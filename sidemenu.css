@@ -1,3 +1,7 @@
+body{
+    margin: 0;
+}
+
 .sidebar {
     background-color: #2A3647 ;
     display: flex;
@@ -29,4 +33,15 @@
 a{
     padding-bottom: 20px;
     color: white;
+}
+
+.headlineDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.privacy{
+    margin-top: 206px;
+    
 }
