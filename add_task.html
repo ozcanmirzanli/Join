@@ -1,18 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/fonts.css" />
-    <link rel="stylesheet" href="css/addTask.css">
-    <link rel="stylesheet" href="css/sidemenu.css">
+    <link rel="stylesheet" href="css/addTask.css" />
+    <link rel="stylesheet" href="css/sidemenu.css" />
     <script src="script.js"></script>
 
     <title>Join - Add Task</title>
-</head>
+  </head>
 
-<body onload="includeHTML()">
+  <body onload="includeHTML()">
+
+    <!-- Implement Sidemenu HTML -->
     <div w3-include-html="assets/templates/sidemenu.html"></div>
-    
-</body>
+
+    <form action="" onsubmit="" return false>
+      <div>
+        <h1>Add Task</h1>
+      </div>
+
+      <!-- Left Part of Add Task -->
+      <div>
+        <div>
+          <span>Title</span><span>*</span>
+          <input type="text" placeholder="Enter a Title" required />
+        </div>
+
+        <div>
+          <span>Description</span>
+          <textarea name="description" id="" cols="30" rows="10" placeholder="Enter a Description"></textarea>
+        </div>
+
+        <div>
+          <span>Assigned to</span>
+          <input type="text" placeholder="Select contacts to assign" />
+          <img src="assets/img/" alt="arrowdown" />
+        </div>
+      </div>
+
+      <!-- Seperator -->
+      <div><img src="" alt="seperator" /></div>
+
+      <!-- Right Part of Add Task -->
+      <div>
+        <div>
+            <span>Due Date</span><span>*</span>
+            <input type="date" placeholder="yyyy/mm/dd">
+        </div>
+        <div>
+            <span>Prio</span>
+            <button>Urgent</button>
+        </div>
+      </div>
+
+    </form>
+  </body>
 </html>
