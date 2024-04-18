@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css" />
+    <link rel="stylesheet" href="fonts.css" />
+  </head>
+  <body>
+    <div class="login-main-container">
+      <img id="login-logo" src="assets/img/Capa 2.png" alt="logo-capa-2" />
+      <div class="sign-up">
+        <h2>Not a Join user?</h2>
+        <button id="sign-up-btn">Sign up</button>
+      </div>
+
+      <div class="login-form-card">
+        <h1>Log in</h1>
+        <div class="login-underline"></div>
+        <form class="login-inputs" onsubmit="login(); return false;">
+          <div class="email-input">
+            <input type="email" id="email" placeholder="Email" required />
+            <img src="assets/img/mail.png" alt="mail" id="mail-logo" />
+          </div>
+          <div class="password-input">
+            <input
+              type="password"
+              id="password"
+              placeholder="Password"
+              required
+            />
+            <img src="assets/img/lock.png" alt="lock" id="password-logo" />
+          </div>
+
+          <div class="check-box">
+            <input type="checkbox" name="remember-me" id="remember-me" />
+            <span>Remember me</span>
+          </div>
+        </form>
+        <div class="bottom-btns">
+          <button id="login-btn">Log in</button>
+          <button id="guest-login-btn">Guest Log in</button>
+        </div>
+      </div>
+      <footer>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Legal notice</a>
+      </footer>
+    </div>
+    <script src="js/login.js"></script>
+  </body>
+</html>
