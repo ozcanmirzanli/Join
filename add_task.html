@@ -6,54 +6,133 @@
     <link rel="stylesheet" href="css/fonts.css" />
     <link rel="stylesheet" href="css/addTask.css" />
     <link rel="stylesheet" href="css/sidemenu.css" />
+    <link rel="icon" type="image/png" href="assets/img/joinLogoBlack.svg" />
     <script src="script.js"></script>
 
     <title>Join - Add Task</title>
   </head>
 
   <body onload="includeHTML()">
-
     <!-- Implement Sidemenu HTML -->
-    <div w3-include-html="assets/templates/sidemenu.html"></div>
+    <!-- <div w3-include-html="assets/templates/sidemenu.html"></div> -->
 
     <form action="" onsubmit="" return false>
       <div>
         <h1>Add Task</h1>
       </div>
 
+    <div class="main-addTask">  
       <!-- Left Part of Add Task -->
       <div>
-        <div>
+        <!-- Title -->
+        <section>
           <span>Title</span><span>*</span>
           <input type="text" placeholder="Enter a Title" required />
-        </div>
+        </section>
 
-        <div>
+        <!-- Description -->
+        <section>
           <span>Description</span>
-          <textarea name="description" id="" cols="30" rows="10" placeholder="Enter a Description"></textarea>
-        </div>
+          <textarea name="description" id="" cols="30" rows="10" placeholder="Enter a Description"
+          ></textarea>
+        </section>
 
-        <div>
+        <!-- Assigend To -->
+        <section>
           <span>Assigned to</span>
           <input type="text" placeholder="Select contacts to assign" />
           <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrowdown" />
-        </div>
+        </section>
       </div>
 
       <!-- Seperator -->
       <div><img src="assets/img/seperator_AddTask.svg" alt="seperator" /></div>
 
       <!-- Right Part of Add Task -->
+
+      <!-- Due Date -->
+      <section>
+        <span>Due Date</span><span>*</span>
+        <input type="date" placeholder="yyyy/mm/dd" />
+      </section>
+
+      <!-- Priority -->
+      <section>
+        <span>Prio</span>
+        <div>
+          <button type="button">
+            Urgent
+            <img
+              src="assets/img/urgent_red_AddTask.svg"
+              alt="urgent_red_AddTask"
+            />
+          </button>
+          <button type="button">
+            Medium
+            <img
+              src="assets/img/medium_orange_AddTask.svg"
+              alt="medium_orange_AddTask"
+            />
+          </button>
+          <button type="button">
+            Low
+            <img
+              src="assets/img/low_green_AddTask.svg"
+              alt="low_green_AddTask"
+            />
+          </button>
+        </div>
+      </section>
+
+      <!-- Category   -->
+      <section>
+        <span>Category</span><span>*</span>
+        <div>
+          <input type="text" placeholder="Select Task Category">
+          <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrow_drop_down_AddTask">
+        </div>
+        <div>
+          <div>
+            <option value="user-Story">User Story</option>
+            <option value="Technical Story">Technical Story</option>
+          </div>
+        </div>
+      </section>
+
+      <!-- Subtasks -->
+      <section>
+        <span>Subtasks</span>
+        <div>
+          <input type="text" placeholder="Add new subtasks">
+          <img src="assets/img/plus_addTask.svg" alt="plus_addTask">
+          <img src="assets/img/subtask_cancel_AddTask.svg" alt="subtask_cancel_AddTask">
+          <img src="assets/img/subtask_seperator_AddTask.svg" alt="subtask_seperator_AddTask">
+          <img src="assets/img/subtask_check_AddTask.svg" alt="subtask_check_AddTask">
+        </div>
+        <div id="subtasks"></div>
+      </section>
+    </div>
+
+    <!-- Footer AddTask -->
+    <section class="addtask-footer">
       <div>
-        <div>
-            <span>Due Date</span><span>*</span>
-            <input type="date" placeholder="yyyy/mm/dd">
-        </div>
-        <div>
-            <span>Prio</span>
-            <button>Urgent</button>
-        </div>
+        <span>*</span>
+        This field is required
       </div>
+
+      <div>
+        <button type="button">
+          <span>Clear</span>
+          <img src="assets/img/subtask_cancel_AddTask.svg" alt="subtask_cancel_AddTask">
+        </button>
+
+        <button type="button">
+          <span>Create Task</span>
+          <img src="assets/img/subtask_check_AddTask.svg" alt="subtask_check_AddTask">
+        </button>
+      </div>
+    </section>
+
 
     </form>
   </body>
