@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Summary</title>
+    <link rel="stylesheet" href="css/summary.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+  </head>
+  <body onload="includeHTML()">
+    <div w3-include-html="/assets/templates/sidemenu.html"></div>
+    <div w3-include-html="/assets/templates/header.html"></div>
+
+    <div class="summary-main-container">
+      <div class="title">
+        <h1>Join 360</h1>
+        <div class="seperator"></div>
+        <h2>Key Metrics at a Glance</h2>
+      </div>
+
+      <div class="options-container">
+        <div class="option-first-row">
+        <div class="first-row">
+          <img
+            src="assets/img/pencil_toDo_Summary.svg"
+            alt="pencil-btn"
+            id="pencil-btn"
+          />
+            <div class="option-text">
+              <span>1</span>
+              <p>To-do</p>
+            </div>
+        </div>
+        
+            <div class="first-row">
+                <img
+                  src="assets/img/hook_done_Summary.svg"
+                  alt="pencil-btn"
+                  id="pencil-btn"
+                />
+               
+                  <div class="option-text">
+                    <span>1</span>
+                    <p>Done</p>
+                  </div>
+
+          </div>
+        </div>
+        <div class="option-second-row">
+    <div class="second-row">
+        <div class="second-row-left">
+<img src="assets/img/urgent_Summary.svg" alt="urgent">
+<div class="option-text">
+    <span>1</span>
+    <p>To-do</p>
+</div>
+</div>
+<div class="seperator-date"></div>
+<div class="date-text">
+    <h3>October 16, 2022</h3>
+    <p>Upcoming Deadline</p>
+</div>
+</div>
+</div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
