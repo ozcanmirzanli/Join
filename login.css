@@ -85,17 +85,15 @@ h2 {
 .login-form-card h1 {
   font-size: 61px;
   font-weight: 700;
-  line-height: 0;
   text-align: center;
   margin-block-start: 0;
   margin-block-end: 0;
-  margin-top: 48px;
 }
 
 .login-underline {
-  border: 3px solid #29abe2;
+  border-bottom: 3px solid #29abe2;
   width: 150px;
-  margin-top: 16px;
+  margin-top: -16px;
 }
 
 .login-inputs {
@@ -112,6 +110,7 @@ input {
   font-size: 20px;
   line-height: 24px;
   font-weight: 400;
+  cursor: pointer;
 }
 
 input::placeholder {
@@ -129,6 +128,7 @@ input::placeholder {
   border-radius: 10px;
   background-color: white;
   border: 1px solid #e8e8e8;
+  cursor: pointer;
 }
 
 #mail-logo,
@@ -143,7 +143,7 @@ input::placeholder {
   margin-left: 43px;
 }
 
-.check-box span {
+.check-box label {
   margin-left: 12px;
   font-size: 16px;
   font-weight: 400;
@@ -151,7 +151,7 @@ input::placeholder {
   text-align: left;
 }
 
-#remember-me {
+#remember-me-checkbox {
   width: 16px;
   height: 16px;
   border-radius: 3px;
@@ -175,6 +175,9 @@ input::placeholder {
   font-size: 21px;
   font-weight: 700;
   line-height: 25.2px;
+  height: 48px;
+  display: flex;
+  align-items: center;
 }
 
 #login-btn:hover {
@@ -191,11 +194,14 @@ input::placeholder {
   font-size: 21px;
   font-weight: 700;
   line-height: 25.2px;
+  height: 48px;
+  display: flex;
+  align-items: center;
 }
 
 #guest-login-btn:hover {
   color: #29abe2;
-  border: 2px solid #29abe2;
+  border: 1px solid #29abe2;
   box-shadow: 0px 4px 4px 0px #00000040;
 }
 
