@@ -29,19 +29,19 @@
       <div>
         <!-- Title -->
         <section class="input-parts-addTask">
-          <span>Title<span class="required-addTask">*</span></span>
+          <span class="pd-bottom">Title<span class="required-addTask">*</span></span>
           <input type="text" placeholder="Enter a Title" required class="border-input-addtask input-title"/>
         </section>
 
         <!-- Description -->
         <section class="input-parts-addTask padding-description">
-          <span>Description</span>
+          <span class="pd-bottom">Description</span>
           <textarea name="description" id="" cols="30" rows="10" placeholder="Enter a Description" class="input-description border-input-addtask"></textarea>
         </section>
 
         <!-- Assigend To -->
         <section >
-            <span class="input-parts-addTask">Assigned to</span>
+            <span class="input-parts-addTask pd-bottom">Assigned to</span>
             <input type="text" placeholder="Select contacts to assign" class="input-assignedTo border-input-addtask" />
             <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrowdown" />
         </section>
@@ -54,13 +54,13 @@
       <div>
       <!-- Due Date -->
       <section class="input-parts-addTask">
-        <span>Due Date<span class="required-addTask">*</span></span>
+        <span class="pd-bottom">Due Date<span class="required-addTask">*</span></span>
         <input type="date" placeholder="yyyy/mm/dd" class="input-dueDate border-input-addtask"/>
       </section>
 
       <!-- Priority -->
       <section class="input-parts-addTask padding-prio">
-        <span>Prio</span>
+        <span class="pd-bottom">Prio</span>
         <div class="priority">
           <button type="button" class="button-prio">
             Urgent
@@ -88,7 +88,7 @@
 
       <!-- Category   -->
       <section class="input-parts-addTask padding-category">
-        <span>Category<span class="required-addTask">*</span></span>
+        <span class="pd-bottom">Category<span class="required-addTask">*</span></span>
         <div>
           <input type="text" placeholder="Select Task Category" class="input-category border-input-addtask">
           <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrow_drop_down_AddTask">
@@ -103,7 +103,7 @@
 
       <!-- Subtasks -->
       <section class="input-parts-addTask">
-        <span>Subtasks</span>
+        <span class="pd-bottom">Subtasks</span>
         <div>
           <input type="text" placeholder="Add new subtasks" class="input-subtasks border-input-addtask">
           <img src="assets/img/plus_addTask.svg" alt="plus_addTask">
@@ -123,15 +123,15 @@
         This field is required
       </div>
 
-      <div>
-        <button type="button">
-          <span>Clear</span>
+      <div class="footer-btn-addTask">
+        <button class="footer-btn-text-img" type="button" id="clear-btn">
+          Clear
           <img src="assets/img/subtask_cancel_AddTask.svg" alt="subtask_cancel_AddTask">
         </button>
 
-        <button type="button">
-          <span>Create Task</span>
-          <img src="assets/img/subtask_check_AddTask.svg" alt="subtask_check_AddTask">
+        <button class="footer-btn-text-img" type="button" id="create-btn">
+          Create Task
+          <img src="assets/img/create_hook_white_AddTask.svg" alt="create_hook_white_AddTask">
         </button>
       </div>
     </section>
