@@ -2,7 +2,6 @@ body {
     margin: 0;
     background-color: #f6f7f8;
     display: flex;
-    justify-content: center;
     font-family: "Inter", sans-serif;
     box-sizing: border-box;
   }
