@@ -46,6 +46,7 @@
   gap: 0px;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 15px;
 }
 
 .column {
@@ -72,9 +73,25 @@
   height: 48px;
   gap: 10px;
   border-radius: 10px;
-  border: 1px;
+  border: 1px solid;
+  border-style: dotted;
   background-color: rgb(231, 231, 231);
   display: flex;
   justify-content: center;
   align-items: center;
+  color: rgb(168, 168, 168);
+}
+
+#addTask:hover{
+    cursor: pointer;
+}
+
+.plus{
+    width: 24px;
+    height: 24px;
+    border: 2px;
+}
+
+.plus:hover{
+    cursor: pointer;
 }
