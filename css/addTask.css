@@ -1,5 +1,141 @@
+body {
+    margin: 0;
+    background-color: #f6f7f8;
+    display: flex;
+    justify-content: center;
+    font-family: "Inter", sans-serif;
+    box-sizing: border-box;
+  }
+
+input:hover,textarea:hover,button:hover{
+    cursor: pointer;
+}
+
+form {
+    padding-left: 328px;
+}
+
+h1 {
+    font-size: 61px;
+    font-weight: 700;
+    line-height: 72.2px;
+    padding-top: 206px;
+}
+
+.required-addTask {
+    color: #ff8190;
+}
+
+.main-addTask {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 146px;
+}
+
+.addTaskLeftSide {
+
+}
+
+span {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 400;
+    color: #2A3647;
+}
+
+.border-input-addtask {
+    border-radius: 10px;
+    border: 1px;
+    background: #fff;
+    align-self: stretch;
+    border: unset;
+}
+
+.input-parts-addTask {
+    display: flex;
+    flex-direction: column;
+}
+
+.seperator-addtask {
+    padding-left: 48.25px;
+    padding-right: 48px;
+}
+
 .addtask-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+/* Title section */
+
+.input-title {
+    padding: 12px 21px 12px 21px;
+}
+
+/* description section */
+
+.input-description {
+    padding: 18px 16px 78px 16px;
+}
+
+.padding-description {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+/* assigned to section */
+
+.input-assignedTo {
+    padding: 12px 185px 12px 16px;
+}
+
+/* due date section */
+
+.input-dueDate {
+    padding: 12px 305px 12px 16px;
+}
+
+/* prio section */
+
+.priority {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+}
+
+.button-prio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: unset;
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 16px 10px 16px 10px;
+    gap: 4.75px;
+}
+
+.padding-prio {
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+/* category section */
+
+.input-category {
+    padding: 12px 229px 12px 16px;
+}
+
+.padding-category {
+    padding-bottom: 24px;
+}
+
+/* subtasks section */
+
+.input-subtasks {
+    padding: 12px 254px 12px 16px;
 }
