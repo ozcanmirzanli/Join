@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}
+
+.title {
+  margin: 206px 0 56px 328px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.title h1 {
+  font-size: 61px;
+  font-weight: 700;
+  line-height: 73.2px;
+}
+
+.title h2 {
+  font-size: 27px;
+  font-weight: 400;
+  line-height: 32.4px;
+  color: #2a3647;
+}
+
+.seperator {
+  height: 59px;
+  border-right: 3px solid #29abe2;
+}
+
+.options-container {
+  width: 560px;
+  height: 562px;
+  gap: 28px;
+  margin-left: 328px;
+  display: flex;
+  flex-direction: column;
+}
+
+.first-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 264px;
+  max-height: 168px;
+  width: 264px;
+  height: 168px;
+  gap: 18px;
+  border-radius: 30px;
+  box-shadow: 0px 0px 4px 0px #0000001a;
+  cursor: pointer;
+  transition: 80ms ease-in-out;
+}
+
+.first-row:hover {
+  background-color: #2a3647;
+  color: white;
+  transition: 100ms ease-in-out;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  transform: scale(1.1);
+}
+
+.option-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.option-text span {
+  font-size: 64px;
+  font-weight: 600;
+  line-height: 76.8px;
+}
+
+.option-text p {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.option-first-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.option-second-row {
+  width: 560px;
+  height: 168px;
+  top: 196px;
+  gap: 61px;
+  border-radius: 30px;
+  box-shadow: 0px 0px 4px 0px #0000001a;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.second-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+}
+
+.second-row-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 264px;
+  height: 168px;
+  gap: 18px;
+}
+
+.date-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+}
+
+.seperator-date {
+  height: 102.02px;
+  border: 2px solid #d1d1d1;
+}
