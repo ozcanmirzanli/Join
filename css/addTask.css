@@ -34,15 +34,12 @@ h1 {
     padding-bottom: 146px;
 }
 
-.addTaskLeftSide {
-
-}
-
 span {
     font-size: 20px;
     line-height: 24px;
     font-weight: 400;
     color: #2A3647;
+    padding-bottom: 8px;
 }
 
 .border-input-addtask {
