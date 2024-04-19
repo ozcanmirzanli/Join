@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Board</title>
-    <link rel="stylesheet" href="/css/sidemenu.css" />
+    <link rel="stylesheet" href="/css/board.css" />
     <script src="/script.js"></script>
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="icon" href="/assets/img/joinLogoBlack.svg" />
@@ -12,5 +12,42 @@
   <body onload="includeHTML()">
     <div w3-include-html="/assets/templates/sidemenu.html"></div>
     <div w3-include-html="/assets/templates/header.html"></div>
+    <div>
+      <div class="headlineBoard">
+      <h1>Board</h1>
+      <div class="task">
+      <div class="FindTask">
+      <input type="text" name="search" id="search" placeholder=" find Task"><div class="line"></div>
+      <button class="searchButton"><img src="/assets/img/search.svg" alt="search"></button>
+      </div>
+      <img src="/assets/img/addTask_Button_Board.svg" alt="addTask">
+      </div>
+      </div>
+      <div class="table">
+      <div class="column">
+      <div>
+      <div class="toDo"><p>To Do</p> <img src="/assets/img/plus button.svg" alt=""></div>
+      </div>
+      <div class="Task"><p class="noToDo">no Task to do</p></div>
+      </div>
+      <div class="column">
+        <div>
+        <div class="toDo"><p>in Progress</p> <img src="/assets/img/plus button.svg" alt=""></div>
+        </div>
+        <div class="Task"><p class="noToDo">no Task in Progress</p></div>
+      </div>
+      <div class="column">
+        <div>
+        <div class="toDo"><p>Await Feedback</p> <img src="/assets/img/plus button.svg" alt=""></div>
+        </div>
+        <div class="Task"><p class="noToDo">no Task await feedback</p></div>
+        </div>
+      <div class="column">
+        <div>
+        <div class="toDo"><p>Done</p> <img src="/assets/img/plus button.svg" alt=""></div>
+        </div>
+        <div class="Task"><p class="noToDo">no Task done</p></div>
+        </div>
+      </div>
   </body>
 </html>

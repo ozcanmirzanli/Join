@@ -116,6 +116,7 @@ a:hover {
 
 .display {
   display: flex;
+  align-items: center;
 }
 
 .help {
@@ -129,4 +130,9 @@ a:hover {
   cursor: pointer;
   height: 40px;
   width: 40px;
+}
+
+.user{
+  width: 56px;
+height: 56px;
 }

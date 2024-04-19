@@ -1,0 +1,80 @@
+.headlineBoard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 176px;
+  margin-left: 296px;
+  width: 1056px;
+  height: 73px;
+}
+
+.FindTask {
+  display: flex;
+  margin-left: 376px;
+  margin-right: 32px;
+  border: 1px solid;
+  border-radius: 10px;
+}
+
+.task {
+  display: flex;
+}
+
+#search {
+  border: none;
+  padding: 0;
+}
+
+.searchButton {
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background-color: white;
+  border-radius: 50px;
+}
+
+.line {
+  width: 1px;
+  height: 10px;
+  color: grey;
+}
+
+.toDo {
+  display: flex;
+  width: 244px;
+  height: 24px;
+  gap: 0px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  margin-right: 24px;
+}
+
+.Task {
+  width: 246px;
+  height: 688px;
+  gap: 24px;
+  opacity: 0px;
+}
+
+.table {
+  display: flex;
+  margin-left: 296px;
+  margin-top: 48px;
+}
+
+.noToDo {
+  width: 246px;
+  height: 48px;
+  gap: 10px;
+  border-radius: 10px;
+  border: 1px;
+  background-color: rgb(231, 231, 231);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
