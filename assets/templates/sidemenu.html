@@ -7,20 +7,21 @@
     <title>Sidemenu</title>
     <link rel="stylesheet" href="css/fonts.css" />
     <script src="script.js"></script>
+    <script src="/js/sidemenu.js"></script>
     <link rel="stylesheet" href="/css/sidemenu.css">
 </head>
 <body>
     <div class="sidebar">
         <img src="/assets/img/joinLogoWhite.svg" alt="Logo" class="LogoSideBar">
         <div class="linkSideBar">
-        <a href="summary.html"><img src="/assets/img/Summary_SideBar.svg" alt="summary"></a>
-        <a href="add_task.html"><img src="/assets/img/AddTask_SideBar.svg" alt="addTask"></a>
-        <a href="board.html"><img src="/assets/img/Board_SideBar.svg" alt="Board"></a>
-        <a href="Contacts"><img src="/assets/img/Contacts_SideBar.svg" alt="Contacts"></a>
+        <a class="sideBtn" href="summary.html" id='${i}sideBtn' onclick="changeBackground('${i}sideBtn')"><img src="/assets/img/Summary_SideBar.svg" alt="summary" ></a>
+        <a class="sideBtn" href="/add_task.html" id='${i}sideBtn' onclick="changeBackground('${i}sideBtn')"><img src="/assets/img/AddTask_SideBar.svg" alt="addTask" ></a>
+        <a class="sideBtn" href="/assets/templates/board.html" id="${i}sideBtn" onclick="changeBackground('${i}sideBtn')"><img src="/assets/img/Board_SideBar.svg" alt="Board" ></a>
+        <a class="sideBtn" href="Contacts" id='${i}sideBtn' onclick="changeBackground(${i}sideBtn)"><img src="/assets/img/Contacts_SideBar.svg" alt="Contacts" ></a>
         </div>
     <div class="legal">
-        <a href="PrivacyPolicy.html">Privacy Policy</a>
-        <a href="LegalNotice.html">Legal notice</a>
+        <a href="PrivacyPolicy.html" id="privacy">Privacy Policy</a>
+        <a href="LegalNotice.html" id="legal">Legal notice</a>
     </div>
     </div>
 </body>

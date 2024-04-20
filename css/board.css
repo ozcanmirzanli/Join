@@ -8,12 +8,22 @@
   height: 73px;
 }
 
+#h1{
+  width: 176px;
+  height: 73px;
+  font-family: "Inter", sans-serif;
+  font-size: 700;
+}
+
 .FindTask {
   display: flex;
   margin-left: 376px;
   margin-right: 32px;
   border: 1px solid;
   border-radius: 10px;
+  height: 48px;
+  width: 312px;
+  justify-content: space-around;
 }
 
 .task {
@@ -82,16 +92,22 @@
   color: rgb(168, 168, 168);
 }
 
-#addTask:hover{
-    cursor: pointer;
+#addTask {
+  width: 160px;
+  height: 48px;
+  padding: 8px 16px 8px 16px;
 }
 
-.plus{
-    width: 24px;
-    height: 24px;
-    border: 2px;
+#addTask:hover {
+  cursor: pointer;
 }
 
-.plus:hover{
-    cursor: pointer;
+.plus {
+  width: 24px;
+  height: 24px;
+  border: 2px;
+}
+
+.plus:hover {
+  cursor: pointer;
 }

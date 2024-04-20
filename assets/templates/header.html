@@ -12,10 +12,17 @@
   <body>
     <div class="header">
       <p>Kanban Project Management Tool</p>
+    <div class="column">
       <div class="display">
-        <a href="help.html"></a>
-        <img src="/assets/img/help.svg" alt="help" class="help" />
-        <img src="/assets/img/UserInitials.svg" alt="PlatzhalterBenutzer" class="user"/><!--Bild mit Js ändern-->
+        <a href="help.html"><img src="/assets/img/help.svg" alt="help" class="help" /></a>
+        <img src="/assets/img/UserInitials.svg" alt="PlatzhalterBenutzer" class="user" id="initials" onclick="changeInitials()"/><!--Bild mit Js ändern-->
+      </div>
+        <div id="subMenu" class="d-none">
+          <a href="help.html">Help</a>
+          <a href="PrivacyPolicy.html" id="privacy">Privacy Policy</a>
+          <a href="LegalNotice.html" id="legal">Legal notice</a>
+          <a href="logout">Log out</a>
+        </div>
       </div>
     </div>
   </body>
