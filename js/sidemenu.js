@@ -9,9 +9,17 @@ function changeInitials() {
     submenu.classList.add('subMenu');
 }
 
-function changeBackground(i){
+/*ausgelagert in script.js
+function initSidemenu() {
+    let clickedBtnId = localStorage.getItem('clickedBtnId');
+    if (clickedBtnId) {
+        let clickedBtn = document.getElementById(clickedBtnId);
+        clickedBtn.classList.add('clickedSideBtn');
+    }
+}*/
 
-    let clickedBtn = document.getElementById('${i}sideBtn');
-    clickedBtn.style.backgroundColor = 'black';
-   
+function changeBackground(id){
+    let clickedBtn = document.getElementById(id);
+    clickedBtn.classList.add('clickedSideBtn');
+    localStorage.setItem('clickedBtnId', id);
 }

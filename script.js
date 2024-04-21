@@ -1,4 +1,4 @@
-async function includeHTML() {
+async function includeHTML(){
     let includeElements = document.querySelectorAll('[w3-include-html]');
     for (let i = 0; i < includeElements.length; i++) {
         const element = includeElements[i];
@@ -9,5 +9,14 @@ async function includeHTML() {
         } else {
             element.innerHTML = 'Page not found';
         }
+    }
+    initSidemenu();
+}
+
+function initSidemenu(){
+    let clickedBtnId = localStorage.getItem('clickedBtnId');
+    if (clickedBtnId) {
+        let clickedBtn = document.getElementById(clickedBtnId);
+        clickedBtn.classList.add('clickedSideBtn');
     }
 }
