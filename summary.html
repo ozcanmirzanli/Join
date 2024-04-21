@@ -21,11 +21,15 @@
       <div class="secondary-container">
         <div class="options-container">
           <div class="options-first-row">
-            <div class="first-row">
+            <div
+              class="first-row"
+              onmouseover="changeButtonColor(this)"
+              onmouseout="resetButtonColor(this)"
+            >
               <img
                 src="assets/img/pencil_toDo_Summary.svg"
-                alt="pencil-btn"
-                id="pencil-btn"
+                alt="to-do-btn"
+                id="to-do-btn"
               />
               <div class="option-text">
                 <span>1</span>
@@ -33,11 +37,15 @@
               </div>
             </div>
 
-            <div class="first-row">
+            <div
+              class="first-row"
+              onmouseover="changeButtonColor(this)"
+              onmouseout="resetButtonColor(this)"
+            >
               <img
                 src="assets/img/hook_done_Summary.svg"
-                alt="pencil-btn"
-                id="pencil-btn"
+                alt="done-btn"
+                id="done-btn"
               />
 
               <div class="option-text">
@@ -85,5 +93,6 @@
       </div>
     </div>
     <script src="script.js"></script>
+    <script src="js/summary.js"></script>
   </body>
 </html>
