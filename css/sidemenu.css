@@ -40,7 +40,6 @@ body {
 }
 
 .sideBtn {
-  background-color: none;
   display: flex;
   align-items: flex-start;
   justify-content: space-evenly;
