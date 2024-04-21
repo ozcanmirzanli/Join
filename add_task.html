@@ -26,7 +26,7 @@
 
     <div class="main-addTask">  
       <!-- Left Part of Add Task -->
-      <div>
+      <div class="left-part">
         <!-- Title -->
         <section class="input-parts-addTask">
           <span class="pd-bottom">Title<span class="required-addTask">*</span></span>
@@ -40,10 +40,12 @@
         </section>
 
         <!-- Assigend To -->
-        <section >
-            <span class="input-parts-addTask pd-bottom">Assigned to</span>
-            <input type="text" placeholder="Select contacts to assign" class="input-assignedTo border-input-addtask" />
-            <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrowdown" />
+        <section>
+            <label>Assigned to</label>
+              <div class="input-assignedTo">
+                <input type="text" list="browsers" name="assignTo" placeholder="Select contact to assign" class="input-assignedTo"/>
+                <img class="btn-DropDown" src="assets/img/arrow_drop_down_AddTask.svg" alt="arrowdown" />                
+              </div>       
         </section>
       </div>
 
@@ -51,37 +53,25 @@
       <div><img src="assets/img/seperator_AddTask.svg" alt="seperator" class="seperator-addtask"/></div>
 
       <!-- Right Part of Add Task -->
-      <div>
+      <div class="right-part">
       <!-- Due Date -->
       <section class="input-parts-addTask">
         <span class="pd-bottom">Due Date<span class="required-addTask">*</span></span>
-        <input type="date" placeholder="yyyy/mm/dd" class="input-dueDate border-input-addtask"/>
+        <input id="dueDate" type="date" placeholder="yyyy/mm/dd" class="input-dueDate border-input-addtask"/>
       </section>
 
       <!-- Priority -->
       <section class="input-parts-addTask padding-prio">
         <span class="pd-bottom">Prio</span>
         <div class="priority">
-          <button type="button" class="button-prio">
-            Urgent
-            <img
-              src="assets/img/urgent_red_AddTask.svg"
-              alt="urgent_red_AddTask"
-            />
+          <button type="button" class="button-prio" id="btnPrioUrgent">Urgent
+            <img src="assets/img/urgent_red_AddTask.svg" alt="urgent_red_AddTask"/>
           </button>
-          <button type="button" class="button-prio">
-            Medium
-            <img
-              src="assets/img/medium_orange_AddTask.svg"
-              alt="medium_orange_AddTask"
-            />
+          <button type="button" class="button-prio" id="btnPrioMedium">Medium
+            <img src="assets/img/medium_orange_AddTask.svg" alt="medium_orange_AddTask"/>
           </button>
-          <button type="button" class="button-prio">
-            Low
-            <img
-              src="assets/img/low_green_AddTask.svg"
-              alt="low_green_AddTask"
-            />
+          <button type="button" class="button-prio" id="btnPrioLow">Low
+            <img src="assets/img/low_green_AddTask.svg" alt="low_green_AddTask"/>
           </button>
         </div>
       </section>
