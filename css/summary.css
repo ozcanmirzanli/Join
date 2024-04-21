@@ -52,7 +52,9 @@
   transition: 80ms ease-in-out;
 }
 
-.first-row:hover {
+.first-row:hover,
+.second-row:hover,
+.third-row:hover {
   background-color: #2a3647;
   color: white;
   transition: 100ms ease-in-out;
@@ -78,13 +80,13 @@
   line-height: 24px;
 }
 
-.option-first-row {
+.options-first-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.option-second-row {
+.options-second-row {
   width: 560px;
   height: 168px;
   top: 196px;
@@ -101,6 +103,8 @@
   flex-direction: row;
   width: 100%;
   align-items: center;
+  border-radius: 30px;
+  cursor: pointer;
 }
 
 .second-row-left {
@@ -112,6 +116,13 @@
   gap: 18px;
 }
 
+.second-row p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+  color: #2a3647;
+}
+
 .date-text {
   display: flex;
   flex-direction: column;
@@ -120,7 +131,64 @@
   width: 50%;
 }
 
+.date-text h3 {
+  margin-bottom: 13px;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 25.2px;
+  color: #2a3647;
+}
+
 .seperator-date {
   height: 102.02px;
-  border: 2px solid #d1d1d1;
+  border-left: 2px solid #d1d1d1;
+}
+
+.options-third-row {
+  width: 560px;
+  height: 170px;
+  gap: 32px;
+  display: flex;
+  flex-direction: row;
+}
+
+.third-row {
+  width: 168px;
+  height: 168px;
+  border-radius: 30px;
+  box-shadow: 0px 0px 4px 0px #0000001a;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.third-row p {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #2a3647;
+}
+
+.secondary-container {
+  display: flex;
+  align-items: center;
+}
+
+.welcome-text {
+  margin-left: 80px;
+}
+
+.welcome-text h2 {
+  font-size: 47px;
+  font-weight: 500;
+  line-height: 56.4px;
+  color: #2a3647;
+}
+
+.welcome-text h1 {
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 76.8px;
+  color: #29abe2;
 }
