@@ -70,19 +70,17 @@ h2 {
 
 #background-fade {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100vw;
   height: 100vh;
   background: rgba(255, 255, 255, 1);
-  animation: opacity-fade 3s;
+  animation: opacity-fade 1s;
 }
 
 #logo-container {
   position: absolute;
   top: 0;
   left: 0;
-  animation: moving-to-target 2s;
+  animation: moving-to-target 1s;
 }
 
 #logo-container img {
