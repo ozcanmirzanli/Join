@@ -8,7 +8,7 @@ body {
 
 /* main css for addTask */
 
-.display-none {
+.d-none {
     display: none;
 }
 
