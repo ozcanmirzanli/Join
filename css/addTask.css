@@ -21,6 +21,8 @@ h1 {
     font-weight: 700;
     line-height: 72.2px;
     padding-top: 206px;
+    padding-bottom: 48px;
+    margin: 0;
 }
 
 button:hover {
@@ -55,7 +57,7 @@ span, label {
 }
 
 .pd-bottom {
-    padding-bottom: 16px;
+    padding-bottom: 8px;
 }
 
 .border-input-addtask {
@@ -71,14 +73,9 @@ span, label {
     position: relative;
 }
 
-.input-parts-addTask {
-    width: Fixed (440px)px;
-    height: Hug (48px)px;
-    padding: 12px 16px 12px 16px;
-    gap: 0px;
-    border-radius: 10px 0px 0px 0px;
-    border: 1px 0px 0px 0px;
-    opacity: 0px;
+input {
+    padding-left: 16px;
+    padding-right: 16px;
 }
 
 .seperator-addtask {
@@ -86,33 +83,28 @@ span, label {
     padding-right: 48px;
 }
 
-.left-part {
-    width: 440px;
-    height: 376px;
-    top: 327px;
-    left: 328px;
-    gap: 16px;
+.sections-addTask {
     display: flex;
     flex-direction: column;
-}
-
-.right-part {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+    gap: 8px;
     width: 100%;
 }
 
 /* Title section */
 
-.input-title {
-    padding: 12px 21px 12px 21px;
+#titleAddTask {
+    width: 440px;
+    height: 48px;
 }
 
 /* description section */
 
-.input-description {
-    padding: 18px 16px 78px 16px;
+textarea {
+    width: 440px;
+    height: 120px;
+    padding: 18px 16px 18px 16px;
+    gap: 10px;
+    border-radius: 10px 0px 0px 0px;
 }
 
 .padding-description {

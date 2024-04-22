@@ -26,22 +26,22 @@
 
     <div class="main-addTask">  
       <!-- Left Part of Add Task -->
-      <div class="left-part">
+      <div class="sections-addTask">
         <!-- Title -->
         <section class="input-parts-addTask">
-          <span class="pd-bottom">Title<span class="required-addTask">*</span></span>
-          <input type="text" placeholder="Enter a Title" required class="border-input-addtask input-title"/>
+          <div class="pd-bottom"><span>Title<span class="required-addTask">*</span></span></div>
+          <input id="titleAddTask" type="text" placeholder="Enter a Title" required class="border-input-addtask"/>
         </section>
 
         <!-- Description -->
-        <section class="input-parts-addTask padding-description">
-          <span class="pd-bottom">Description</span>
-          <textarea name="description" id="" cols="30" rows="10" placeholder="Enter a Description" class="input-description border-input-addtask"></textarea>
+        <section class="padding-description">
+          <div class="pd-bottom"><span>Description</span></div>
+          <textarea name="description" id="" cols="30" rows="10" placeholder="Enter a Description" class="border-input-addtask"></textarea>
         </section>
 
         <!-- Assigend To -->
-        <section>
-            <label>Assigned to</label>
+        <section class="padding-description">
+            <div class="pd-bottom"><label>Assigned to</label></div>
               <div class="input-assignedTo">
                 <input id="assignDropDown" type="text" list="browsers" name="assignTo" placeholder="Select contact to assign" class="input-assignedTo"/>
                 <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrowdown" />                
@@ -50,19 +50,19 @@
       </div>
 
       <!-- Seperator -->
-      <div><img src="assets/img/seperator_AddTask.svg" alt="seperator" class="seperator-addtask"/></div>
+      <div class="seperator-addtask"><img src="assets/img/seperator_AddTask.svg" alt="seperator"/></div>
 
       <!-- Right Part of Add Task -->
-      <div class="right-part">
+      <div class="sections-addTask">
       <!-- Due Date -->
-      <section class="input-parts-addTask">
-        <span class="pd-bottom">Due Date<span class="required-addTask">*</span></span>
+      <section>
+        <div class="pd-bottom"><span>Due Date<span class="required-addTask">*</span></span></div>
         <input id="dueDate" type="date" placeholder="yyyy/mm/dd" class="input-dueDate border-input-addtask"/>
       </section>
 
       <!-- Priority -->
-      <section class="input-parts-addTask padding-prio">
-        <span class="pd-bottom">Prio</span>
+      <section class="ipadding-prio">
+        <div class="pd-bottom"><span>Prio</span></div>
         <div class="priority">
           <button type="button" class="button-prio" id="btnPrioUrgent">Urgent
             <img src="assets/img/urgent_red_AddTask.svg" alt="urgent_red_AddTask"/>
@@ -77,8 +77,8 @@
       </section>
 
       <!-- Category   -->
-      <section class="input-parts-addTask padding-category">
-        <span class="pd-bottom">Category<span class="required-addTask">*</span></span>
+      <section class="padding-category">
+        <div class="pd-bottom"><span>Category<span class="required-addTask">*</span></span></div>
         <div>
           <input type="text" placeholder="Select Task Category" class="input-category border-input-addtask">
           <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrow_drop_down_AddTask">
@@ -92,8 +92,8 @@
       </section>
 
       <!-- Subtasks -->
-      <section class="input-parts-addTask">
-        <span class="pd-bottom">Subtasks</span>
+      <section>
+        <div class="pd-bottom"><span>Subtasks</span></div>
         <div>
           <input type="text" placeholder="Add new subtasks" class="input-subtasks border-input-addtask">
           <img src="assets/img/plus_addTask.svg" alt="plus_addTask">
