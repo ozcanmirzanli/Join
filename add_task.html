@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/fonts.css" />
     <link rel="stylesheet" href="css/addTask.css" />
-    <link rel="stylesheet" href="css/sidemenu.css" />
+    <link rel="stylesheet" type="text/css" href="css/sidemenu.css" />
     <link rel="icon" type="image/png" href="assets/img/joinLogoBlack.svg" />
     <script src="script.js"></script>
 
@@ -15,7 +15,6 @@
   <body onload="includeHTML()">
     <!-- Implement Header HTML -->
     <div w3-include-html="assets/templates/header.html"></div>
-
     <!-- Implement Sidemenu HTML -->
     <div w3-include-html="assets/templates/sidemenu.html"></div>
 
@@ -43,8 +42,8 @@
         <section class="padding-description">
             <div class="pd-bottom"><label>Assigned to</label></div>
               <div class="input-assignedTo">
-                <input id="assignDropDown" type="text" list="browsers" name="assignTo" placeholder="Select contact to assign" class="input-assignedTo"/>
-                <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrowdown" />                
+                <input id="assignDropDown" type="text" name="assignTo" placeholder="Select contact to assign" class="border-none input-assignedTo"/>
+                <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrowdown" class="dropDownImg"/>                
               </div>       
         </section>
       </div>
@@ -79,9 +78,9 @@
       <!-- Category   -->
       <section class="padding-category">
         <div class="pd-bottom"><span>Category<span class="required-addTask">*</span></span></div>
-        <div>
-          <input type="text" placeholder="Select Task Category" class="input-category border-input-addtask">
-          <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrow_drop_down_AddTask">
+        <div class="input-assignedTo border-input-addtask">
+          <input type="text" id="categoryAddTask" placeholder="Select Task Category" class="input-assignedTo border-none">
+          <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrow_drop_down_AddTask" class="dropDownImg">
         </div>
         <div>
           <div>
@@ -94,12 +93,14 @@
       <!-- Subtasks -->
       <section>
         <div class="pd-bottom"><span>Subtasks</span></div>
-        <div>
-          <input type="text" placeholder="Add new subtasks" class="input-subtasks border-input-addtask">
-          <img src="assets/img/plus_addTask.svg" alt="plus_addTask">
-          <img src="assets/img/subtask_cancel_AddTask.svg" alt="subtask_cancel_AddTask">
-          <img src="assets/img/subtask_seperator_AddTask.svg" alt="subtask_seperator_AddTask">
-          <img src="assets/img/subtask_check_AddTask.svg" alt="subtask_check_AddTask">
+        <div class="input-assignedTo border-input-addtask">
+          <input type="text" placeholder="Add new subtasks" class="input-assignedTo border-none">
+          <img src="assets/img/plus_addTask.svg" alt="plus_addTask" class="dropDownImg">
+          <div>
+            <img src="assets/img/subtask_cancel_AddTask.svg" alt="subtask_cancel_AddTask" class="display-none dropDownImg">
+            <img src="assets/img/subtask_seperator_AddTask.svg" alt="subtask_seperator_AddTask" class="display-none dropDownImg">
+            <img src="assets/img/subtask_check_AddTask.svg" alt="subtask_check_AddTask" class="display-none dropDownImg">
+          </div>
         </div>
         <div id="subtasks"></div>
       </section>
