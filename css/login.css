@@ -7,6 +7,8 @@ body {
   justify-content: center;
   align-items: center;
   font-family: "Inter", sans-serif;
+  height: 100%;
+  overflow: hidden;
 }
 
 button {
@@ -64,6 +66,32 @@ h2 {
   position: absolute;
   top: 80px;
   left: 77px;
+}
+
+#background-fade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 1);
+  animation: opacity-fade 3s;
+}
+
+#logo-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: moving-to-target 2s;
+}
+
+#logo-container img {
+  display: block;
+  height: auto;
+}
+
+.fixed-center {
+  position: fixed;
 }
 
 .login-form-card {
@@ -225,4 +253,27 @@ footer a {
 footer a:hover {
   color: #29abe2;
   font-weight: 700;
+}
+
+@keyframes moving-to-target {
+  from {
+    top: 38%;
+    left: 43%;
+    transform: translate(-50%, -50%);
+  }
+
+  to {
+    top: 0px;
+    left: 0px;
+  }
+}
+
+@keyframes opacity-fade {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
 }
