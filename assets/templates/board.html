@@ -6,11 +6,11 @@
     <title>Board</title>
     <link rel="stylesheet" href="/css/board.css" />
     <script src="/script.js"></script>
-    <script src="/js/sidemenu.js"></script>
+    <script src="/js/board.js"></script>
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="icon" href="/assets/img/joinLogoBlack.svg" />
   </head>
-  <body onload="includeHTML()">
+  <body onload="includeHTML(); updateHTML()">
     <div w3-include-html="/assets/templates/sidemenu.html"></div>
     <div w3-include-html="/assets/templates/header.html"></div>
     <div>
@@ -37,7 +37,7 @@
               <img src="/assets/img/plus button.svg" alt="Plus" class="plus" />
             </div>
           </div>
-          <div class="Task" id="toDo" ondrop="moveTo('toDo')" ondragleave="removeHighlight('toDo')" ondragover="allowDrop(event); highlight('toDo')"><div class="noToDo" id="1" draggable="true" ondragstart="startDragging(id)">no Task to do</div></div>
+          <div class="Task" id="toDo" ondrop="moveTo('toDo')" ondragleave="removeHighlight('toDo')" ondragover="allowDrop(event); highlight('toDo')"><div class="noToDo" id="1">no Task to do</div></div>
         </div>
         <div class="column">
           <div>

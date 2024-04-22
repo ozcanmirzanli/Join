@@ -3,11 +3,26 @@ let todos = [{
     'title': 'Putzen',
     'description': 'blah',
     'date':'24.05.2024',
-    'Story': 'userStory',
+    'story': 'userStory',
     'category':'toDo'
 }];
 
 let currentDraggedElement;
+/*
+function generateTodoHTML(element) {
+    return `<div draggable="true" ondragstart="startDragging(${element['id']})" class="plus">${element['title']}</div>`;
+}*/
+
+function generateTodoHTML(element){
+return /*html*/`
+    <div draggable="true" ondragstart="startDragging(${element['id']})"> 
+    <div>${element['story']}</div>
+    <h4>${element['title']}</h4>
+    <div>${element['description']}</div>
+    <div>${element['date']}</div>
+    </div>
+` 
+}
 
 function updateHTML() {
     let toDo = todos.filter(t => t['category'] == 'toDo');
@@ -50,10 +65,6 @@ function updateHTML() {
 
 function startDragging(id) {
     currentDraggedElement = id;
-}
-
-function generateTodoHTML(element) {
-    return `<div draggable="true" ondragstart="startDragging(${element['id']})" class="plus">${element['title']}</div>`;
 }
 
 function allowDrop(ev) {
