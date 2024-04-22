@@ -1,5 +1,4 @@
 /*Java Script für header.html, sidemenu.html, PrivacyPolice.html, LegalNotice.html, help.html und sidemenu.css*/
-
 function changeInitials() {
     let image = document.getElementById('initials'); 
     image.src = "/assets/img/UserInitialsHover.svg";
