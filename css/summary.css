@@ -62,6 +62,11 @@
   transform: scale(1.1);
 }
 
+.second-row:hover .date-text h3,
+.second-row:hover p {
+  color: white;
+}
+
 .option-text {
   display: flex;
   flex-direction: column;
@@ -168,6 +173,10 @@
   font-weight: 400;
   line-height: 24px;
   color: #2a3647;
+}
+
+.third-row:hover p {
+  color: white;
 }
 
 .secondary-container {
