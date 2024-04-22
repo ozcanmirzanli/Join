@@ -1,0 +1,32 @@
+.left {
+  width: 467px;
+  height: 594px;
+  padding: 66px 48px 66px 48px;
+  gap: 12px;
+  background-color: rgb(42, 54, 71);
+}
+
+.logo {
+  width: 55px;
+  height: 66px;
+  top: 154px;
+  left: 47px;
+}
+
+.add {
+  font-family: "Inter", sans-serif;
+  font-size: 61px;
+  font-weight: 700;
+  text-align: left;
+  width: 366px;
+  height: 73px;
+}
+
+.better {
+  font-family: "Inter", sans-serif;
+  font-size: 27px;
+  font-weight: 400;
+  text-align: left;
+  width: 371px;
+  height: 32px;
+}
