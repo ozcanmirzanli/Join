@@ -64,8 +64,6 @@ h2 {
   width: 100px;
   height: 122px;
   position: absolute;
-  top: 80px;
-  left: 77px;
 }
 
 #background-fade {
@@ -73,19 +71,14 @@ h2 {
   width: 100vw;
   height: 100vh;
   background: rgba(255, 255, 255, 1);
-  animation: opacity-fade 1s;
+  animation: opacity-fade 1s ease-in-out;
 }
 
 #logo-container {
   position: absolute;
-  top: 0;
-  left: 0;
-  animation: moving-to-target 1s;
-}
-
-#logo-container img {
-  display: block;
-  height: auto;
+  top: 80px;
+  left: 77px;
+  animation: moving-to-target 1s ease-in-out;
 }
 
 .fixed-center {
@@ -255,14 +248,15 @@ footer a:hover {
 
 @keyframes moving-to-target {
   from {
-    top: 38%;
-    left: 43%;
-    transform: translate(-50%, -50%);
+    top: 33%;
+    left: 40%;
+    transform: translate(-40%, -40%) scale(3);
   }
 
   to {
-    top: 0px;
-    left: 0px;
+    top: 80px;
+    left: 77px;
+    transform: translate(0, 0) scale(1);
   }
 }
 
