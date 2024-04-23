@@ -13,48 +13,23 @@ let todos = [
     description: "blah",
     date: "24.05.2024",
     story: "userStory",
-    category: "toDo",
+    category: "inProgress",
   },
 ];
 
 let currentDraggedElement;
-/*
-function generateTodoHTML(element) {
-    return `<div draggable="true" ondragstart="startDragging(${element['id']})" class="plus">${element['title']}</div>`;
-}*/
-function filterTasks() {
-  let search = document.getElementById("search").value;
-  search = search.toLowerCase();
 
-  let toDo = todos['title'];
-
-  for (let index = 0; index < toDo.length; index++) {
-    const element = toDo[index];
-    if (toDo.toLowerCase().includes(search)) {
-      document.getElementById("toDo").innerHTML += generateTodoHTML(element);
-    }
-  }
-}
-
-function generateTodoHTML(element) {
-  return /*html*/ `
-    <div draggable="true" ondragstart="startDragging(${element["id"]})"> 
-    <div>${element["story"]}</div>
-    <h4>${element["title"]}</h4>
-    <div>${element["description"]}</div>
-    <div>${element["date"]}</div>
-    </div>
-`;
-}
-
-function updateHTML() {
+function updateHTMLBoard() {
   let toDo = todos.filter((t) => t["category"] == "toDo");
 
   document.getElementById("toDo").innerHTML = "";
 
   for (let index = 0; index < toDo.length; index++) {
     const element = toDo[index];
-    document.getElementById("toDo").innerHTML += generateTodoHTML(element);
+    if(index > 0){
+    document.getElementById("toDo").innerHTML += generateTodoHTML(element)};
+    else {document.getElementById("toDo").innerHTML += <div class="noToDo">no Task to do</div>}
+
   }
 
   let inProgress = todos.filter((t) => t["category"] == "inProgress");
@@ -86,6 +61,17 @@ function updateHTML() {
     document.getElementById("done").innerHTML += generateTodoHTML(element);
   }
 }
+
+function generateTodoHTML(element) {
+    return /*html*/ `
+      <div draggable="true" ondragstart="startDragging(${element["id"]})"> 
+      <div>${element["story"]}</div>
+      <h4>${element["title"]}</h4>
+      <div>${element["description"]}</div>
+      <div>${element["date"]}</div>
+      </div>
+  `;
+  }
 
 function startDragging(id) {
   currentDraggedElement = id;

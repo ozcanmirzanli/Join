@@ -8,10 +8,10 @@
     <script src="/script.js"></script>
     <script src="/js/board.js"></script>
     <script src="/js/sidemenu.js"></script>
-    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/fonts.css"/>
     <link rel="icon" href="/assets/img/joinLogoBlack.svg" />
   </head>
-  <body onload="includeHTML(); updateHTML()">
+  <body onload="includeHTML(); updateHTMLBoard()">
     <div w3-include-html="/assets/templates/sidemenu.html"></div>
     <div w3-include-html="/assets/templates/header.html"></div>
     <div>
@@ -20,9 +20,13 @@
         <div class="task">
           <form action="">
             <div class="FindTask">
-              <input type="text" name="search" id="search" placeholder="find Task" onchange="filterTasks()"/>
+              <input type="text" name="search" id="search" placeholder="Find Task" onchange="filterTasks()"/>
               <div class="line"></div>
+<<<<<<< Updated upstream
                 <img src="/assets/img/search.svg" alt="search"   class="searchButton"/>
+=======
+                <img src="/assets/img/search.svg" alt="search" class="searchButton"/>
+>>>>>>> Stashed changes
             </div>
           </form>
           <img src="/assets/img/addTask_Button_Board.svg" alt="addTask" id="addTask" />
@@ -36,7 +40,7 @@
               <img src="/assets/img/plus button.svg" alt="Plus" class="plus" />
             </div>
           </div>
-          <div class="Task" id="toDo" ondrop="moveTo('toDo')" ondragleave="removeHighlight('toDo')" ondragover="allowDrop(event); highlight('toDo')"><div class="noToDo" id="1">no Task to do</div></div>
+          <div class="Task" id="toDo" ondrop="moveTo('toDo')" ondragleave="removeHighlight('toDo')" ondragover="allowDrop(event); highlight('toDo')"></div>
         </div>
         <div class="column">
           <div>
@@ -45,7 +49,7 @@
               <img src="/assets/img/plus button.svg" alt="Plus" class="plus" />
             </div>
           </div>
-          <div class="Task" id="inProgress" ondrop="moveTo('inProgress')" ondragleave="removeHighlight('inProgress')" ondragover="allowDrop(event); highlight('inProgress')"><div class="noToDo">no Task in Progress</div></div>
+          <div class="Task" id="inProgress" ondrop="moveTo('inProgress')" ondragleave="removeHighlight('inProgress')" ondragover="allowDrop(event); highlight('inProgress')"></div>
         </div>
         <div class="column">
           <div>
@@ -55,7 +59,6 @@
             </div>
           </div>
           <div class="Task" id="awaitFeedback" ondrop="moveTo('awaitFeedback')" ondragleave="removeHighlight('awaitFeedback')" ondragover="allowDrop(event); highlight('awaitFeedback')">
-            <div class="noToDo">no Task await feedback</div>
           </div>
         </div>
         <div class="column">
@@ -65,7 +68,7 @@
               <img src="/assets/img/plus button.svg" alt="Plus" class="plus" />
             </div>
           </div>
-          <div class="Task" id="done" ondrop="moveTo('done')" ondragleave="removeHighlight('done')" ondragover="allowDrop(event); highlight('done')"><div class="noToDo">no Task done</div></div>
+          <div class="Task" id="done" ondrop="moveTo('done')" ondragleave="removeHighlight('done')" ondragover="allowDrop(event); highlight('done')"></div>
         </div>
       </div>
     </div>

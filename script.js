@@ -20,3 +20,4 @@ function initSidemenu() {
     clickedBtn.classList.add("clickedSideBtn");
   }
 }
+
