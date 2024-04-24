@@ -3,15 +3,72 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign Up</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="css/sign_up.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
   </head>
   <body>
-    <form onsubmit="addUser()" ; return false;>
-      <input type="email" id="email" required />
-      <input type="password" id="password" required />
-      <button>Registrieren</button>
+    <div class="sign-up-main-container">
+      <div id="logo-container">
+        <img id="sign-up-logo" src="assets/img/Capa_1.png" alt="logo-capa-2" />
+      </div>
+
+      <div class="sign-up">
+        <button id="signed-up-success-btn">You Signed Up successfully</button>
+      </div>
+
+      <div class="sign-up-form-card">
+        <h1>Sign up</h1>
+        <div class="sign-up-underline"></div>
+        <form class="sign-up-inputs" onsubmit="signUp(); return false;">
+          <div class="email-input">
+            <input type="text" id="name" placeholder="Name" required />
+            <img src="assets/img/input_name.png" alt="name" id="name-logo" />
+          </div>
+          <div class="email-input">
+            <input type="email" id="email" placeholder="Email" required />
+            <img src="assets/img/mail.png" alt="mail" id="mail-logo" />
+          </div>
+          <div class="password-input">
+            <input
+              type="password"
+              id="password"
+              placeholder="Password"
+              required
+            />
+            <img src="assets/img/lock.png" alt="lock" id="password-logo" />
+          </div>
+          <div class="password-input">
+            <input
+              type="password"
+              id="password"
+              placeholder="Confirm password"
+              required
+            />
+            <img src="assets/img/lock.png" alt="lock" id="password-logo" />
+          </div>
+
+          <div class="check-box">
+            <input
+              type="checkbox"
+              name="remember-me"
+              id="remember-me-checkbox"
+            />
+            <label for="check-box">I accept the privacy policy</label>
+          </div>
+        
+        <div class="sign-up-btn-container">
+          <button id="sign-up-btn">Sign up</button>
+        </div>
+      </div>
     </form>
-    <script src="js/sign_up.js"></script>
+    <div id="msgBox"></div>
+      <footer>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Legal notice</a>
+      </footer>
+    </div>
     <script src="js/login.js"></script>
+    <script src="js/sign_up.js"></script>
   </body>
 </html>
