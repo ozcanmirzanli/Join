@@ -133,7 +133,7 @@ textarea {
     width: 454px;
 }
 
-.drop-down-image { 
+.drop-down-image-assign { 
     border-radius: 10px;
     height: 20px;
     width: 20px;
@@ -242,6 +242,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     transform: rotate(180deg);
 }
 
+.drop-down-image { 
+    border-radius: 10px;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* subtasks section */
 
 .input-subtasks {
@@ -258,6 +267,46 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: flex;
     gap: 4px;
 }
+
+.subtasks:hover {
+    background-color: #ebeaec;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.sections-addTask input[type=text]:focus {
+    border-color: rgba(41, 171, 226, 1);
+    outline: none;
+}
+
+.subtasks-list {
+    border-radius: 10px;
+    background-color: #f2f2f2; /* Leichtes Grau */
+    padding: 10px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Abstand zwischen den DIVs */
+}
+
+.subtask-item {
+    margin-bottom: 5px;
+    border-radius: 10px;
+    background-color: #f2f2f2; /* Leichtes Grau */
+    padding: 10px;
+}
+
+.subtask-bounding-box {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 5px;
+}
+
+.subtask-bounding-box img {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
 
 /* footer section */
 

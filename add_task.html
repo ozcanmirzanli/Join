@@ -44,7 +44,7 @@
                     <div class="pd-bottom"><label>Assigned to</label></div>
                     <div class="input-assignedTo border-input-addtask">
                         <input id="assignDropDown" type="text" name="assignTo" placeholder="Select contact to assign" class="border-none input-assignedTo"/>
-                        <div class="drop-down-image">
+                        <div class="drop-down-image-assign">
                             <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrowdown"/> 
                         </div>              
                     </div>       
@@ -59,7 +59,7 @@
                 <!-- Due Date -->
                 <section>
                     <div class="pd-bottom"><span>Due Date<span class="required-addTask">*</span></span></div>
-                    <input id="dueDate" type="date" placeholder="yyyy/mm/dd" class="input-dueDate border-input-addtask"/>
+                    <input id="dueDate" type="date" placeholder="yyyy/mm/dd" class="input-dueDate border-input-addtask" required/>
                 </section>
 
                 <!-- Priority -->
@@ -99,17 +99,17 @@
                 <section>
                     <div class="pd-bottom"><span>Subtasks</span></div>
                     <div class="input-assignedTo border-input-addtask">
-                        <input type="text" placeholder="Add new subtasks" class="input-assignedTo border-none">
-                        <div class="drop-down-image drop-down-subtask">
-                            <img src="assets/img/plus_addTask.svg" alt="plus_addTask">
+                        <input id="addsubtask" type="text" placeholder="Add new subtasks" class="input-assignedTo border-none" onfocus="handleInputFocus()">
+                        <div onclick="toggleSubtasks()" class="drop-down-image drop-down-subtask">
+                            <img id="plusIcon" src="assets/img/plus_addTask.svg" alt="plus_addTask">
                         </div>
-                        <div class="d-none add-subtasks">
-                            <img src="assets/img/subtask_cancel_AddTask.svg" alt="subtask_cancel_AddTask">
+                        <div id="subtasks" class="d-none add-subtasks">
+                            <img onclick="cancelSubtaskClick()" id="cancelSubtask" src="assets/img/subtask_cancel_AddTask.svg" class="subtasks" alt="subtask_cancel_AddTask">
                             <img src="assets/img/subtask_seperator_AddTask.svg" alt="subtask_seperator_AddTask">
-                            <img src="assets/img/subtask_check_AddTask.svg" alt="subtask_check_AddTask">
+                            <img onclick="saveSubtask()" id="checkSubtask" src="assets/img/subtask_check_AddTask.svg" class="subtasks" alt="subtask_check_AddTask">
                         </div>
                     </div>
-                    <div id="subtasks"></div>
+                    <div id="showsubtasks" class="subtasks-list d-none"></div>
                 </section>
             </div>
         </div>
