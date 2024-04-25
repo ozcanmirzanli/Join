@@ -102,7 +102,33 @@ function saveSubtask() {
         newSubtask.classList.add('subtask-item');
         newSubtask.innerText = '\u2022 ' + inputValue; // Füge Aufzählung hinzu
 
-        // Füge das neue Element zur Liste hinzu
+        // Erstelle eine Bounding Box für die Bearbeiten-, Trennlinien- und Löschen-Optionen
+        const boundingBox = document.createElement('div');
+        boundingBox.classList.add('bounding-box');
+
+        // Erstelle die Bilder für die Bearbeiten-, Trennlinien- und Löschen-Optionen
+        const editIcon = document.createElement('img');
+        editIcon.src = "assets/img/subtask_edit_AddTask.svg";
+        editIcon.alt = "Edit Subtask";
+        editIcon.classList.add('subtask-icon');
+
+        const separatorIcon = document.createElement('img');
+        separatorIcon.src = "assets/img/subtask_seperator_AddTask.svg";
+        separatorIcon.alt = "Separator";
+        separatorIcon.classList.add('subtask-icon');
+
+        const trashIcon = document.createElement('img');
+        trashIcon.src = "assets/img/subtask_trash_AddTask.svg";
+        trashIcon.alt = "Delete Subtask";
+        trashIcon.classList.add('subtask-icon');
+
+        // Füge die Bilder zur Bounding Box hinzu
+        boundingBox.appendChild(editIcon);
+        boundingBox.appendChild(separatorIcon);
+        boundingBox.appendChild(trashIcon);
+
+        // Füge die Bounding Box und die Subtask-DIV zur Liste hinzu
+        newSubtask.appendChild(boundingBox);
         showSubtasks.appendChild(newSubtask);
         
         // Leere das Input-Feld

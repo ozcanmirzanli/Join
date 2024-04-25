@@ -291,6 +291,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .subtask-item {
     margin-bottom: 5px;
+    justify-content: space-between;
+    align-items: center;
     border-radius: 10px;
     background-color: #f2f2f2; /* Leichtes Grau */
     padding: 10px;
@@ -305,6 +307,28 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .subtask-bounding-box img {
     margin-left: 5px;
     cursor: pointer;
+}
+
+.bounding-box {
+    justify-content: right;
+    display: flex;
+    gap: 8px; /* Abstand zwischen den Bildern */
+    transform: translateY(-50%);
+    opacity: 0; /* Standardmäßig ausgeblendet */
+    transition: opacity 0.3s ease; /* Sanfte Übergänge */
+}
+
+.subtask-item:hover .bounding-box {
+    opacity: 1; /* Bei Hover einblenden */
+}
+
+.subtask-icon {
+    width: 16px;
+    height: 18px;
+}
+
+.subtask-icon:hover {
+    cursor: pointer; /* Zeige Handcursor beim Überfahren */
 }
 
 
