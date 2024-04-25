@@ -18,7 +18,8 @@ function initSidemenu() {
 }*/
 
 function changeBackground(id){
+    document.getElementById().classList.remove('clickedSideBtn');
     let clickedBtn = document.getElementById(id);
-    clickedBtn.classList.add('clickedSideBtn');//higliht clicked Button
     localStorage.setItem('clickedBtnId', id);//save id of clicked Button
+    clickedBtn.classList.add('clickedSideBtn');//higliht clicked Button
 }

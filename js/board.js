@@ -130,13 +130,13 @@ function displayFilteredTodos(filteredTodos) {
   });
 }  
 
-function addTaskBoard(){
+function showaddTaskBoard(){
   let addTask = document.getElementById('addTask');//get element with id 'addTask'
   addTask.classList.remove('d-none');//remove class d-none
   addTask.classList.add('addTask');//add class 'addTask'
   creatTask();
 }
 
-function creatTask(){
+function addTaskBoard(){
   //addtask.html einbinden??
 }
