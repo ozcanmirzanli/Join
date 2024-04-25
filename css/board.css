@@ -1,3 +1,7 @@
+.d-none {
+  display: none;
+}
+
 .headlineBoard {
   display: flex;
   justify-content: space-between;
@@ -8,7 +12,7 @@
   height: 73px;
 }
 
-#h1{
+#h1 {
   width: 176px;
   height: 73px;
   font-family: "Inter", sans-serif;
@@ -92,13 +96,13 @@
   color: rgb(168, 168, 168);
 }
 
-#addTask {
+.addTaskBtn {
   width: 160px;
   height: 48px;
   padding: 8px 16px 8px 16px;
 }
 
-#addTask:hover {
+.addTaskBtn:hover {
   cursor: pointer;
 }
 
@@ -113,5 +117,16 @@
 }
 
 input:focus {
-  outline:none;
+  outline: none;
+}
+
+.addTask {
+  position: absolute;
+  z-index: 5;
+  width: 1116px;
+  height: 870px;
+  margin-top: -899px;
+  margin-left: 161px;
+  border-radius: 30px 0px 0px 0px;
+  background-color: black;
 }

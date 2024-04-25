@@ -1,11 +1,11 @@
 /*Java Script für header.html & sidemenu.html*/
 function changeInitials() {
     let image = document.getElementById('initials'); 
-    image.src = "/assets/img/UserInitialsHover.svg";
+    image.src = "/assets/img/UserInitialsHover.svg";//change img src from element with Id 'initials'
 
     let submenu = document.getElementById('subMenu');
-    submenu.classList.remove('d-none');
-    submenu.classList.add('subMenu');
+    submenu.classList.remove('d-none');//show submenu
+    submenu.classList.add('subMenu');//style submenu
 }
 
 /*ausgelagert in script.js
@@ -19,6 +19,6 @@ function initSidemenu() {
 
 function changeBackground(id){
     let clickedBtn = document.getElementById(id);
-    clickedBtn.classList.add('clickedSideBtn');
-    localStorage.setItem('clickedBtnId', id);
+    clickedBtn.classList.add('clickedSideBtn');//higliht clicked Button
+    localStorage.setItem('clickedBtnId', id);//save id of clicked Button
 }

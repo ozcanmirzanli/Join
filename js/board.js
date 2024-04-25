@@ -20,58 +20,55 @@ let todos = [
 let currentDraggedElement;
 
 function updateHTMLBoard() {
-  let toDo = todos.filter((t) => t["category"] == "toDo");
+  let toDo = todos.filter((t) => t["category"] == "toDo");//Filter array nach category toDo 
 
+  document.getElementById("toDo").innerHTML = "";//leert element mit id toDo
   if (toDo.length === 0) {
-    document.getElementById("toDo").innerHTML = "<div>No Tasks to do.</div>";
+    document.getElementById("toDo").innerHTML = "<div>No Tasks to do.</div>";//erstellt div 'No Tasks to do.'
   } else {
-  document.getElementById("toDo").innerHTML = "";
-
   for (let index = 0; index < toDo.length; index++) {
     const element = toDo[index];
-    document.getElementById("toDo").innerHTML += generateTodoHTML(element);
+    document.getElementById("toDo").innerHTML += generateTodoHTML(element);//erstellt alle Tasks mit category: toDo
   }}
 
-  let inProgress = todos.filter((t) => t["category"] == "inProgress");
+  let inProgress = todos.filter((t) => t["category"] == "inProgress"); //Filter Array nach category: inProgress
 
+  document.getElementById("inProgress").innerHTML = "";//leert element mit id inProgress
   if (inProgress.length === 0) {
-    document.getElementById("inProgress").innerHTML = "<div>No Tasks in Progress.</div>";
+    document.getElementById("inProgress").innerHTML = "<div>No Tasks in Progress.</div>";//erstellt div 'No Tasks in Progress.'
   } else {
-  document.getElementById("inProgress").innerHTML = "";
 
   for (let index = 0; index < inProgress.length; index++) {
     const element = inProgress[index];
-    document.getElementById("inProgress").innerHTML +=
+    document.getElementById("inProgress").innerHTML +=//erstellt alle Tasks mit category: inProgress
       generateTodoHTML(element);
   }}
 
-  let awaitFeedback = todos.filter((t) => t["category"] == "awaitFeedback");
+  let awaitFeedback = todos.filter((t) => t["category"] == "awaitFeedback");//Filter Array nach category: awaitFeedback
 
+  document.getElementById("awaitFeedback").innerHTML = "";//leert element mit id awaitFeedback
   if (awaitFeedback.length === 0) {
-    document.getElementById("awaitFeedback").innerHTML = "<div>No Tasks await Feedback.</div>";
+    document.getElementById("awaitFeedback").innerHTML = "<div>No Tasks await Feedback.</div>";//erstellt div 'No Tasks await Feedback.'
   } else {
-  document.getElementById("awaitFeedback").innerHTML = "";
-
   for (let index = 0; index < awaitFeedback.length; index++) {
     const element = awaitFeedback[index];
-    document.getElementById("awaitFeedback").innerHTML +=
+    document.getElementById("awaitFeedback").innerHTML +=//erstellt alle Tasks mit category: awaitFeedback
       generateTodoHTML(element);
   }}
 
-  let done = todos.filter((t) => t["category"] == "done");
+  let done = todos.filter((t) => t["category"] == "done");//Filter Array nach category: done
 
+  document.getElementById("done").innerHTML = "";//leert element mit id done
   if (done.length === 0) {
-    document.getElementById("done").innerHTML = "<div>No Tasks done.</div>";
+    document.getElementById("done").innerHTML = "<div>No Tasks done.</div>";//erstellt div 'No Tasks done.'
   } else {
-  document.getElementById("done").innerHTML = "";
-
   for (let index = 0; index < done.length; index++) {
     const element = done[index];
-    document.getElementById("done").innerHTML += generateTodoHTML(element);
+    document.getElementById("done").innerHTML += generateTodoHTML(element);//erstellt alle Tasks mit category: done
   }
 }}
 
-function generateTodoHTML(element) {
+function generateTodoHTML(element) {//erstellt element entsprechend category
   return /*html*/ `
       <div draggable="true" ondragstart="startDragging(${element["id"]})"> 
       <div>${element["story"]}</div>
@@ -83,7 +80,7 @@ function generateTodoHTML(element) {
 }
 
 function startDragging(id) {
-  currentDraggedElement = id;
+  currentDraggedElement = id;//saves id from dragged element
 }
 
 function allowDrop(ev) {
@@ -91,44 +88,55 @@ function allowDrop(ev) {
 }
 
 function moveTo(category) {
-  todos[currentDraggedElement]["category"] = category;
-  updateHTML();
+  todos[currentDraggedElement]["category"] = category;//change category of element
+  updateHTMLBoard();//update Board 
 }
 
 function highlight(id) {
-  document.getElementById(id).classList.add("drag-area-highlight");
+  document.getElementById(id).classList.add("drag-area-highlight");//add class on element by dragover
 }
 
 function removeHighlight(id) {
-  document.getElementById(id).classList.remove("drag-area-highlight");
+  document.getElementById(id).classList.remove("drag-area-highlight");// remove class on element by dragleave
 }
 
 function filterTasks() {
-  let search = document.getElementById("search").value.toLowerCase();
+  let search = document.getElementById("search").value.toLowerCase();//eingabe des inputfield speichern
   
-  let filteredTodos = todos.filter(todo =>
-    (todo.title.toLowerCase().includes(search) || todo.description.toLowerCase().includes(search)) &&
-    (todo.category === "toDo" || todo.category === "inProgress" || todo.category === "awaitFeedback" || todo.category === "done")
+  let filteredTodos = todos.filter(todo =>//erstellt neues array filterdTodos
+    (todo.title.toLowerCase().includes(search) || todo.description.toLowerCase().includes(search)) &&// filtert FilterdTodos nach 'title' and 'description'
+    (todo.category === "toDo" || todo.category === "inProgress" || todo.category === "awaitFeedback" || todo.category === "done")//filtert filredTodos nach 'category'
   );
 
-  displayFilteredTodos(filteredTodos);
+  displayFilteredTodos(filteredTodos);//ruft displayFilteredTodos() auf
 }
 
 function displayFilteredTodos(filteredTodos) {
-  document.getElementById("toDo").innerHTML = "";
-  document.getElementById("inProgress").innerHTML = "";
-  document.getElementById("awaitFeedback").innerHTML = "";
-  document.getElementById("done").innerHTML = "";
+  document.getElementById("toDo").innerHTML = "";//leert element mit id 'toDo'
+  document.getElementById("inProgress").innerHTML = "";//leert element mit id 'inProgress'
+  document.getElementById("awaitFeedback").innerHTML = "";//leert element mit id 'awaitFeedback'
+  document.getElementById("done").innerHTML = "";//leert element mit id 'done'
 
-  filteredTodos.forEach(todo => {
+  filteredTodos.forEach(todo => {//erstellt für filteredtodos nach category neues HTML
     if (todo.category === "toDo") {
-      document.getElementById("toDo").innerHTML += generateTodoHTML(todo);
+      document.getElementById("toDo").innerHTML += generateTodoHTML(todo);//erstellt in element 'toDo' für category 'toDo' neues Html
     } else if (todo.category === "inProgress") {
-      document.getElementById("inProgress").innerHTML += generateTodoHTML(todo);
+      document.getElementById("inProgress").innerHTML += generateTodoHTML(todo);//erstellt in element 'inProgress' für category 'inPrgress' neues Html
     } else if (todo.category === "awaitFeedback") {
-      document.getElementById("awaitFeedback").innerHTML += generateTodoHTML(todo);
+      document.getElementById("awaitFeedback").innerHTML += generateTodoHTML(todo);//erstellt in element 'awaitFeedback' für category 'awaitFeedback' neues Html
     } else if (todo.category === "done") {
-      document.getElementById("done").innerHTML += generateTodoHTML(todo);
+      document.getElementById("done").innerHTML += generateTodoHTML(todo);//erstellt in element 'done' für category 'done' neues Html
     }
   });
 }  
+
+function addTaskBoard(){
+  let addTask = document.getElementById('addTask');//get element with id 'addTask'
+  addTask.classList.remove('d-none');//remove class d-none
+  addTask.classList.add('addTask');//add class 'addTask'
+  creatTask();
+}
+
+function creatTask(){
+  //addtask.html einbinden??
+}
