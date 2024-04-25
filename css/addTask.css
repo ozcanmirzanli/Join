@@ -313,11 +313,22 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     justify-content: right;
     display: flex;
     gap: 8px; /* Abstand zwischen den Bildern */
+    transform: translateY(-50%);
+    opacity: 0; /* Standardmäßig ausgeblendet */
+    transition: opacity 0.3s ease; /* Sanfte Übergänge */
+}
+
+.subtask-item:hover .bounding-box {
+    opacity: 1; /* Bei Hover einblenden */
 }
 
 .subtask-icon {
-    width: 24px;
-    height: 24px;
+    width: 16px;
+    height: 18px;
+}
+
+.subtask-icon:hover {
+    cursor: pointer; /* Zeige Handcursor beim Überfahren */
 }
 
 
