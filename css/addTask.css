@@ -291,6 +291,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .subtask-item {
     margin-bottom: 5px;
+    justify-content: space-between;
+    align-items: center;
     border-radius: 10px;
     background-color: #f2f2f2; /* Leichtes Grau */
     padding: 10px;
@@ -305,6 +307,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .subtask-bounding-box img {
     margin-left: 5px;
     cursor: pointer;
+}
+
+.bounding-box {
+    justify-content: right;
+    display: flex;
+    gap: 8px; /* Abstand zwischen den Bildern */
+}
+
+.subtask-icon {
+    width: 24px;
+    height: 24px;
 }
 
 
