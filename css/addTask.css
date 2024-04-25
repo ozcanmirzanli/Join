@@ -12,18 +12,12 @@ body {
     display: none;
 }
 
-input:hover,textarea:hover,button:hover{
+textarea:hover,button:hover{
     cursor: pointer;
     box-shadow: 0px 4px 4px 0px #00000040;
 }
 
-.dropDownImg:hover {
-	background-color: #eaeaea;
-	border-radius: 50%;
-    cursor: pointer;
-}
-
-form {
+.main-container {
     padding-left: 328px;
 }
 
@@ -85,6 +79,13 @@ input {
     padding-right: 16px;
 }
 
+input[type=text]:focus,
+input[type=date]:focus,
+textarea:focus {
+    border-color: rgba(41, 171, 226, 1);
+    outline: none;
+}
+
 .seperator-addtask {
     padding-left: 48.25px;
     padding-right: 48px;
@@ -125,19 +126,29 @@ textarea {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 10px;
+    padding: 8px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
     background: #fff;
     width: 454px;
 }
 
-.btnDropDown:hover { 
-    background-color: #F9F9F9;
+.drop-down-image-assign { 
+    border-radius: 10px;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.drop-down-image:hover {
+    background-color: #ebeaec;
+    cursor: pointer;
 }
 
 .border-none {
-    border: none;
+    border: unset;
 }
 
 /* due date section */
@@ -197,11 +208,105 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding-bottom: 24px;
 }
 
+.category-menu {
+    flex-direction: column;
+    position: absolute;
+    width: 474px;
+    border-radius: 10px;
+    background-color: #fff;
+    gap: 16px;
+    box-shadow: 0px 3px 8px 0px rgb(0 0 0 / 20%);
+    font-size: 20px;
+    overflow-y: auto;
+    z-index: 1;
+    height: 120px;
+}
+
+.category-option {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 400;
+    box-sizing: border-box;
+    padding: 18px;
+}
+
+.category-option:hover {
+    background-color: rgb(245, 245, 245);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.rotate180 {
+    transform: rotate(180deg);
+}
+
+.drop-down-image { 
+    border-radius: 10px;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* subtasks section */
 
 .input-subtasks {
     padding: 12px 254px 12px 16px;
 }
+
+.drop-down-subtask {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+.add-subtasks {
+    display: flex;
+    gap: 4px;
+}
+
+.subtasks:hover {
+    background-color: #ebeaec;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.sections-addTask input[type=text]:focus {
+    border-color: rgba(41, 171, 226, 1);
+    outline: none;
+}
+
+.subtasks-list {
+    border-radius: 10px;
+    background-color: #f2f2f2; /* Leichtes Grau */
+    padding: 10px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Abstand zwischen den DIVs */
+}
+
+.subtask-item {
+    margin-bottom: 5px;
+    border-radius: 10px;
+    background-color: #f2f2f2; /* Leichtes Grau */
+    padding: 10px;
+}
+
+.subtask-bounding-box {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 5px;
+}
+
+.subtask-bounding-box img {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
 
 /* footer section */
 
