@@ -4,16 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Board</title>
-    <link rel="stylesheet" href="/css/board.css" />
-    <script src="/script.js"></script>
-    <script src="/js/board.js"></script>
-    <script src="/js/sidemenu.js"></script>
-    <link rel="stylesheet" href="/css/fonts.css"/>
-    <link rel="icon" href="/assets/img/joinLogoBlack.svg" />
+    <link rel="stylesheet" href="./css/board.css" />
+    <script src="script.js"></script>
+    <script src="./js/board.js"></script>
+    <script src="./js/sidemenu.js"></script>
+    <link rel="stylesheet" href="./css/fonts.css"/>
+    <link rel="icon" href="/.assets/img/joinLogoBlack.svg" />
   </head>
   <body onload="includeHTML(); updateHTMLBoard()">
-    <div w3-include-html="/assets/templates/sidemenu.html"></div>
-    <div w3-include-html="/assets/templates/header.html"></div>
+    <div w3-include-html="./assets/templates/sidemenu.html"></div>
+    <div w3-include-html="./assets/templates/header.html"></div>
     <div>
       <div class="headlineBoard">
         <h1>Board</h1>
@@ -21,9 +21,9 @@
             <div class="FindTask">
               <input type="text" name="search" id="search" placeholder="Find Task" oninput="filterTasks()"/>
               <div class="line"></div>
-                <img src="/assets/img/search.svg" alt="search"   class="searchButton"/>
+                <img src="./assets/img/search.svg" alt="search" class="searchButton"/>
             </div>
-          <img src="/assets/img/addTask_Button_Board.svg" alt="addTask" class="addTaskBtn" onclick="addTaskBoard()"/>
+          <img src="./assets/img/addTask_Button_Board.svg" alt="addTask" class="addTaskBtn" onclick="addTaskBoard()"/>
         </div>
       </div>
       <div class="table">
@@ -31,7 +31,7 @@
           <div>
             <div class="toDo">
               <p>To Do</p>
-              <img src="/assets/img/plus button.svg" alt="Plus" class="plus" />
+              <img src="./assets/img/plus button.svg" alt="Plus" class="plus" />
             </div>
           </div>
           <div class="Task" id="toDo" ondrop="moveTo('toDo')" ondragleave="removeHighlight('toDo')" ondragover="allowDrop(event); highlight('toDo')"></div>
@@ -40,7 +40,7 @@
           <div>
             <div class="toDo">
               <p>in Progress</p>
-              <img src="/assets/img/plus button.svg" alt="Plus" class="plus" />
+              <img src="./assets/img/plus button.svg" alt="Plus" class="plus" />
             </div>
           </div>
           <div class="Task" id="inProgress" ondrop="moveTo('inProgress')" ondragleave="removeHighlight('inProgress')" ondragover="allowDrop(event); highlight('inProgress')"></div>
@@ -49,7 +49,7 @@
           <div>
             <div class="toDo">
               <p>Await Feedback</p>
-              <img src="/assets/img/plus button.svg" alt="Plus" class="plus" />
+              <img src="./assets/img/plus button.svg" alt="Plus" class="plus" />
             </div>
           </div>
           <div class="Task" id="awaitFeedback" ondrop="moveTo('awaitFeedback')" ondragleave="removeHighlight('awaitFeedback')" ondragover="allowDrop(event); highlight('awaitFeedback')">
@@ -59,7 +59,7 @@
           <div>
             <div class="toDo">
               <p>Done</p>
-              <img src="/assets/img/plus button.svg" alt="Plus" class="plus" />
+              <img src="./assets/img/plus button.svg" alt="Plus" class="plus" />
             </div>
           </div>
           <div class="Task" id="done" ondrop="moveTo('done')" ondragleave="removeHighlight('done')" ondragover="allowDrop(event); highlight('done')"></div>
