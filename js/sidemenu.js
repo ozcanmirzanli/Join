@@ -18,7 +18,10 @@ function initSidemenu() {
 }*/
 
 function changeBackground(id){
-    document.getElementById().classList.remove('clickedSideBtn');
+    document.getElementById('sideBtn1').classList.remove('clickedSideBtn');
+    document.getElementById('sideBtn2').classList.remove('clickedSideBtn');
+    document.getElementById('sideBtn3').classList.remove('clickedSideBtn');
+    document.getElementById('sideBtn4').classList.remove('clickedSideBtn');
     let clickedBtn = document.getElementById(id);
     localStorage.setItem('clickedBtnId', id);//save id of clicked Button
     clickedBtn.classList.add('clickedSideBtn');//higliht clicked Button
