@@ -118,8 +118,7 @@ input::placeholder {
   color: #e8e8e8;
 }
 
-.email-input,
-.password-input {
+.input {
   width: 378px;
   height: 22px;
   max-width: 422px;
