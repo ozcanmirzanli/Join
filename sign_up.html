@@ -18,18 +18,19 @@
       </div>
 
       <div class="sign-up-form-card">
+        <img src="assets/img/arrow-left-line.png" alt="left-arrow" id="left-arrow">
         <h1>Sign up</h1>
         <div class="sign-up-underline"></div>
         <form class="sign-up-inputs" onsubmit="signUp(); return false;">
-          <div class="email-input">
-            <input type="text" id="name" placeholder="Name" required />
+          <div class="input">
+            <input type="text" id="user-name" placeholder="Name" required />
             <img src="assets/img/input_name.png" alt="name" id="name-logo" />
           </div>
-          <div class="email-input">
+          <div class="input">
             <input type="email" id="email" placeholder="Email" required />
             <img src="assets/img/mail.png" alt="mail" id="mail-logo" />
           </div>
-          <div class="password-input">
+          <div class="input">
             <input
               type="password"
               id="password"
@@ -38,10 +39,10 @@
             />
             <img src="assets/img/lock.png" alt="lock" id="password-logo" />
           </div>
-          <div class="password-input">
+          <div class="input">
             <input
               type="password"
-              id="password"
+              id="confirm-password"
               placeholder="Confirm password"
               required
             />
@@ -68,7 +69,7 @@
         <a href="#">Legal notice</a>
       </footer>
     </div>
-    <script src="js/login.js"></script>
+    <script src="js/storage.js"></script>
     <script src="js/sign_up.js"></script>
   </body>
 </html>
