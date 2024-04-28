@@ -73,6 +73,7 @@ h2 {
   width: 100px;
   height: 122px;
   position: absolute;
+  z-index: 10;
 }
 
 #background-fade {
@@ -81,6 +82,7 @@ h2 {
   height: 100vh;
   background: rgba(255, 255, 255, 1);
   animation: opacity-fade 1s ease-in-out;
+  z-index: 10;
 }
 
 #logo-container {
@@ -88,6 +90,7 @@ h2 {
   top: 80px;
   left: 77px;
   animation: moving-to-target 1s ease-in-out;
+  z-index: 10;
 }
 
 .fixed-center {
