@@ -148,6 +148,7 @@ input {
   line-height: 24px;
   font-weight: 400;
   cursor: pointer;
+  width: 340px;
 }
 
 input::placeholder {
