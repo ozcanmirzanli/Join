@@ -303,17 +303,33 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .subtask-item {
     margin-bottom: 5px;
+    display: flex;
     justify-content: space-between;
     align-items: center;
     border-radius: 10px;
     background-color: #f2f2f2; /* Leichtes Grau */
     padding: 10px;
+    position: relative;
+}
+
+.subtask-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.subtask-content {
+    flex-grow: 1;
 }
 
 .subtask-bounding-box {
     display: flex;
     justify-content: flex-end;
     margin-top: 5px;
+    position: relative;
+    z-index: 1;
 }
 
 .subtask-bounding-box img {
@@ -330,6 +346,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     transition: opacity 0.3s ease; /* Sanfte Übergänge */
 }
 
+.subtask-item .subtask-icon {
+    display: none; /* Standardmäßig ausblenden */
+}
+
+.subtask-item:hover .subtask-icon {
+    display: inline-block; /* Bei Hover einblenden */
+}
+
+
 .subtask-item:hover .bounding-box {
     opacity: 1; /* Bei Hover einblenden */
 }
@@ -337,10 +362,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .subtask-icon {
     width: 16px;
     height: 18px;
-}
-
-.subtask-icon:hover {
-    cursor: pointer; /* Zeige Handcursor beim Überfahren */
 }
 
 

@@ -1,3 +1,5 @@
+let subtask = [];
+
 /**
  * Setze alle Buttons zurück auf die Standardfarben und Schriftfarben
  *
@@ -90,94 +92,39 @@ function handleInputFocus() {
 }
 
 function saveSubtask() {
-    const inputField = document.getElementById('addsubtask');
-    const inputValue = inputField.value.trim();
+    const subtaskInput = document.getElementById('addsubtask');
+    const subtaskText = subtaskInput.value.trim();
     
-    if (inputValue !== '') {
-        const showSubtasks = document.getElementById('showsubtasks');
+    if (subtaskText !== '') {
+        // Erstellen des HTML-Codes für den Subtask
+        const subtaskHTML = renderSubtaskItem(subtaskText);
         
-        // Erstelle ein neues Element für die gespeicherte Subtask
-        const newSubtask = document.createElement('div');
-        newSubtask.classList.add('subtask-item');
-        newSubtask.innerText = '\u2022 ' + inputValue; // Füge Aufzählung hinzu
+        // Hinzufügen des Subtask-HTML-Codes zum Element mit der ID 'showsubtasks'
+        const showSubtasksContainer = document.getElementById('showsubtasks');
+        showSubtasksContainer.insertAdjacentHTML('beforeend', subtaskHTML);
 
-        // Erstelle eine Bounding Box für die Bearbeiten-, Trennlinien- und Löschen-Optionen
-        const boundingBox = document.createElement('div');
-        boundingBox.classList.add('bounding-box');
+        // Clear subtask input
+        subtaskInput.value = '';
 
-        // Erstelle die Bilder für die Bearbeiten-, Trennlinien- und Löschen-Optionen
-        const editIcon = document.createElement('img');
-        editIcon.src = "assets/img/subtask_edit_AddTask.svg";
-        editIcon.alt = "Edit Subtask";
-        editIcon.classList.add('subtask-icon');
-
-        const separatorIcon = document.createElement('img');
-        separatorIcon.src = "assets/img/subtask_seperator_AddTask.svg";
-        separatorIcon.alt = "Separator";
-        separatorIcon.classList.add('subtask-icon');
-
-        const trashIcon = document.createElement('img');
-        trashIcon.src = "assets/img/subtask_trash_AddTask.svg";
-        trashIcon.alt = "Delete Subtask";
-        trashIcon.classList.add('subtask-icon');
-
-        // Füge die Bilder zur Bounding Box hinzu
-        boundingBox.appendChild(editIcon);
-        boundingBox.appendChild(separatorIcon);
-        boundingBox.appendChild(trashIcon);
-
-        // Füge die Bounding Box und die Subtask-DIV zur Liste hinzu
-        newSubtask.appendChild(boundingBox);
-        showSubtasks.appendChild(newSubtask);
-        
-        // Leere das Input-Feld
-        inputField.value = '';
-        
-        // Zeige die showsubtasks DIV an, falls sie versteckt ist
-        showsubtasks.classList.remove('d-none');
+        // Hier entfernst du die Klasse d-none, um die Subtasks anzuzeigen
+        showSubtasksContainer.classList.remove('d-none');
     }
 }
 
-// Annahme: inputField, checkIcon, trashIcon und separatorIcon sind definiert
-
-editIcon.onclick = function() {
-    // Bearbeitungsmodus aktivieren
-    inputField.contentEditable = true;
-    inputField.focus();
-
-    // Funktion für das Speichern des geänderten Eintrags
-    checkIcon.onclick = function() {
-        // Speichern des geänderten Eintrags
-        saveEditedSubtask();
-        // Bearbeitungsmodus beenden
-        inputField.contentEditable = false;
-        // Hier kannst du weitere Aktionen ausführen, wenn der Eintrag gespeichert wurde
-    };
-
-    // Funktion für das Löschen des Eintrags
-    trashIcon.onclick = function() {
-        // Löschen des Eintrags
-        deleteSubtask(subtaskId);
-        // Hier kannst du weitere Aktionen ausführen, wenn der Eintrag gelöscht wurde
-    };
-
-    // Bilder auf der rechten Seite anzeigen
-    showIcons();
-};
-
-function showIcons() {
-    // Zeige die Bilder auf der rechten Seite an
-    trashIcon.style.display = 'inline-block'; // Das Löschen-Bild anzeigen
-    separatorIcon.style.display = 'inline-block'; // Das Trennlinien-Bild anzeigen
-    checkIcon.style.display = 'inline-block'; // Das Speichern-Bild anzeigen
-}
-
-function saveEditedSubtask() {
-    // Hier die Logik zum Speichern des geänderten Unterauftrags implementieren
-}
-
-function deleteSubtask(subtaskId) {
-    // Hier die Logik zum Löschen des Unterauftrags implementieren
+function renderSubtaskItem(subtask) {
+    return `
+        <div class="subtask-item">
+            <div class="subtask-content">
+                <span>\u2022 ${subtask}</span>
+            </div>
+            <div class="subtask-overlay"></div>
+            <div class="subtask-bounding-box">
+                <img src="assets/img/subtask_edit_AddTask.svg" alt="Edit Subtask" class="subtask-icon">
+                <img src="assets/img/subtask_seperator_AddTask.svg" alt="Separator" class="subtask-icon">
+                <img src="assets/img/subtask_trash_AddTask.svg" alt="Delete Subtask" class="subtask-icon">
+            </div>
+        </div>
+    `;
 }
 
 function clearEntries() {
