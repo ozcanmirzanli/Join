@@ -28,3 +28,16 @@ if (msg) {
 } else {
   msgBox.display.style = "none";
 }
+
+function checkBoxToggle() {
+  var unchecked = document.getElementById("unchecked");
+  var checked = document.getElementById("checked");
+
+  if (unchecked.style.display === "none") {
+    unchecked.style.display = "block";
+    checked.style.display = "none";
+  } else {
+    unchecked.style.display = "none";
+    checked.style.display = "block";
+  }
+}

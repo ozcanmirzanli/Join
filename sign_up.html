@@ -56,12 +56,9 @@
           </div>
 
           <div class="check-box">
-            <input
-              type="checkbox"
-              name="remember-me"
-              id="remember-me-checkbox"
-            />
-            <label for="check-box">I accept the privacy policy</label>
+            <img src="assets/img/check-box-disabled.png" id="unchecked" onclick="checkBoxToggle()"/>
+            <img src="assets/img/check-box-checked.png" class="d-none" id="checked" onclick="checkBoxToggle()"/>
+            <p>I accept the privacy policy</p>
           </div>
         
         <div class="sign-up-btn-container">
@@ -71,11 +68,12 @@
     </form>
     <div id="msgBox"></div>
       <footer>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Legal notice</a>
+        <a href="./assets/templates/PrivacyPolicy.html">Privacy Policy</a>
+        <a href="./assets/templates/LegalNotice.html">Legal notice</a>
       </footer>
     </div>
     <script src="js/storage.js"></script>
     <script src="js/sign_up.js"></script>
+    <script src="js/login.js"></script>
   </body>
 </html>

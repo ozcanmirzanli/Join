@@ -11,6 +11,15 @@ body {
   overflow: hidden;
 }
 
+p {
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+}
+
+.d-none {
+  display: none;
+}
+
 button {
   cursor: pointer;
   transition: all 100ms ease-in-out;
@@ -161,20 +170,14 @@ input::placeholder {
   justify-content: center;
 }
 
-.check-box label {
-  margin-left: 4px;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 19.2px;
-  text-align: left;
+.check-box img {
+  margin-right: 12px;
+  cursor: pointer;
 }
 
-#remember-me-checkbox {
-  width: 16px;
-  height: 16px;
-  border-radius: 3px;
-  border: 2px solid #2a3647;
-  cursor: pointer;
+.check-box img:hover {
+  transform: scale(1.1);
+  background-color: #edf2fa;
 }
 
 .sign-up-btn-container {
