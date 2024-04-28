@@ -150,14 +150,6 @@ function openAddTaskDialog() {
   // Fügen Sie das Dialogfenster zum Body hinzu
   document.body.appendChild(dialogContent);
 
-  // Entfernen Sie das Padding für das Formular im Dialogfenster
-  const addTaskForm = dialogContent.querySelector('#addTaskForm');
-  addTaskForm.style.paddingLeft = '0';
-
-  // Entfernen Sie das Padding-top für das h1-Element im Dialogfenster
-  const addTaskHeading = dialogContent.querySelector('h1');
-  addTaskHeading.style.paddingTop = '0';
-
   // Wenn ein Schließen-Button benötigt wird, fügen Sie ihn hier hinzu und definieren Sie die Logik, um das Dialogfenster zu schließen
 }
 
