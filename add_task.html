@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/addTask.css">
+    <link rel="stylesheet" href="css/addTaskDialog.css">
     <link rel="stylesheet" type="text/css" href="css/sidemenu.css">
     <link rel="icon" type="image/png" href="assets/img/joinLogoBlack.svg">
     <script src="script.js"></script>
@@ -23,7 +23,7 @@
         <div w3-include-html="assets/templates/sidemenu.html"></div>
     </nav>
 
-    <main class="main-container">
+    <form action="">
         <h1>Add Task</h1>
 
         <div class="main-addTask">
@@ -84,23 +84,21 @@
                     <div class="pd-bottom"><span>Category<span class="required-addTask">*</span></span></div>
                     <div class="input-assignedTo border-input-addtask" id="categoryAddTask" onclick="toggleCategoryDropdown()">
                       Select Task Category
-                      <div class="drop-down-image">
+                      <div id="categoryDropDownArrow" class="drop-down-image">
                         <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrow_drop_down_AddTask">
                       </div>
                     </div>
-                    
                     <div class="d-none category-menu">
                       <div class="category-option" onclick="selectCategory('User Story')">User Story</div>
                       <div class="category-option" onclick="selectCategory('Technical Story')">Technical Story</div>
                     </div>
-                    
                 </section>
 
                 <!-- Subtasks -->
                 <section>
                     <div class="pd-bottom"><span>Subtasks</span></div>
-                    <div class="input-assignedTo border-input-addtask">
-                        <input id="addsubtask" type="text" placeholder="Add new subtasks" class="input-assignedTo border-none" onfocus="handleInputFocus()">
+                    <div class="input-assignedTo border-input-addtask" id="addSubtaskMain" onfocus="handleInputFocus()">
+                        <input id="addsubtask" type="text" placeholder="Add new subtasks" class="input-assignedTo border-none">
                         <div onclick="toggleSubtasks()" class="drop-down-image drop-down-subtask">
                             <img id="plusIcon" src="assets/img/plus_addTask.svg" alt="plus_addTask">
                         </div>
@@ -123,7 +121,7 @@
             </div>
 
             <div class="footer-btn-addTask">
-                <button class="footer-btn-text-img" type="button" id="clear-btn">
+                <button onclick="clearEntries()" class="footer-btn-text-img" type="button" id="clear-btn">
                     Clear
                     <img src="assets/img/subtask_cancel_AddTask.svg" alt="subtask_cancel_AddTask">
                 </button>
@@ -134,6 +132,6 @@
                 </button>
             </div>
         </footer>
-    </main>
+    </form>
 </body>
 </html>

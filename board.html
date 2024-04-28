@@ -8,7 +8,9 @@
     <script src="script.js"></script>
     <script src="./js/board.js"></script>
     <script src="./js/sidemenu.js"></script>
+    <script src="./js/add_task.js"></script>
     <link rel="stylesheet" href="./css/fonts.css"/>
+    <link rel="stylesheet" href="./css/addTask.css">
     <link rel="icon" href="/.assets/img/joinLogoBlack.svg" />
   </head>
   <body onload="includeHTML(); updateHTMLBoard()">
@@ -23,7 +25,7 @@
               <div class="line"></div>
                 <img src="./assets/img/search.svg" alt="search" class="searchButton"/>
             </div>
-          <img src="./assets/img/addTask_Button_Board.svg" alt="addTask" class="addTaskBtn" onclick="addTaskBoard()"/>
+          <img src="./assets/img/addTask_Button_Board.svg" alt="addTask" class="addTaskBtn" onclick="openAddTaskDialog()"/>
         </div>
       </div>
       <div class="table">
@@ -66,6 +68,6 @@
         </div>
       </div>
     </div>
-    <div id="addTask" class="d-none"></div>
+    <div id="addTaskDialog" class="dialog"></div>
   </body>
 </html>
