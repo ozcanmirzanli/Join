@@ -1,3 +1,23 @@
+document.addEventListener("DOMContentLoaded", function () {
+  let userNameSummary = document.getElementById("user-name");
+
+  const lastUser = localStorage.getItem("lastLoggedUser");
+  if (lastUser) {
+    userNameSummary.innerText = localStorage.getItem("userName") || "Guest";
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function () {});
+
+function getCurrentUser() {
+  const userName = JSON.parse(sessionStorage.getItem("currentUser"));
+  if (userName) {
+    return userName;
+  }
+  return null;
+}
+
+let userNameSummary = document.getElementById("user-name");
 let greetingText = document.getElementById("greeting-text");
 
 function changeButtonColor(element) {
@@ -24,8 +44,16 @@ let today = new Date();
 let curHr = today.getHours();
 
 function changeGreetingText() {
+  const currentUser = getCurrentUser();
   greetingText.innerText = "";
   greetingTextCondition();
+
+  userNameSummary.innerText = "";
+  if (currentUser) {
+    userNameSummary.innerText = currentUser.userName;
+  } else {
+    userNameSummary.innerText = "Guest";
+  }
 }
 
 function greetingTextCondition() {

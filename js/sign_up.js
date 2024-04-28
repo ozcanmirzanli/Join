@@ -19,6 +19,9 @@ async function loadUsers() {
 
 async function signUp() {
   signUpBtn.disabled = true;
+  let userNameValue = userName.value;
+
+  localStorage.setItem("userName", userNameValue);
 
   users.push({
     userName: userName.value,
@@ -35,4 +38,14 @@ function resetForm() {
   email.value = "";
   password.value = "";
   signUpBtn.disabled = false;
+}
+
+const urlParams = new URLSearchParams(window.location.search);
+const msg = urlParams.get("msg");
+let signUpBox = document.getElementById("signed-up-success-container");
+
+if (msg) {
+  signUpBox.innerHTML = msg;
+} else {
+  signUpBox.display.style = "none";
 }

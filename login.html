@@ -24,7 +24,7 @@
       <div class="login-form-card">
         <h1>Log in</h1>
         <div class="login-underline"></div>
-        <form class="login-inputs" onsubmit="login(); return false;">
+        <form class="login-inputs" onsubmit="login(event); return false;">
           <div class="email-input">
             <input type="email" id="email" placeholder="Email" required />
             <img src="assets/img/mail.png" alt="mail" id="mail-logo" />
@@ -38,6 +38,7 @@
             />
             <img src="assets/img/lock.png" alt="lock" id="password-logo" />
           </div>
+          <p id="wrong-password">Wrong password Ups! Try again.</p>
 
           <div class="check-box">
             <img src="assets/img/check-box-disabled.png" id="unchecked" onclick="checkBoxToggle()"/>
@@ -51,7 +52,6 @@
         </div>
       </div>
     </form>
-    <div id="msgBox"></div>
       <footer>
         <a href="./assets/templates/PrivacyPolicy.html">Privacy Policy</a>
         <a href="./assets/templates/LegalNotice.html">Legal notice</a>
@@ -59,5 +59,6 @@
     </div>
     <script src="js/storage.js"></script>
     <script src="js/login.js"></script>
+    <script src="js/sign_up.js"></script>
   </body>
 </html>
