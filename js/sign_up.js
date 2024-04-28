@@ -5,6 +5,18 @@ let email = document.getElementById("email");
 let password = document.getElementById("password");
 let signUpBtn = document.getElementById("sign-up-btn");
 
+async function init() {
+  loadUsers();
+}
+
+async function loadUsers() {
+  try {
+    users = JSON.parse(await getItem("users"));
+  } catch (e) {
+    console.error("Loading error:", e);
+  }
+}
+
 async function signUp() {
   signUpBtn.disabled = true;
 

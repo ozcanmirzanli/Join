@@ -76,6 +76,7 @@ h2 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
   gap: 32px;
   padding: 48px 88px 48px 88px;
   border-radius: 30px;
@@ -90,6 +91,13 @@ h2 {
   text-align: center;
   margin-block-start: 0;
   margin-block-end: 0;
+}
+
+.sign-up-arrow {
+  display: flex;
+  position: absolute;
+  top: 70px;
+  left: 50px;
 }
 
 .sign-up-underline {
@@ -193,7 +201,19 @@ input::placeholder {
   align-items: center;
 }
 
-#signed-up-success-btn {
+.signed-up-success-container {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  background-color: rgba(0, 0, 0, 0.356);
+  z-index: 5;
+  display: none;
+}
+
+#signed-up-success {
   padding: 0px 25px 0px 25px;
   border-radius: 20px;
   border: none;
@@ -207,6 +227,8 @@ input::placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 auto;
+  z-index: 5;
 }
 
 #sign-up-btn:hover {
