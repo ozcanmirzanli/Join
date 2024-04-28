@@ -10,23 +10,26 @@ document.addEventListener("DOMContentLoaded", function () {
   }, 1000);
 });
 
-function login() {
+function login(event) {
+  event.preventDefault();
+
   let email = document.getElementById("email");
   let password = document.getElementById("password");
+  let passwordInput = document.querySelector(".password-input");
+  let wrongPassword = document.getElementById("wrong-password");
 
   let user = users.find(
     (u) => u.email == email.value && u.password == password.value
   );
-}
 
-const urlParams = new URLSearchParams(window.location.search);
-const msg = urlParams.get("msg");
-let msgBox = document.getElementById("msgBox");
-
-if (msg) {
-  msgBox.innerHTML = msg;
-} else {
-  msgBox.display.style = "none";
+  if (user) {
+    sessionStorage.setItem("currentUser", JSON.stringify(user));
+    localStorage.setItem("lastLoggedUser", user.userName);
+    window.location.href = "summary.html";
+  } else {
+    passwordInput.style.border = "1px solid red";
+    wrongPassword.style.display = "block";
+  }
 }
 
 function checkBoxToggle() {

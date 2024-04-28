@@ -129,6 +129,7 @@ input {
   line-height: 24px;
   font-weight: 400;
   cursor: pointer;
+  width: 340px;
 }
 
 input::placeholder {
@@ -185,7 +186,6 @@ input::placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
-
   gap: 35px;
 }
 
