@@ -61,9 +61,21 @@ function greetingTextCondition() {
 }
 
 function updateSummary() {
-  let todo = document.getElementById("to-do");
+  updateDisplay("to-do", todos.length);
+  updateDisplay("done", getCategoryCount("done"));
+  updateDisplay("urgent", getCategoryCount("urgent"));
+  updateDisplay("in-board", getCategoryCount("inBoard"));
+  updateDisplay("in-progress", getCategoryCount("inProgress"));
+  updateDisplay("awaiting-feedback", getCategoryCount("awaitingFeedback"));
+}
 
-  todo.innerText = `${todos.length}`;
+function getCategoryCount(category) {
+  return todos.filter((todo) => todo.category === category).length;
+}
+
+function updateDisplay(elementId, count) {
+  let displayElement = document.getElementById(elementId);
+  displayElement.innerText = `${count}`;
 }
 
 changeGreetingText();

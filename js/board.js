@@ -5,7 +5,7 @@ let todos = [
     description: "blah",
     date: "24.05.2024",
     story: "userStory",
-    category: "toDo",
+    category: "done",
   },
   {
     id: 1,
@@ -14,6 +14,14 @@ let todos = [
     date: "24.05.2024",
     story: "userStory",
     category: "inProgress",
+  },
+  {
+    id: 2,
+    title: "asdf",
+    description: "asdf",
+    date: "29.05.2024",
+    story: "userStory",
+    category: "awaitingFeedback",
   },
 ];
 
