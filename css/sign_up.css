@@ -115,7 +115,7 @@ h2 {
   margin-top: -16px;
 }
 
-.sign-up-inputs {
+.inputs {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -136,7 +136,10 @@ input::placeholder {
   color: #e8e8e8;
 }
 
-.input {
+.user-name-input,
+.email-input,
+.password-input,
+.confirm-password-input {
   width: 378px;
   height: 22px;
   max-width: 422px;

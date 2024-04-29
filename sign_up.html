@@ -27,16 +27,16 @@
       </div>
         <h1>Sign up</h1>
         <div class="sign-up-underline"></div>
-        <form class="sign-up-inputs" onsubmit="signUp(); return false;">
-          <div class="input">
+        <form class="inputs" onsubmit="signUp(); return false;">
+          <div class="user-name-input">
             <input type="text" id="user-name" placeholder="Name" required />
             <img src="assets/img/input_name.png" alt="name" id="name-logo" />
           </div>
-          <div class="input">
+          <div class="email-input">
             <input type="email" id="email" placeholder="Email" required />
             <img src="assets/img/mail.png" alt="mail" id="mail-logo" />
           </div>
-          <div class="input">
+          <div class="password-input">
             <input
               type="password"
               id="password"
@@ -45,7 +45,7 @@
             />
             <img src="assets/img/lock.png" alt="lock" id="password-logo" />
           </div>
-          <div class="input">
+          <div class="confirm-password-input">
             <input
               type="password"
               id="confirm-password"
@@ -73,7 +73,7 @@
       </footer>
     </div>
     <script src="js/storage.js"></script>
-    <script src="js/sign_up.js"></script>
     <script src="js/login.js"></script>
+    <script src="js/sign_up.js"></script>
   </body>
 </html>
