@@ -61,9 +61,13 @@ function greetingTextCondition() {
 }
 
 function updateSummary() {
-  let todo = document.getElementById("to-do");
+  let todoDisplay = document.getElementById("to-do");
+  let doneDisplay = document.getElementById("done");
 
-  todo.innerText = `${todos.length}`;
+  let done = todos.filter((t) => t["category"] == "done"); //Filter Array nach category: done
+
+  todoDisplay.innerText = `${todos.length}`;
+  doneDisplay.innerText = `${done.length}`;
 }
 
 changeGreetingText();
