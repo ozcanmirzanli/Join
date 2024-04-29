@@ -1,6 +1,7 @@
 let subtask = [];
 let taskData = [];
 let taskIdCounter = 0;
+let selectedPrio = '';
 
 /**
  * Setze alle Buttons zurück auf die Standardfarben und Schriftfarben
@@ -31,16 +32,19 @@ function changePriorityColor(priority) {
         document.getElementById("btnPrioUrgent").style.color = "#FFFFFF";
         document.getElementById("btnPrioUrgent").style.borderColor = "#FF3D00";
         document.getElementById("btnPrioUrgent").getElementsByTagName("img")[0].src = "assets/img/urgent_white_AddTask.svg";
+        selectedPrio = 'urgent';
     } else if (priority === 'medium') {
         document.getElementById("btnPrioMedium").style.backgroundColor = "#FFA800";
         document.getElementById("btnPrioMedium").style.color = "#FFFFFF";
         document.getElementById("btnPrioMedium").style.borderColor = "#FFA800";
         document.getElementById("btnPrioMedium").getElementsByTagName("img")[0].src = "assets/img/medium_white_AddTask.svg";
+        selectedPrio = 'medium';
     } else if (priority === 'low') {
         document.getElementById("btnPrioLow").style.backgroundColor = "#7AE229";
         document.getElementById("btnPrioLow").style.color = "#FFFFFF";
         document.getElementById("btnPrioLow").style.borderColor = "#7AE229";
         document.getElementById("btnPrioLow").getElementsByTagName("img")[0].src = "assets/img/low_white_AddTask.svg";
+        selectedPrio = 'low';
     }
 }
 
@@ -129,13 +133,21 @@ function renderSubtaskItem(subtask) {
     `;
 }
 
+function editSubtask(i) {
+    let subtask = document.getElementById(`subtask${i}`);
+    let editSubtaskField = document.getElementById(`editSubtaskField${i}`);
+
+    subtask.classList.toggle('noDisplay');
+    editSubtaskField.classList.toggle('noDisplay');
+}
+
 function clearEntries() {
     // Clear-Eingaben für die Titel-Section
     document.getElementById('titleAddTask').value = '';
     // Clear-Eingaben für die Description-Section
     document.querySelector('.padding-description textarea').value = '';
     // Clear-Eingaben für die Assigned To-Section
-    document.getElementById('assignDropDown').value = '';
+    document.getElementById('assignAddTask').value = '';
     // Clear-Eingaben für die Due Date-Section
     document.getElementById('dueDate').value = '';
     // Clear-Eingaben für die Priority-Section
@@ -196,7 +208,7 @@ function resetCategorySection() {
 }
 
 
-function createTask() {
+async function createTask() {
     // Erforderliche Felder prüfen
     let title = document.getElementById('titleAddTask').value;
     let dueDate = document.getElementById('dueDate').value;
@@ -207,28 +219,24 @@ function createTask() {
     }
 
     // Werte aus den Abschnitten abrufen
-    let description = document.getElementById('descriptionAddTask').value;
-    let assignTo = document.getElementById('assignAddTask').value;
-    let category = document.getElementById('categoryAddTask').textContent;
     let subTasks = document.getElementById('addsubtask').value;
 
-    let newTask = {
+    taskData.push ({
         id: taskIdCounter++,
         title: title,
-        description: description,
-        assignTo: assignTo,
+        description: document.getElementById('descriptionAddTask').value,
+        assignTo: document.getElementById('assignAddTask').value,
         dueDate: dueDate,
-        category: category,
-        subTasks: subTasks.split('\n').map(subTask => ({ id: taskIdCounter++, content: subTask.trim() }))
-    };
+        category: document.getElementById('categoryAddTask').textContent,
+        subTasks: subTasks.split('\n').map(subTask => ({ id: taskIdCounter++, content: subTask.trim() })),
+        priority: selectedPrio,
+    });
+        await setItem('taskData', JSON.stringify(taskData));
 
-    taskData.push(newTask);
+    // taskData.push(newTask);
+
+    clearEntries()
 
     // JSON-Array ausgeben (nur für Debugging-Zwecke)
     console.log(taskData);
 };
-
-
-
-
-
