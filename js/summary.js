@@ -1,13 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-  let userNameSummary = document.getElementById("user-name");
-
-  const lastUser = localStorage.getItem("lastLoggedUser");
-  if (lastUser) {
-    userNameSummary.innerText = localStorage.getItem("userName") || "Guest";
-  }
+  changeGreetingText();
 });
-
-document.addEventListener("DOMContentLoaded", function () {});
 
 function getCurrentUser() {
   const userName = JSON.parse(sessionStorage.getItem("currentUser"));
