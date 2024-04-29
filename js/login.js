@@ -1,3 +1,7 @@
+/**
+ * This function hides the background fade by setting up a timer right after the DOM has been fully loaded.
+ *
+ */
 document.addEventListener("DOMContentLoaded", function () {
   setTimeout(function () {
     let backgroundFade = document.getElementById("background-fade");
@@ -7,6 +11,10 @@ document.addEventListener("DOMContentLoaded", function () {
   // Attach event handlers to the form for focusin and focusout events
   document.querySelector(".inputs").addEventListener("focusin", handleFocus);
   document.querySelector(".inputs").addEventListener("focusout", handleBlur);
+
+  // Hide wrong password text when the input value changes
+  let passwordInput = document.getElementById("password");
+  passwordInput.addEventListener("input", hideWrongPassword);
 });
 
 function handleFocus(event) {
@@ -57,7 +65,6 @@ function checkBoxToggle() {
 function togglePassword() {
   let passwordInput = document.getElementById("password");
   let passwordLogo = document.getElementById("password-logo");
-  console.log(passwordInput.type, passwordInput.value.length); // To see what values are being checked
 
   if (passwordInput.type === "password" && passwordInput.value.length > 0) {
     passwordLogo.src = "assets/img/password-visible.png";
