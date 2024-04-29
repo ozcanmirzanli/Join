@@ -15,3 +15,6 @@ async function getItem(key) {
     .then((res) => res.json())
     .then((res) => res.data.value);
 }
+
+window.setItem = setItem;
+window.getItem = getItem;
