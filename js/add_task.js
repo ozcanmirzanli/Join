@@ -3,6 +3,11 @@ let taskData = [];
 let taskIdCounter = 0;
 let selectedPrio = '';
 
+async function init () {
+    includeHTML();
+    await loadTasksData();
+}
+
 /**
  * Setze alle Buttons zurück auf die Standardfarben und Schriftfarben
  *
@@ -240,3 +245,12 @@ async function createTask() {
     // JSON-Array ausgeben (nur für Debugging-Zwecke)
     console.log(taskData);
 };
+
+async function loadTasksData() {
+    try {
+        taskData = JSON.parse(await getItem('taskData'))
+    }
+    catch (e) {
+        console.info('Could not load tasks')
+    }
+}
