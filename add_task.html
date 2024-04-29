@@ -37,14 +37,14 @@
                 <!-- Description -->
                 <section class="padding-description">
                     <div class="pd-bottom"><span>Description</span></div>
-                    <textarea name="description" id="" cols="30" rows="10" placeholder="Enter a Description" class="border-input-addtask"></textarea>
+                    <textarea name="description" id="descriptionAddTask" cols="30" rows="10" placeholder="Enter a Description" class="border-input-addtask"></textarea>
                 </section>
 
                 <!-- Assigend To -->
                 <section class="padding-description">
                     <div class="pd-bottom"><label>Assigned to</label></div>
                     <div class="input-assignedTo border-input-addtask">
-                        <input id="assignDropDown" type="text" name="assignTo" placeholder="Select contact to assign" class="border-none input-assignedTo"/>
+                        <input id="assignAddTask" type="text" name="assignTo" placeholder="Select contact to assign" class="border-none input-assignedTo"/>
                         <div class="drop-down-image-assign">
                             <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrowdown"/> 
                         </div>              
@@ -126,7 +126,7 @@
                     <img src="assets/img/subtask_cancel_AddTask.svg" alt="subtask_cancel_AddTask">
                 </button>
 
-                <button class="footer-btn-text-img" type="button" id="create-btn">
+                <button onclick="createTask()" class="footer-btn-text-img" type="button" id="create-btn">
                     Create Task
                     <img src="assets/img/create_hook_white_AddTask.svg" alt="create_hook_white_AddTask">
                 </button>

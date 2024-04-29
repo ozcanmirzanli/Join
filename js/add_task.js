@@ -1,4 +1,6 @@
 let subtask = [];
+let taskData = [];
+let taskIdCounter = 0;
 
 /**
  * Setze alle Buttons zurück auf die Standardfarben und Schriftfarben
@@ -93,7 +95,7 @@ function handleInputFocus() {
 
 function saveSubtask() {
     const subtaskInput = document.getElementById('addsubtask');
-    const subtaskText = subtaskInput.value.trim();
+    const subtaskText = subtaskInput.value;
     
     if (subtaskText !== '') {
         // Erstellen des HTML-Codes für den Subtask
@@ -130,25 +132,18 @@ function renderSubtaskItem(subtask) {
 function clearEntries() {
     // Clear-Eingaben für die Titel-Section
     document.getElementById('titleAddTask').value = '';
-
     // Clear-Eingaben für die Description-Section
     document.querySelector('.padding-description textarea').value = '';
-
     // Clear-Eingaben für die Assigned To-Section
     document.getElementById('assignDropDown').value = '';
-
     // Clear-Eingaben für die Due Date-Section
     document.getElementById('dueDate').value = '';
-
     // Clear-Eingaben für die Priority-Section
     resetPriorityButtons();
-
     // Clear-Eingaben für die Category-Section
     resetCategorySection();
-
     // Clear-Eingaben für die Subtasks-Section
     document.getElementById('addsubtask').value = '';
-
     // Clear-Einträge in der Show Subtasks-Section
     clearShowSubtasks();
 }
@@ -201,6 +196,37 @@ function resetCategorySection() {
 }
 
 
+function createTask() {
+    // Erforderliche Felder prüfen
+    let title = document.getElementById('titleAddTask').value;
+    let dueDate = document.getElementById('dueDate').value;
+
+    if (title === '' || dueDate === '') {
+        alert('Please fill in all required fields.');
+        return;
+    }
+
+    // Werte aus den Abschnitten abrufen
+    let description = document.getElementById('descriptionAddTask').value;
+    let assignTo = document.getElementById('assignAddTask').value;
+    let category = document.getElementById('categoryAddTask').textContent;
+    let subTasks = document.getElementById('addsubtask').value;
+
+    let newTask = {
+        id: taskIdCounter++,
+        title: title,
+        description: description,
+        assignTo: assignTo,
+        dueDate: dueDate,
+        category: category,
+        subTasks: subTasks.split('\n').map(subTask => ({ id: taskIdCounter++, content: subTask.trim() }))
+    };
+
+    taskData.push(newTask);
+
+    // JSON-Array ausgeben (nur für Debugging-Zwecke)
+    console.log(taskData);
+};
 
 
 
