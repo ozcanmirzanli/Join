@@ -14,8 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Hide wrong password text when the input value changes
   let passwordInput = document.getElementById("password");
-  passwordInput.addEventListener("input", handlePasswordChange);
   passwordInput.addEventListener("input", hideWrongPassword);
+  // Changes the password logo to default when the input field is empty
+  passwordInput.addEventListener("input", handlePasswordChange);
 });
 
 function handleFocus(event) {

@@ -1,3 +1,8 @@
+document.addEventListener("DOMContentLoaded", function () {
+  let confirmPasswordInput = document.getElementById("confirm-password");
+  confirmPasswordInput.addEventListener("input", handleConfirmPasswordChange);
+});
+
 let users = [];
 
 let userName = document.getElementById("user-name");
@@ -48,4 +53,36 @@ if (msg) {
   signUpBox.innerHTML = msg;
 } else {
   signUpBox.display.style = "none";
+}
+
+function handleConfirmPasswordChange() {
+  let confirmPasswordInput = document.getElementById("confirm-password");
+  let confirmPasswordLogo = document.getElementById("confirm-password-logo");
+
+  if (confirmPasswordInput.value.length > 0) {
+    confirmPasswordLogo.src = "assets/img/password-hide.png";
+  } else {
+    confirmPasswordLogo.src = "assets/img/lock.png";
+  }
+}
+
+function toggleConfirmPassword() {
+  let confirmPasswordInput = document.getElementById("confirm-password");
+  let confirmPasswordLogo = document.getElementById("confirm-password-logo");
+
+  if (
+    confirmPasswordInput.type === "password" &&
+    confirmPasswordInput.value.length > 0
+  ) {
+    confirmPasswordLogo.src = "assets/img/password-visible.png";
+    passwordInput.type = "text";
+  } else if (
+    confirmPasswordInput.type === "text" &&
+    confirmPasswordInput.value.length > 0
+  ) {
+    confirmPasswordLogo.src = "assets/img/password-hide.png";
+    confirmPasswordInput.type = "password";
+  } else {
+    confirmPasswordLogo.src = "assets/img/lock.png";
+  }
 }
