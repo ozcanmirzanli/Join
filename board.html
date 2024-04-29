@@ -33,41 +33,40 @@
           <div>
             <div class="toDo">
               <p>To Do</p>
-              <img src="./assets/img/plus button.svg" alt="Plus" class="plus" />
+              <img src="./assets/img/plus button.svg" alt="Plus" class="plus" onclick="showaddTaskBoard()"/>
             </div>
           </div>
-          <div class="Task" id="toDo" ondrop="moveTo('toDo')" ondragleave="removeHighlight('toDo')" ondragover="allowDrop(event); highlight('toDo')"></div>
+          <div class="Task" id="toDo" ondrop="moveTo('toDo')" ondragover="allowDrop(event)"></div>
         </div>
         <div class="column">
           <div>
             <div class="toDo">
               <p>in Progress</p>
-              <img src="./assets/img/plus button.svg" alt="Plus" class="plus" />
+              <img src="./assets/img/plus button.svg" alt="Plus" class="plus" onclick="showaddTaskBoard()"/>
             </div>
           </div>
-          <div class="Task" id="inProgress" ondrop="moveTo('inProgress')" ondragleave="removeHighlight('inProgress')" ondragover="allowDrop(event); highlight('inProgress')"></div>
+          <div class="Task" id="inProgress" ondrop="moveTo('inProgress')"  ondragover="allowDrop(event)"></div>
         </div>
         <div class="column">
           <div>
             <div class="toDo">
               <p>Await Feedback</p>
-              <img src="./assets/img/plus button.svg" alt="Plus" class="plus" />
+              <img src="./assets/img/plus button.svg" alt="Plus" class="plus" onclick="showaddTaskBoard()" />
             </div>
           </div>
-          <div class="Task" id="awaitFeedback" ondrop="moveTo('awaitFeedback')" ondragleave="removeHighlight('awaitFeedback')" ondragover="allowDrop(event); highlight('awaitFeedback')">
+          <div class="Task" id="awaitFeedback" ondrop="moveTo('awaitFeedback')"  ondragover="allowDrop(event)">
           </div>
         </div>
         <div class="column">
           <div>
             <div class="toDo">
               <p>Done</p>
-              <img src="./assets/img/plus button.svg" alt="Plus" class="plus" />
+              <img src="./assets/img/plus button.svg" alt="Plus" class="plus" onclick="showaddTaskBoard()"/>
             </div>
           </div>
-          <div class="Task" id="done" ondrop="moveTo('done')" ondragleave="removeHighlight('done')" ondragover="allowDrop(event); highlight('done')"></div>
+          <div class="Task" id="done" ondrop="moveTo('done')" ondragleave="removeHighlight('done')" ondragover="allowDrop(event)"></div>
         </div>
       </div>
-    </div>
     <div id="addTaskDialog" class="dialog"></div>
-  </body>
+    <div id="taskBig" class="d-none"></div>
 </html>

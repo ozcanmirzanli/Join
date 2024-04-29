@@ -53,10 +53,9 @@ body {
   background-color: rgb(42, 61, 89);
 }
 
-.clickedSideBtn{
+.clickedSideBtn {
   background-color: rgb(9, 25, 49);
 }
-
 
 .legal {
   display: flex;
@@ -172,7 +171,7 @@ a:hover {
 
 .user {
   margin-top: 25px;
-    margin-bottom: 44px;
+  margin-bottom: 44px;
   width: 56px;
   height: 56px;
 }
@@ -235,6 +234,10 @@ a {
   color: rgb(168, 168, 168);
   text-decoration: none;
   cursor: pointer;
+}
+
+a:hover {
+  color: rgb(41, 171, 226);
 }
 
 .column {
