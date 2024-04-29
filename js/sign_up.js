@@ -75,7 +75,7 @@ function toggleConfirmPassword() {
     confirmPasswordInput.value.length > 0
   ) {
     confirmPasswordLogo.src = "assets/img/password-visible.png";
-    passwordInput.type = "text";
+    confirmPasswordInput.type = "text";
   } else if (
     confirmPasswordInput.type === "text" &&
     confirmPasswordInput.value.length > 0
