@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Hide wrong password text when the input value changes
   let passwordInput = document.getElementById("password");
+  passwordInput.addEventListener("input", handlePasswordChange);
   passwordInput.addEventListener("input", hideWrongPassword);
 });
 
@@ -59,6 +60,17 @@ function checkBoxToggle() {
   } else {
     unchecked.style.display = "none";
     checked.style.display = "block";
+  }
+}
+
+function handlePasswordChange() {
+  let passwordInput = document.getElementById("password");
+  let passwordLogo = document.getElementById("password-logo");
+
+  if (passwordInput.value.length > 0) {
+    passwordLogo.src = "assets/img/password-hide.png";
+  } else {
+    passwordLogo.src = "assets/img/lock.png";
   }
 }
 
