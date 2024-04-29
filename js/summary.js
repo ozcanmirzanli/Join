@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   changeGreetingText();
+  updateSummary();
 });
 
 function getCurrentUser() {
@@ -57,6 +58,12 @@ function greetingTextCondition() {
   } else {
     greetingText.innerText = "Good evening,";
   }
+}
+
+function updateSummary() {
+  let todo = document.getElementById("to-do");
+
+  todo.innerText = `${todos.length}`;
 }
 
 changeGreetingText();
