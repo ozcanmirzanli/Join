@@ -42,23 +42,31 @@ function login(event) {
 }
 
 function checkBoxToggle() {
-  let unchecked = document.getElementById("unchecked");
-  let checked = document.getElementById("checked");
-  [unchecked, checked].forEach(
-    (el) => (el.style.display = el.style.display === "none" ? "block" : "none")
-  );
+  var unchecked = document.getElementById("unchecked");
+  var checked = document.getElementById("checked");
+
+  if (unchecked.style.display === "none") {
+    unchecked.style.display = "block";
+    checked.style.display = "none";
+  } else {
+    unchecked.style.display = "none";
+    checked.style.display = "block";
+  }
 }
 
 function togglePassword() {
-  var passwordInput = document.getElementById("password");
-  var passwordLogo = document.getElementById("password-logo");
+  let passwordInput = document.getElementById("password");
+  let passwordLogo = document.getElementById("password-logo");
+  console.log(passwordInput.type, passwordInput.value.length); // To see what values are being checked
 
-  if (passwordInput.type === "password") {
+  if (passwordInput.type === "password" && passwordInput.value.length > 0) {
     passwordLogo.src = "assets/img/password-visible.png";
     passwordInput.type = "text";
-  } else {
+  } else if (passwordInput.type === "text" && passwordInput.value.length > 0) {
     passwordLogo.src = "assets/img/password-hide.png";
     passwordInput.type = "password";
+  } else {
+    passwordLogo.src = "assets/img/lock.png";
   }
 }
 
