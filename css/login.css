@@ -12,8 +12,8 @@ body {
 }
 
 p {
-  margin-block-start: 1em;
-  margin-block-end: 1em;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 .d-none {
@@ -125,10 +125,13 @@ h2 {
 
 #wrong-password {
   position: absolute;
-  top: 290px;
-  color: red;
+  top: 315px;
   left: 118px;
   display: none;
+  color: #ff8190;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 15.6px;
 }
 
 .login-underline {
@@ -180,7 +183,7 @@ input::placeholder {
 
 .check-box {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   margin-left: 43px;
 }
 

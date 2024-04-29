@@ -1,6 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
   let confirmPasswordInput = document.getElementById("confirm-password");
   confirmPasswordInput.addEventListener("input", handleConfirmPasswordChange);
+  document
+    .getElementById("password")
+    .addEventListener("input", confirmPassword);
+  document
+    .getElementById("confirm-password")
+    .addEventListener("input", confirmPassword);
+  loadUsers();
 });
 
 let users = [];
@@ -8,7 +15,6 @@ let users = [];
 let userName = document.getElementById("user-name");
 let email = document.getElementById("email");
 let password = document.getElementById("password");
-let signUpBtn = document.getElementById("sign-up-btn");
 
 async function init() {
   loadUsers();
@@ -23,6 +29,8 @@ async function loadUsers() {
 }
 
 async function signUp() {
+  let signUpBtn = document.getElementById("sign-up-btn");
+
   signUpBtn.disabled = true;
   let userNameValue = userName.value;
 
@@ -39,10 +47,32 @@ async function signUp() {
 }
 
 function resetForm() {
+  let signUpBtn = document.getElementById("sign-up-btn");
+
   userName.value = "";
   email.value = "";
   password.value = "";
   signUpBtn.disabled = false;
+}
+
+function confirmPassword() {
+  let signUpBtn = document.getElementById("sign-up-btn");
+  let wrongPassword = document.getElementById("wrong-password");
+  let confirmPassword = document.getElementById("confirm-password");
+  let confirmPasswordInput = document.querySelector(".confirm-password-input");
+
+  let passwordsMatch = password.value === confirmPassword.value;
+  let isFormValid = userName.value && passwordsMatch && password.value;
+
+  if (password.value != confirmPassword.value) {
+    wrongPassword.style.display = "block";
+    confirmPasswordInput.style.border = "1px solid red";
+  } else {
+    wrongPassword.style.display = "none";
+    confirmPasswordInput.style.border = "";
+  }
+
+  signUpBtn.disabled = !isFormValid;
 }
 
 const urlParams = new URLSearchParams(window.location.search);
