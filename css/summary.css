@@ -3,6 +3,10 @@
   font-family: "Inter", sans-serif;
 }
 
+body {
+  background-color: #f6f7f8;
+}
+
 .title {
   margin: 206px 0 56px 328px;
   display: flex;
