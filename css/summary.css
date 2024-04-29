@@ -54,6 +54,7 @@ body {
   box-shadow: 0px 0px 4px 0px #0000001a;
   cursor: pointer;
   transition: 80ms ease-in-out;
+  background-color: white;
 }
 
 .first-row:hover,
@@ -114,6 +115,7 @@ body {
   align-items: center;
   border-radius: 30px;
   cursor: pointer;
+  background-color: white;
 }
 
 .second-row-left {
@@ -170,6 +172,7 @@ body {
   justify-content: center;
   text-align: center;
   cursor: pointer;
+  background-color: white;
 }
 
 .third-row p {
