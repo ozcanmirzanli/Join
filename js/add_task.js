@@ -205,7 +205,7 @@ function resetCategorySection() {
     // Setze den Text zurück
     categoryDropdown.textContent = 'Select Task Category';
     // Zurücksetzen des Drop-Down-Pfeils
-    categoryArrowDiv.innerHTML = `<img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrow_drop_down_AddTask">`;
+    categoryArrowDiv.innerHTML = '<img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrow_drop_down_AddTask">';
     // Setze die Border Color zurück
     categoryDropdown.style.borderColor = "#D1D1D1";
     // Füge das onclick-Event wieder hinzu
