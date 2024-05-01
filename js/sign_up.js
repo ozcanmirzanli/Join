@@ -1,12 +1,9 @@
+/* prettier-ignore */
 document.addEventListener("DOMContentLoaded", function () {
   let confirmPasswordInput = document.getElementById("confirm-password");
   confirmPasswordInput.addEventListener("input", handleConfirmPasswordChange);
-  document
-    .getElementById("password")
-    .addEventListener("input", confirmPassword);
-  document
-    .getElementById("confirm-password")
-    .addEventListener("input", confirmPassword);
+  document.getElementById("password").addEventListener("input", confirmPassword);
+  document.getElementById("confirm-password").addEventListener("input", confirmPassword);
   loadUsers();
 });
 
@@ -28,6 +25,7 @@ async function loadUsers() {
   }
 }
 
+/* prettier-ignore */
 async function signUp() {
   let signUpBtn = document.getElementById("sign-up-btn");
 
@@ -36,11 +34,7 @@ async function signUp() {
 
   localStorage.setItem("userName", userNameValue);
 
-  users.push({
-    userName: userName.value,
-    email: email.value,
-    password: password.value,
-  });
+  users.push({ userName: userName.value, email: email.value, password: password.value });
 
   await setItem("users", JSON.stringify(users));
   resetForm();
@@ -56,23 +50,52 @@ function resetForm() {
 }
 
 function confirmPassword() {
-  let signUpBtn = document.getElementById("sign-up-btn");
   let wrongPassword = document.getElementById("wrong-password");
-  let confirmPassword = document.getElementById("confirm-password");
+  let confirmPasswordElement = document.getElementById("confirm-password");
   let confirmPasswordInput = document.querySelector(".confirm-password-input");
 
-  let passwordsMatch = password.value === confirmPassword.value;
-  let isFormValid = userName.value && passwordsMatch && password.value;
+  let passwordsMatch = password.value === confirmPasswordElement.value;
 
-  if (password.value != confirmPassword.value) {
+  wrongPasswordInput(passwordsMatch, wrongPassword, confirmPasswordInput);
+  disableSignUpButton(passwordsMatch);
+}
+
+/* prettier-ignore */
+function wrongPasswordInput(passwordsMatch, wrongPassword, confirmPasswordInput) {
+  if (!passwordsMatch) {
     wrongPassword.style.display = "block";
     confirmPasswordInput.style.border = "1px solid red";
   } else {
     wrongPassword.style.display = "none";
     confirmPasswordInput.style.border = "";
   }
+}
+
+function disableSignUpButton(passwordsMatch) {
+  let signUpBtn = document.getElementById("sign-up-btn");
+  let isFormValid = userName.value && passwordsMatch && password.value;
 
   signUpBtn.disabled = !isFormValid;
+}
+
+/* prettier-ignore */
+function handleConfirmPasswordChange() {
+  let confirmPasswordInput = document.getElementById("confirm-password");
+  let confirmPasswordLogo = document.getElementById("confirm-password-logo");
+
+  confirmPasswordLogo.src = confirmPasswordInput.value.length > 0 ? "assets/img/password-hide.png" : "assets/img/lock.png";
+}
+
+/* prettier-ignore */
+function toggleConfirmPassword() {
+  let confirmPasswordInput = document.getElementById("confirm-password");
+  let confirmPasswordLogo = document.getElementById("confirm-password-logo");
+
+  let type = confirmPasswordInput.type === "password" ? "text" : "password";
+  let src = type === "text" ? "assets/img/password-visible.png" : "assets/img/password-hide.png";
+
+  confirmPasswordInput.type = type;
+  confirmPasswordLogo.src = src;
 }
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -83,36 +106,4 @@ if (msg) {
   signUpBox.innerHTML = msg;
 } else {
   signUpBox.display.style = "none";
-}
-
-function handleConfirmPasswordChange() {
-  let confirmPasswordInput = document.getElementById("confirm-password");
-  let confirmPasswordLogo = document.getElementById("confirm-password-logo");
-
-  if (confirmPasswordInput.value.length > 0) {
-    confirmPasswordLogo.src = "assets/img/password-hide.png";
-  } else {
-    confirmPasswordLogo.src = "assets/img/lock.png";
-  }
-}
-
-function toggleConfirmPassword() {
-  let confirmPasswordInput = document.getElementById("confirm-password");
-  let confirmPasswordLogo = document.getElementById("confirm-password-logo");
-
-  if (
-    confirmPasswordInput.type === "password" &&
-    confirmPasswordInput.value.length > 0
-  ) {
-    confirmPasswordLogo.src = "assets/img/password-visible.png";
-    confirmPasswordInput.type = "text";
-  } else if (
-    confirmPasswordInput.type === "text" &&
-    confirmPasswordInput.value.length > 0
-  ) {
-    confirmPasswordLogo.src = "assets/img/password-hide.png";
-    confirmPasswordInput.type = "password";
-  } else {
-    confirmPasswordLogo.src = "assets/img/lock.png";
-  }
 }
