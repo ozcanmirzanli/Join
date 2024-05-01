@@ -99,12 +99,12 @@ function generateTodoHTML(element) {
 }
 
 function startDragging(id) {
-  currentDraggedElement = id; //saves id from dragged element
-  document.getElementById(id).classList.add("dragged");
+  currentDraggedElement = id;
+  document.getElementById(id).classList.add('dragged');
 }
 
 function endDragging(id) {
-  document.getElementById(id).classList.remove("dragged");
+  document.getElementById(id).classList.remove('dragged');
   currentDraggedElement = null;
 }
 
@@ -118,8 +118,8 @@ function moveTo(category) {
 }
 
 function openTask() {
-  document.getElementById("taskBig").classList.remove("d-none");
-  document.getElementById("taskBig").classList.add("bigTask");
+  document.getElementById("taskBig").classList.remove('d-none');
+  document.getElementById("taskBig").classList.add('bigTask');
   renderBigTask();
 }
 
@@ -127,20 +127,24 @@ function renderBigTask() {
   let bigTask = document.getElementById("taskBig");
   bigTask.innerHTML = "";
   bigTask.innerHTML += /*html*/ `
-    <div class="bigTask">
-      <h2>title</h2>
+    <div class="taskTitle">
+      <h2>title</h2><img src="./assets/img/plus button.svg" alt="" onclick="closeTaskBig()"></div>
       <h3>beschreibung</h3>
-      <div>due date :</div>
-      <div>Priority: Meduímum <img src="./assets/img/medium_orange_AddTask.svg" alt=""></div>
-      <div>assigned to :
-       <div><img src="user 1" alt="user1"> Name user1</div>
-       <div><img src="" alt="user2"> name user 2</div>
+      <div class="dueDate">due date :</div>
+      <div class="prio">Priority: Meduímum <img src="./assets/img/medium_orange_AddTask.svg" alt=""></div>
+      <div class="members">assigned to :
+       <div class="userTask"><img src="./assets/img/edit contacts.svg" alt="user1" class="userImg"> Name user1</div>
+       <div class="userTask"><img src="./assets/img/edit contacts.svg" alt="user2" class="userImg"> name user 2</div>
       </div>
-      <div>subtasks</div>
-      <footer><img src="./assets/img/Delete contact.svg" alt="delet"> 
-      <img src="./assets/img/edit contacts.svg" alt="edit"></footer>
-    </div>
+      <div class="subtask">subtasks</div>
+      <footer class="taskfooter"><img src="./assets/img/Delete contact.svg" alt="delet" class="iconTask"> 
+      <img src="./assets/img/edit contacts.svg" alt="edit" class="iconTask"></footer>
   `;
+}
+
+function closeTaskBig(){
+  document.getElementById("taskBig").classList.remove('bigTask');
+  document.getElementById("taskBig").classList.add('d-none');
 }
 
 function filterTasks() {
