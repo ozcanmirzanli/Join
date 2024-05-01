@@ -434,4 +434,44 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     content: url(/Join/assets/img/clear_hook_blue_AddTask.svg);
  }
 
- 
+ @media screen and (max-width: 1400px) and (min-width: 1201px){
+    form {
+        padding-left: 140px;
+    }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 1141px){
+    form {
+        padding-left: 70px;
+    }
+}
+
+@media screen and (max-width: 1140px) and (min-width: 1101px){
+    form {
+        padding-left: 35px;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+        margin: 0 auto;
+        padding-left: 0;
+    }
+
+    .seperator-addtask {
+        display: none;
+    }
+
+    .main-addTask {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+}

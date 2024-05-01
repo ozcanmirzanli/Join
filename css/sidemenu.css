@@ -259,6 +259,7 @@ a:hover {
   align-items: center;
   padding: 2px 16px;
   gap: 64px;
+  z-index: 1;
 }
 
 .navBarIcons {
@@ -276,13 +277,13 @@ a:hover {
   height: 100px;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1400px) {
   .sidebar {
     display: none;
   }
 }
 
-@media screen and (min-width: 1201px) {
+@media screen and (min-width: 1401px) {
   .sidebar {
     display: block;
   }
