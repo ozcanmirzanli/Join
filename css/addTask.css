@@ -21,6 +21,10 @@ form {
     display: none;
 }
 
+input, textarea {
+    flex-wrap: wrap;
+}
+
 textarea:hover,button:hover{
     cursor: pointer;
     box-shadow: 0px 4px 4px 0px #00000040;
