@@ -2,6 +2,7 @@ let subtask = [];
 let taskData = [];
 let taskIdCounter = 0;
 let selectedPrio = '';
+let newTask = [];
 
 async function init () {
     includeHTML();
@@ -109,7 +110,7 @@ function saveSubtask() {
     if (subtaskText !== '') {
         // Erstellen des HTML-Codes für den Subtask
         const subtaskHTML = renderSubtaskItem(subtaskText);
-        
+
         // Hinzufügen des Subtask-HTML-Codes zum Element mit der ID 'showsubtasks'
         const showSubtasksContainer = document.getElementById('showsubtasks');
         showSubtasksContainer.insertAdjacentHTML('beforeend', subtaskHTML);
@@ -122,28 +123,62 @@ function saveSubtask() {
     }
 }
 
-function renderSubtaskItem(subtask) {
+function renderSubtaskItem(subtask, i) {
     return `
         <div class="subtask-item">
-            <div class="subtask-content">
+            <div id="subtask${i}" class="subtask-content">
                 <span>\u2022 ${subtask}</span>
             </div>
-            <div class="subtask-overlay"></div>
-            <div class="subtask-bounding-box">
-                <img src="assets/img/subtask_edit_AddTask.svg" alt="Edit Subtask" class="subtask-icon">
+            <div id="subtaskEditInput${i}" class="subtask-content d-none">
+                <input value="${subtask}" class="subtask-input subtaskEditText" id="subtaskInput${i}">
+                <div class="subtask-bounding-box">
+                    <img onclick="subtaskDelete(${i})" src="assets/img/subtask_trash_AddTask.svg" alt="Delete Subtask" class="subtask-icon">
+                    <img src="assets/img/subtask_seperator_AddTask.svg" alt="Separator" class="subtask-icon">
+                    <img onclick="subtaskSaveEdit(${i})" src="assets/img/subtask_check_AddTask.svg" alt="Check Subtask" class="subtask-icon">
+                </div>
+            </div>
+            <div id="mainBoundingBox" class="subtask-bounding-box">
+                <img onclick="subtaskEdit(${i})" src="assets/img/subtask_edit_AddTask.svg" alt="Edit Subtask" class="subtask-icon">
                 <img src="assets/img/subtask_seperator_AddTask.svg" alt="Separator" class="subtask-icon">
-                <img src="assets/img/subtask_trash_AddTask.svg" alt="Delete Subtask" class="subtask-icon">
+                <img onclick="subtaskDelete(${i})" src="assets/img/subtask_trash_AddTask.svg" alt="Delete Subtask" class="subtask-icon">
             </div>
         </div>
     `;
 }
 
-function editSubtask(i) {
-    let subtask = document.getElementById(`subtask${i}`);
-    let editSubtaskField = document.getElementById(`editSubtaskField${i}`);
+function subtaskEdit(i) {
+    let subtaskContent = document.getElementById(`subtask${i}`);
+    let subtaskEditInput = document.getElementById(`subtaskEditInput${i}`);
+    document.getElementById(`mainBoundingBox`).classList.add('d-none');
 
-    subtask.classList.toggle('noDisplay');
-    editSubtaskField.classList.toggle('noDisplay');
+    subtaskContent.classList.toggle('d-none');
+    subtaskEditInput.classList.toggle('d-none');
+}
+
+function subtaskSaveEdit(i) {
+    let subtaskContent = document.getElementById(`subtask${i}`);
+    let subtaskEditInput = document.getElementById(`subtaskEditInput${i}`);
+    let subtaskInput = document.getElementById(`subtaskInput${i}`);
+    document.getElementById('mainBoundingBox').classList.remove('d-none');
+
+
+    subtaskContent.querySelector('span').textContent = `\u2022 ${subtaskInput.value}`;
+    subtaskContent.classList.toggle('d-none');
+    subtaskEditInput.classList.toggle('d-none');
+}
+
+function subtaskDelete(i) {
+    let subtaskContainer = document.getElementById(`subtask${i}`).parentNode;
+    subtaskContainer.remove();
+
+    // Nach dem Entfernen eines Subtasks werden die verbleibenden Subtasks neu nummeriert
+    let subtaskItems = document.querySelectorAll('.subtask-item');
+    subtaskItems.forEach((item, index) => {
+        item.querySelector('.subtask-content').id = `subtask${index}`;
+        item.querySelector('.subtask-content input').id = `subtaskInput${index}`;
+        item.querySelector('.subtask-bounding-box img').setAttribute('onclick', `subtaskEdit(${index})`);
+        item.querySelector('.subtask-bounding-box img:last-child').setAttribute('onclick', `subtaskDelete(${index})`);
+    });
 }
 
 function clearEntries() {
@@ -163,6 +198,7 @@ function clearEntries() {
     document.getElementById('addsubtask').value = '';
     // Clear-Einträge in der Show Subtasks-Section
     clearShowSubtasks();
+    subtaskDelete();
 }
 
 function clearShowSubtasks() {
@@ -236,9 +272,9 @@ async function createTask() {
         subTasks: subTasks.split('\n').map(subTask => ({ id: taskIdCounter++, content: subTask.trim() })),
         priority: selectedPrio,
     });
-        await setItem('taskData', JSON.stringify(taskData));
+        // await setItem('taskData', JSON.stringify(taskData));
 
-    // taskData.push(newTask);
+    taskData.push(newTask);
 
     clearEntries()
 

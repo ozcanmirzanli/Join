@@ -364,6 +364,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     height: 18px;
 }
 
+.subtaskEditText{
+    border: 0;
+    width: 80%;
+}
+
+.subtaskEditText:focus{
+    outline: none;
+}
+
 
 /* footer section */
 
