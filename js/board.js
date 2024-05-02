@@ -129,13 +129,13 @@ function renderBigTask(todo) {
   document.getElementById("taskBig").classList.remove('d-none');
   const BigTaskHTML = /*html*/ `
      <div class="bigTask">
-      <div>${todo.story}</div> 
+      <div>${todo["story"]}</div> 
       <div class="taskTitle">
-        <h2>${todo.title}</h2>
+        <h2>${todo["title"]}</h2>
         <img src="./assets/img/plus button.svg" alt="" onclick="closeTaskBig()">
       </div>
       <h3>${todo.description}</h3>
-      <div class="dueDate">due date : ${todo.date}</div>
+      <div class="dueDate">due date : ${todo["date"]}</div>
       <div class="prio">Priority: Meduímum <img src="./assets/img/medium_orange_AddTask.svg" alt=""></div>
       <div class="members">assigned to :
         <div class="userTask"><img src="./assets/img/edit contacts.svg" alt="user1" class="userImg"> Name user1</div>
@@ -143,8 +143,8 @@ function renderBigTask(todo) {
       </div>
       <div class="subtask">subtasks</div>
       <footer class="taskfooter">
-        <img src="./assets/img/Delete contact.svg" alt="delete" class="iconTask" onclick="deleteTask(${todo.id})"> 
-        <img src="./assets/img/edit contacts.svg" alt="edit" class="iconTask" onclick="editTask(${todo.id})">
+        <img src="./assets/img/Delete contact.svg" alt="delete" class="iconTask" onclick="deleteTask(${todo["id"]})"> 
+        <img src="./assets/img/edit contacts.svg" alt="edit" class="iconTask" onclick="editTask(${todo["id"]})">
       </footer>
     </div>
   `;
@@ -347,4 +347,39 @@ function deleteTask(id){
   }
   updateHTMLBoard();
   closeTaskBig();
+}
+
+function editTask(id){
+  const todo = todos.find(todo => todo.id === id);
+  renderEditTaskForm(todo);
+}
+
+function renderEditTaskForm(todo) {
+  document.getElementById("taskBig").classList.remove('d-none');
+  document.getElementById("taskBig").innerHTML = /*html*/ `
+    <div class="bigTask">
+      <section class="input-parts-addTask">
+        <div class="pd-bottom"><span>Title<span class="required-addTask">*</span></span></div>
+        <input id="titleAddTask" type="text" placeholder="Enter a Title" required class="border-input-addtask" value="${todo.title}"/>
+      </section>
+
+      <!-- Description -->
+      <section class="padding-description">
+        <div class="pd-bottom"><span>Description</span></div>
+        <textarea name="description" id="descriptionAddTask" cols="30" rows="10" placeholder="Enter a Description" class="border-input-addtask">${todo.description}</textarea>
+      </section>
+
+      <!-- Assigend To -->
+      <section class="padding-description">
+        <div class="pd-bottom"><label>Assigned to</label></div>
+        <div class="input-assignedTo border-input-addtask">
+            <input id="assignDropDown" type="text" name="assignTo" placeholder="Select contact to assign" class="border-none input-assignedTo"/>
+            <div class="drop-down-image-assign">
+                <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrowdown"/> 
+            </div>              
+        </div>       
+      </section>
+      <img src="./assets/img/button_OK.svg" alt="delete" class="iconTask" onclick="saveTask(${todo["id"]})">
+    </div>
+  `;
 }
