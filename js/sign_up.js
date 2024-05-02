@@ -1,10 +1,22 @@
 /* prettier-ignore */
 document.addEventListener("DOMContentLoaded", function () {
   let confirmPasswordInput = document.getElementById("confirm-password");
+  let emailInput = document.getElementById("email"); 
+  let alertUsedEmail = document.querySelector(".used-email");
+
   confirmPasswordInput.addEventListener("input", handleConfirmPasswordChange);
   document.getElementById("password").addEventListener("input", confirmPasswordFunction);
   document.getElementById("confirm-password").addEventListener("input", confirmPasswordFunction);
   loadUsers();
+
+
+  emailInput.addEventListener("input", function() {
+    if (alertUsedEmail.style.display === "block") {
+      alertUsedEmail.style.display = "none"; // Hide alert when user modifies email
+    }
+  });
+
+
 });
 
 let users = [];
@@ -19,7 +31,7 @@ let confirmPasswordContainer = document.querySelector(".confirm-password-contain
 let confirmPasswordLogo = document.getElementById("confirm-password-logo");
 let signUpBtn = document.getElementById("sign-up-btn");
 let checked = document.getElementById("checked");
-let wrongPassword = document.getElementById("wrong-password");
+let wrongPassword = document.getElementById("alert");
 
 async function init() {
   loadUsers();
@@ -33,14 +45,18 @@ async function loadUsers() {
   }
 }
 
+let inputChecked = false;
+
 /* prettier-ignore */
 async function signUp() {
-  let inputChecked = checked.style.display === "block";
 
   if (!inputChecked) {
       alert("Please check the Privacy Policy box to proceed.");
       return;  
   }
+  if (usedEmail()) {
+    return; // Stop the sign-up process if the email is already used
+}
       users.push({ userName: userName.value, email: email.value, password: password.value });
       await setItem("users", JSON.stringify(users));
 
@@ -94,12 +110,34 @@ function handleConfirmPasswordChange() {
 /* prettier-ignore */
 function toggleConfirmPassword() {
 
-
   let type = confirmPasswordInput.type === "password" ? "text" : "password";
   let src = type === "text" ? "assets/img/password-visible.png" : "assets/img/password-hide.png";
 
   confirmPasswordInput.type = type;
   confirmPasswordLogo.src = src;
+}
+
+function usedEmail() {
+  let emailContainer = document.querySelector(".email-input");
+  let alertUsedEmail = document.querySelector(".used-email");
+  let emailIsUsed = false;
+
+  for (let i = 0; i < users.length; i++) {
+    if (users[i].email === email.value) {
+      emailIsUsed = true;
+      break;
+    }
+  }
+
+  if (emailIsUsed) {
+    emailContainer.style.border = "1px solid red";
+    alertUsedEmail.style.display = "block";
+    return true;
+  } else {
+    emailContainer.style.border = "";
+    alertUsedEmail.style.display = "none";
+    return false;
+  }
 }
 
 const urlParams = new URLSearchParams(window.location.search);

@@ -169,7 +169,7 @@ input::placeholder {
   margin-right: 5px;
 }
 
-#wrong-password {
+#alert {
   position: absolute;
   top: 445px;
   left: 93px;

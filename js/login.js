@@ -83,17 +83,16 @@ async function resetUser() {
 }
 
 function checkBoxToggle() {
-  let unchecked = document.getElementById("unchecked");
   let checked = document.getElementById("checked");
 
   if (checked.classList.contains("d-none")) {
-    checked.classList.remove("d-none");
-    unchecked.classList.add("d-none");
+    checkedFunc();
     checkRememberMeState(true); // Save the checked state
+    inputChecked = true;
   } else {
-    checked.classList.add("d-none");
-    unchecked.classList.remove("d-none");
+    uncheckedFunc();
     checkRememberMeState(false); // Save the unchecked state
+    inputChecked = false;
   }
 }
 
@@ -118,20 +117,26 @@ async function checkRememberMe() {
   ) {
     document.getElementById("email").value = rememberedEmail;
     document.getElementById("password").value = rememberedPassword;
-    document.getElementById("checked").classList.remove("d-none");
-    document.getElementById("unchecked").classList.add("d-none");
+    checkedFunc();
   } else {
     document.getElementById("email").value = "";
     document.getElementById("password").value = "";
-    document.getElementById("unchecked").classList.remove("d-none");
-    document.getElementById("checked").classList.add("d-none");
+    uncheckedFunc();
   }
 }
 
 async function unCheckRememberMe() {
   await resetUser();
   clearInputFields();
+  uncheckedFunc();
+}
 
+function checkedFunc() {
+  document.getElementById("checked").classList.remove("d-none");
+  document.getElementById("unchecked").classList.add("d-none");
+}
+
+function uncheckedFunc() {
   document.getElementById("checked").classList.add("d-none");
   document.getElementById("unchecked").classList.remove("d-none");
 }
