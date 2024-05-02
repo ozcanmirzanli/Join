@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
   passwordInput.addEventListener("input", hideWrongPassword);
   // Changes the password logo to default when the input field is empty
   passwordInput.addEventListener("input", handlePasswordChange);
+  checkRememberMe();
 });
 
 function handleFocus(event) {
@@ -50,22 +51,52 @@ function validateUser(email, password) {
   return users.find((u) => u.email.trim() === email && u.password === password);
 }
 
-function loginUser(user) {
+async function loginUser(user) {
   sessionStorage.setItem("currentUser", JSON.stringify(user));
-  localStorage.setItem("lastLoggedUser", user.userName);
+
+  let checked = document.getElementById("checked");
+  if (!checked.classList.contains("d-none")) {
+    // Store the user email in remote storage for "Remember Me" functionality
+    await setItem("rememberMeEmail", user.email);
+    await setItem("rememberMePassword", user.password);
+  }
+
   window.location.href = "summary.html";
+}
+
+async function logoutUser() {
+  sessionStorage.removeItem("currentUser");
+  // Clear the remembered user's data
+  await setItem("rememberMeEmail", "");
+  await setItem("rememberMePassword", "");
+
+  window.location.href = "login.html";
 }
 
 function checkBoxToggle() {
   let unchecked = document.getElementById("unchecked");
   let checked = document.getElementById("checked");
 
-  if (unchecked.style.display === "none") {
-    unchecked.style.display = "block";
-    checked.style.display = "none";
+  if (checked.classList.contains("d-none")) {
+    checked.classList.remove("d-none");
+    unchecked.classList.add("d-none");
   } else {
-    unchecked.style.display = "none";
-    checked.style.display = "block";
+    checked.classList.add("d-none");
+    unchecked.classList.remove("d-none");
+  }
+}
+
+async function checkRememberMe() {
+  let rememberedEmail = await getItem("rememberMeEmail");
+  let rememberedPassword = await getItem("rememberMePassword");
+
+  if (rememberedEmail) {
+    document.getElementById("email").value = rememberedEmail;
+    document.getElementById("password").value = rememberedPassword;
+
+    // Automatically check the 'Remember Me' box
+    document.getElementById("checked").classList.remove("d-none");
+    document.getElementById("unchecked").classList.add("d-none");
   }
 }
 
