@@ -3,10 +3,9 @@ document.addEventListener("DOMContentLoaded", function () {
   let confirmPasswordInput = document.getElementById("confirm-password");
   let emailInput = document.getElementById("email"); 
   let alertUsedEmail = document.querySelector(".used-email");
+  let passwordInput = document.getElementById("password")
 
-  confirmPasswordInput.addEventListener("input", handleConfirmPasswordChange);
-  document.getElementById("password").addEventListener("input", confirmPasswordFunction);
-  document.getElementById("confirm-password").addEventListener("input", confirmPasswordFunction);
+
   loadUsers();
 
 
@@ -16,6 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  passwordInput.addEventListener("input", hideMismatchWarning);
+  confirmPasswordInput.addEventListener("input", hideMismatchWarning);
 
 });
 
@@ -54,6 +55,14 @@ async function signUp() {
       alert("Please check the Privacy Policy box to proceed.");
       return;  
   }
+
+  let passwordsMatch = password.value === confirmPasswordInput.value;
+  wrongPasswordInput(passwordsMatch, wrongPassword, confirmPasswordContainer); 
+
+  if (!passwordsMatch) {
+    return; // Stop the sign-up process if the passwords do not match
+  }
+
   if (usedEmail()) {
     return; // Stop the sign-up process if the email is already used
 }
@@ -90,6 +99,12 @@ function wrongPasswordInput(passwordsMatch, wrongPassword, confirmPasswordContai
     wrongPassword.style.display = "block";
     confirmPasswordContainer.style.border = "1px solid red";
   } else {
+    hideMismatchWarning();
+  }
+}
+
+function hideMismatchWarning() {
+  if (wrongPassword.style.display === "block") {
     wrongPassword.style.display = "none";
     confirmPasswordContainer.style.border = "";
   }
