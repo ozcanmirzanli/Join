@@ -2,8 +2,8 @@
 document.addEventListener("DOMContentLoaded", function () {
   let confirmPasswordInput = document.getElementById("confirm-password");
   confirmPasswordInput.addEventListener("input", handleConfirmPasswordChange);
-  document.getElementById("password").addEventListener("input", confirmPassword);
-  document.getElementById("confirm-password").addEventListener("input", confirmPassword);
+  document.getElementById("password").addEventListener("input", confirmPasswordFunction);
+  document.getElementById("confirm-password").addEventListener("input", confirmPasswordFunction);
   loadUsers();
 });
 
@@ -12,6 +12,14 @@ let users = [];
 let userName = document.getElementById("user-name");
 let email = document.getElementById("email");
 let password = document.getElementById("password");
+let passwordLogo = document.getElementById("password-logo");
+let confirmPasswordInput = document.getElementById("confirm-password");
+/* prettier-ignore */
+let confirmPasswordContainer = document.querySelector(".confirm-password-container");
+let confirmPasswordLogo = document.getElementById("confirm-password-logo");
+let signUpBtn = document.getElementById("sign-up-btn");
+let checked = document.getElementById("checked");
+let wrongPassword = document.getElementById("wrong-password");
 
 async function init() {
   loadUsers();
@@ -27,69 +35,65 @@ async function loadUsers() {
 
 /* prettier-ignore */
 async function signUp() {
-  let signUpBtn = document.getElementById("sign-up-btn");
+  let inputChecked = checked.style.display === "block";
 
-  signUpBtn.disabled = true;
-  let userNameValue = userName.value;
+  if (!inputChecked) {
+      alert("Please check the Privacy Policy box to proceed.");
+      return;  
+  }
+      users.push({ userName: userName.value, email: email.value, password: password.value });
+      await setItem("users", JSON.stringify(users));
 
-  localStorage.setItem("userName", userNameValue);
+      alert("You have successfully signed up!");
+      resetForm();
 
-  users.push({ userName: userName.value, email: email.value, password: password.value });
-
-  await setItem("users", JSON.stringify(users));
-  resetForm();
-}
+      window.location.href = "login.html";
+  }
 
 function resetForm() {
-  let signUpBtn = document.getElementById("sign-up-btn");
-
   userName.value = "";
   email.value = "";
   password.value = "";
-  signUpBtn.disabled = false;
+  confirmPasswordInput.value = "";
+  confirmPasswordLogo.src = "assets/img/lock.png";
+  passwordLogo.src = "assets/img/lock.png";
+
+  checkBoxToggle();
 }
 
-function confirmPassword() {
-  let wrongPassword = document.getElementById("wrong-password");
-  let confirmPasswordElement = document.getElementById("confirm-password");
-  let confirmPasswordInput = document.querySelector(".confirm-password-input");
+function confirmPasswordFunction() {
+  let passwordsMatch = password.value === confirmPasswordInput.value;
 
-  let passwordsMatch = password.value === confirmPasswordElement.value;
-
-  wrongPasswordInput(passwordsMatch, wrongPassword, confirmPasswordInput);
+  wrongPasswordInput(passwordsMatch, wrongPassword, confirmPasswordContainer);
   disableSignUpButton(passwordsMatch);
 }
 
 /* prettier-ignore */
-function wrongPasswordInput(passwordsMatch, wrongPassword, confirmPasswordInput) {
+function wrongPasswordInput(passwordsMatch, wrongPassword, confirmPasswordContainer) {
   if (!passwordsMatch) {
     wrongPassword.style.display = "block";
-    confirmPasswordInput.style.border = "1px solid red";
+    confirmPasswordContainer.style.border = "1px solid red";
   } else {
     wrongPassword.style.display = "none";
-    confirmPasswordInput.style.border = "";
+    confirmPasswordContainer.style.border = "";
   }
 }
 
 function disableSignUpButton(passwordsMatch) {
-  let signUpBtn = document.getElementById("sign-up-btn");
-  let isFormValid = userName.value && passwordsMatch && password.value;
-
+  let isFormValid =
+    userName.value && email.value && password.value && passwordsMatch;
   signUpBtn.disabled = !isFormValid;
 }
 
 /* prettier-ignore */
 function handleConfirmPasswordChange() {
-  let confirmPasswordInput = document.getElementById("confirm-password");
-  let confirmPasswordLogo = document.getElementById("confirm-password-logo");
 
   confirmPasswordLogo.src = confirmPasswordInput.value.length > 0 ? "assets/img/password-hide.png" : "assets/img/lock.png";
 }
 
 /* prettier-ignore */
 function toggleConfirmPassword() {
-  let confirmPasswordInput = document.getElementById("confirm-password");
-  let confirmPasswordLogo = document.getElementById("confirm-password-logo");
+
 
   let type = confirmPasswordInput.type === "password" ? "text" : "password";
   let src = type === "text" ? "assets/img/password-visible.png" : "assets/img/password-hide.png";

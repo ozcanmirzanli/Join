@@ -140,7 +140,7 @@ input::placeholder {
 .user-name-input,
 .email-input,
 .password-input,
-.confirm-password-input {
+.confirm-password-container {
   width: 378px;
   height: 22px;
   max-width: 422px;

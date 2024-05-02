@@ -57,8 +57,8 @@ function loginUser(user) {
 }
 
 function checkBoxToggle() {
-  var unchecked = document.getElementById("unchecked");
-  var checked = document.getElementById("checked");
+  let unchecked = document.getElementById("unchecked");
+  let checked = document.getElementById("checked");
 
   if (unchecked.style.display === "none") {
     unchecked.style.display = "block";
