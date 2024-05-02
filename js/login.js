@@ -90,7 +90,7 @@ async function checkRememberMe() {
   let rememberedEmail = await getItem("rememberMeEmail");
   let rememberedPassword = await getItem("rememberMePassword");
 
-  if (rememberedEmail) {
+  if (rememberedEmail && document.querySelector(".login-page")) {
     document.getElementById("email").value = rememberedEmail;
     document.getElementById("password").value = rememberedPassword;
 
