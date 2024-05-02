@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("password").addEventListener("input", confirmPasswordFunction);
   document.getElementById("confirm-password").addEventListener("input", confirmPasswordFunction);
   loadUsers();
-  resetRememberMe();
 });
 
 let users = [];

@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
     backgroundFade.style.display = "none";
   }, 1000);
 
+  checkRememberMe();
+
   // Attach event handlers to the form for focusin and focusout events
   document.querySelector(".inputs").addEventListener("focusin", handleFocus);
   document.querySelector(".inputs").addEventListener("focusout", handleBlur);
@@ -17,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
   passwordInput.addEventListener("input", hideWrongPassword);
   // Changes the password logo to default when the input field is empty
   passwordInput.addEventListener("input", handlePasswordChange);
-  checkRememberMe();
 });
 
 function handleFocus(event) {
@@ -59,6 +60,10 @@ async function loginUser(user) {
     // Store the user email in remote storage for "Remember Me" functionality
     await setItem("rememberMeEmail", user.email);
     await setItem("rememberMePassword", user.password);
+  } else {
+    // No datas are saved if 'Remember Me' is not checked
+    await setItem("rememberMeEmail", "");
+    await setItem("rememberMePassword", "");
   }
 
   window.location.href = "summary.html";
@@ -66,11 +71,15 @@ async function loginUser(user) {
 
 async function logoutUser() {
   sessionStorage.removeItem("currentUser");
-  // Clear the remembered user's data
-  await setItem("rememberMeEmail", "");
-  await setItem("rememberMePassword", "");
+  await resetUser();
 
   window.location.href = "login.html";
+}
+
+// Clear the remembered user's data
+async function resetUser() {
+  await setItem("rememberMeEmail", "");
+  await setItem("rememberMePassword", "");
 }
 
 function checkBoxToggle() {
@@ -80,24 +89,56 @@ function checkBoxToggle() {
   if (checked.classList.contains("d-none")) {
     checked.classList.remove("d-none");
     unchecked.classList.add("d-none");
+    checkRememberMeState(true); // Save the checked state
   } else {
     checked.classList.add("d-none");
     unchecked.classList.remove("d-none");
+    checkRememberMeState(false); // Save the unchecked state
   }
+}
+
+function checkRememberMeState(isChecked) {
+  localStorage.setItem("rememberMeChecked", isChecked);
+}
+
+function getRememberMeState() {
+  return localStorage.getItem("rememberMeChecked") === "true";
 }
 
 async function checkRememberMe() {
   let rememberedEmail = await getItem("rememberMeEmail");
   let rememberedPassword = await getItem("rememberMePassword");
+  let isChecked = getRememberMeState();
 
-  if (rememberedEmail && document.querySelector(".login-page")) {
+  if (
+    isChecked &&
+    rememberedEmail &&
+    rememberedPassword &&
+    document.querySelector(".login-page")
+  ) {
     document.getElementById("email").value = rememberedEmail;
     document.getElementById("password").value = rememberedPassword;
-
-    // Automatically check the 'Remember Me' box
     document.getElementById("checked").classList.remove("d-none");
     document.getElementById("unchecked").classList.add("d-none");
+  } else {
+    document.getElementById("email").value = "";
+    document.getElementById("password").value = "";
+    document.getElementById("unchecked").classList.remove("d-none");
+    document.getElementById("checked").classList.add("d-none");
   }
+}
+
+async function unCheckRememberMe() {
+  await resetUser();
+  clearInputFields();
+
+  document.getElementById("checked").classList.add("d-none");
+  document.getElementById("unchecked").classList.remove("d-none");
+}
+
+function clearInputFields() {
+  document.getElementById("email").value = "";
+  document.getElementById("password").value = "";
 }
 
 /* prettier-ignore */
