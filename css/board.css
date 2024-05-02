@@ -194,8 +194,8 @@ input:focus {
   transition: transform 0.3s ease-out;
 }
 
-.dragged {
-  transform: rotate(-5); /* Beispiel für Skalierung während des Ziehens */
+.userStoryMini:hover {
+  transform: rotate(+5deg); /* Beispiel für Skalierung während des Ziehens */
 }
 
 .TaskDescription {
@@ -361,11 +361,17 @@ input:focus {
 }
 
 .taskfooter {
-  width: 159px;
+  width: 525px;
   margin: 8px;
+  justify-content: flex-end;
+  display: flex;
 }
 
 .iconTask {
   width: 70px;
   height: 70px;
+}
+
+.iconTask:hover{
+cursor: pointer;
 }

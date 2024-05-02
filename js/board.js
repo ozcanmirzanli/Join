@@ -23,9 +23,17 @@ let todos = [
     story: "userStory",
     category: "awaitingFeedback",
   },
+  {
+    id: 3,
+    title: "bla",
+    description: "bla",
+    date: "29.05.2024",
+    story: "userStory",
+    category: "toDo",
+  },
 ];
 
-let currentDraggedElement;
+let currentDraggedElement=[];
 
 function updateHTMLBoard() {
   let toDo = todos.filter((t) => t["category"] == "toDo"); //Filter array nach category toDo
@@ -86,7 +94,7 @@ function updateHTMLBoard() {
 function generateTodoHTML(element) {
   //erstellt element entsprechend category
   return /*html*/ `
-    <div draggable="true" ondrag="startDragging(${element["id"]})" ondragend="endDragging(${element["id"]})" class="userStoryMini" onclick="openTask(${element["id"]})"> 
+    <div draggable="true" ondrag="startDragging(${element["id"]})"  class="userStoryMini" onclick="openTask(${element["id"]})"> 
       <div>${element["story"]}</div>
       <h4>${element["title"]}</h4>
       <div class="TaskDescription">${element["description"]}</div>
@@ -100,13 +108,8 @@ function generateTodoHTML(element) {
 
 function startDragging(id) {
   currentDraggedElement = id;
-  document.getElementById(id).classList.add('dragged');
 }
 
-function endDragging(id) {
-  document.getElementById(id).classList.remove('dragged');
-  currentDraggedElement = null;
-}
 
 function allowDrop(ev) {
   ev.preventDefault();
@@ -117,30 +120,38 @@ function moveTo(category) {
   updateHTMLBoard(); //update Board
 }
 
-function openTask() {
-  document.getElementById("taskBig").classList.remove('d-none');
-  document.getElementById("taskBig").classList.add('bigTask');
-  renderBigTask();
+function openTask(id) {
+  let task = todos.find(todo => todo.id === id);
+  renderBigTask(task);
 }
 
-function renderBigTask() {
-  let bigTask = document.getElementById("taskBig");
-  bigTask.innerHTML = "";
-  bigTask.innerHTML += /*html*/ `
-    <div class="taskTitle">
-      <h2>title</h2><img src="./assets/img/plus button.svg" alt="" onclick="closeTaskBig()"></div>
-      <h3>beschreibung</h3>
-      <div class="dueDate">due date :</div>
+function renderBigTask(todo) {
+  document.getElementById("taskBig").classList.remove('d-none');
+  const BigTaskHTML = /*html*/ `
+     <div class="bigTask">
+      <div>${todo.story}</div> 
+      <div class="taskTitle">
+        <h2>${todo.title}</h2>
+        <img src="./assets/img/plus button.svg" alt="" onclick="closeTaskBig()">
+      </div>
+      <h3>${todo.description}</h3>
+      <div class="dueDate">due date : ${todo.date}</div>
       <div class="prio">Priority: Meduímum <img src="./assets/img/medium_orange_AddTask.svg" alt=""></div>
       <div class="members">assigned to :
-       <div class="userTask"><img src="./assets/img/edit contacts.svg" alt="user1" class="userImg"> Name user1</div>
-       <div class="userTask"><img src="./assets/img/edit contacts.svg" alt="user2" class="userImg"> name user 2</div>
+        <div class="userTask"><img src="./assets/img/edit contacts.svg" alt="user1" class="userImg"> Name user1</div>
+        <div class="userTask"><img src="./assets/img/edit contacts.svg" alt="user2" class="userImg"> name user 2</div>
       </div>
       <div class="subtask">subtasks</div>
-      <footer class="taskfooter"><img src="./assets/img/Delete contact.svg" alt="delet" class="iconTask"> 
-      <img src="./assets/img/edit contacts.svg" alt="edit" class="iconTask"></footer>
+      <footer class="taskfooter">
+        <img src="./assets/img/Delete contact.svg" alt="delete" class="iconTask" onclick="deleteTask(${todo.id})"> 
+        <img src="./assets/img/edit contacts.svg" alt="edit" class="iconTask" onclick="editTask(${todo.id})">
+      </footer>
+    </div>
   `;
+
+document.getElementById("taskBig").innerHTML = BigTaskHTML;
 }
+
 
 function closeTaskBig(){
   document.getElementById("taskBig").classList.remove('bigTask');
@@ -321,10 +332,19 @@ function renderAddTaskForm() {
       </div>
   `;
 }
-
+/* noch anpassen
 function updateProgressBar() {
   let percent = (currentTasks + 1) / subTasks.length;
   percent = Math.round(percent * 100);
   document.getElementById("progress-bar").innerHTML = `${percent}%`;
   document.getElementById("progress-bar").style.width = `${percent}%`;
+}*/
+
+function deleteTask(id){
+  const index = todos.findIndex(todo => todo.id === id);
+  if (index !== -1) {
+    todos.splice(index, 1);
+  }
+  updateHTMLBoard();
+  closeTaskBig();
 }
