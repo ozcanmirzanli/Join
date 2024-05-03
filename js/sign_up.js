@@ -12,6 +12,8 @@ let confirmPasswordInput = document.getElementById("confirm-password");
 let emailInput = document.getElementById("email");
 let alertUsedEmail = document.querySelector(".used-email");
 
+let users = [];
+
 loadUsers();
 
 /* prettier-ignore */
@@ -19,8 +21,6 @@ emailInput.addEventListener("input", () => (alertUsedEmail.style.display = "none
 password.addEventListener("input", hideMismatchWarning);
 confirmPasswordInput.addEventListener("input", hideMismatchWarning);
 confirmPasswordInput.addEventListener("input", handleConfirmPasswordChange);
-
-let users = [];
 
 /**
  * Initializes the application by loading user data from storage.
