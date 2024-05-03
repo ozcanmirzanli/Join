@@ -1,43 +1,41 @@
-/* prettier-ignore */
-document.addEventListener("DOMContentLoaded", function () {
-  let confirmPasswordInput = document.getElementById("confirm-password");
-  let emailInput = document.getElementById("email"); 
-  let alertUsedEmail = document.querySelector(".used-email");
-  let passwordInput = document.getElementById("password")
-
-
-  loadUsers();
-
-
-  emailInput.addEventListener("input", function() {
-    if (alertUsedEmail.style.display === "block") {
-      alertUsedEmail.style.display = "none"; // Hide alert when user modifies email
-    }
-  });
-
-  passwordInput.addEventListener("input", hideMismatchWarning);
-  confirmPasswordInput.addEventListener("input", hideMismatchWarning);
-
-});
-
-let users = [];
-
 let userName = document.getElementById("user-name");
 let email = document.getElementById("email");
 let password = document.getElementById("password");
 let passwordLogo = document.getElementById("password-logo");
-let confirmPasswordInput = document.getElementById("confirm-password");
 /* prettier-ignore */
 let confirmPasswordContainer = document.querySelector(".confirm-password-container");
 let confirmPasswordLogo = document.getElementById("confirm-password-logo");
 let signUpBtn = document.getElementById("sign-up-btn");
 let checked = document.getElementById("checked");
 let wrongPassword = document.getElementById("alert");
+let confirmPasswordInput = document.getElementById("confirm-password");
+let emailInput = document.getElementById("email");
+let alertUsedEmail = document.querySelector(".used-email");
 
+let users = [];
+
+loadUsers();
+
+/* prettier-ignore */
+emailInput.addEventListener("input", () => (alertUsedEmail.style.display = "none"));
+password.addEventListener("input", hideMismatchWarning);
+confirmPasswordInput.addEventListener("input", hideMismatchWarning);
+confirmPasswordInput.addEventListener("input", handleConfirmPasswordChange);
+
+/**
+ * Initializes the application by loading user data from storage.
+ * This is typically called when the application starts.
+ * @async
+ */
 async function init() {
   loadUsers();
 }
 
+/**
+ * Loads user data from local storage and parses it into the 'users' array.
+ * If the data cannot be loaded or parsed, an error is logged to the console.
+ * @async
+ */
 async function loadUsers() {
   try {
     users = JSON.parse(await getItem("users"));
@@ -49,32 +47,38 @@ async function loadUsers() {
 let inputChecked = false;
 
 /* prettier-ignore */
-async function signUp() {
 
+/**
+ * Signs up a new user after validating the input.
+ * Ensures that the passwords match and the email is not already in use.
+ * If successful, the user is added to the storage and redirected. *
+ * @async
+ */
+async function signUp() {
   if (!inputChecked) {
       alert("Please check the Privacy Policy box to proceed.");
       return;  
   }
 
   let passwordsMatch = password.value === confirmPasswordInput.value;
-  wrongPasswordInput(passwordsMatch, wrongPassword, confirmPasswordContainer); 
+  wrongPasswordInput(passwordsMatch); 
 
   if (!passwordsMatch) {
     return; // Stop the sign-up process if the passwords do not match
   }
 
-  if (usedEmail()) {
+  if (updateEmailUI()) {
     return; // Stop the sign-up process if the email is already used
 }
       users.push({ userName: userName.value, email: email.value, password: password.value });
       await setItem("users", JSON.stringify(users));
-
-      alert("You have successfully signed up!");
+        showSignedUpSuccess();
       resetForm();
-
-      window.location.href = "login.html";
   }
 
+/**
+ * Resets the sign-up form fields and visuals to their default states.
+ */
 function resetForm() {
   userName.value = "";
   email.value = "";
@@ -86,23 +90,56 @@ function resetForm() {
   checkBoxToggle();
 }
 
+/**
+ * Displays a success message and redirects the user after a short delay.
+ * The success message is shown for a set duration before transitioning the user to the login page.
+ */
+function showSignedUpSuccess() {
+  let successContainer = document.querySelector(".signed-up-success-container");
+  successContainer.style.display = "block";
+
+  setTimeout(() => {
+    successContainer.style.display = "none";
+    window.location.href = "login.html";
+  }, 1200);
+}
+
+/**
+ * This function checks if the password and the confirm password are matching
+ */
 function confirmPasswordFunction() {
   let passwordsMatch = password.value === confirmPasswordInput.value;
 
-  wrongPasswordInput(passwordsMatch, wrongPassword, confirmPasswordContainer);
+  wrongPasswordInput(passwordsMatch);
   disableSignUpButton(passwordsMatch);
 }
 
 /* prettier-ignore */
-function wrongPasswordInput(passwordsMatch, wrongPassword, confirmPasswordContainer) {
+
+/**
+ * Checks if the passwords in the 'password' and 'confirm password' fields match.
+ * Updates UI based on whether they match.
+ * @param {boolean} passwordsMatch - Whether the password and confirm password inputs match.
+ */
+function wrongPasswordInput(passwordsMatch) {
   if (!passwordsMatch) {
-    wrongPassword.style.display = "block";
-    confirmPasswordContainer.style.border = "1px solid red";
+    showMismatchWarning();
   } else {
     hideMismatchWarning();
   }
 }
 
+/**
+ * Displays an error message and styles if the passwords do not match.
+ */
+function showMismatchWarning() {
+  wrongPassword.style.display = "block";
+  confirmPasswordContainer.style.border = "1px solid red";
+}
+
+/**
+ * Hides the error message and resets styles related to password mismatch.
+ */
 function hideMismatchWarning() {
   if (wrongPassword.style.display === "block") {
     wrongPassword.style.display = "none";
@@ -110,6 +147,11 @@ function hideMismatchWarning() {
   }
 }
 
+/**
+ * Enables or disables the sign-up button based on form validity.
+ * The button is enabled only if all fields are filled and passwords match.
+ * @param {boolean} passwordsMatch - Whether the password and confirm password inputs match.
+ */
 function disableSignUpButton(passwordsMatch) {
   let isFormValid =
     userName.value && email.value && password.value && passwordsMatch;
@@ -117,14 +159,19 @@ function disableSignUpButton(passwordsMatch) {
 }
 
 /* prettier-ignore */
+/**
+ * Updates the visibility icon of the confirm password input based on its content.
+ * Changes the icon to indicate whether the field is empty or contains text.
+ */
 function handleConfirmPasswordChange() {
-
   confirmPasswordLogo.src = confirmPasswordInput.value.length > 0 ? "assets/img/password-hide.png" : "assets/img/lock.png";
 }
 
 /* prettier-ignore */
+/**
+ * This function changes the password logo depending on the input type
+ */
 function toggleConfirmPassword() {
-
   let type = confirmPasswordInput.type === "password" ? "text" : "password";
   let src = type === "text" ? "assets/img/password-visible.png" : "assets/img/password-hide.png";
 
@@ -132,35 +179,36 @@ function toggleConfirmPassword() {
   confirmPasswordLogo.src = src;
 }
 
-function usedEmail() {
-  let emailContainer = document.querySelector(".email-input");
-  let alertUsedEmail = document.querySelector(".used-email");
-  let emailIsUsed = false;
-
+/**
+ * Checks if the given email is already used by any previous user.
+ * @returns {boolean} Returns true if the email is already used, otherwise false.
+ */
+function isEmailUsed() {
   for (let i = 0; i < users.length; i++) {
     if (users[i].email === email.value) {
-      emailIsUsed = true;
-      break;
+      return true;
     }
   }
+  return false;
+}
+
+/**
+ * Updates the UI elements based on the email usage status.
+ * If the email is used, it sets the border of the email input to red and displays a warning.
+ * Otherwise, it resets the styles.
+ * @returns {boolean} Returns the status of the email usage (true if used, false if not).
+ */
+function updateEmailUI() {
+  let emailIsUsed = isEmailUsed();
+  let emailContainer = document.querySelector(".email-input");
+  let alertUsedEmail = document.querySelector(".used-email");
 
   if (emailIsUsed) {
     emailContainer.style.border = "1px solid red";
     alertUsedEmail.style.display = "block";
-    return true;
   } else {
     emailContainer.style.border = "";
     alertUsedEmail.style.display = "none";
-    return false;
   }
-}
-
-const urlParams = new URLSearchParams(window.location.search);
-const msg = urlParams.get("msg");
-let signUpBox = document.getElementById("signed-up-success-container");
-
-if (msg) {
-  signUpBox.innerHTML = msg;
-} else {
-  signUpBox.display.style = "none";
+  return emailIsUsed;
 }

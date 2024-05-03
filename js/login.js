@@ -33,8 +33,9 @@ function handleBlur(event) {
   }
 }
 
-function login(event) {
+async function login(event) {
   event.preventDefault();
+  await loadUsers();
 
   let email = document.getElementById("email").value.trim();
   let password = document.getElementById("password").value;
