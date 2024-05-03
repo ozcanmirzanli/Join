@@ -19,7 +19,10 @@ body {
   border-radius: 0px;
   z-index: 5;
   padding-bottom: 0;
-  position: fixed;
+}
+
+#joinLogoHeader {
+  display: none;
 }
 
 .LogoSideBar {
@@ -260,7 +263,6 @@ a:hover {
   justify-content: center;
   gap: 25px;
   align-items: center;
-  padding: 2px 16px;
   gap: 64px;
   z-index: 1;
 }
@@ -270,10 +272,10 @@ a:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
   width: 80px;
   height: 76px;
   border-radius: 16px;
+  padding-bottom: 0;
 }
 
 .navBarImg {
@@ -284,6 +286,11 @@ a:hover {
   .sidebar {
     display: none;
   }
+
+  .header {
+    padding-left: 140px;
+    width: 1220px;
+  }
 }
 
 @media screen and (min-width: 1401px) {
@@ -292,5 +299,41 @@ a:hover {
   }
   .navBar {
     display: none;
+  }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 1141px){
+  .header {
+      padding-left: 70px;
+  }
+}
+
+@media screen and (max-width: 1140px) and (min-width: 1101px){
+  .header {
+      padding-left: 35px;
+  }
+
+}
+
+@media screen and (max-width: 1100px) {
+  p {
+    display: none;
+  }
+  #joinLogoHeader {
+    display: block;
+    height: 80px;
+  }
+  .header {
+    width: 915px;
+    padding-left: 70px;
+  }
+}
+
+@media screen and (max-width: 551px) {
+  .navBar {
+    gap: 1px;
+  }
+  .navBarImg {
+    height: 70px;
   }
 }
