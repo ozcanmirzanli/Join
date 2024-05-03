@@ -324,8 +324,10 @@ a:hover {
     height: 80px;
   }
   .header {
-    width: 915px;
+    width: 100%;
     padding-left: 70px;
+    display: flex;
+    justify-content: space-around;
   }
 }
 
@@ -335,5 +337,12 @@ a:hover {
   }
   .navBarImg {
     height: 70px;
+  }
+
+  .header {
+    width: 100%;
+    padding-left: 8px;
+    display: flex;
+    justify-content: space-evenly;
   }
 }
