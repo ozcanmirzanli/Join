@@ -1,32 +1,82 @@
-.left {
-  width: 467px;
-  height: 594px;
-  padding: 66px 48px 66px 48px;
-  gap: 12px;
-  background-color: rgb(42, 54, 71);
+.contactPage {
+  display: flex;
+  justify-content: center;
+  width: 1208px;
 }
 
-.logo {
-  width: 55px;
-  height: 66px;
-  top: 154px;
-  left: 47px;
+.seperator {
+  height: 59px;
+  border: 3px;
+  border: 3px solid #29abe2;
 }
 
-.add {
+.headline {
+  width: 274px;
+  height: 73px;
   font-family: "Inter", sans-serif;
   font-size: 61px;
   font-weight: 700;
+  line-height: 73.2px;
   text-align: left;
-  width: 366px;
-  height: 73px;
 }
 
-.better {
+h4 {
+  width: 235px;
+  height: 32px;
   font-family: "Inter", sans-serif;
   font-size: 27px;
   font-weight: 400;
+  line-height: 32.4px;
   text-align: left;
-  width: 371px;
-  height: 32px;
+}
+
+.contactOverview {
+  width: 569px;
+  height: 73px;
+  margin-top: 206px;
+  margin-left: 743px;
+  gap: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.allContacts {
+  width: 456px;
+  height: 928px;
+  padding-top: 96px;
+  padding-left: 232px;
+}
+
+.addBtn{
+  width: 352px;
+height: 56px;
+margin-top: 22.5px;
+margin-left: 52px;
+padding: 12px 0px 12px 0px;
+gap: 16px;
+background-color: #2A3647;
+display: flex;
+align-items: center;
+justify-content: center;
+border: 1px solid #2A3647;
+border-radius: 10px;
+}
+
+
+
+.AddContactText{
+  width: 175px;
+height: 25px;
+font-family: "Inter",sans-serif;
+font-size: 21px;
+font-weight: 700;
+line-height: 25.2px;
+text-align: left;
+color: #fff;
+}
+
+.addContactPic{
+  width: 32px;
+height: 32px;
 }

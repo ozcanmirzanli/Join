@@ -1,3 +1,8 @@
+/**
+ * Represents an array of todo objects.
+ * @type {Array}
+ */
+
 let todos = [
   {
     id: 0,
@@ -33,8 +38,15 @@ let todos = [
   },
 ];
 
-let currentDraggedElement=[];
+/**
+ * Represents the ID of the currently dragged element.
+ * @type {number}
+ */
+let currentDraggedElement = [];
 
+/**
+ * Updates the HTML board based on the current state of todos.
+ */
 function updateHTMLBoard() {
   let toDo = todos.filter((t) => t["category"] == "toDo"); //Filter array nach category toDo
 
@@ -91,73 +103,51 @@ function updateHTMLBoard() {
   }
 }
 
-function generateTodoHTML(element) {
-  //erstellt element entsprechend category
-  return /*html*/ `
-    <div draggable="true" ondrag="startDragging(${element["id"]})"  class="userStoryMini" onclick="openTask(${element["id"]})"> 
-      <div>${element["story"]}</div>
-      <h4>${element["title"]}</h4>
-      <div class="TaskDescription">${element["description"]}</div>
-      <div class="TaskProgressbar" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-          <div class="progress-bar" id="progress-bar" style="width: 25%"><div class="Taskcounter">1/2 Subtasks</div></div>
-      </div>
-      <div class="taskFooter"><img src="./assets/img/UserInitials.svg" alt="" class="TaskMembers"><img src="./assets/img/medium_orange_AddTask.svg" alt="" class="taskPriority"></div>
-    </div>
-  `;
-}
-
+/**
+ * Initiates the dragging of a todo element.
+ * @param {number} id - The ID of the todo element.
+ */
 function startDragging(id) {
   currentDraggedElement = id;
 }
 
-
+/**
+ * Prevents the default action of a drop event.
+ * @param {Event} ev - The drop event.
+ */
 function allowDrop(ev) {
   ev.preventDefault();
 }
 
+/**
+ * Moves a task to a different category and updates the HTML board.
+ * @param {string} category - The category to move the task to.
+ */
 function moveTo(category) {
   todos[currentDraggedElement]["category"] = category; //change category of element
   updateHTMLBoard(); //update Board
 }
 
+/**
+ * Opens a task when clicked on.
+ * @param {number} id - The ID of the task to open.
+ */
 function openTask(id) {
-  let task = todos.find(todo => todo.id === id);
+  let task = todos.find((todo) => todo.id === id);
   renderBigTask(task);
 }
 
-function renderBigTask(todo) {
-  document.getElementById("taskBig").classList.remove('d-none');
-  const BigTaskHTML = /*html*/ `
-     <div class="bigTask">
-      <div>${todo["story"]}</div> 
-      <div class="taskTitle">
-        <h2>${todo["title"]}</h2>
-        <img src="./assets/img/plus button.svg" alt="" onclick="closeTaskBig()">
-      </div>
-      <h3>${todo.description}</h3>
-      <div class="dueDate">due date : ${todo["date"]}</div>
-      <div class="prio">Priority: Meduímum <img src="./assets/img/medium_orange_AddTask.svg" alt=""></div>
-      <div class="members">assigned to :
-        <div class="userTask"><img src="./assets/img/edit contacts.svg" alt="user1" class="userImg"> Name user1</div>
-        <div class="userTask"><img src="./assets/img/edit contacts.svg" alt="user2" class="userImg"> name user 2</div>
-      </div>
-      <div class="subtask">subtasks</div>
-      <footer class="taskfooter">
-        <img src="./assets/img/Delete contact.svg" alt="delete" class="iconTask" onclick="deleteTask(${todo["id"]})"> 
-        <img src="./assets/img/edit contacts.svg" alt="edit" class="iconTask" onclick="editTask(${todo["id"]})">
-      </footer>
-    </div>
-  `;
-
-document.getElementById("taskBig").innerHTML = BigTaskHTML;
+/**
+ * Closes the big task view.
+ */
+function closeTaskBig() {
+  document.getElementById("taskBig").classList.remove("bigTask");
+  document.getElementById("taskBig").classList.add("d-none");
 }
 
-
-function closeTaskBig(){
-  document.getElementById("taskBig").classList.remove('bigTask');
-  document.getElementById("taskBig").classList.add('d-none');
-}
-
+/**
+ * Filters tasks based on search criteria.
+ */
 function filterTasks() {
   let search = document.getElementById("search").value.toLowerCase(); //eingabe des inputfield speichern
 
@@ -176,6 +166,10 @@ function filterTasks() {
   displayFilteredTodos(filteredTodos); //ruft displayFilteredTodos() auf
 }
 
+/**
+ * Displays filtered tasks on the HTML board.
+ * @param {Array} filteredTodos - The filtered tasks to display.
+ */
 function displayFilteredTodos(filteredTodos) {
   document.getElementById("toDo").innerHTML = ""; //leert element mit id 'toDo'
   document.getElementById("inProgress").innerHTML = ""; //leert element mit id 'inProgress'
@@ -197,12 +191,18 @@ function displayFilteredTodos(filteredTodos) {
   });
 }
 
+/**
+ * Shows the add task board.
+ */
 function showaddTaskBoard() {
   let addTask = document.getElementById("addTask"); //get element with id 'addTask'
   addTask.style.display = "block";
   addTask.style.right = "620px"; //add class 'addTask'
 }
 
+/**
+ * Opens the add task dialog.
+ */
 function openAddTaskDialog() {
   // Erstellen Sie das Dialogfenster und fügen Sie die AddTask-Form hinzu
   const dialogContent = document.createElement("div");
@@ -215,133 +215,12 @@ function openAddTaskDialog() {
   // Wenn ein Schließen-Button benötigt wird, fügen Sie ihn hier hinzu und definieren Sie die Logik, um das Dialogfenster zu schließen
 }
 
-function renderAddTaskForm() {
-  return `
-      <div class="dialog-content">
-          <form id="addTaskForm">
-              <!-- Hier die Inhalte der AddTask-Form einfügen -->
-              <h1>Add Task</h1>
-
-              <div class="main-addTask">
-                  <div class="sections-addTask">
-                      <!-- Title -->
-                      <section class="input-parts-addTask">
-                          <div class="pd-bottom"><span>Title<span class="required-addTask">*</span></span></div>
-                          <input id="titleAddTask" type="text" placeholder="Enter a Title" required class="border-input-addtask"/>
-                      </section>
-
-                      <!-- Description -->
-                      <section class="padding-description">
-                          <div class="pd-bottom"><span>Description</span></div>
-                          <textarea name="description" id="" cols="30" rows="10" placeholder="Enter a Description" class="border-input-addtask"></textarea>
-                      </section>
-
-                      <!-- Assigend To -->
-                      <section class="padding-description">
-                          <div class="pd-bottom"><label>Assigned to</label></div>
-                          <div class="input-assignedTo border-input-addtask">
-                              <input id="assignDropDown" type="text" name="assignTo" placeholder="Select contact to assign" class="border-none input-assignedTo"/>
-                              <div class="drop-down-image-assign">
-                                  <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrowdown"/> 
-                              </div>              
-                          </div>       
-                      </section>
-                  </div>
-
-                  <!-- Seperator -->
-                  <div class="seperator-addtask"><img src="assets/img/seperator_AddTask.svg" alt="seperator"/></div>
-
-                  <!-- Right Part of Add Task -->
-                  <div class="sections-addTask">
-                      <!-- Due Date -->
-                      <section>
-                          <div class="pd-bottom"><span>Due Date<span class="required-addTask">*</span></span></div>
-                          <input id="dueDate" type="date" placeholder="yyyy/mm/dd" class="input-dueDate border-input-addtask" required/>
-                      </section>
-
-                      <!-- Priority -->
-                      <section class="padding-prio">
-                          <div class="pd-bottom"><span>Prio</span></div>
-                          <div class="priority">
-                              <button type="button" class="button-prio" id="btnPrioUrgent" onclick="changePriorityColor('urgent')">Urgent
-                                  <img src="assets/img/urgent_red_AddTask.svg" alt="urgent_red_AddTask"/>
-                              </button>                    
-                              <button type="button" class="button-prio" id="btnPrioMedium" onclick="changePriorityColor('medium')">Medium
-                                  <img src="assets/img/medium_orange_AddTask.svg" alt="medium_orange_AddTask"/>
-                              </button>                    
-                              <button type="button" class="button-prio" id="btnPrioLow" onclick="changePriorityColor('low')">Low
-                                  <img src="assets/img/low_green_AddTask.svg" alt="low_green_AddTask"/>
-                              </button>                    
-                          </div>
-                      </section>
-
-                      <!-- Category -->
-                      <section class="padding-category">
-                          <div class="pd-bottom"><span>Category<span class="required-addTask">*</span></span></div>
-                          <div class="input-assignedTo border-input-addtask" id="categoryAddTask" onclick="toggleCategoryDropdown()">
-                              Select Task Category
-                              <div id="categoryDropDownArrow" class="drop-down-image">
-                                  <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrow_drop_down_AddTask">
-                              </div>
-                          </div>
-                          <div class="d-none category-menu">
-                              <div class="category-option" onclick="selectCategory('User Story')">User Story</div>
-                              <div class="category-option" onclick="selectCategory('Technical Story')">Technical Story</div>
-                          </div>
-                      </section>
-
-                      <!-- Subtasks -->
-                      <section>
-                          <div class="pd-bottom"><span>Subtasks</span></div>
-                          <div class="input-assignedTo border-input-addtask" id="addSubtaskMain" onfocus="handleInputFocus()">
-                              <input id="addsubtask" type="text" placeholder="Add new subtasks" class="input-assignedTo border-none">
-                              <div onclick="toggleSubtasks()" class="drop-down-image drop-down-subtask">
-                                  <img id="plusIcon" src="assets/img/plus_addTask.svg" alt="plus_addTask">
-                              </div>
-                              <div id="subtasks" class="d-none add-subtasks">
-                                  <img onclick="cancelSubtaskClick()" id="cancelSubtask" src="assets/img/subtask_cancel_AddTask.svg" class="subtasks" alt="subtask_cancel_AddTask">
-                                  <img src="assets/img/subtask_seperator_AddTask.svg" alt="subtask_seperator_AddTask">
-                                  <img onclick="saveSubtask()" id="checkSubtask" src="assets/img/subtask_check_AddTask.svg" class="subtasks" alt="subtask_check_AddTask">
-                              </div>
-                          </div>
-                          <div id="showsubtasks" class="subtasks-list d-none"></div>
-                      </section>
-                  </div>
-              </div>
-
-              <!-- Footer AddTask -->
-              <footer class="addtask-footer">
-                  <div>
-                      <span class="required-addTask">*</span>
-                      This field is required
-                  </div>
-
-                  <div class="footer-btn-addTask">
-                      <button onclick="clearEntries()" class="footer-btn-text-img" type="button" id="clear-btn">
-                          Clear
-                          <img src="assets/img/subtask_cancel_AddTask.svg" alt="subtask_cancel_AddTask">
-                      </button>
-
-                      <button class="footer-btn-text-img" type="button" id="create-btn">
-                          Create Task
-                          <img src="assets/img/create_hook_white_AddTask.svg" alt="create_hook_white_AddTask">
-                      </button>
-                  </div>
-              </footer>
-          </form>
-      </div>
-  `;
-}
-/* noch anpassen
-function updateProgressBar() {
-  let percent = (currentTasks + 1) / subTasks.length;
-  percent = Math.round(percent * 100);
-  document.getElementById("progress-bar").innerHTML = `${percent}%`;
-  document.getElementById("progress-bar").style.width = `${percent}%`;
-}*/
-
-function deleteTask(id){
-  const index = todos.findIndex(todo => todo.id === id);
+/**
+ * Deletes a task.
+ * @param {number} id - The ID of the task to delete.
+ */
+function deleteTask(id) {
+  const index = todos.findIndex((todo) => todo.id === id);
   if (index !== -1) {
     todos.splice(index, 1);
   }
@@ -349,37 +228,14 @@ function deleteTask(id){
   closeTaskBig();
 }
 
-function editTask(id){
-  const todo = todos.find(todo => todo.id === id);
-  renderEditTaskForm(todo);
+/* noch anpassen
+function updateProgressBar() {
+  let percent = (currentTasks + 1) / subTasks.length;
+  percent = Math.round(percent * 100);
+  document.getElementById("progress-bar").innerHTML = `${percent}%`;
+  document.getElementById("progress-bar").style.width = `${percent}%`;
 }
 
-function renderEditTaskForm(todo) {
-  document.getElementById("taskBig").classList.remove('d-none');
-  document.getElementById("taskBig").innerHTML = /*html*/ `
-    <div class="bigTask">
-      <section class="input-parts-addTask">
-        <div class="pd-bottom"><span>Title<span class="required-addTask">*</span></span></div>
-        <input id="titleAddTask" type="text" placeholder="Enter a Title" required class="border-input-addtask" value="${todo.title}"/>
-      </section>
+function saveEditTask(){
 
-      <!-- Description -->
-      <section class="padding-description">
-        <div class="pd-bottom"><span>Description</span></div>
-        <textarea name="description" id="descriptionAddTask" cols="30" rows="10" placeholder="Enter a Description" class="border-input-addtask">${todo.description}</textarea>
-      </section>
-
-      <!-- Assigend To -->
-      <section class="padding-description">
-        <div class="pd-bottom"><label>Assigned to</label></div>
-        <div class="input-assignedTo border-input-addtask">
-            <input id="assignDropDown" type="text" name="assignTo" placeholder="Select contact to assign" class="border-none input-assignedTo"/>
-            <div class="drop-down-image-assign">
-                <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrowdown"/> 
-            </div>              
-        </div>       
-      </section>
-      <img src="./assets/img/button_OK.svg" alt="delete" class="iconTask" onclick="saveTask(${todo["id"]})">
-    </div>
-  `;
-}
+}*/
