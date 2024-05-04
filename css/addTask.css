@@ -451,6 +451,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 @media screen and (max-width: 1200px) and (min-width: 1141px){
     form {
         padding-left: 70px;
+        margin: 0 auto;
     }
 
     .footer-btn-addTask {
@@ -461,6 +462,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 @media screen and (max-width: 1140px) and (min-width: 1101px){
     form {
         padding-left: 35px;
+        margin: 0 auto;
     }
 
     .footer-btn-addTask {
