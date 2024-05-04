@@ -4,18 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Help</title>
-    <link rel="stylesheet" href="../../css/sidemenu.css" />
-    <script src="../../script.js"></script>
-    <link rel="stylesheet" href=".../" />
-    <link rel="icon" href="../../assets/img/joinLogoBlack.svg" />
+    <link rel="stylesheet" href="./css/sidemenu.css" />
+    <script src="./script.js"></script>
+    <script src="./js/sidemenu.js"></script>
+    <link rel="stylesheet" href="./css/fonts.css" />
+    <link rel="icon" href="./assets/img/joinLogoBlack.svg" />
   </head>
   <body onload="includeHTML()">
-      <div w3-include-html="sidemenu.html"></div>
-      <div w3-include-html="header.html"></div>
+      <div w3-include-html="./assets/templates/sidemenu.html"></div>
+      <div w3-include-html="./assets/templates/header.html"></div>
       <div class="legalNotice">
         <div class="headlineDiv">
           <h1>Help</h1>
-          <img src="../../assets/img/arrowBack.svg" alt="Pfeil" class="arrow" />
+          <img onclick="goBack()" src="./assets/img/arrowBack.svg" alt="Pfeil" class="arrow" />
         </div>
         Welcome to the help page for Join, your guide to using our kanban
         project management tool. Here, we'll provide an overview of what Join
@@ -61,6 +62,5 @@
         contact us at [Your Contact Email]. We're here to help you!
         <h2>Enjoy using Join!</h2>
       </div>
-    </div>
   </body>
 </html>
