@@ -211,8 +211,13 @@ function openAddTaskDialog() {
 
   // Fügen Sie das Dialogfenster zum Body hinzu
   document.body.appendChild(dialogContent);
+}
 
-  // Wenn ein Schließen-Button benötigt wird, fügen Sie ihn hier hinzu und definieren Sie die Logik, um das Dialogfenster zu schließen
+function closeAddTaskDialog() {
+  const dialogContent = document.querySelector(".dialog-content");
+  if (dialogContent) {
+    dialogContent.remove();
+  }
 }
 
 /**

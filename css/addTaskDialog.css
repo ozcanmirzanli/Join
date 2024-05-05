@@ -26,12 +26,18 @@ textarea:hover,button:hover{
     padding-left: 328px;
 }
 
-h1 {
-    font-size: 61px;
-    font-weight: 700;
-    line-height: 72.2px;
-    padding-bottom: 48px;
-    margin: 0;
+#cardHeadline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#cardHeadline h2 {
+    font-size: 40px;
+}
+
+#closeDialogBTN:hover {
+    cursor: pointer;
 }
 
 .required-addTask {
@@ -51,6 +57,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center; /* In der Mitte zentrieren */
+    gap: 1.25rem;
 }
 
 span, label {
@@ -89,16 +96,13 @@ textarea:focus {
     outline: none;
 }
 
-.seperator-addtask {
-    padding-left: 48.25px;
-    padding-right: 48px;
-}
-
 .sections-addTask {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
     width: 100%;
+    height: fit-content;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.6rem;
 }
 
 /* Title section */
@@ -119,8 +123,7 @@ textarea {
 }
 
 .padding-description {
-    padding-top: 16px;
-    padding-bottom: 16px;
+    padding-top: 8px;
 }
 
 /* assigned to section */
@@ -203,46 +206,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* category section */
 
-.input-category {
-    padding: 12px 229px 12px 16px;
+.input-assignedTo {
+    position: relative; /* Position relativ für die absolute Positionierung des Dropdown-Menüs */
 }
 
 .padding-category {
     padding-bottom: 24px;
 }
 
-.category-menu {
-    flex-direction: column;
-    position: absolute;
-    width: 474px;
-    border-radius: 10px;
-    background-color: #fff;
-    gap: 16px;
-    box-shadow: 0px 3px 8px 0px rgb(0 0 0 / 20%);
-    font-size: 20px;
-    overflow-y: auto;
-    z-index: 1;
-    height: 120px;
-}
-
-.category-option {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    font-size: 20px;
-    font-weight: 400;
-    box-sizing: border-box;
-    padding: 18px;
-}
-
-.category-option:hover {
-    background-color: rgb(245, 245, 245);
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.rotate180 {
-    transform: rotate(180deg);
+.input-category {
+    width: 100%;
+    border: none;
+    border-radius: inherit;
+    background-color: inherit;
+    font-size: inherit;
 }
 
 .drop-down-image { 
@@ -343,7 +320,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .addtask-footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: baseline;
 }
 
@@ -351,7 +328,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: flex;
     justify-content: space-between;
     gap: 16px;
-    padding-top: 146px;
+    padding-top: 32px;
 }
 
 .footer-btn-text-img {

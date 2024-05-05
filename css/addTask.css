@@ -172,7 +172,7 @@ textarea {
 input[type="date"]::-webkit-calendar-picker-indicator {
     background: url(/Join/assets/img/due_date_calender_AddTasksvg.svg);
     background-repeat: no-repeat;
-    background-position: 95%;
+    background-position: right center;
     background-size: 24px 24px;
     position: absolute;
     top: 10px;
@@ -183,10 +183,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .priority {
     display: flex;
-    width: 440px;
-    justify-content: space-between;
+    width: 100%;
+    justify-content: flex-start;
     align-items: center;
-    gap: 16px;
+    gap: 1rem;
 }
 
 .button-prio {
@@ -212,46 +212,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* category section */
 
-.input-category {
-    padding: 12px 229px 12px 16px;
+.input-assignedTo {
+    position: relative; /* Position relativ für die absolute Positionierung des Dropdown-Menüs */
 }
 
 .padding-category {
     padding-bottom: 24px;
 }
 
-.category-menu {
-    flex-direction: column;
-    position: absolute;
-    width: 474px;
-    border-radius: 10px;
-    background-color: #fff;
-    gap: 16px;
-    box-shadow: 0px 3px 8px 0px rgb(0 0 0 / 20%);
-    font-size: 20px;
-    overflow-y: auto;
-    z-index: 1;
-    height: 120px;
-}
-
-.category-option {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    font-size: 20px;
-    font-weight: 400;
-    box-sizing: border-box;
-    padding: 18px;
-}
-
-.category-option:hover {
-    background-color: rgb(245, 245, 245);
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.rotate180 {
-    transform: rotate(180deg);
+.input-category {
+    width: 100%;
+    border: none;
+    border-radius: inherit;
+    background-color: inherit;
+    font-size: inherit;
 }
 
 .drop-down-image { 
@@ -280,10 +254,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     gap: 4px;
 }
 
-.subtasks:hover {
-    background-color: #ebeaec;
+.subtask-item:hover {
+    background-color: #f2f2f2; /* Leichtes Grau */
     cursor: pointer;
-    border-radius: 50%;
+    border-radius: 10px;
 }
 
 .sections-addTask input[type=text]:focus {
@@ -293,7 +267,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .subtasks-list {
     border-radius: 10px;
-    background-color: #f2f2f2; /* Leichtes Grau */
     padding: 6px 16px;
     margin-top: 10px;
     display: flex;
@@ -310,8 +283,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-radius: 10px;
-    background-color: #f2f2f2; /* Leichtes Grau */
     padding: 10px;
     position: relative;
 }
@@ -326,6 +297,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .subtask-content {
     flex-grow: 1;
+    background-color: none;
+    display: flex;
+    justify-content: space-between;
 }
 
 .subtask-bounding-box {
@@ -357,7 +331,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .subtask-item:hover .subtask-icon {
     display: inline-block; /* Bei Hover einblenden */
 }
-
 
 .subtask-item:hover .bounding-box {
     opacity: 1; /* Bei Hover einblenden */
@@ -530,11 +503,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
 
     #dueDate {
-        padding: 12px 230px 11px 16px;
+        padding: 12px 250px 11px 16px;
     }
 
-    .priority {
-        width: 374px;
+    .padding-category, .sectionSubtasks {
+        display: none;
     }
 }
 
