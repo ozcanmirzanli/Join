@@ -54,24 +54,25 @@ function changePriorityColor(priority) {
     }
 }
 
-function toggleCategoryDropdown() {
-    let categoryDropdown = document.querySelector('.category-menu');
-    let dropdownImage = document.querySelector('.drop-down-image img');
-    let borderCategoryDropdown = document.getElementById("categoryAddTask");
-    borderCategoryDropdown.style.borderColor = "rgba(41, 171, 226, 1)";
-    
-    categoryDropdown.classList.toggle('d-none');
-    dropdownImage.classList.toggle('rotate180');
+function checkDueDate() {
+    let selectedDate = new Date(document.getElementById('dueDate').value);
+    let currentDate = new Date();
+
+    if (selectedDate < currentDate.setHours(0, 0, 0, 0)) {
+        alert('Please select a date that is today or later for the due date.');
+        document.getElementById('dueDate').value = ''; // Zurücksetzen des Eingabefelds
+    }
 }
 
-function selectCategory(category) {
-    let categoryAddTask = document.getElementById('categoryAddTask');
-    let categoryDropdown = document.querySelector('.category-menu');
-    let dropdownImage = document.querySelector('.drop-down-image img');
+function handleCategoryChange(selectElement) {
+    var selectedCategory = selectElement.value;
+    // Hier können Sie die gewählte Kategorie weiterverarbeiten, z. B. sie in einer Variable speichern oder eine Funktion aufrufen
+    console.log("Selected category: " + selectedCategory);
+}
 
-    categoryAddTask.innerText = category;
-    categoryDropdown.classList.add('d-none');
-    dropdownImage.classList.remove('rotate180');
+function changeBorderColor() {
+    let categoryContainer = document.getElementById('categoryContainer');
+    categoryContainer.style.borderColor = "rgba(41, 171, 226, 1)";
 }
 
 function toggleSubtasks() {
@@ -237,15 +238,12 @@ function resetPriorityButtons() {
 
 function resetCategorySection() {
     const categoryDropdown = document.getElementById('categoryAddTask');
-    const categoryArrowDiv = document.getElementById('categoryDropDownArrow');
-    // Setze den Text zurück
-    categoryDropdown.textContent = 'Select Task Category';
-    // Zurücksetzen des Drop-Down-Pfeils
-    categoryArrowDiv.innerHTML = '<img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrow_drop_down_AddTask">';
+    // Setze den ausgewählten Index auf den Index des `<option>`-Elements mit dem Wert ""
+    categoryDropdown.selectedIndex = 0;
     // Setze die Border Color zurück
     categoryDropdown.style.borderColor = "#D1D1D1";
-    // Füge das onclick-Event wieder hinzu
-    categoryDropdown.onclick = toggleCategoryDropdown;
+    // Füge das onchange-Event wieder hinzu
+    categoryDropdown.onchange = handleCategoryChange;
 }
 
 
@@ -258,7 +256,6 @@ async function createTask() {
         alert('Please fill in all required fields.');
         return;
     }
-
     // Werte aus den Abschnitten abrufen
     let subTasks = document.getElementById('addsubtask').value;
 
@@ -268,18 +265,18 @@ async function createTask() {
         description: document.getElementById('descriptionAddTask').value,
         assignTo: document.getElementById('assignAddTask').value,
         dueDate: dueDate,
-        category: document.getElementById('categoryAddTask').textContent,
+        category: document.getElementById('categoryAddTask').value,
         subTasks: subTasks.split('\n').map(subTask => ({ id: taskIdCounter++, content: subTask.trim() })),
         priority: selectedPrio,
     });
         // await setItem('taskData', JSON.stringify(taskData));
 
-    taskData.push(newTask);
+    // taskData.push(newTask);
 
     clearEntries()
 
     // JSON-Array ausgeben (nur für Debugging-Zwecke)
-    console.log(taskData);
+    // console.log(taskData);
 };
 
 async function loadTasksData() {
