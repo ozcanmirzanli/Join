@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
   passwordInput.addEventListener("input", hideWrongPassword);
   // Changes the password logo to default when the input field is empty
   passwordInput.addEventListener("input", handlePasswordChange);
+  guestLoginBtn.addEventListener("click", guestLogin);
 });
 
 function handleFocus(event) {
@@ -35,7 +36,6 @@ function handleBlur(event) {
 
 async function login(event) {
   event.preventDefault();
-  await loadUsers();
 
   let email = document.getElementById("email").value.trim();
   let password = document.getElementById("password").value;
@@ -191,4 +191,15 @@ function showWrongPassword() {
 function hideWrongPassword() {
   let wrongPassword = document.getElementById("wrong-password");
   wrongPassword.style.display = "none";
+}
+
+function guestLogin() {
+  let guestUser = {
+    userName: "guest",
+    email: "guest@guest.de",
+    password: "guest",
+  };
+
+  sessionStorage.setItem("currentUser", JSON.stringify(guestUser));
+  window.location.href = "summary.html";
 }

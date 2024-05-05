@@ -44,9 +44,8 @@ function changeGreetingText() {
 
   userNameSummary.innerText = "";
   if (currentUser) {
-    userNameSummary.innerText = currentUser.userName;
-  } else {
-    userNameSummary.innerText = "Guest";
+    userNameSummary.innerText =
+      currentUser.userName[0].toUpperCase() + currentUser.userName.slice(1);
   }
 }
 

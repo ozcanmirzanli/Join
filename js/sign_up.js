@@ -11,6 +11,7 @@ let wrongPassword = document.getElementById("alert");
 let confirmPasswordInput = document.getElementById("confirm-password");
 let emailInput = document.getElementById("email");
 let alertUsedEmail = document.querySelector(".used-email");
+let guestLoginBtn = document.getElementById("guest-login-btn");
 
 let users = [];
 
