@@ -37,3 +37,7 @@ function changeBackground(id){
     localStorage.setItem('clickedBtnId', id); // Save ID of clicked Button
     clickedBtn.classList.add('clickedSideBtn'); // Highlight clicked Button
 }
+
+function goBack() {
+    window.history.back();
+}
