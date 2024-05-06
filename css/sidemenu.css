@@ -122,7 +122,7 @@ a:hover {
   align-items: flex-start;
   padding-left: 328px;
   padding-top: 210px;
-  width: calc(100% - 328px); /* Breite basierend auf der Bildschirmbreite abzüglich des linken Paddings */
+  width: 103vh;
 }
 
 .header {

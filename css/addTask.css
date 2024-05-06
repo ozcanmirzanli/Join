@@ -221,12 +221,21 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .input-category {
+    position: relative;
     width: 100%;
     border: none;
+    border-radius: 10px;
     border-radius: inherit;
-    background-color: inherit;
+    background-color: #fff;
     font-size: inherit;
+    border: none;
 }
+
+/* CSS für das Dropdown-Menü */
+select.input-category option[value=""][disabled] {
+    display: none; /* Ausblenden der Option "Select Task Category" */
+}
+
 
 .drop-down-image { 
     border-radius: 10px;

@@ -18,7 +18,7 @@
   <body onload="includeHTML(); init()">
     <div w3-include-html="./assets/templates/sidemenu.html"></div>
     <div w3-include-html="./assets/templates/header.html"></div>
-    <div>
+    <div class="mainBoardContainer">
       <div class="headlineBoard">
         <h1>Board</h1>
         <div class="task">
@@ -27,7 +27,9 @@
               <div class="line"></div>
                 <img src="./assets/img/search.svg" alt="search" class="searchButton"/>
             </div>
-          <img src="./assets/img/addTask_Button_Board.svg" alt="addTask" class="addTaskBtn" onclick="openAddTaskDialog()"/>
+            <div>
+              <img src="./assets/img/addTask_Button_Board.svg" alt="addTask" class="addTaskBtn" onclick="openAddTaskDialog()"/>
+            </div>
         </div>
       </div>
       <div class="table">

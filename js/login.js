@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 checkRememberMe();
+changeLogoToMobile();
 
 // Event listeners for input focus states
 document.querySelector(".inputs").addEventListener("focusin", handleFocus);
@@ -288,4 +289,18 @@ function showWrongPassword() {
 function hideWrongPassword() {
   let wrongPassword = document.getElementById("wrong-password");
   wrongPassword.style.display = "none";
+}
+
+/**
+ * Changes the logo if the screen width is lower than 600px
+ * sets a timeout to change it back so it fits with the animation
+ */
+function changeLogoToMobile() {
+  let loginLogo = document.getElementById("login-logo");
+  if (window.innerWidth < 600) {
+    loginLogo.src = "assets/img/mobile-logo.png";
+    setTimeout(function () {
+      loginLogo.src = "assets/img/Capa_1.png";
+    }, 1000);
+  }
 }
