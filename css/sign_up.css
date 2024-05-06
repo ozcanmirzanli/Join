@@ -307,6 +307,11 @@ footer a:hover {
     width: 339px;
     height: 460px;
   }
+
+  .sign-up-arrow {
+    top: 35px;
+    left: 30px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -402,17 +407,22 @@ footer a:hover {
     width: 150%;
   }
 
-  @media (max-width: 340px) {
-    .user-name-input,
-    .email-input,
-    .password-input,
-    .confirm-password-container {
-      gap: 0;
-      width: 245px;
-    }
+  .sign-up-arrow {
+    top: 29px;
+    left: 17px;
+  }
+}
 
-    .sign-up-underline {
-      width: 67px;
-    }
+@media (max-width: 340px) {
+  .user-name-input,
+  .email-input,
+  .password-input,
+  .confirm-password-container {
+    gap: 0;
+    width: 245px;
+  }
+
+  .sign-up-underline {
+    width: 67px;
   }
 }
