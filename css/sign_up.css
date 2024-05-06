@@ -41,20 +41,19 @@ h2 {
   align-items: center;
 }
 
-.sign-up {
-  gap: 35px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  position: absolute;
-  top: 67px;
-  right: 122px;
-}
-
 #sign-up-logo {
   width: 100px;
   height: 122px;
   position: absolute;
+  z-index: 10;
+}
+
+#logo-container {
+  position: absolute;
+  top: 80px;
+  left: 77px;
+  animation: moving-to-target 1s ease-in-out;
+  z-index: 10;
 }
 
 .fixed-center {
@@ -288,5 +287,132 @@ footer a:hover {
 
   100% {
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 1050px) {
+  #logo-container {
+    top: 35px;
+    left: 35px;
+  }
+
+  #sign-up-logo {
+    width: 83px;
+    height: 98px;
+  }
+}
+
+@media (max-width: 750px) {
+  .sign-up-form-card {
+    width: 339px;
+    height: 460px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sign-up-form-card {
+    width: 274px;
+  }
+}
+
+@media (max-width: 520px) {
+  .sign-up-form-card {
+    width: 235px;
+  }
+
+  .sign-up-form-card h1 {
+    font-size: 47px;
+  }
+
+  .sign-up-underline {
+    width: 88px;
+  }
+
+  #sign-up-logo {
+    width: 85px;
+    height: 109px;
+  }
+
+  .user-name-input,
+  .email-input,
+  .password-input,
+  .confirm-password-container {
+    width: 335px;
+  }
+
+  footer {
+    bottom: -5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sign-up-form-card {
+    width: 225px;
+  }
+}
+
+@media (max-width: 420px) {
+  .user-name-input,
+  .email-input,
+  .password-input,
+  .confirm-password-container {
+    width: 280px;
+  }
+
+  .sign-up-form-card {
+    width: 178px;
+  }
+
+  .bottom-btns {
+    gap: 21px;
+    flex-direction: column;
+    margin-top: 30px;
+  }
+
+  #sign-up-btn {
+    width: 178px;
+    justify-content: center;
+  }
+
+  #sign-up-logo {
+    width: 65px;
+    height: 75px;
+  }
+}
+
+@media (max-width: 380px) {
+  .user-name-input,
+  .email-input,
+  .password-input,
+  .confirm-password-container {
+    width: 240px;
+  }
+
+  input {
+    width: 220px;
+  }
+
+  .sign-up-form-card {
+    width: 130px;
+    height: 456px;
+  }
+
+  .sign-up-form-card h1 {
+    font-size: 40px;
+    width: 150%;
+  }
+
+  @media (max-width: 340px) {
+    .user-name-input,
+    .email-input,
+    .password-input,
+    .confirm-password-container {
+      gap: 0;
+      width: 245px;
+    }
+
+    .sign-up-underline {
+      width: 67px;
+    }
   }
 }

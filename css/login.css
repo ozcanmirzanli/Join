@@ -325,9 +325,9 @@ footer a:hover {
     animation: moving-to-target-2 1s ease-in-out;
   }
 
-  .sign-up {
-    top: 45px;
-    right: 55px;
+  #sign-up-logo {
+    width: 83px;
+    height: 98px;
   }
 }
 
@@ -375,7 +375,7 @@ footer a:hover {
   }
 
   footer {
-    bottom: 20px;
+    bottom: -5px;
   }
 
   #background-fade {
@@ -437,7 +437,8 @@ footer a:hover {
   }
 
   .login-form-card h1 {
-    font-size: 35px;
+    font-size: 40px;
+    width: 170%;
   }
 }
 
@@ -450,10 +451,6 @@ footer a:hover {
 
   .login-form-card {
     width: 75px;
-  }
-
-  .login-form-card h1 {
-    font-size: 25px;
   }
 
   .login-underline {
