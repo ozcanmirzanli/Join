@@ -132,7 +132,7 @@ a:hover {
   align-items: center;
   padding: 20px 40px 20px 348px;
   gap: 34px;
-  width: 1440px;
+  width: 103vh;
   height: 96px;
   left: 0px;
   top: 0px;
@@ -352,22 +352,6 @@ a:hover {
     width: calc(100% - 40px);
     padding-top: 150px;
     padding-bottom: 80px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  h1 {
-    font-size: 24px;
-  }
-  h2 {
-    font-size: 20px;
-  }
-  h3 {
-    font-size: 18px;
-  }
-
-  p {
-    font-size: 12px;
   }
 }
 

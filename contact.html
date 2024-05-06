@@ -8,14 +8,16 @@
     <link rel="stylesheet" href="./css/contact.css">
     <script src="./js/contact.js"></script>
     <script src="./script.js"></script>
+    <script src="./js/storage.js"></script>
 </head>
 <body onload="includeHTML()">
     <div w3-include-html="./assets/templates/sidemenu.html"></div>
     <div w3-include-html="./assets/templates/header.html"></div>
 
     <div class="contactPage">
-    <section class="allContacts"><button class="addBtn"><p class="AddContactText">add new Contact</p><img src="./assets/img/person_add.svg" alt="" class="addContactPic"></button></section>
+    <section class="allContacts"><button class="addBtn" onclick="addNewConatct()"><p class="AddContactText">add new Contact</p><img src="./assets/img/person_add.svg" alt="" class="addContactPic"></button></section>
     <section class="contactOverview"><h3 class="headline">Contacts</h3><div class="seperator"></div><h4>Better with a team</h4></section>
+    <div id="addContact" class="d-none"></div>
     </div>
 </body>
 </html>

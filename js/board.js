@@ -3,40 +3,7 @@
  * @type {Array}
  */
 
-let todos = [
-  {
-    id: 0,
-    title: "Putzen",
-    description: "blah",
-    date: "24.05.2024",
-    story: "userStory",
-    category: "done",
-  },
-  {
-    id: 1,
-    title: "nooooo",
-    description: "blah",
-    date: "24.05.2024",
-    story: "userStory",
-    category: "inProgress",
-  },
-  {
-    id: 2,
-    title: "asdf",
-    description: "asdf",
-    date: "29.05.2024",
-    story: "userStory",
-    category: "awaitingFeedback",
-  },
-  {
-    id: 3,
-    title: "bla",
-    description: "bla",
-    date: "29.05.2024",
-    story: "userStory",
-    category: "toDo",
-  },
-];
+let todos = [];
 
 /**
  * Represents the ID of the currently dragged element.
@@ -44,6 +11,10 @@ let todos = [
  */
 let currentDraggedElement = [];
 
+async function init(){
+  await loadTasksData();
+  updateHTMLBoard();
+}
 /**
  * Updates the HTML board based on the current state of todos.
  */
@@ -211,8 +182,13 @@ function openAddTaskDialog() {
 
   // Fügen Sie das Dialogfenster zum Body hinzu
   document.body.appendChild(dialogContent);
+}
 
-  // Wenn ein Schließen-Button benötigt wird, fügen Sie ihn hier hinzu und definieren Sie die Logik, um das Dialogfenster zu schließen
+function closeAddTaskDialog() {
+  const dialogContent = document.querySelector(".dialog-content");
+  if (dialogContent) {
+    dialogContent.remove();
+  }
 }
 
 /**
@@ -228,14 +204,28 @@ function deleteTask(id) {
   closeTaskBig();
 }
 
-/* noch anpassen
-function updateProgressBar() {
-  let percent = (currentTasks + 1) / subTasks.length;
-  percent = Math.round(percent * 100);
-  document.getElementById("progress-bar").innerHTML = `${percent}%`;
-  document.getElementById("progress-bar").style.width = `${percent}%`;
-}
+async function saveTask(id) {
+  // Werte aus den Abschnitten abrufen
+  let subTasks = document.getElementById('addsubtask').value;
 
-function saveEditTask(){
+  taskData.push ({
+      id: taskIdCounter++,
+      title: document.getElementById('titleAddTask').value,
+      description: document.getElementById('descriptionAddTask').value,
+      assignTo: document.getElementById('assignAddTask').value,
+      dueDate: document.getElementById('dueDate').value,
+      category: document.getElementById('categoryAddTask').textContent,
+      subTasks: subTasks.split('\n').map(subTask => ({ id: taskIdCounter++, content: subTask.trim() })),
+      priority: selectedPrio,
+  });
+      // await setItem('taskData', JSON.stringify(taskData));
 
-}*/
+  taskData.push(newTask);
+
+  closeTaskBig();
+
+  // JSON-Array ausgeben (nur für Debugging-Zwecke)
+  console.log(taskData);
+};
+
+

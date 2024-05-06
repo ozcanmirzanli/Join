@@ -61,7 +61,7 @@
                 <!-- Due Date -->
                 <section>
                     <div class="pd-bottom"><span>Due Date<span class="required-addTask">*</span></span></div>
-                    <input id="dueDate" type="date" placeholder="yyyy/mm/dd" class="input-dueDate border-input-addtask" required/>
+                    <input id="dueDate" type="date" placeholder="yyyy/mm/dd" class="input-dueDate border-input-addtask" onchange="checkDueDate()" required/>
                 </section>
 
                 <!-- Priority -->
@@ -83,20 +83,17 @@
                 <!-- Category -->
                 <section class="padding-category">
                     <div class="pd-bottom"><span>Category<span class="required-addTask">*</span></span></div>
-                    <div class="input-assignedTo border-input-addtask" id="categoryAddTask" onclick="toggleCategoryDropdown()">
-                      Select Task Category
-                      <div id="categoryDropDownArrow" class="drop-down-image">
-                        <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrow_drop_down_AddTask">
-                      </div>
+                    <div class="input-assignedTo border-input-addtask" id="categoryContainer">
+                        <select title="category" id="categoryAddTask" class="input-category" onchange="handleCategoryChange(this)" onclick="changeBorderColor()">
+                            <option value="" selected disabled>Select Task Category</option>
+                            <option value="User Story">User Story</option>
+                            <option value="Technical Story">Technical Story</option>
+                        </select>
                     </div>
-                    <div class="d-none category-menu">
-                      <div class="category-option" onclick="selectCategory('User Story')">User Story</div>
-                      <div class="category-option" onclick="selectCategory('Technical Story')">Technical Story</div>
-                    </div>
-                </section>
+                </section> 
 
                 <!-- Subtasks -->
-                <section>
+                <section class="sectionSubtasks">
                     <div class="pd-bottom"><span>Subtasks</span></div>
                     <div class="input-assignedTo border-input-addtask" id="addSubtaskMain" onfocus="handleInputFocus()">
                         <input id="addsubtask" type="text" placeholder="Add new subtasks" class="input-assignedTo border-none">
