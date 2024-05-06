@@ -21,6 +21,7 @@ h1 {
   height: 73px;
   font-family: "Inter", sans-serif;
   font-size: 700;
+  margin-right: auto;
 }
 
 h4 {
@@ -37,7 +38,6 @@ h4 {
 
 .FindTask {
   display: flex;
-  margin-left: 376px;
   margin-right: 32px;
   border: 1px solid;
   border-radius: 10px;
@@ -49,6 +49,8 @@ h4 {
 .task {
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 #search {
@@ -101,6 +103,7 @@ h4 {
   display: flex;
   margin-left: 296px;
   margin-top: 48px;
+  flex-wrap: wrap;
 }
 
 .noToDo {
@@ -171,7 +174,7 @@ input:focus {
   background-color: white;
   border-radius: 24px;
   border: 1px solid lightgray;
-  padding: 24px;
+  padding: 15px;
   width: 70vw; /* Breite des Dialogfensters anpassen */
   height: 70vh; /* Höhe des Dialogfensters anpassen */
   max-height: calc(100% - 2rem);
@@ -181,6 +184,7 @@ input:focus {
   transform: translate(-50%, -50%);
   z-index: 9999; /* Stellen Sie sicher, dass das Dialogfenster über anderen Inhalten liegt */
   overflow-y: auto; /* Falls der Inhalt scrollbar wird */
+  overflow: hidden;
 }
 
 .userStoryMini {
@@ -375,4 +379,59 @@ input:focus {
 
 .iconTask:hover{
 cursor: pointer;
+}
+
+@media (max-width: 1400px){
+  .headlineBoard {
+      margin-left: 140px;
+  }
+  .footer-btn-addTask {
+      padding-top: 16px;
+  }
+}
+
+@media (max-width: 1235px) {
+  .headlineBoard, .table {
+    margin-left: 70px;
+  }
+}
+
+@media (max-width: 1160px) {
+  .headlineBoard {
+    margin-left: 35px;
+    justify-content: center;
+    gap: 96px;
+  }
+
+  .table {
+    margin-left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+}
+
+@media (max-width: 1060px) {
+  .task {
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+  }
+
+  .addTaskBtn {
+    margin-left: auto;
+  }
+
+  .FindTask {
+    flex-basis: 100%;
+    margin-top: 0;
+  }
+
+  .searchButton {
+    margin-left: 10px;
+  }
 }

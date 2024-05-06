@@ -223,8 +223,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .input-category {
     width: 100%;
     border: none;
+    border-radius: 10px;
     border-radius: inherit;
-    background-color: inherit;
+    background-color: #fff;
     font-size: inherit;
 }
 
