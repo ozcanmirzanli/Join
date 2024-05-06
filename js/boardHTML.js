@@ -31,7 +31,7 @@ function renderBigTask(todo) {
           <h2>${todo["title"]}</h2>
           <img src="./assets/img/plus button.svg" alt="" onclick="closeTaskBig()">
         </div>
-        <h3>${todo.description}</h3>
+        <h3>${todo["description"]}</h3>
         <div class="dueDate">due date : ${todo["date"]}</div>
         <div class="prio">Priority: Meduímum <img src="./assets/img/medium_orange_AddTask.svg" alt=""></div>
         <div class="members">assigned to :
@@ -160,7 +160,7 @@ function renderAddTaskForm() {
                             <img src="assets/img/subtask_cancel_AddTask.svg" alt="subtask_cancel_AddTask">
                         </button>
 
-                        <button onclick="createTask()" class="footer-btn-text-img" type="button" id="create-btn">
+                        <button onclick="saveTask(id)" class="footer-btn-text-img" type="button" id="create-btn">
                             Create Task
                             <img src="assets/img/create_hook_white_AddTask.svg" alt="create_hook_white_AddTask">
                         </button>
@@ -257,7 +257,7 @@ function renderEditTaskForm(todo) {
       </div>
              <div id="showsubtasks" class="subtasks-list d-none"></div>
             </section>
-   <img src="./assets/img/button_OK.svg" alt="delete" class="iconTask" onclick="saveTask(${todo["id"]})">
+   <img src="./assets/img/button_OK.svg" alt="delete" class="iconTask" onclick="saveTask(${taskData["id"]})">
   </div>
     `;
 }

@@ -1,5 +1,14 @@
 let contact = [];
 
+async function getContact(){
+  try {
+   contact = JSON.parse(await getItem("contact"));
+  } catch (error) {
+    console.info('Could not load contacts')
+  } 
+}
+
+
 function addNewConatct(){
     let addContact = document.getElementById("addContact");
     addContact.classList.remove("d-none");
@@ -32,13 +41,14 @@ async function saveContact(){
     let mail = document.getElementById("mail").value;
     let number = document.getElementById("number").value;
 
-    contact.push({ name: name.value, email: mail.value, number: number.value });
-  await setItem("contact", JSON.stringify(contact));
+    contact.push({ name: name, email: mail, number: number});
+    await setItem("contact", JSON.stringify(contact));
+    close();
 }
 
 function close(){
     let addContact = document.getElementById("addContact");
     addContact.innerHTML = '';
     addContact.classList.add("d-none");
-    addContact.classList.remove("addContact");
+    addContact.classList.remove("addContact"); 
 }

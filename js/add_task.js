@@ -268,7 +268,8 @@ async function createTask() {
         category: document.getElementById('categoryAddTask').value,
         subTasks: subTasks.split('\n').map(subTask => ({ id: taskIdCounter++, content: subTask.trim() })),
         priority: selectedPrio,
-    });
+        todo: "toDo",
+    })
         // await setItem('taskData', JSON.stringify(taskData));
 
     // taskData.push(newTask);
