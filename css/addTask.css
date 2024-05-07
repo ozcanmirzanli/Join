@@ -273,6 +273,10 @@ select.input-category option[value=""][disabled] {
     border-radius: 10px;
 }
 
+.subtasks:hover {
+    cursor: pointer;
+}
+
 .sections-addTask input[type=text]:focus {
     border-color: rgba(41, 171, 226, 1);
     outline: none;
@@ -352,6 +356,10 @@ select.input-category option[value=""][disabled] {
 .subtask-icon {
     width: 16px;
     height: 18px;
+}
+
+.subtask-icon:hover {
+    cursor: pointer;
 }
 
 .subtaskEditText{
