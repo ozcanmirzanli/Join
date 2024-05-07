@@ -20,16 +20,20 @@
     <div w3-include-html="./assets/templates/header.html"></div>
     <div class="mainBoardContainer">
       <div class="headlineBoard">
-        <h1>Board</h1>
+        <div class="headlineMobile">
+          <h1>Board</h1>
+          <div class="d-none" id="plusMobile" onclick="openAddTaskDialog()">&#x2b;</div>
+        </div>
         <div class="task">
             <div class="FindTask">
               <input type="text" name="search" id="search" placeholder="Find Task" oninput="filterTasks()"/>
               <div class="line"></div>
                 <img src="./assets/img/search.svg" alt="search" class="searchButton"/>
             </div>
-            <div>
-              <img src="./assets/img/addTask_Button_Board.svg" alt="addTask" class="addTaskBtn" onclick="openAddTaskDialog()"/>
-            </div>
+            <button onclick="openAddTaskDialog()" class="addTaskBtn" type="button" id="addTaskBtn">
+              Add Task
+              <img src="./assets/img/addTask_Button_Board_Plus.svg" alt="addTask_Button_Board_Plus">
+            </button>
         </div>
       </div>
       <div class="table">

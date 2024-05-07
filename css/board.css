@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  box-sizing: border-box;
 }
 
 .d-none {
@@ -12,7 +13,8 @@ body {
   align-items: center;
   margin-top: 176px;
   margin-left: 296px;
-  width: 1056px;
+  max-width: 1056px;
+  width: 100vw;
   height: 73px;
 }
 
@@ -121,13 +123,23 @@ h4 {
 }
 
 .addTaskBtn {
-  width: 160px;
+  padding: 15px 24px 15px 24px;
+  border-radius: 8px;
+  border: none;
+  background-color: #2a3647;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 25.2px;
   height: 48px;
-  padding: 8px 16px 8px 16px;
+  display: flex;
+  align-items: center;
+  color: white;
+  gap: 8px;
 }
 
 .addTaskBtn:hover {
   cursor: pointer;
+  background-color: #29abe2;
 }
 
 .plus {
@@ -138,6 +150,7 @@ h4 {
 
 .plus:hover {
   cursor: pointer;
+  filter: invert(64%) sepia(70%) saturate(2202%) hue-rotate(165deg) brightness(91%) contrast(94%);
 }
 
 input:focus {
@@ -382,7 +395,7 @@ cursor: pointer;
 }
 
 @media (max-width: 1400px){
-  .headlineBoard {
+  .headlineBoard, .table {
       margin-left: 140px;
   }
   .footer-btn-addTask {
@@ -398,13 +411,14 @@ cursor: pointer;
 
 @media (max-width: 1160px) {
   .headlineBoard {
-    margin-left: 35px;
+    margin-left: auto;
     justify-content: center;
-    gap: 96px;
+    flex-direction: column;
   }
 
   .table {
-    margin-left: 0;
+    margin-top: 112px;
+    margin-left: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -412,26 +426,48 @@ cursor: pointer;
     flex-wrap: wrap;
   }
 
-}
+  .Findtask {
+    margin: 0;
+  }
 
-@media (max-width: 1060px) {
-  .task {
+  #plusMobile {
+    padding: 3px;
+    border-radius: 8px;
+    border: none;
+    background-color: #2a3647;
+    font-size: 36px;
+    line-height: 25.2px;
+    height: 40px;
     display: flex;
     align-items: center;
-    flex-direction: column-reverse;
-    flex-wrap: wrap;
+    color: white;
+    width: 40px;
+    justify-content: center;
   }
 
-  .addTaskBtn {
-    margin-left: auto;
+  #plusMobile:hover {
+    cursor: pointer;
+    background-color: #29abe2;
   }
 
-  .FindTask {
-    flex-basis: 100%;
-    margin-top: 0;
+  #addTaskBtn {
+    display: none;
   }
 
-  .searchButton {
-    margin-left: 10px;
+  .headlineMobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16vw;
+  }
+}
+
+@media (max-width: 970px) {
+  .table {
+    flex-direction: column;
+  }
+
+  .task {
+    width: 75vw;
   }
 }

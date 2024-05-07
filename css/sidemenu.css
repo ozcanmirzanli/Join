@@ -4,6 +4,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  box-sizing: border-box;
 }
 
 .sidebar {
@@ -287,7 +288,6 @@ a:hover {
   }
   .header {
     padding-left: 140px;
-    width: 1220px;
   }
   .legalNotice {
     padding-left: 140px;
@@ -310,7 +310,7 @@ a:hover {
 
 @media screen and (max-width: 1200px) and (min-width: 1141px){
   .header {
-      padding-left: 70px;
+    padding-left: 70px;
   }
   .legalNotice {
     padding-left: 70px;
@@ -322,7 +322,7 @@ a:hover {
 
 @media screen and (max-width: 1140px) and (min-width: 1101px){
   .header {
-      padding-left: 35px;
+    padding-left: 35px;
   }
   .legalNotice {
     padding-left: 35px;
