@@ -367,11 +367,16 @@ body {
     font-size: 16px;
     line-height: 16px;
   }
+
+  .date-text {
+    width: 55%;
+  }
 }
 
 @media (max-width: 500px) {
   .title {
     margin-left: 20px;
+    margin-top: 160px;
   }
 
   .first-row {
@@ -409,11 +414,19 @@ body {
   .option-text span {
     font-size: 47px;
   }
+
+  .date-text {
+    width: 60%;
+  }
 }
 
 @media (max-width: 420px) {
   .first-row {
     max-width: 170px;
+  }
+
+  .options-first-row {
+    gap: 25px;
   }
 
   .options-second-row,
@@ -423,5 +436,48 @@ body {
 
   .date-text h3 {
     font-size: 17px;
+  }
+
+  .date-text {
+    width: 70%;
+  }
+}
+
+@media (max-width: 380px) {
+  .options-first-row {
+    gap: 15px;
+  }
+
+  .first-row {
+    max-width: 150px;
+  }
+
+  .options-second-row,
+  .options-third-row {
+    max-width: 335px;
+  }
+
+  .first-row,
+  .second-row,
+  .third-row {
+    height: 100px;
+  }
+
+  .date-text {
+    width: 75%;
+  }
+}
+
+@media (max-width: 335px) {
+  .first-row {
+    max-width: 140px;
+  }
+
+  .options-second-row,
+  .options-third-row {
+    max-width: 315px;
+  }
+  .date-text {
+    width: 80%;
   }
 }
