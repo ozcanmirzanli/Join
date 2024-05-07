@@ -206,7 +206,6 @@ function showaddTaskBoard() {
 function openAddTaskDialog() {
   // Erstellen Sie das Dialogfenster und fügen Sie die AddTask-Form hinzu
   const dialogContent = document.createElement("div");
-  dialogContent.classList.add("dialog-content");
   dialogContent.innerHTML = renderAddTaskForm();
 
   // Fügen Sie das Dialogfenster zum Body hinzu

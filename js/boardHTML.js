@@ -90,7 +90,7 @@ function renderAddTaskForm() {
                     </div>
 
                     <!-- Seperator -->
-                    <div><img src="assets/img/seperator_AddTask.svg" alt="seperator"/></div>
+                    <div><img src="assets/img/seperator_AddTask.svg" alt="seperator" id="seperator" /></div>
 
                     <!-- Right Part of Add Task -->
                     <div class="sections-addTask">

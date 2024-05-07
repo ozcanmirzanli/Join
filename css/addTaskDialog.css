@@ -404,4 +404,67 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     content: url(/Join/assets/img/clear_hook_blue_AddTask.svg);
  }
 
- 
+ @media (max-width: 1400px) {
+    .main-addTask {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+        margin: 0 auto;
+        padding-left: 0;
+    }
+
+    #seperator {
+        display: none;
+    }
+
+    #cardHeadline {
+        justify-content: space-around;
+    }
+
+    .sections-addTask, #titleAddTask, textarea, select {
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: inherit;
+    }
+ }
+
+@media (max-width: 710px) {
+    .priority {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50vw;
+    }
+
+    .addtask-footer, .footer-btn-addTask {
+        flex-direction: column;
+        align-items: center;
+        padding-top: 16px;
+    }
+
+    #titleAddTask, textarea, .input-assignedTo {
+        width: 100%;
+    }
+    
+    #dueDate {
+        padding: 12px 250px 11px 16px;
+        max-width: 50px;
+    }
+
+    #clear-btn {
+        display: none;
+    }
+
+    .sectionSubtasks {
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
+    #dueDate {
+        padding: 12px 250px 11px 16px;
+        width: 5px;  
+    }
+}

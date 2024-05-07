@@ -11,6 +11,10 @@ body {
     font-family: 'Inter', sans-serif;
   }
 
+body::-webkit-scrollbar {
+    display: none;
+  }
+
 /* main css for addTask */
 
 form {
