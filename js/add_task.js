@@ -334,8 +334,8 @@ function renderContacts() {
 function getassignListHTML(contact, badgeColor, i) {
     return /*HTML*/ `
             <div id="contact${i}" onclick="assignContact(${i}, '${contact.name}')">
-                <div class="contactDetails">
-                    <div class="contactProfileBadge" style="background-color: ${badgeColor}</div>
+                <div>
+                    <div style="background-color: ${badgeColor}</div>
                     <div class="contactName">${contact.name}</div>
                 </div>
                 <img id="checkbox${i}" src="./assets/img/addTask_AssignTo_Checkbox.svg" class="checkbox">
