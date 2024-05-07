@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact</title>
     <link rel="icon" href="/.assets/img/joinLogoBlack.svg" />
-    <link rel="stylesheet" href="./css/contact.css">
+    <link rel="stylesheet" href="./css/contact.css" />
     <script src="./js/contact.js"></script>
     <script src="./script.js"></script>
     <script src="./js/storage.js"></script>
-</head>
-<body onload="includeHTML(), getContact();">
+  </head>
+  <body onload="includeHTML(), init();">
     <div w3-include-html="./assets/templates/sidemenu.html"></div>
     <div w3-include-html="./assets/templates/header.html"></div>
 
     <div class="contactPage">
-    <section class="allContacts"><button class="addBtn" onclick="addNewConatct()"><p class="AddContactText">add new Contact</p><img src="./assets/img/person_add.svg" alt="" class="addContactPic"></button></section>
-    <section class="contactOverview"><h3 class="headline">Contacts</h3><div class="seperator"></div><h4>Better with a team</h4></section>
-    <div id="addContact" class="d-none"></div>
+      <section class="allContacts" onclick="closeContact()">
+        <button class="addBtn" onclick="addNewConatct()">
+          <p class="AddContactText">add new Contact</p>
+          <img src="./assets/img/person_add.svg" alt="" class="addContactPic" />
+        </button>
+        <div id="allContacts"></div>
+      </section>
+      <section>
+        <div class="contactOverview">
+        <h3 class="headline">Contacts</h3>
+        <div class="seperator"></div>
+        <h4>Better with a team</h4>
+        </div>
+        <div class="contactBig" id="contactBig"></div>
+      </section>
+      <div id="addContact" class="d-none"></div>
     </div>
-</body>
+  </body>
 </html>
