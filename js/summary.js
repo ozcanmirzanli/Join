@@ -3,6 +3,16 @@ document.addEventListener("DOMContentLoaded", function () {
   updateSummary();
 });
 
+document.querySelectorAll(".first-row").forEach(function (element) {
+  element.addEventListener("click", openBoard);
+});
+
+document.querySelector(".second-row").addEventListener("click", openBoard);
+
+document.querySelectorAll(".third-row").forEach(function (element) {
+  element.addEventListener("click", openBoard);
+});
+
 function getCurrentUser() {
   const userName = JSON.parse(sessionStorage.getItem("currentUser"));
   if (userName) {
@@ -77,4 +87,6 @@ function updateDisplay(elementId, count) {
   displayElement.innerText = `${count}`;
 }
 
-changeGreetingText();
+function openBoard() {
+  window.location.href = "board.html";
+}
