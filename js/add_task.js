@@ -105,12 +105,13 @@ function handleInputFocus() {
 }
 
 function saveSubtask() {
-    const subtaskInput = document.getElementById('addsubtask');
-    const subtaskText = subtaskInput.value;
+    let subtaskInput = document.getElementById('addsubtask');
+    let subtaskText = subtaskInput.value;
     
     if (subtaskText !== '') {
-        // Erstellen des HTML-Codes für den Subtask
-        const subtaskHTML = renderSubtaskItem(subtaskText);
+        // Erstellen des HTML-Codes für den Subtask mit einer eindeutigen ID
+        const subtaskCount = document.querySelectorAll('.subtask-item').length; // Anzahl der vorhandenen Subtasks
+        const subtaskHTML = renderSubtaskItem(subtaskText, subtaskCount);
 
         // Hinzufügen des Subtask-HTML-Codes zum Element mit der ID 'showsubtasks'
         const showSubtasksContainer = document.getElementById('showsubtasks');
@@ -138,7 +139,7 @@ function renderSubtaskItem(subtask, i) {
                     <img onclick="subtaskSaveEdit(${i})" src="assets/img/subtask_check_AddTask.svg" alt="Check Subtask" class="subtask-icon">
                 </div>
             </div>
-            <div id="mainBoundingBox" class="subtask-bounding-box">
+            <div id="mainBoundingBox${i}" class="subtask-bounding-box">
                 <img onclick="subtaskEdit(${i})" src="assets/img/subtask_edit_AddTask.svg" alt="Edit Subtask" class="subtask-icon">
                 <img src="assets/img/subtask_seperator_AddTask.svg" alt="Separator" class="subtask-icon">
                 <img onclick="subtaskDelete(${i})" src="assets/img/subtask_trash_AddTask.svg" alt="Delete Subtask" class="subtask-icon">
@@ -162,7 +163,6 @@ function subtaskSaveEdit(i) {
     let subtaskInput = document.getElementById(`subtaskInput${i}`);
     document.getElementById('mainBoundingBox').classList.remove('d-none');
 
-
     subtaskContent.querySelector('span').textContent = `\u2022 ${subtaskInput.value}`;
     subtaskContent.classList.toggle('d-none');
     subtaskEditInput.classList.toggle('d-none');
@@ -181,6 +181,7 @@ function subtaskDelete(i) {
         item.querySelector('.subtask-bounding-box img:last-child').setAttribute('onclick', `subtaskDelete(${index})`);
     });
 }
+
 
 function clearEntries() {
     // Clear-Eingaben für die Titel-Section
@@ -210,8 +211,8 @@ function clearShowSubtasks() {
     }
 }
 
-// Eventlistener für den Clear-Button
-document.getElementById('clear-btn').addEventListener('click', clearEntries);
+// // Eventlistener für den Clear-Button
+// document.getElementById('clear-btn').addEventListener('click', clearEntries);
 
 function resetPriorityButtons() {
     // Array mit den IDs der Priority-Buttons und ihren Standardbildern
