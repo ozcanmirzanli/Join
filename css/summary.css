@@ -5,6 +5,13 @@
 
 body {
   background-color: #f6f7f8;
+  max-width: 1900px;
+}
+
+.summary-main-container {
+  max-width: 1440px;
+  width: 100vw;
+  height: 100vh;
 }
 
 .title {
@@ -207,4 +214,75 @@ body {
   font-weight: 700;
   line-height: 76.8px;
   color: #29abe2;
+}
+
+@media (max-width: 1400px) {
+  .title {
+    margin: 165px 0 25px 80px;
+  }
+
+  .options-container {
+    margin-left: 80px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .welcome-text {
+    margin-left: 40px;
+  }
+}
+
+@media (max-width: 900px) {
+  .welcome-text {
+    display: none;
+  }
+
+  .title {
+    margin: 0 auto;
+    margin-top: 175px;
+    margin-bottom: 25px;
+    gap: 25px;
+    width: 60%;
+  }
+
+  .title h1 {
+    font-size: 45px;
+  }
+
+  .title h2 {
+    font-size: 20px;
+  }
+
+  .first-row {
+    max-width: 244px;
+    max-height: 148px;
+  }
+
+  .options-first-row {
+    justify-content: space-evenly;
+  }
+
+  .options-second-row {
+    max-width: 520px;
+    max-height: 148px;
+    margin-left: 20px;
+  }
+
+  .second-row {
+    max-height: 148px;
+  }
+
+  .options-third-row {
+    gap: 10px;
+  }
+
+  .third-row {
+    width: 148px;
+    height: 148px;
+    margin: 0 auto;
+  }
+
+  .options-container {
+    margin: 0 auto;
+  }
 }

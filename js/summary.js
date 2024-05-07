@@ -1,8 +1,37 @@
+/**
+ * Executes once all the DOM content is fully loaded.
+ */
 document.addEventListener("DOMContentLoaded", function () {
   changeGreetingText();
   updateSummary();
 });
 
+let userNameSummary = document.getElementById("user-name");
+let greetingText = document.getElementById("greeting-text");
+
+/**
+ * Adds click event listeners to elements with class "first-row".
+ */
+document.querySelectorAll(".first-row").forEach(function (element) {
+  element.addEventListener("click", openBoard);
+});
+
+/**
+ * Adds a click event listener to the element with class "second-row".
+ */
+document.querySelector(".second-row").addEventListener("click", openBoard);
+
+/**
+ * Adds click event listeners to elements with class "third-row".
+ */
+document.querySelectorAll(".third-row").forEach(function (element) {
+  element.addEventListener("click", openBoard);
+});
+
+/**
+ * Gets the current user's information from sessionStorage.
+ * @returns {Object|null} The current user object or null if no user is stored.
+ */
 function getCurrentUser() {
   const userName = JSON.parse(sessionStorage.getItem("currentUser"));
   if (userName) {
@@ -11,9 +40,10 @@ function getCurrentUser() {
   return null;
 }
 
-let userNameSummary = document.getElementById("user-name");
-let greetingText = document.getElementById("greeting-text");
-
+/**
+ * Changes the source image of buttons to a highlighted version.
+ * @param {Element} element - The element containing the button image.
+ */
 function changeButtonColor(element) {
   let img = element.querySelector("img");
 
@@ -24,6 +54,10 @@ function changeButtonColor(element) {
   }
 }
 
+/**
+ * Resets the source image of buttons to their original version.
+ * @param {Element} element - The element containing the button image.
+ */
 function resetButtonColor(element) {
   let img = element.querySelector("img");
 
@@ -37,6 +71,9 @@ function resetButtonColor(element) {
 let today = new Date();
 let curHr = today.getHours();
 
+/**
+ * Updates the greeting text based on the current time and user's first name.
+ */
 function changeGreetingText() {
   const currentUser = getCurrentUser();
   greetingText.innerText = "";
@@ -49,6 +86,9 @@ function changeGreetingText() {
   }
 }
 
+/**
+ * Sets greeting text based on the current hour of the day.
+ */
 function greetingTextCondition() {
   if (curHr < 12) {
     greetingText.innerText = "Good morning,";
@@ -59,6 +99,9 @@ function greetingTextCondition() {
   }
 }
 
+/**
+ * Updates the display of various task categories.
+ */
 function updateSummary() {
   updateDisplay("to-do", todos.length);
   updateDisplay("done", getCategoryCount("done"));
@@ -68,13 +111,28 @@ function updateSummary() {
   updateDisplay("awaiting-feedback", getCategoryCount("awaitingFeedback"));
 }
 
+/**
+ * Returns the count of tasks in a specified category.
+ * @param {string} category - The category of tasks to count.
+ * @returns {number} The number of tasks in the category.
+ */
 function getCategoryCount(category) {
   return todos.filter((todo) => todo.category === category).length;
 }
 
+/**
+ * Updates the text content of an element with a specified count.
+ * @param {string} elementId - The ID of the element to update.
+ * @param {number} count - The count to display in the element.
+ */
 function updateDisplay(elementId, count) {
   let displayElement = document.getElementById(elementId);
   displayElement.innerText = `${count}`;
 }
 
-changeGreetingText();
+/**
+ * Redirects the browser to the board.html page.
+ */
+function openBoard() {
+  window.location.href = "board.html";
+}
