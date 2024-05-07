@@ -45,12 +45,13 @@ function getCurrentUser() {
  * @param {Element} element - The element containing the button image.
  */
 function changeButtonColor(element) {
-  let img = element.querySelector("img");
-
-  if (img.id === "to-do-btn") {
-    img.src = "assets/img/pencil-btn-white.png";
-  } else if (img.id === "done-btn") {
-    img.src = "assets/img/done-white.png";
+  if (window.innerWidth > 800) {
+    let img = element.querySelector("img");
+    if (img.id === "to-do-btn") {
+      img.src = "assets/img/pencil-btn-white.png";
+    } else if (img.id === "done-btn") {
+      img.src = "assets/img/done-white.png";
+    }
   }
 }
 
@@ -59,12 +60,13 @@ function changeButtonColor(element) {
  * @param {Element} element - The element containing the button image.
  */
 function resetButtonColor(element) {
-  let img = element.querySelector("img");
-
-  if (img.id === "to-do-btn") {
-    img.src = "assets/img/pencil_toDo_Summary.svg";
-  } else if (img.id === "done-btn") {
-    img.src = "assets/img/hook_done_Summary.svg";
+  if (window.innerWidth > 800) {
+    let img = element.querySelector("img");
+    if (img.id === "to-do-btn") {
+      img.src = "assets/img/pencil_toDo_Summary.svg";
+    } else if (img.id === "done-btn") {
+      img.src = "assets/img/hook_done_Summary.svg";
+    }
   }
 }
 
