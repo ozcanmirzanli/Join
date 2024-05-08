@@ -1,4 +1,4 @@
-let subtask = [];
+// let subtask = [];
 let taskData = [];
 let taskIdCounter = 0;
 let selectedPrio = '';

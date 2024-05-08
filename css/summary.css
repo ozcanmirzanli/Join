@@ -220,6 +220,32 @@ body {
   color: #29abe2;
 }
 
+.welcome-backgound {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: #f6f7f8;
+  z-index: 10;
+  animation: opacity-fade 1s ease-in-out 2s;
+  overflow: hidden;
+  opacity: 1;
+  display: none;
+}
+
+.fade-out {
+  opacity: 0;
+}
+
+@keyframes opacity-fade {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
 @media (max-width: 1400px) {
   .title {
     margin: 165px 0 25px 80px;
@@ -237,8 +263,20 @@ body {
 }
 
 @media (max-width: 900px) {
+  .welcome-backgound {
+    display: block;
+  }
+
   .welcome-text {
-    display: none;
+    position: absolute;
+    top: 45%;
+    left: 27%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 12;
+    animation: opacity-fade 1s ease-in-out 2s;
+    opacity: 1;
   }
 
   .title {
@@ -310,6 +348,16 @@ body {
   .third-row:hover p {
     color: #2a3647;
   }
+
+  .welcome-text {
+    left: 24%;
+  }
+}
+
+@media (max-width: 720px) {
+  .welcome-text {
+    left: 22%;
+  }
 }
 
 @media (max-width: 600px) {
@@ -371,6 +419,18 @@ body {
   .date-text {
     width: 55%;
   }
+
+  .welcome-text {
+    left: 18%;
+  }
+
+  .welcome-text h2 {
+    font-size: 36px;
+  }
+
+  .welcome-text h1 {
+    font-size: 47px;
+  }
 }
 
 @media (max-width: 500px) {
@@ -418,6 +478,10 @@ body {
   .date-text {
     width: 60%;
   }
+
+  .welcome-text {
+    left: 15%;
+  }
 }
 
 @media (max-width: 420px) {
@@ -440,6 +504,10 @@ body {
 
   .date-text {
     width: 70%;
+  }
+
+  .welcome-text {
+    left: 12%;
   }
 }
 
@@ -466,6 +534,10 @@ body {
   .date-text {
     width: 75%;
   }
+
+  .welcome-text {
+    left: 5%;
+  }
 }
 
 @media (max-width: 335px) {
@@ -479,5 +551,9 @@ body {
   }
   .date-text {
     width: 80%;
+  }
+
+  .welcome-text {
+    left: 1%;
   }
 }
