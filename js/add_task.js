@@ -326,7 +326,7 @@ function closeAssignTo() {
 function renderContacts() {
     let assignList = document.getElementById('assignToList');
     assignList.innerHTML = '';
-    for (let i = 2; i < contacts.length; i++) {
+    for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
         let badgeColor = contact.color;
         assignToList.innerHTML += getassignListHTML(contact, badgeColor, i);
