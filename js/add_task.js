@@ -314,6 +314,7 @@ function openAssignTo() {
     let dropDownMenu = document.getElementById('assignToDropdown');
     dropDownMenu.classList.remove('d-none');
     document.getElementById('assignedUser').classList.add('d-none');
+    renderContacts();
 }
 
 function closeAssignTo() {
@@ -324,9 +325,10 @@ function closeAssignTo() {
 
 function renderContacts() {
     let assignList = document.getElementById('assignToList');
-    for (let i = 0; i < assignList.length; i++) {
+    assignList.innerHTML = '';
+    for (let i = 2; i < contacts.length; i++) {
         let contact = contacts[i];
-        let badgeColor = contacts[i].color;
+        let badgeColor = contact.color;
         assignToList.innerHTML += getassignListHTML(contact, badgeColor, i);
     }
 }
@@ -335,7 +337,7 @@ function getassignListHTML(contact, badgeColor, i) {
     return /*HTML*/ `
             <div id="contact${i}" onclick="assignContact(${i}, '${contact.name}')">
                 <div>
-                    <div style="background-color: ${badgeColor}</div>
+                    <div class="assignToBadge" style="background-color: ${badgeColor}</div>
                     <div class="contactName">${contact.name}</div>
                 </div>
                 <img id="checkbox${i}" src="./assets/img/addTask_AssignTo_Checkbox.svg" class="checkbox">
