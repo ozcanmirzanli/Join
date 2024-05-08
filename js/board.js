@@ -242,7 +242,7 @@ async function saveTask(id) {
       description: document.getElementById('descriptionAddTask').value,
       assignTo: document.getElementById('assignAddTask').value,
       dueDate: document.getElementById('dueDate').value,
-      category: document.getElementById('categoryAddTask').textContent,
+      category: document.getElementById('categoryAddTask').value,
       subTasks: subTasks.split('\n').map(subTask => ({ id: taskIdCounter++, content: subTask.trim() })),
       priority: selectedPrio,
       todo: "toDo",
