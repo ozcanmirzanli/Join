@@ -1,7 +1,18 @@
 /**
- * Executes once all the DOM content is fully loaded.
+ * This function is executed once all the DOM content is fully loaded.
+ * 1. Waits for 2.9 seconds before hiding the load animation for smaller screens (under 900px width).
+ * 2. Calls functions `changeGreetingText` and `updateSummary` to update the page's content.
  */
 document.addEventListener("DOMContentLoaded", function () {
+  setTimeout(function () {
+    let welcomeBackground = document.querySelector(".welcome-backgound");
+    let welcomeText = document.querySelector(".welcome-text");
+    if (window.innerWidth < 900) {
+      welcomeBackground.style.display = "none";
+      welcomeText.style.display = "none";
+    }
+  }, 2900);
+
   changeGreetingText();
   updateSummary();
 });
