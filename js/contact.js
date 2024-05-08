@@ -83,7 +83,7 @@ function renderContacts() {
     const initials = getInitials(contact.name);
 
     overview.innerHTML += /*html*/ `
-    <div class="contactSmall" onclick="getOverview(contacts[${index}])">
+    <div class="contactSmall" onclick="getOverview(${index})">
             <div class="initials" style="background-color: ${contact.color};">${initials}</div>
             <div class="contactInfo">
                 <div class="name">${contact["name"]}</div>
@@ -105,18 +105,25 @@ contacts.forEach(function (contact) {
   contact.initials = getInitials(contact.name);
 });
 
-function getOverview(contact){
-    document.getElementById("contactBig").classList.remove('d-none')
-    document.getElementById("contactBig").innerHTML =/*html*/`
-        <div class="bigInitials" style="background-color: ${contact["color"]};">${initials}</div>
-            <div class="">
-                <h3 class="bigName">${contact["name"]}</h3>
-                <div class="btnArea">
-                <img src="./assets/img/Delete contact.svg" alt="delete" onclick="deletContact()"> 
-          <img src="./assets/img/edit contacts.svg" alt="edit" onclick="editContact()">
+function getOverview(index) {
+  let contact = contacts[index]; 
+  document.getElementById("contactBig").classList.remove("d-none");
+  document.getElementById("contactBig").innerHTML = /*html*/ `
+  <div class="upperArea">
+    <div class="initialsBig" style="background-color: ${contact["color"]};">${contact["initials"]}</div>
+<div class="nameArea">
+    <h3 class="nameBig">${contact["name"]}</h3>
+    <img src="./assets/img/Delete contact.svg" class="btn"  alt="delete" onclick="deletContact(${index})"> 
+    <img src="./assets/img/edit contacts.svg"  class="btn" alt="edit" onclick="editContact(${index})">
 </div>
-          <h2>Contact Information</h2>
-                <div><h4>E-Mail</h4>${contact["email"]}</div>
-                <div><h4>Phone</h4>${contact["number"]}</div>
-  </div>   `
+</div>
+    <h3 class="infoHead">Contact Information</h3>
+    <div ><h5 class="mailHead">E-Mail</h5><a style="background-color: background: #007CEE;" class="email">${contact["email"]}</a></div>
+    <div ><h5 class="mailHead">Phone</h5> <div class="email">${contact["number"]}</div></div>
+  `;
 }
+
+function deleteContact(index) {
+  contacts.splice(index, 1); 
+  renderContacts(); 
+  setItem("contact", JSON.stringify(contacts)); }

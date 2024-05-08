@@ -313,23 +313,15 @@ text-align: left;
 color: #007CEE;
 }
 
-.contactBig{
-  width: 461px;
-height: 364px;
-top: 311px;
-left: 750px;
-gap: 21px;
-}
-
-.bigInitials{
-  width:120px;
+.initialsBig{
+width: 120px;
 height: 120px;
 gap: 10px;
 border-radius: 70px;
 border: 3px;
 }
 
-.bigName{
+.nameBig{
   width: 287px;
 height: 56px;
 font-family: "Inter", sans-serif;
@@ -337,11 +329,61 @@ font-size: 47px;
 font-weight: 500;
 line-height: 56.4px;
 text-align: left;
+padding-bottom: 8px;
 }
 
-.btnArea{
-  width: 159px;
+.btn {
+  width:81px;
 height: 24px;
-gap: 16px;
+left: 78px;
+gap: 8px;
+font-family: "Inter", sans-serif;
+font-size: 16px;
+font-weight: 400;
+line-height: 19.2px;
+text-align: left;
+}
+
+.infoHead{
+  width:207px;
+height: 74px;
+gap: 59px;
+font-family: "Inter", sans-serif;
+font-size: 20px;
+font-weight: 400;
+line-height: 24px;
+text-align: left;
+}
+
+.mailHead{
+  width: 50px;
+height: 19px;
+gap: 0px;
 opacity: 0px;
+font-family: "Inter", sans-serif;
+font-size: 16px;
+font-weight: 700;
+line-height: 19.2px;
+text-align: left;
+cursor: pointer;
+}
+
+.email{
+  width: 140px;
+height: 19px;
+font-family: "Inter", sans-serif;
+font-size: 16px;
+font-weight: 400;
+line-height: 19.2px;
+text-align: left;
+}
+
+.nameArea{
+  display: block;
+  margin-left: 54px;
+  margin-top: -50px;
+}
+
+.upperArea{
+  display: flex;
 }
