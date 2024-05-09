@@ -70,6 +70,48 @@ h4 {
   padding-top: 96px;
   padding-left: 232px;
   box-shadow: 4px 0px 6px 0px #00000014;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.allContacts::-webkit-scrollbar {
+  height: 24px;
+  width: 24px;
+}
+.allContacts::-webkit-scrollbar:vertical {
+  width: 11px;
+}
+
+.allContacts::-webkit-scrollbar:horizontal {
+  height: 11px;
+}
+
+.allContacts::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background-color: #A8A8A8;
+}
+.allContacts::-webkit-scrollbar-track { 
+  border-radius: 8px;
+  background-color: #FFFFFF;
+} 
+
+.allContacts::-webkit-scrollbar-button
+{
+  border-style: solid;
+  height: 16px;
+  width: 16px;
+}
+
+.allContacts::-webkit-scrollbar-button:vertical:decrement
+{
+  border-width: 0 7px 14px 7px;
+  border-color: transparent transparent #404040 transparent;
+}
+
+.allContacts::-webkit-scrollbar-button:vertical:increment
+{
+  border-width: 14px 7px 0 7px;
+  border-color: #404040 transparent transparent transparent;
 }
 
 .addBtn {
@@ -142,7 +184,7 @@ h4 {
   color: #2a3647;
 }
 
-.addContactCancel:hover{
+.addContactCancel:hover {
   color: rgb(0, 124, 238);
   cursor: pointer;
   border: 1px solid rgb(0, 124, 238);
@@ -170,7 +212,7 @@ h4 {
   margin-left: 24px;
 }
 
-.addContactSave:hover{
+.addContactSave:hover {
   background-color: rgb(0, 124, 238);
   cursor: pointer;
   border: 1px solid rgb(0, 124, 238);

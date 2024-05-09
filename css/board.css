@@ -1,4 +1,4 @@
-body {
+ body {
   margin: 0;
   box-sizing: border-box;
 }
@@ -204,6 +204,7 @@ input:focus {
 }
 
 .userStoryMini {
+  margin-bottom: 16px;
   padding-left: 16px;
   width: 236px;
   height: 244px;
