@@ -44,15 +44,18 @@
                 <!-- Assigend To -->
                 <section class="padding-description">
                     <div class="pd-bottom"><label>Assigned to</label></div>
-                    <div class="input-assignedTo border-input-addtask">
-                        <div id="assignAddTask" name="assignTo" class="border-none input-assignedTo" onclick="openAssignTo()">Select contacts to assign</div>
-                        <div class="drop-down-image-assign">
-                            <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrowdown" onclick=""/> 
+                    <div class="">
+                        <div id="assignAddTask" name="assignTo" class="border-none input-assignedTo"><span>Select contacts to assign</span>
+                        <img class="assignToDDArrow" src="assets/img/arrow_drop_down_AddTask.svg" onclick="openAssignTo()" id="arrowdown" alt="arrowdown"/>
+                        <img src="assets/img/arrow_drop_down_AddTask.svg" onclick="closeAssignTo()" id="arrowup" alt="arrowup" class="assignToDDArrow rotate d-none">
                         </div>              
                     </div>
-                    <div id="assignToDropdown" class=""></div>
-                    <div id="assignToList" class="assignToDropDownMenu"></div>
-                    <div id="assignedUser" class="assignedContactsList"></div>
+                    <div id="assignToDropdown" class="assignToDropdown assignField d-none">
+                        <!-- <input title="assignToFilter" type="text" onkeyup="filterNames()" id="contactSearch" class="assignToContactField">
+                        <img src="assets/img/arrow_drop_down_AddTask.svg" onclick="closeAssignTo()" id="arrowup" alt="arrowup" class="assignToDDArrow rotate"> -->
+                        <div id="assignToList" class="assignToDropDownMenu"></div>
+                    </div>
+                    <div id="assignedUser" class="assignedUserList"></div>
                 </section>
             </div>
 
@@ -98,7 +101,7 @@
                 <!-- Subtasks -->
                 <section class="sectionSubtasks">
                     <div class="pd-bottom"><span>Subtasks</span></div>
-                    <div class="input-assignedTo border-input-addtask" id="addSubtaskMain" onfocus="handleInputFocus()">
+                    <div class="input-subtasks border-input-addtask" id="addSubtaskMain" onfocus="handleInputFocus()">
                         <input id="addsubtask" type="text" placeholder="Add new subtasks" class="input-assignedTo border-none">
                         <div onclick="toggleSubtasks()" class="drop-down-image drop-down-subtask">
                             <img id="plusIcon" src="assets/img/plus_addTask.svg" alt="plus_addTask">

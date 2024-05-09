@@ -5,6 +5,9 @@ let selectedPrio = '';
 let newTask = [];
 let users = [];
 let contacts = [];
+let selectedContacts = [];
+let assignedContacts = [];
+
 
 async function init () {
     includeHTML();
@@ -173,7 +176,7 @@ function subtaskSaveEdit(i) {
 }
 
 function subtaskDelete(i) {
-    let subtaskContainer = document.getElementById(`subtask${i}`).parentNode;
+    let subtaskContainer = document.getElementById(`subtask${i}`).value;
     subtaskContainer.remove();
 
     // Nach dem Entfernen eines Subtasks werden die verbleibenden Subtasks neu nummeriert
@@ -186,14 +189,13 @@ function subtaskDelete(i) {
     });
 }
 
-
 function clearEntries() {
     // Clear-Eingaben für die Titel-Section
     document.getElementById('titleAddTask').value = '';
     // Clear-Eingaben für die Description-Section
     document.querySelector('.padding-description textarea').value = '';
     // Clear-Eingaben für die Assigned To-Section
-    document.getElementById('assignAddTask').value = '';
+    clearAssignedUser();
     // Clear-Eingaben für die Due Date-Section
     document.getElementById('dueDate').value = '';
     // Clear-Eingaben für die Priority-Section
@@ -268,7 +270,7 @@ async function createTask() {
         id: taskIdCounter++,
         title: title,
         description: document.getElementById('descriptionAddTask').value,
-        assignTo: document.getElementById('assignAddTask').value,
+        assignTo: assignedContacts,
         dueDate: dueDate,
         category: document.getElementById('categoryAddTask').value,
         subTasks: subTasks.split('\n').map(subTask => ({ id: taskIdCounter++, content: subTask.trim() })),
@@ -314,6 +316,8 @@ function openAssignTo() {
     let dropDownMenu = document.getElementById('assignToDropdown');
     dropDownMenu.classList.remove('d-none');
     document.getElementById('assignedUser').classList.add('d-none');
+    document.getElementById('arrowdown').classList.add('d-none');
+    document.getElementById('arrowup').classList.remove('d-none');
     renderContacts();
 }
 
@@ -321,6 +325,8 @@ function closeAssignTo() {
     let dropDownMenu = document.getElementById('assignToDropdown');
     dropDownMenu.classList.add('d-none');
     document.getElementById('assignedUser').classList.remove('d-none');
+    document.getElementById('arrowup').classList.add('d-none');
+    document.getElementById('arrowdown').classList.remove('d-none');
 }
 
 function renderContacts() {
@@ -335,12 +341,77 @@ function renderContacts() {
 
 function getassignListHTML(contact, badgeColor, i) {
     return /*HTML*/ `
-            <div id="contact${i}" onclick="assignContact(${i}, '${contact.name}')">
-                <div>
-                    <div class="assignToBadge" style="background-color: ${badgeColor}"></div>
-                    <div class="">${contact.name}</div>
+            <div class="assignListContact" id="contact${i}" onclick="assignContact(${i}, '${contact.name}', '${contact.initials}')">
+                <div class="assignDetails">
+                    <div class="assignToBadge" style="background-color: ${badgeColor}">${contact.initials}</div>
+                    <div>${contact.name}</div>
                 </div>
                 <img id="checkbox${i}" src="./assets/img/addTask_AssignTo_Checkbox.svg" class="checkbox">
             </div>
             `
+}
+
+function isSelectedContact(contact) {
+    return selectedContacts.some(selectedContact => selectedContact.name === contact.name);
+}
+
+function assignContact(i, contactName) {
+    let contact = document.getElementById(`contact${i}`);
+    let checkbox = document.getElementById(`checkbox${i}`);
+    contact.classList.toggle('contactSelected');
+    let isSelected = contact.classList.contains('contactSelected');
+    if (isSelected) {
+        checkbox.src = "./assets/img/addTask_AssignTo_Checkbox_Checked.svg";
+        selectedContacts.push(contacts[i]) - 1;
+        addToAssignedUser(i, contacts[i]);
+    } else {
+        unassignContacts(contactName, checkbox);
+    }
+}
+
+function addToAssignedUser(i) {
+    let assignedUser = document.getElementById('assignedUser');
+    let assignedContact = selectedContacts[i];
+    assignedContacts.push(assignedContact);
+    renderassignedUser(assignedUser);
+}
+
+function unassignContacts(contactName, checkbox) {
+    checkbox.src = "./assets/img/addTask_AssignTo_Checkbox.svg";
+    let selectedContactIndex = findSelectedIndex(contactName);
+    selectedContacts.splice(selectedContactIndex, 1);
+    removeFromAssignedList(selectedContactIndex);
+}
+
+function findSelectedIndex(contactName) {
+    return selectedContacts.findIndex(contact => contact['name'] === contactName);
+}
+
+function removeFromAssignedList(selectedContactIndex) {
+    let assignedUser = document.getElementById('assignedUser');
+    assignedContacts.splice(selectedContactIndex, 1);
+    renderassignedUser(assignedUser);
+}
+
+function renderassignedUser(assignedUser) {
+    assignedUser.innerHTML = '';
+    assignedContacts.forEach(assignedContact => {
+        let badgeColor = assignedContact.color;
+        assignedUser.innerHTML += `
+            <div class="assignToBadge" style="background-color: ${badgeColor}">${assignedContact.initials}</div>
+        `;
+    });
+}
+
+function clearAssignedUser() {
+    assignedContacts = [];
+    selectedContacts = [];
+    renderassignedUser(assignedUser);
+    document.querySelectorAll('.checkbox').forEach(function (checkbox) {
+        checkbox.src = "./assets/img/addTask_AssignTo_Checkbox.svg";
+    });
+    document.querySelectorAll('.assignListContact').forEach(function (dropDownContact) {
+        dropDownContact.classList.remove('contactSelected');
+    });
+    closeAssignTo()
 }
