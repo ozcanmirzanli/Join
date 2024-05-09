@@ -1,7 +1,7 @@
 let contacts = [];
 
 let colors = [
-  "#FF7A002",
+  "#FF7A00",
   "#9327FF",
   "#6E52FF",
   "#FC71FF",
@@ -38,24 +38,24 @@ function addNewConatct() {
                 <h1>AddContact</h1><h2>Tasks are better with a Team!</h2><div class="vector"></div>
             </section>
             <section class="addContactRigth">
-            <img src="./assets/img/Close.png" alt="" class="close" onclick="closeAddContact()">
+            <div class="close"><img src="./assets/img/Close.png" alt="" onclick="closeAddContact()"></div>
             <div class="inputarea">
                 <img src="./assets/img/Group 13.png" alt="" class="addInitials">
             <form class="inputFields">
                 <div class="input"><input type="text" placeholder="Name" id="name"><img src="./assets/img/input_name.png" alt="" class="inputImg"></div>
                 <div class="input"><input type="e-mail" placeholder="E-Mail" id="mail"><img src="./assets/img/mail.png" alt="" class="inputImg"></div>
                 <div class="input"><input type="number" placeholder="Telefonnummer" id="number"><img src="./assets/img/call.png" alt="" class="inputImg"></div>
-</form>
+            </form>
             </div>
-            <div class="buttonArea">
-             <button class="closeCreate" onclick="closeAddContact()">
-             <p class="CloseText">Close</p>
-             <img src="./assets/img/Close.png" alt="" class="closeImg"/>
-             </button>
-            <button class="createContactBtn" onclick="saveContact()">
-          <p class="createText">Create Contact</p>
-          <img src="./assets/img/create_hook_white_AddTask.svg" alt="" class="closeImg"/>
-        </button></div>
+            <div class="btnArea" style= "margin-top: 80px;" >
+               <button class="addContactCancel" onclick="closeAddContact()">
+               <p class="cancelText">Cancel</p><img src="./assets/img/Close.png" alt="" class="close">
+               </button>
+               <button class="addContactSave" onclick="saveContact()">
+               <p class="saveText">Create Contact</p>
+              <img src="./assets/img/check.png" alt="" style="width: 20px; height: 18px;"/>
+              </button>
+            </div>
             </section>      
     `;
 }
@@ -74,8 +74,11 @@ async function saveContact() {
     color: color,
     initials: initials,
   });
-  closeAddContact();
   await setItem("contact", JSON.stringify(contacts));
+  let index = contacts.length - 1;
+  getOverview(index);
+  renderContacts();
+  closeAddContact();
 }
 
 function closeAddContact() {
@@ -144,11 +147,17 @@ function getOverview(index) {
   `;
 }
 
+function closeOverview(){
+
+  document.getElementById("contactBig").classList.add("d-none");
+}
+
 async function deleteContact(index) {
   contacts.splice(index, 1);
   await setItem("contact", JSON.stringify(contacts));
   await getContact();
   closeAddContact();
+  closeOverview();
   renderContacts();
 }
 
