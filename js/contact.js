@@ -30,6 +30,8 @@ function addNewConatct() {
   let addContact = document.getElementById("addContact");
   addContact.classList.remove("d-none");
   addContact.classList.add("addContact");
+  let addBtn = document.querySelector(".addBtn");
+  addBtn.style.backgroundColor = "rgb(9,25,49)";
   addContact.innerHTML = /*html*/ `
             <section class="addContactLeft">
                 <img src="./assets/img/joinLogoWhite.svg" alt="" class="logo">
@@ -39,16 +41,21 @@ function addNewConatct() {
             <img src="./assets/img/Close.png" alt="" class="close" onclick="closeAddContact()">
             <div class="inputarea">
                 <img src="./assets/img/Group 13.png" alt="" class="addInitials">
-            <div class="inputFields">
+            <form class="inputFields">
                 <div class="input"><input type="text" placeholder="Name" id="name"><img src="./assets/img/input_name.png" alt="" class="inputImg"></div>
                 <div class="input"><input type="e-mail" placeholder="E-Mail" id="mail"><img src="./assets/img/mail.png" alt="" class="inputImg"></div>
                 <div class="input"><input type="number" placeholder="Telefonnummer" id="number"><img src="./assets/img/call.png" alt="" class="inputImg"></div>
-            </div>
+</form>
             </div>
             <div class="buttonArea">
-                    <img src="./assets/img/cancel.png" alt="" class="cancel, btnCancel"  onclick="closeAddContact()">
-                    <img src="./assets/img/Primary check button.png" alt="" class="create, btnCreate"  onclick="saveContact()">
-                </div>
+             <button class="closeCreate" onclick="closeAddContact()">
+             <p class="CloseText">Close</p>
+             <img src="./assets/img/Close.png" alt="" class="closeImg"/>
+             </button>
+            <button class="createContactBtn" onclick="saveContact()">
+          <p class="createText">Create Contact</p>
+          <img src="./assets/img/create_hook_white_AddTask.svg" alt="" class="closeImg"/>
+        </button></div>
             </section>      
     `;
 }
@@ -60,7 +67,13 @@ async function saveContact() {
   let color = colors[Math.floor(Math.random() * colors.length)];
   let nameParts = name.split(" ");
   let initials = getInitials(name);
-  contacts.push({ name: name, email: mail, number: number, color: color, initials: initials });
+  contacts.push({
+    name: name,
+    email: mail,
+    number: number,
+    color: color,
+    initials: initials,
+  });
   closeAddContact();
   await setItem("contact", JSON.stringify(contacts));
 }
@@ -73,7 +86,7 @@ function closeAddContact() {
 
 function renderContacts() {
   let overview = document.getElementById("allContacts");
-  overview.innerHTML = '';
+  overview.innerHTML = "";
 
   contacts.sort(function (a, b) {
     return a.name.localeCompare(b.name);
@@ -106,15 +119,23 @@ contacts.forEach(function (contact) {
 });
 
 function getOverview(index) {
-  let contact = contacts[index]; 
+  let contact = contacts[index];
   document.getElementById("contactBig").classList.remove("d-none");
   document.getElementById("contactBig").innerHTML = /*html*/ `
   <div class="upperArea">
     <div class="initialsBig" style="background-color: ${contact["color"]};">${contact["initials"]}</div>
 <div class="nameArea">
     <h3 class="nameBig">${contact["name"]}</h3>
-    <img src="./assets/img/Delete contact.svg" class="btn"  alt="delete" onclick="deleteContact(${index})"> 
-    <img src="./assets/img/edit contacts.svg"  class="btn" alt="edit" onclick="editContact(${index})">
+    <div class="btnArea">
+    <button class="deleteBtnContact" onclick="editContact(${index})">
+             <img src="./assets/img/edit.svg" alt="" class="btnImg"/>
+             <p class="deleteBtnText">Edit</p>
+    </button>
+    <button class="deleteBtnContact" onclick="deleteContact(${index})">
+             <img src="./assets/img/delete.png" alt="" class="btnImg"/>
+             <p class="deleteBtnText">Delete</p>
+    </button>
+</div>
 </div>
 </div>
     <h3 class="infoHead">Contact Information</h3>
@@ -124,26 +145,26 @@ function getOverview(index) {
 }
 
 async function deleteContact(index) {
-  contacts.splice(index, 1); 
+  contacts.splice(index, 1);
   await setItem("contact", JSON.stringify(contacts));
   await getContact();
   closeAddContact();
-  renderContacts(); 
+  renderContacts();
 }
 
-function editContact(index){
+function editContact(index) {
   let contact = contacts[index];
   let addContact = document.getElementById("addContact");
   addContact.classList.remove("d-none");
   addContact.classList.add("addContact");
-  
+
   addContact.innerHTML = /*html*/ `
   <section class="addContactLeft">
   <img src="./assets/img/joinLogoWhite.svg" alt="" class="logo">
   <h1>Edit Contact</h1><div class="vector"></div>
 </section>
 <section class="addContactRigth">
-<img src="./assets/img/Close.png" alt="" class="close" onclick="closeAddContact()">
+<div class="close"><img src="./assets/img/Close.png" alt="" onclick="closeAddContact()"></div>
 <div class="inputarea">
   <img src="./assets/img/Group 13.png" alt="" class="addInitials">
 <div class="inputFields">
@@ -152,15 +173,19 @@ function editContact(index){
   <div class="input"><input type="number" placeholder="Telefonnummer" id="number" value="${contact["number"]}"><img src="./assets/img/call.png" alt="" class="inputImg"></div>
 </div>
 </div>
-<div class="buttonArea">
-      <img src="./assets/img/cancel.png" alt="" class="cancel" class="btnCancel" onclick="closeAddContact()">
-      <img src="./assets/img/Primary check button.png" alt="" class="create" class="btnCreate" onclick="saveEditedContact(${index})">
-  </div>
-</section>`
+<div class="btnArea" style= "margin-top: 80px;" >
+<button class="deleteBtnEdit" onclick="deleteContact(${index})">
+             <p class="deleteBtnEditText">Delete</p>
+    </button>
+    <button class="saveBtn" onclick="saveEditedContact(${index})">
+      <p class="saveBtnText">Save</p>
+             <img src="./assets/img/check.png" alt="" style="width: 20px; height: 18px;"/>
+    </button>
+</div>
+</section>`;
 }
 
 async function saveEditedContact(index) {
-
   let name = document.getElementById("name").value;
   let mail = document.getElementById("mail").value;
   let number = document.getElementById("number").value;
@@ -169,7 +194,7 @@ async function saveEditedContact(index) {
   let initials = getInitials(name);
   contacts[index]["name"] = name;
   contacts[index]["email"] = mail;
-  contacts[index]["number"]= number;
+  contacts[index]["number"] = number;
   contacts[index]["color"] = color;
   contacts[index]["initials"] = initials;
   await setItem("contact", JSON.stringify(contacts));

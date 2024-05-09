@@ -11,6 +11,11 @@
   margin-top: 96px;
 }
 
+.close{
+  display: flex;
+  justify-content: flex-end;
+}
+
 .seperator {
   height: 59px;
   border: 3px;
@@ -68,6 +73,10 @@ h4 {
   justify-content: center;
   border: 1px solid #2a3647;
   border-radius: 10px;
+}
+
+.addBtn:hover{
+  background-color:rgb(41,171,226);
   cursor: pointer;
 }
 
@@ -210,58 +219,62 @@ input {
   padding-top: 100px;
 }
 
-.cancel {
-  width: 126px;
-  height: 56px;
-  padding: 16px;
-  gap: 4px;
-  border-radius: 10px;
-  border: 1px;
-  opacity: 0px;
+.closeCreate{
+ width: 126px;
+height: 56px;
+padding: 16px;
+gap: 4px;
+border-radius: 10px;
+opacity: 0px;
+border: 1px solid #2A3647;
+display: flex;
+align-items: center;
+background-color: #ffffff;
 }
 
-.create {
-  width: 214px;
-  height: 57px;
-  padding: 16px;
-  gap: 4px;
-  border-radius: 10px;
-  opacity: 0px;
+.CloseText{
+  width: 66px;
+height: 24px;
+font-family: "Inter", sans-serif;
+font-size: 20px;
+font-weight: 400;
+line-height: 24px;
+text-align: left;
+color: #2A3647;
 }
 
-.close {
-  width: 32px;
-  height: 32px;
-  padding: 4px;
-  border-radius: 56px;
-  padding-left: 486px;
-  cursor: pointer;
+.closeImg{
+  width: 24px;
+height: 24px;
+padding: 6.76px;
+}
+
+.createContactBtn{
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+width: 229px;
+height: 57px;
+padding: 16px;
+gap: 4px;
+border-radius: 10px;
+background: #2A3647;
+}
+
+.createText{
+  width: 154px;
+height: 25px;
+font-family: "Inter", sans-serif;
+font-size: 21px;
+font-weight: 700;
+line-height: 25.2px;
+text-align: left;
+color: #FFFFFF;
 }
 
 .inputImg {
   height: 24px;
   width: 24px;
 }
-
-.btnCreate {
-  width: 214px;
-  height: 57px;
-  padding: 16px;
-  gap: 4px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.btnCancel {
-  width: 126px;
-  height: 56px;
-  padding: 16px;
-  gap: 4px;
-  border-radius: 10px;
-  border: 1px;
-cursor: pointer;}
 
 .initials {
   width: 42px;
@@ -321,6 +334,15 @@ height: 120px;
 gap: 10px;
 border-radius: 70px;
 border: 3px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: "Inter", sans-serif;
+font-size: 47px;
+font-weight: 500;
+line-height: 56.4px;
+text-align: center;
+color: #FFFFFF;
 }
 
 .nameBig{
@@ -389,4 +411,114 @@ text-align: left;
 
 .upperArea{
   display: flex;
+}
+
+.deleteBtnContact{
+  width:81px;
+height: 24px;
+left: 78px;
+gap: 8px;
+display: flex;
+    justify-content: center;
+    align-items: center;
+    border:none;
+    background-color: #FFFFFF;
+}
+
+.deleteBtnText:hover{
+  cursor: pointer;
+  color:rgb(0,124,238);
+}
+
+.deleteBtnText{
+  width: 49px;
+height: 19px;
+gap: 0px;
+opacity: 0px;
+font-family: "Inter", sans-serif;
+font-size: 16px;
+font-weight: 400;
+line-height: 19.2px;
+text-align: left;
+color: #2A3647;
+}
+
+.btnArea{
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.btnImg{
+  height: 24px;
+  width: 24px;
+}
+
+.btnImg:hover{
+  cursor: pointer;
+  color:rgb(0,124,238);
+}
+
+.deleteBtnEdit{
+  display: flex;
+  justify-content: center;
+    align-items: center;
+  width: 113px;
+height: 55px;
+padding: 15px 24px 15px 24px;
+gap: 10px;
+border-radius: 8px;
+background: #FFFFFF;
+margin-right: 25px;
+border: 1px solid #2A3647;
+}
+
+.deleteBtnEdit:hover{
+  cursor: pointer;
+  border: 1px solid rgb(0,124,238);
+  box-shadow:  0 5px 5px rgba(182, 182, 182, 0.75);
+}
+
+.deleteBtnEditText{
+  width: 65px;
+height: 25px;
+font-family: "Inter", sans-serif;
+font-size: 21px;
+font-weight: 400;
+line-height: 25.2px;
+text-align: left;
+color: #2A3647;
+}
+
+.deleteBtnEditText:hover{
+  color:rgb(0,124,238);
+}
+
+.saveBtn{
+   display: flex;
+  justify-content: center;
+    align-items: center;
+  width: 111px;
+  height: 57px;
+  padding: 16px;
+  gap: 4px;
+  border-radius: 10px;
+  background: #2A3647;
+}
+
+.saveBtn:hover{
+  cursor: pointer;
+  background-color: rgb(0,124,238);
+  border: none;
+  box-shadow:  0 5px 5px rgba(182, 182, 182, 0.75);
+}
+.saveBtnText{
+  width: 51px;
+height: 25px;
+font-family: "Inter", sans-serif;
+font-size: 21px;
+font-weight: 700;
+line-height: 25.2px;
+text-align: center;
+color: #FFFFFF;
 }
