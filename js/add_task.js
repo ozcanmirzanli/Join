@@ -90,7 +90,6 @@ function checkDueDate() {
   }
 }
 
-
 function handleCategoryChange(selectElement) {
   var selectedCategory = selectElement.value;
   // Hier können Sie die gewählte Kategorie weiterverarbeiten, z. B. sie in einer Variable speichern oder eine Funktion aufrufen
@@ -346,7 +345,6 @@ async function getContact() {
 }
 
 function openAssignTo() {
-<<<<<<< HEAD
   let dropDownMenu = document.getElementById("assignToDropdown");
   dropDownMenu.classList.remove("d-none");
   document.getElementById("assignedUser").classList.add("d-none");
@@ -355,16 +353,6 @@ function openAssignTo() {
   renderContacts();
   renderAssignedContacts();
   restoreSelectedContacts();
-=======
-    let dropDownMenu = document.getElementById('assignToDropdown');
-    dropDownMenu.classList.remove('d-none');
-    document.getElementById('assignedUser').classList.add('d-none');
-    document.getElementById('arrowdown').classList.add('d-none');
-    document.getElementById('arrowup').classList.remove('d-none');
-    renderContacts();
-    renderAssignedContacts();
-    restoreSelectedContacts();
->>>>>>> 1336df5cf22a1bd865fb50bc8f249e9105ae0d74
 }
 
 function closeAssignTo() {
