@@ -27,7 +27,9 @@ body {
 }
 
 .sidebar-container {
-  display: flex;
+  position: relative;
+  max-height: 994px;
+  height: 83%;
 }
 
 .sidebar-logo {
@@ -58,6 +60,7 @@ body {
   align-items: center;
   gap: 8px;
   width: 232px;
+  height: 239px;
 }
 
 .sideBtn {
@@ -84,7 +87,7 @@ body {
   flex-direction: column;
   align-items: center;
   position: absolute;
-  bottom: 0;
+  bottom: -30px;
 }
 
 a:hover {
