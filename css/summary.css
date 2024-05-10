@@ -284,7 +284,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 175px;
+    margin-top: 129px;
     margin-bottom: 25px;
     gap: 25px;
   }
@@ -366,6 +366,7 @@ body {
     flex-direction: column;
     gap: 0;
     margin-left: 45px;
+    margin-top: 115px;
   }
 
   .title h1 {
@@ -436,7 +437,6 @@ body {
 @media (max-width: 500px) {
   .title {
     margin-left: 20px;
-    margin-top: 160px;
   }
 
   .first-row {

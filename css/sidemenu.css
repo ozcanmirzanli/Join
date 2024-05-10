@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -313,7 +313,7 @@ a:hover {
   }
 }
 
-@media screen and (max-width: 1200px) and (min-width: 1141px){
+@media screen and (max-width: 1200px) and (min-width: 1141px) {
   .pLineHeader {
     padding-left: 70px;
   }
@@ -322,10 +322,9 @@ a:hover {
     width: calc(100% - 70px);
     padding-bottom: 80px;
   }
-  
 }
 
-@media screen and (max-width: 1140px) and (min-width: 1101px){
+@media screen and (max-width: 1140px) and (min-width: 1101px) {
   .pLineHeader {
     padding-left: 35px;
   }
@@ -334,23 +333,27 @@ a:hover {
     width: calc(100% - 35px);
     padding-bottom: 80px;
   }
-
 }
 
-@media (max-width: 1100px){
+@media (max-width: 1100px) {
   .pLineHeader {
     display: none;
   }
+
   #joinLogoHeader {
     display: block;
     height: 80px;
+    margin-left: -33px;
   }
+
   .header {
-    width: 100%;
-    padding-left: 70px;
+    width: 95%;
+    height: 100px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding-left: 70px;
   }
+
   .legalNotice {
     padding-left: 20px;
     padding-right: 20px;
@@ -358,25 +361,71 @@ a:hover {
     padding-top: 150px;
     padding-bottom: 80px;
   }
+
+  .display {
+    padding-right: 50px;
+  }
+
+  .user {
+    margin-bottom: 28px;
+  }
+
+  .help {
+    margin-top: 26px;
+  }
+}
+
+@media (max-width: 800px) {
+  .header {
+    width: 93%;
+  }
 }
 
 @media (max-width: 551px) {
   .navBar {
     gap: 1px;
   }
+
   .navBarImg {
     height: 70px;
   }
-  .header {
-    width: 100%;
-    padding-left: 8px;
-    display: flex;
-    justify-content: space-evenly;
-  }
+
   .legalNotice {
     padding: 20px;
     width: calc(100% - 40px);
     padding-top: 150px;
     padding-bottom: 80px;
+  }
+
+  .user {
+    width: 40px;
+    height: 40px;
+  }
+
+  .help {
+    display: none;
+  }
+
+  #joinLogoHeader {
+    height: 55px;
+    margin-left: -48px;
+  }
+
+  .header {
+    height: 80px;
+  }
+}
+
+@media (max-width: 420px) {
+  .header {
+    width: 91%;
+  }
+
+  #joinLogoHeader {
+    height: 45px;
+  }
+
+  .display {
+    padding-right: 58px;
   }
 }
