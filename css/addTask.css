@@ -238,8 +238,8 @@ textarea {
   cursor: pointer;
   word-wrap: break-word;
   resize: none;
-  position: relative;
-  width: 100%;
+  position: absolute;
+  width: 353px;
 }
 
 .drop-down-image-assign {
