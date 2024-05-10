@@ -8,6 +8,15 @@ document.addEventListener("DOMContentLoaded", function () {
   }, 1000);
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  // Getting the 'addsubtask' input element by its ID
+  var addSubtaskInput = document.getElementById("addsubtask");
+
+  // Setting up the event listeners for focus and blur events
+  addSubtaskInput.addEventListener("focus", handleFocus);
+  addSubtaskInput.addEventListener("blur", handleBlur);
+});
+
 checkRememberMe();
 changeLogoToMobile();
 
