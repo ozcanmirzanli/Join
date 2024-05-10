@@ -310,6 +310,12 @@ async function getContact() {
     } catch (error) {
       console.info("Could not load contacts");
     }
+    // Laden der ausgewählten Kontakte aus dem Local Storage
+    try {
+        selectedContacts = JSON.parse(localStorage.getItem("selectedContacts")) || [];
+    } catch (error) {
+        console.info("Could not load selected contacts");
+    }
 }
 
 function openAssignTo() {
@@ -319,6 +325,8 @@ function openAssignTo() {
     document.getElementById('arrowdown').classList.add('d-none');
     document.getElementById('arrowup').classList.remove('d-none');
     renderContacts();
+    renderAssignedContacts();
+    restoreSelectedContacts()
 }
 
 function closeAssignTo() {
@@ -327,6 +335,31 @@ function closeAssignTo() {
     document.getElementById('assignedUser').classList.remove('d-none');
     document.getElementById('arrowup').classList.add('d-none');
     document.getElementById('arrowdown').classList.remove('d-none');
+}
+
+function saveSelectedContacts() {
+    localStorage.setItem("selectedContacts", JSON.stringify(selectedContacts));
+}
+
+function renderAssignedContacts() {
+    let assignedUser = document.getElementById('assignedUser');
+    renderassignedUser(assignedUser);
+}
+
+function restoreSelectedContacts() {
+    let selectedContactsFromStorage = JSON.parse(localStorage.getItem('selectedContacts'));
+    if (selectedContactsFromStorage) {
+        selectedContacts = selectedContactsFromStorage;
+        selectedContacts.forEach(contact => {
+            let index = contacts.findIndex(c => c.name === contact.name);
+            if (index !== -1) {
+                let contactElement = document.getElementById(`contact${index}`);
+                contactElement.classList.add('contactSelected');
+                let checkbox = document.getElementById(`checkbox${index}`);
+                checkbox.src = "./assets/img/addTask_AssignTo_Checkbox_Checked.svg";
+            }
+        });
+    }
 }
 
 function renderContacts() {
@@ -351,10 +384,6 @@ function getassignListHTML(contact, badgeColor, i) {
             `
 }
 
-function isSelectedContact(contact) {
-    return selectedContacts.some(selectedContact => selectedContact.name === contact.name);
-}
-
 function assignContact(i, contactName) {
     let contact = document.getElementById(`contact${i}`);
     let checkbox = document.getElementById(`checkbox${i}`);
@@ -367,6 +396,7 @@ function assignContact(i, contactName) {
     } else {
         unassignContacts(contactName, checkbox);
     }
+    saveSelectedContacts()
 }
 
 function addToAssignedUser(i) {
@@ -391,6 +421,7 @@ function removeFromAssignedList(selectedContactIndex) {
     let assignedUser = document.getElementById('assignedUser');
     assignedContacts.splice(selectedContactIndex, 1);
     renderassignedUser(assignedUser);
+    saveSelectedContacts()
 }
 
 function renderassignedUser(assignedUser) {
@@ -414,4 +445,5 @@ function clearAssignedUser() {
         dropDownContact.classList.remove('contactSelected');
     });
     closeAssignTo()
+    saveSelectedContacts()
 }
