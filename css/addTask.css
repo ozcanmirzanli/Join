@@ -1,660 +1,667 @@
 body {
-    background-color: #f6f7f8;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 100vw;
-    min-height: 100vh;
-    margin: 0 auto 0 0;
-    padding: 0;
-    font-family: 'Inter', sans-serif;
-  }
+  background-color: #f6f7f8;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100vw;
+  min-height: 100vh;
+  margin: 0 auto 0 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+}
 
 body::-webkit-scrollbar {
-    display: none;
-  }
+  display: none;
+}
 
 /* main css for addTask */
 
 form {
-    padding-left: 328px;
+  padding-left: 328px;
 }
 
 .d-none {
-    display: none;
+  display: none;
 }
 
-input, textarea {
-    flex-wrap: wrap;
+input,
+textarea {
+  flex-wrap: wrap;
 }
 
-textarea:hover,button:hover{
-    cursor: pointer;
-    box-shadow: 0px 4px 4px 0px #00000040;
+textarea:hover,
+button:hover {
+  cursor: pointer;
+  box-shadow: 0px 4px 4px 0px #00000040;
 }
 
 .main-container {
-    padding-left: 328px;
+  padding-left: 328px;
 }
 
 h1 {
-    font-size: 61px;
-    font-weight: 700;
-    line-height: 72.2px;
-    padding-top: 206px;
-    padding-bottom: 48px;
-    margin: 0;
+  font-size: 61px;
+  font-weight: 700;
+  line-height: 72.2px;
+  padding-top: 206px;
+  padding-bottom: 48px;
+  margin: 0;
 }
 
 .required-addTask {
-    color: #ff8190;
+  color: #ff8190;
 }
 
 ::placeholder {
-    color: rgba(209, 209, 209, 1);
-    font-family: "Inter", sans-serif;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 24px;
-    text-align: left;
+  color: rgba(209, 209, 209, 1);
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
 }
 
 .main-addTask {
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* In der Mitte zentrieren */
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* In der Mitte zentrieren */
 }
 
-span, label {
-    font-size: 20px;
-    font-weight: 400px;
-    line-height: 24px;
-    color: #2A3647;
+span,
+label {
+  font-size: 20px;
+  font-weight: 400px;
+  line-height: 24px;
+  color: #2a3647;
 }
 
 .pd-bottom {
-    padding-bottom: 8px;
+  padding-bottom: 8px;
 }
 
 .border-input-addtask {
-    border-radius: 10px;
-    border: solid 1px #D1D1D1;
-    color: black !important;
-    display: flex;
-    align-items: flex-start;
-    text-align: start;
-    font-size: 20px;
-    word-wrap: break-word;
-    resize: none;
-    position: relative;
+  border-radius: 10px;
+  border: solid 1px #d1d1d1;
+  color: black !important;
+  display: flex;
+  align-items: flex-start;
+  text-align: start;
+  font-size: 20px;
+  word-wrap: break-word;
+  resize: none;
+  position: relative;
 }
 
 input {
-    padding-left: 16px;
-    padding-right: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
-input[type=text]:focus,
-input[type=date]:focus,
+input[type="text"]:focus,
+input[type="date"]:focus,
 textarea:focus {
-    border-color: rgba(41, 171, 226, 1);
-    outline: none;
+  border-color: rgba(41, 171, 226, 1);
+  outline: none;
 }
 
 .seperator-addtask {
-    padding-left: 83.25px;
-    padding-right: 48px;
+  padding-left: 83.25px;
+  padding-right: 48px;
 }
 
 .sections-addTask {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
 }
 
 /* Title section */
 
 #titleAddTask {
-    width: 100%;
-    height: 48px;
+  width: 100%;
+  height: 48px;
 }
 
 /* description section */
 
 textarea {
-    width: 100%;
-    height: 120px;
-    padding: 18px 16px 18px 16px;
-    gap: 10px;
-    border-radius: 10px 0px 0px 0px;
-    font-family: 'Inter', sans-serif;
+  width: 100%;
+  height: 120px;
+  padding: 18px 16px 18px 16px;
+  gap: 10px;
+  border-radius: 10px 0px 0px 0px;
+  font-family: "Inter", sans-serif;
 }
 
 .padding-description {
-    padding-top: 16px;
-    padding-bottom: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 /* assigned to section */
 
 .input-assignedTo {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 10px;
-    border: 1px solid #D1D1D1;
-    background: #fff;
-    padding: 12px 16px;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
+  background: #fff;
+  padding: 12px 16px;
+  width: 100%;
+  height: 24px;
 }
 
 #assignAddTask:hover {
-    cursor: pointer;
-    box-shadow: 0px 4px 4px 0px #00000040;
+  cursor: pointer;
+  box-shadow: 0px 4px 4px 0px #00000040;
 }
 
 .assignToDropdown {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    width: 440px;
-    z-index: 2;
-    padding-top: 0 !important;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 440px;
+  z-index: 2;
+  padding-top: 0 !important;
 }
 
 .assignToDropDownMenu {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-height: 288px;
-    overflow-y: auto;
-    background-color: #fff;
-    padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 288px;
+  overflow-y: auto;
+  background-color: #fff;
+  padding: 12px 16px;
 }
 
-.assignToDDArrow, #arrowup {
-    border-radius: 50px;
-    right: 13px;
-    top: 10px;
-    z-index: 999;
+.assignToDDArrow,
+#arrowup {
+  border-radius: 50px;
+  right: 13px;
+  top: 10px;
+  z-index: 999;
 }
 
 .rotate {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .assignToContactField {
-    border: 1px solid #29abe2;
-    display: flex;
-    padding: 0px 16px;
-    width: 100%;
-    border-radius: 10px;
-    height: 48px;
+  border: 1px solid #29abe2;
+  display: flex;
+  padding: 0px 16px;
+  width: 100%;
+  border-radius: 10px;
+  height: 48px;
 }
 
 .assignListContact {
-    width: 100%;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .assignToBadge {
-    font-size: 12px bold;
-    border-radius: 50%;
-    border: 2px solid white;
-    padding: 12px;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
+  font-size: 12px bold;
+  border-radius: 50%;
+  border: 2px solid white;
+  padding: 12px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
 }
 
 .assignDetails {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .assignField {
-    border-radius: 10px;
-    border: solid 1px #D1D1D1;
-    background-color: white;
-    color: black !important;
-    display: flex;
-    align-items: flex-start;
-    text-align: start;
-    font-size: 16px;
-    cursor: pointer;
-    word-wrap: break-word;
-    resize: none;
-    position: relative;
-    width: 100%;
+  border-radius: 10px;
+  border: solid 1px #d1d1d1;
+  background-color: white;
+  color: black !important;
+  display: flex;
+  align-items: flex-start;
+  text-align: start;
+  font-size: 16px;
+  cursor: pointer;
+  word-wrap: break-word;
+  resize: none;
+  position: relative;
+  width: 100%;
 }
 
-.drop-down-image-assign { 
-    border-radius: 10px;
-    height: 20px;
-    width: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.drop-down-image-assign {
+  border-radius: 10px;
+  height: 20px;
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.drop-down-image:hover, .assignToDDArrow:hover {
-    background-color: #ebeaec;
-    cursor: pointer;
+.drop-down-image:hover,
+.assignToDDArrow:hover {
+  background-color: #ebeaec;
+  cursor: pointer;
 }
 
 .border-none {
-    border: unset;
+  border: unset;
 }
 
 .contactSelected {
-    background-color: #2A3647 !important;
-    color: white;
+  background-color: #2a3647 !important;
+  color: white;
 }
 
 .assignedUserList {
-    display: flex;
-    flex-wrap: wrap;
-    padding-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 8px;
 }
 
 /* due date section */
 
 .input-dueDate {
-    padding: 12px 305px 12px 16px;
+  padding: 12px 305px 12px 16px;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-    background: url(/Join/assets/img/due_date_calender_AddTasksvg.svg);
-    background-repeat: no-repeat;
-    background-position: right center;
-    background-size: 24px 24px;
-    position: absolute;
-    top: 10px;
-    right: 13px;
+  background: url(/Join/assets/img/due_date_calender_AddTasksvg.svg);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 24px 24px;
+  position: absolute;
+  top: 10px;
+  right: 13px;
 }
 
 /* prio section */
 
 .priority {
-    display: flex;
-    width: 100%;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 1rem;
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
 }
 
 .button-prio {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 136px;
-    height: 56px;
-    border: solid 1px #D1D1D1;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 1);
-    padding: 16px 10px 16px 10px;
-    gap: 8px;
-    font-size: 20px;
-    line-height: 24px;
-    color: rgba(0, 0, 0, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 136px;
+  height: 56px;
+  border: solid 1px #d1d1d1;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 16px 10px 16px 10px;
+  gap: 8px;
+  font-size: 20px;
+  line-height: 24px;
+  color: rgba(0, 0, 0, 1);
 }
 
 .padding-prio {
-    padding-top: 24px;
-    padding-bottom: 24px;
+  padding-top: 24px;
+  padding-bottom: 24px;
 }
 
 /* category section */
 
 .padding-category {
-    padding-bottom: 24px;
+  padding-bottom: 24px;
 }
 
 .input-category {
-    position: relative;
-    width: 100%;
-    border: none;
-    border-radius: 10px;
-    border-radius: inherit;
-    background-color: #fff;
-    font-size: inherit;
-    border: none;
+  position: relative;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  border-radius: inherit;
+  background-color: #fff;
+  font-size: inherit;
+  border: none;
 }
 
 option {
-    font-size: inherit;
-    border-radius: 10px;
-    background-color: #fff;
-    color: #000;
-    border: none;
+  font-size: inherit;
+  border-radius: 10px;
+  background-color: #fff;
+  color: #000;
+  border: none;
 }
 
 /* CSS für das Dropdown-Menü */
 select.input-category option[value=""][disabled] {
-    display: none; /* Ausblenden der Option "Select Task Category" */
+  display: none; /* Ausblenden der Option "Select Task Category" */
 }
 
-.drop-down-image { 
-    border-radius: 10px;
-    height: 20px;
-    width: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.drop-down-image {
+  border-radius: 10px;
+  height: 20px;
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
 
 /* subtasks section */
 
 .input-subtasks {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 10px;
-    border: 1px solid #D1D1D1;
-    background: #fff;
-    padding: 8px;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
+  background: #fff;
+  padding: 8px;
+  width: 100%;
 }
 
 .drop-down-subtask {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
 }
 
 .add-subtasks {
-    display: flex;
-    gap: 4px;
+  display: flex;
+  gap: 4px;
 }
 
 .subtask-item:hover {
-    background-color: #f2f2f2; /* Leichtes Grau */
-    cursor: pointer;
-    border-radius: 10px;
+  background-color: #f2f2f2; /* Leichtes Grau */
+  cursor: pointer;
+  border-radius: 10px;
 }
 
 .subtasks:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-.sections-addTask input[type=text]:focus {
-    border-color: rgba(41, 171, 226, 1);
-    outline: none;
+.sections-addTask input[type="text"]:focus {
+  border-color: rgba(41, 171, 226, 1);
+  outline: none;
 }
 
 .subtasks-list {
-    border-radius: 10px;
-    padding: 6px 16px;
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px; /* Abstand zwischen den DIVs */
+  border-radius: 10px;
+  padding: 6px 16px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Abstand zwischen den DIVs */
 }
 
 .subtasks-list img {
-    display: inline-block;
+  display: inline-block;
 }
 
 .subtask-item {
-    margin-bottom: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    position: relative;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  position: relative;
 }
 
 .subtask-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .subtask-content {
-    flex-grow: 1;
-    background-color: none;
-    display: flex;
-    justify-content: space-between;
+  flex-grow: 1;
+  background-color: none;
+  display: flex;
+  justify-content: space-between;
 }
 
 .subtask-bounding-box {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 5px;
-    position: relative;
-    z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5px;
+  position: relative;
+  z-index: 1;
 }
 
 .subtask-bounding-box img {
-    margin-left: 5px;
-    cursor: pointer;
+  margin-left: 5px;
+  cursor: pointer;
 }
 
 .bounding-box {
-    justify-content: right;
-    display: flex;
-    gap: 8px; /* Abstand zwischen den Bildern */
-    transform: translateY(-50%);
-    opacity: 0; /* Standardmäßig ausgeblendet */
-    transition: opacity 0.3s ease; /* Sanfte Übergänge */
+  justify-content: right;
+  display: flex;
+  gap: 8px; /* Abstand zwischen den Bildern */
+  transform: translateY(-50%);
+  opacity: 0; /* Standardmäßig ausgeblendet */
+  transition: opacity 0.3s ease; /* Sanfte Übergänge */
 }
 
 .subtask-item .subtask-icon {
-    display: none; /* Standardmäßig ausblenden */
+  display: none; /* Standardmäßig ausblenden */
 }
 
 .subtask-item:hover .subtask-icon {
-    display: inline-block; /* Bei Hover einblenden */
+  display: inline-block; /* Bei Hover einblenden */
 }
 
 .subtask-item:hover .bounding-box {
-    opacity: 1; /* Bei Hover einblenden */
+  opacity: 1; /* Bei Hover einblenden */
 }
 
 .subtask-icon {
-    width: 16px;
-    height: 18px;
+  width: 16px;
+  height: 18px;
 }
 
 .subtask-icon:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-.subtaskEditText{
-    border: 0;
-    width: 80%;
+.subtaskEditText {
+  border: 0;
+  width: 80%;
 }
 
-.subtaskEditText:focus{
-    outline: none;
+.subtaskEditText:focus {
+  outline: none;
 }
-
 
 /* footer section */
 
 .addtask-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 }
 
 .footer-btn-addTask {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    padding-top: 146px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 146px;
 }
 
 .footer-btn-text-img {
-    gap: 4px;
+  gap: 4px;
 }
 
 #create-btn {
-    padding: 15px 24px 15px 24px;
-    border-radius: 8px;
-    border: none;
-    background-color: #2a3647;
-    font-size: 21px;
-    font-weight: 700;
-    line-height: 25.2px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    color: white;
-  }
-  
+  padding: 15px 24px 15px 24px;
+  border-radius: 8px;
+  border: none;
+  background-color: #2a3647;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 25.2px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
 #create-btn:hover {
-    background-color: #29abe2;
-  }
+  background-color: #29abe2;
+}
 
 #clear-btn {
-    padding: 15px 24px 15px 24px;
-    border-radius: 8px;
-    border: 1px solid #2a3647;
-    background-color: white;
-    color: #2a3647;
-    font-size: 21px;
-    font-weight: 700;
-    line-height: 25.2px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-  }
-  
- #clear-btn:hover {
-    color: #29abe2;
-    border: 1px solid #29abe2;
-  }
-
- #clear-btn:hover img {
-    content: url(/Join/assets/img/clear_hook_blue_AddTask.svg);
- }
-
- @media screen and (max-width: 1400px) and (min-width: 1201px){
-    form {
-        padding-left: 140px;
-    }
+  padding: 15px 24px 15px 24px;
+  border-radius: 8px;
+  border: 1px solid #2a3647;
+  background-color: white;
+  color: #2a3647;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 25.2px;
+  height: 48px;
+  display: flex;
+  align-items: center;
 }
 
-@media screen and (max-width: 1200px) and (min-width: 1141px){
-    form {
-        padding-left: 70px;
-        margin: 0 auto;
-    }
+#clear-btn:hover {
+  color: #29abe2;
+  border: 1px solid #29abe2;
 }
 
-@media screen and (max-width: 1140px) and (min-width: 1101px){
-    form {
-        padding-left: 35px;
-        margin: 0 auto;
-    }
+#clear-btn:hover img {
+  content: url(/Join/assets/img/clear_hook_blue_AddTask.svg);
+}
 
+@media screen and (max-width: 1400px) and (min-width: 1201px) {
+  form {
+    padding-left: 140px;
+  }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 1141px) {
+  form {
+    padding-left: 70px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 1140px) and (min-width: 1101px) {
+  form {
+    padding-left: 35px;
+    margin: 0 auto;
+  }
 }
 
 @media screen and (max-width: 1100px) {
-    form {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 80%;
-        margin: 0 auto;
-        padding-left: 0;
-    }
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+    padding-left: 0;
+  }
 
-    .seperator-addtask {
-        display: none;
-    }
+  .seperator-addtask {
+    display: none;
+  }
 
-    .main-addTask {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+  .main-addTask {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
-    .footer-btn-addTask {
-        padding-bottom: 100px;
-        padding-top: 24px;
-    }
+  .footer-btn-addTask {
+    padding-bottom: 100px;
+    padding-top: 24px;
+  }
 
-    #clear-btn {
-        display: none;
-    }
+  #clear-btn {
+    display: none;
+  }
 
-    .addtask-footer {
-        gap: 100px;
-    }
+  .addtask-footer {
+    gap: 100px;
+  }
 }
 
 @media screen and (max-width: 551px) {
-    #create-btn, #requiredFooter{
-        padding: 8px 8px;
-    }
+  #create-btn,
+  #requiredFooter {
+    padding: 8px 8px;
+  }
 
-    .addtask-footer {
-        gap: 0;
-    }
+  .addtask-footer {
+    gap: 0;
+  }
 
-    h1 {
-        padding-top: 150px;
-    }
+  h1 {
+    padding-top: 150px;
+  }
 
-    #titleAddTask, textarea, .input-assignedTo {
-        width: 100%;
-    }
+  #titleAddTask,
+  textarea,
+  .input-assignedTo {
+    width: 100%;
+  }
 
-    form {
-        display: flex;
-        align-items: normal;
-    }
+  form {
+    display: flex;
+    align-items: normal;
+  }
 
-    #dueDate {
-        padding: 12px 250px 11px 16px;
-    }
+  #dueDate {
+    padding: 12px 250px 11px 16px;
+  }
 
-    /* .padding-category, .sectionSubtasks {
+  /* .padding-category, .sectionSubtasks {
         display: none;
     } */
 }
 
 @media screen and (max-width: 450px) {
-    #dueDate {
-        padding: 12px 100px 11px 16px;
-    }
+  #dueDate {
+    padding: 12px 100px 11px 16px;
+  }
 
-    textarea, #titleAddTask {
-        padding-right: 0px;
-    }
+  textarea,
+  #titleAddTask {
+    padding-right: 0px;
+  }
 
-    .priority {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
+  .priority {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
 
-    h1 {
-        font-size: 50px !important;
-    }
+  h1 {
+    font-size: 50px !important;
+  }
 
-    #create-btn {
-        font-size: 15px;
-    }
+  #create-btn {
+    font-size: 15px;
+  }
 
-    #requiredFooter {
-        font-size: 12px;
-    }
+  #requiredFooter {
+    font-size: 12px;
+  }
 }

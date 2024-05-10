@@ -50,30 +50,25 @@ function changePriorityColor(priority) {
    * Ändere die Farben des angeklickten Buttons entsprechend der Priorität
    *
    */
+
+  // prettier-ignore
   if (priority === "urgent") {
     document.getElementById("btnPrioUrgent").style.backgroundColor = "#FF3D00";
     document.getElementById("btnPrioUrgent").style.color = "#FFFFFF";
     document.getElementById("btnPrioUrgent").style.borderColor = "#FF3D00";
-    document
-      .getElementById("btnPrioUrgent")
-      .getElementsByTagName("img")[0].src =
-      "assets/img/urgent_white_AddTask.svg";
+    document.getElementById("btnPrioUrgent").getElementsByTagName("img")[0].src ="assets/img/urgent_white_AddTask.svg";
     selectedPrio = "urgent";
   } else if (priority === "medium") {
     document.getElementById("btnPrioMedium").style.backgroundColor = "#FFA800";
     document.getElementById("btnPrioMedium").style.color = "#FFFFFF";
     document.getElementById("btnPrioMedium").style.borderColor = "#FFA800";
-    document
-      .getElementById("btnPrioMedium")
-      .getElementsByTagName("img")[0].src =
-      "assets/img/medium_white_AddTask.svg";
+    document.getElementById("btnPrioMedium").getElementsByTagName("img")[0].src ="assets/img/medium_white_AddTask.svg";
     selectedPrio = "medium";
   } else if (priority === "low") {
     document.getElementById("btnPrioLow").style.backgroundColor = "#7AE229";
     document.getElementById("btnPrioLow").style.color = "#FFFFFF";
     document.getElementById("btnPrioLow").style.borderColor = "#7AE229";
-    document.getElementById("btnPrioLow").getElementsByTagName("img")[0].src =
-      "assets/img/low_white_AddTask.svg";
+    document.getElementById("btnPrioLow").getElementsByTagName("img")[0].src ="assets/img/low_white_AddTask.svg";
     selectedPrio = "low";
   }
 }
@@ -346,10 +341,14 @@ async function getContact() {
 
 function openAssignTo() {
   let dropDownMenu = document.getElementById("assignToDropdown");
+  let inputAssignedTo = document.querySelector(".input-assignedTo");
+  let selectContactsText = document.getElementById("select-contacts");
   dropDownMenu.classList.remove("d-none");
   document.getElementById("assignedUser").classList.add("d-none");
   document.getElementById("arrowdown").classList.add("d-none");
   document.getElementById("arrowup").classList.remove("d-none");
+  inputAssignedTo.style.border = "1px solid #29ABE2";
+  selectContactsText.innerHTML = "";
   renderContacts();
   renderAssignedContacts();
   restoreSelectedContacts();
@@ -357,10 +356,15 @@ function openAssignTo() {
 
 function closeAssignTo() {
   let dropDownMenu = document.getElementById("assignToDropdown");
+  let inputAssignedTo = document.querySelector(".input-assignedTo");
+  let selectContactsText = document.getElementById("select-contacts");
+
   dropDownMenu.classList.add("d-none");
   document.getElementById("assignedUser").classList.remove("d-none");
   document.getElementById("arrowup").classList.add("d-none");
   document.getElementById("arrowdown").classList.remove("d-none");
+  inputAssignedTo.style.border = "";
+  selectContactsText.innerHTML = "Select contacts to assign";
 }
 
 function saveSelectedContacts() {
