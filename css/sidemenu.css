@@ -28,7 +28,7 @@ body {
 
 .sidebar-container {
   position: relative;
-  max-height: 994px;
+  max-height: 964px;
   height: 83%;
 }
 
@@ -87,7 +87,7 @@ body {
   flex-direction: column;
   align-items: center;
   position: absolute;
-  bottom: -30px;
+  bottom: -60px;
 }
 
 a:hover {

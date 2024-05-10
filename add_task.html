@@ -1,141 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/addTask.css">
-    <link rel="stylesheet" type="text/css" href="css/sidemenu.css">
-    <link rel="icon" type="image/png" href="assets/img/joinLogoBlack.svg">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/addTask.css" />
+    <link rel="stylesheet" type="text/css" href="css/sidemenu.css" />
+    <link rel="icon" type="image/png" href="assets/img/joinLogoBlack.svg" />
     <script src="script.js"></script>
     <script src="./js/add_task.js"></script>
     <script src="./js/sidemenu.js"></script>
     <script src="./js/storage.js"></script>
     <title>Join - Add Task</title>
-</head>
-<body onload="init()">
+  </head>
+  <body onload="init()">
     <!-- Implement Header HTML -->
     <header>
-        <div w3-include-html="assets/templates/header.html"></div>
+      <div w3-include-html="assets/templates/header.html"></div>
     </header>
-    
+
     <!-- Implement Sidemenu HTML -->
     <nav>
-        <div w3-include-html="assets/templates/sidemenu.html"></div>
+      <div w3-include-html="assets/templates/sidemenu.html"></div>
     </nav>
 
     <form action="">
-        <h1>Add Task</h1>
+      <h1>Add Task</h1>
 
-        <div class="main-addTask">
-            <div class="sections-addTask">
-                <!-- Title -->
-                <section class="input-parts-addTask">
-                    <div class="pd-bottom"><span>Title<span class="required-addTask">*</span></span></div>
-                    <input id="titleAddTask" type="text" placeholder="Enter a Title" required class="border-input-addtask"/>
-                </section>
+      <div class="main-addTask">
+        <div class="sections-addTask">
+          <!-- Title -->
+          <section class="input-parts-addTask">
+            <div class="pd-bottom">
+              <span>Title<span class="required-addTask">*</span></span>
+            </div>
+            <input
+              id="titleAddTask"
+              type="text"
+              placeholder="Enter a Title"
+              required
+              class="border-input-addtask"
+            />
+          </section>
 
-                <!-- Description -->
-                <section class="padding-description">
-                    <div class="pd-bottom"><span>Description</span></div>
-                    <textarea name="description" id="descriptionAddTask" cols="30" rows="10" placeholder="Enter a Description" class="border-input-addtask"></textarea>
-                </section>
+          <!-- Description -->
+          <section class="padding-description">
+            <div class="pd-bottom"><span>Description</span></div>
+            <textarea
+              name="description"
+              id="descriptionAddTask"
+              cols="30"
+              rows="10"
+              placeholder="Enter a Description"
+              class="border-input-addtask"
+            ></textarea>
+          </section>
 
-                <!-- Assigend To -->
-                <section class="padding-description">
-                    <div class="pd-bottom"><label>Assigned to</label></div>
-                    <div class="">
-                        <div id="assignAddTask" name="assignTo" class="border-none input-assignedTo"><span>Select contacts to assign</span>
-                        <img class="assignToDDArrow" src="assets/img/arrow_drop_down_AddTask.svg" onclick="openAssignTo()" id="arrowdown" alt="arrowdown"/>
-                        <img src="assets/img/arrow_drop_down_AddTask.svg" onclick="closeAssignTo()" id="arrowup" alt="arrowup" class="assignToDDArrow rotate d-none">
-                        </div>              
-                    </div>
-                    <div id="assignToDropdown" class="assignToDropdown assignField d-none">
-                        <!-- <input title="assignToFilter" type="text" onkeyup="filterNames()" id="contactSearch" class="assignToContactField">
+          <!-- Assigend To -->
+          <section class="padding-description">
+            <div class="pd-bottom"><label>Assigned to</label></div>
+            <div class="">
+              <div
+                id="assignAddTask"
+                name="assignTo"
+                class="border-none input-assignedTo"
+              >
+                <span>Select contacts to assign</span>
+                <img
+                  class="assignToDDArrow"
+                  src="assets/img/arrow_drop_down_AddTask.svg"
+                  onclick="openAssignTo()"
+                  id="arrowdown"
+                  alt="arrowdown"
+                />
+                <img
+                  src="assets/img/arrow_drop_down_AddTask.svg"
+                  onclick="closeAssignTo()"
+                  id="arrowup"
+                  alt="arrowup"
+                  class="assignToDDArrow rotate d-none"
+                />
+              </div>
+            </div>
+            <div
+              id="assignToDropdown"
+              class="assignToDropdown assignField d-none"
+            >
+              <!-- <input title="assignToFilter" type="text" onkeyup="filterNames()" id="contactSearch" class="assignToContactField">
                         <img src="assets/img/arrow_drop_down_AddTask.svg" onclick="closeAssignTo()" id="arrowup" alt="arrowup" class="assignToDDArrow rotate"> -->
-                        <div id="assignToList" class="assignToDropDownMenu"></div>
-                    </div>
-                    <div id="assignedUser" class="assignedUserList"></div>
-                </section>
+              <div id="assignToList" class="assignToDropDownMenu"></div>
             </div>
-
-            <!-- Seperator -->
-            <div class="seperator-addtask"><img src="assets/img/seperator_AddTask.svg" alt="seperator"/></div>
-
-            <!-- Right Part of Add Task -->
-            <div class="sections-addTask">
-                <!-- Due Date -->
-                <section>
-                    <div class="pd-bottom"><span>Due Date<span class="required-addTask">*</span></span></div>
-                    <input id="dueDate" type="date" placeholder="yyyy/mm/dd" class="input-dueDate border-input-addtask" onchange="checkDueDate()" required/>
-                </section>
-
-                <!-- Priority -->
-                <section class="padding-prio">
-                    <div class="pd-bottom"><span>Prio</span></div>
-                    <div class="priority">
-                      <button type="button" class="button-prio" id="btnPrioUrgent" onclick="changePriorityColor('urgent')">Urgent
-                        <img src="assets/img/urgent_red_AddTask.svg" alt="urgent_red_AddTask"/>
-                      </button>                    
-                      <button type="button" class="button-prio" id="btnPrioMedium" onclick="changePriorityColor('medium')">Medium
-                        <img src="assets/img/medium_orange_AddTask.svg" alt="medium_orange_AddTask"/>
-                      </button>                    
-                      <button type="button" class="button-prio" id="btnPrioLow" onclick="changePriorityColor('low')">Low
-                        <img src="assets/img/low_green_AddTask.svg" alt="low_green_AddTask"/>
-                      </button>                    
-                    </div>
-                </section>
-
-                <!-- Category -->
-                <section class="padding-category">
-                    <div class="pd-bottom"><span>Category<span class="required-addTask">*</span></span></div>
-                    <div class="input-assignedTo border-input-addtask" id="categoryContainer">
-                        <select title="category" id="categoryAddTask" class="input-category" onchange="handleCategoryChange(this)" onclick="changeBorderColor()">
-                            <option value="" selected disabled>Select Task Category</option>
-                            <option value="User Story">User Story</option>
-                            <option value="Technical Story">Technical Story</option>
-                        </select>
-                    </div>
-                </section> 
-
-                <!-- Subtasks -->
-                <section class="sectionSubtasks">
-                    <div class="pd-bottom"><span>Subtasks</span></div>
-                    <div class="input-subtasks border-input-addtask" id="addSubtaskMain" onfocus="handleInputFocus()">
-                        <input id="addsubtask" type="text" placeholder="Add new subtasks" class="input-assignedTo border-none">
-                        <div onclick="toggleSubtasks()" class="drop-down-image drop-down-subtask">
-                            <img id="plusIcon" src="assets/img/plus_addTask.svg" alt="plus_addTask">
-                        </div>
-                        <div id="subtasks" class="d-none add-subtasks">
-                            <img onclick="cancelSubtaskClick()" id="cancelSubtask" src="assets/img/subtask_cancel_AddTask.svg" class="subtasks" alt="subtask_cancel_AddTask">
-                            <img src="assets/img/subtask_seperator_AddTask.svg" alt="subtask_seperator_AddTask">
-                            <img onclick="saveSubtask()" id="checkSubtask" src="assets/img/subtask_check_AddTask.svg" class="subtasks" alt="subtask_check_AddTask">
-                        </div>
-                    </div>
-                    <div id="showsubtasks" class="subtasks-list d-none"></div>
-                </section>
-            </div>
+            <div id="assignedUser" class="assignedUserList"></div>
+          </section>
         </div>
 
-        <!-- Footer AddTask -->
-        <footer class="addtask-footer">
-            <div id="requiredFooter">
-                <span class="required-addTask">*</span>
-                This field is required
-            </div>
+        <!-- Seperator -->
+        <div class="seperator-addtask">
+          <img src="assets/img/seperator_AddTask.svg" alt="seperator" />
+        </div>
 
-            <div class="footer-btn-addTask">
-                <button onclick="clearEntries()" class="footer-btn-text-img" type="button" id="clear-btn">
-                    Clear
-                    <img src="assets/img/subtask_cancel_AddTask.svg" alt="subtask_cancel_AddTask">
-                </button>
-
-                <button onclick="createTask()" class="footer-btn-text-img" type="button" id="create-btn">
-                    Create Task
-                    <img src="assets/img/create_hook_white_AddTask.svg" alt="create_hook_white_AddTask">
-                </button>
+        <!-- Right Part of Add Task -->
+        <div class="sections-addTask">
+          <!-- Due Date -->
+          <section>
+            <div class="pd-bottom">
+              <span>Due Date<span class="required-addTask">*</span></span>
             </div>
-        </footer>
+            <input
+              id="dueDate"
+              type="date"
+              placeholder="yyyy/mm/dd"
+              class="input-dueDate border-input-addtask"
+              required
+            />
+          </section>
+
+          <!-- Priority -->
+          <section class="padding-prio">
+            <div class="pd-bottom"><span>Prio</span></div>
+            <div class="priority">
+              <button
+                type="button"
+                class="button-prio"
+                id="btnPrioUrgent"
+                onclick="changePriorityColor('urgent')"
+              >
+                Urgent
+                <img
+                  src="assets/img/urgent_red_AddTask.svg"
+                  alt="urgent_red_AddTask"
+                />
+              </button>
+              <button
+                type="button"
+                class="button-prio"
+                id="btnPrioMedium"
+                onclick="changePriorityColor('medium')"
+              >
+                Medium
+                <img
+                  src="assets/img/medium_orange_AddTask.svg"
+                  alt="medium_orange_AddTask"
+                />
+              </button>
+              <button
+                type="button"
+                class="button-prio"
+                id="btnPrioLow"
+                onclick="changePriorityColor('low')"
+              >
+                Low
+                <img
+                  src="assets/img/low_green_AddTask.svg"
+                  alt="low_green_AddTask"
+                />
+              </button>
+            </div>
+          </section>
+
+          <!-- Category -->
+          <section class="padding-category">
+            <div class="pd-bottom">
+              <span>Category<span class="required-addTask">*</span></span>
+            </div>
+            <div
+              class="input-assignedTo border-input-addtask"
+              id="categoryContainer"
+            >
+              <select
+                title="category"
+                id="categoryAddTask"
+                class="input-category"
+                onchange="handleCategoryChange(this)"
+                onclick="changeBorderColor()"
+              >
+                <option value="" selected disabled>Select Task Category</option>
+                <option value="User Story">User Story</option>
+                <option value="Technical Story">Technical Story</option>
+              </select>
+            </div>
+          </section>
+
+          <!-- Subtasks -->
+          <section class="sectionSubtasks">
+            <div class="pd-bottom"><span>Subtasks</span></div>
+            <div
+              class="input-subtasks border-input-addtask"
+              id="addSubtaskMain"
+              onfocus="handleInputFocus()"
+            >
+              <input
+                id="addsubtask"
+                type="text"
+                placeholder="Add new subtasks"
+                class="input-assignedTo border-none"
+              />
+              <div
+                onclick="toggleSubtasks()"
+                class="drop-down-image drop-down-subtask"
+              >
+                <img
+                  id="plusIcon"
+                  src="assets/img/plus_addTask.svg"
+                  alt="plus_addTask"
+                />
+              </div>
+              <div id="subtasks" class="d-none add-subtasks">
+                <img
+                  onclick="cancelSubtaskClick()"
+                  id="cancelSubtask"
+                  src="assets/img/subtask_cancel_AddTask.svg"
+                  class="subtasks"
+                  alt="subtask_cancel_AddTask"
+                />
+                <img
+                  src="assets/img/subtask_seperator_AddTask.svg"
+                  alt="subtask_seperator_AddTask"
+                />
+                <img
+                  onclick="saveSubtask()"
+                  id="checkSubtask"
+                  src="assets/img/subtask_check_AddTask.svg"
+                  class="subtasks"
+                  alt="subtask_check_AddTask"
+                />
+              </div>
+            </div>
+            <div id="showsubtasks" class="subtasks-list d-none"></div>
+          </section>
+        </div>
+      </div>
+
+      <!-- Footer AddTask -->
+      <footer class="addtask-footer">
+        <div id="requiredFooter">
+          <span class="required-addTask">*</span>
+          This field is required
+        </div>
+
+        <div class="footer-btn-addTask">
+          <button
+            onclick="clearEntries()"
+            class="footer-btn-text-img"
+            type="button"
+            id="clear-btn"
+          >
+            Clear
+            <img
+              src="assets/img/subtask_cancel_AddTask.svg"
+              alt="subtask_cancel_AddTask"
+            />
+          </button>
+
+          <button
+            onclick="createTask()"
+            class="footer-btn-text-img"
+            type="button"
+            id="create-btn"
+          >
+            Create Task
+            <img
+              src="assets/img/create_hook_white_AddTask.svg"
+              alt="create_hook_white_AddTask"
+            />
+          </button>
+        </div>
+      </footer>
     </form>
-</body>
+  </body>
 </html>
