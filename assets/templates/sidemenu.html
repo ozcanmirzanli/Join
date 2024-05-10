@@ -1,43 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="./assets/img/joinLogoBlack.svg">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./assets/img/joinLogoBlack.svg" />
     <title>Sidemenu</title>
     <link rel="stylesheet" href="./css/fonts.css" />
     <script src="./script.js"></script>
     <script src="./js/sidemenu.js"></script>
-    <link rel="stylesheet" href="./css/sidemenu.css">
-</head>
-<body>
+    <link rel="stylesheet" href="./css/sidemenu.css" />
+  </head>
+  <body>
     <div class="sidebar">
-        <img src="./assets/img/joinLogoWhite.svg" alt="Logo" class="LogoSideBar">
-        <div class="linkSideBar">
-        <a class="sideBtn" href="./summary.html" id="sideBtn1" onclick="changeBackground('sideBtn1')" ><img src="./assets/img/Summary_SideBar.svg" alt="summary"></a>
-        <a class="sideBtn" href="./add_task.html" id="sideBtn2" onclick="changeBackground('sideBtn2')" ><img src="./assets/img/AddTask_SideBar.svg" alt="addTask"></a>
-        <a class="sideBtn" href="./board.html" id="sideBtn3" onclick="changeBackground('sideBtn3')" ><img src="./assets/img/Board_SideBar.svg" alt="Board"></a>
-        <a class="sideBtn" href="./contact.html" id="sideBtn4" onclick="changeBackground('sideBtn4')" ><img src="./assets/img/Contacts_SideBar.svg" alt="Contacts"></a>
+      <div class="sidebar-logo">
+        <img src="./assets/img/joinLogoWhite.svg" alt="Logo" />
+      </div>
+      <div class="linkSideBar">
+        <a
+          class="sideBtn"
+          href="./summary.html"
+          id="sideBtn1"
+          onclick="changeBackground('sideBtn1')"
+          ><img src="./assets/img/Summary_SideBar.svg" alt="summary"
+        /></a>
+        <a
+          class="sideBtn"
+          href="./add_task.html"
+          id="sideBtn2"
+          onclick="changeBackground('sideBtn2')"
+          ><img src="./assets/img/AddTask_SideBar.svg" alt="addTask"
+        /></a>
+        <a
+          class="sideBtn"
+          href="./board.html"
+          id="sideBtn3"
+          onclick="changeBackground('sideBtn3')"
+          ><img src="./assets/img/Board_SideBar.svg" alt="Board"
+        /></a>
+        <a
+          class="sideBtn"
+          href="./contact.html"
+          id="sideBtn4"
+          onclick="changeBackground('sideBtn4')"
+          ><img src="./assets/img/Contacts_SideBar.svg" alt="Contacts"
+        /></a>
+        <div class="legal">
+          <a href="/Join/PrivacyPolicy.html" id="privacy">Privacy Policy</a>
+          <a href="/Join/LegalNotice.html" id="legal">Legal notice</a>
         </div>
-    <div class="legal">
-        <a href="/Join/PrivacyPolicy.html" id="privacy">Privacy Policy</a>
-        <a href="/Join/LegalNotice.html" id="legal">Legal notice</a>
-    </div>
+      </div>
     </div>
 
     <nav id="navBar" class="navBar">
-        <a class="navBarIcons" href="./summary.html">
-            <img class="navBarImg" src="./assets/img/navbar_summary.svg" alt="summary">
-        </a>
-        <a class="navBarIcons" href="./board.html">
-            <img class="navBarImg" src="/Join/assets/img/navbar_board.svg" alt="Board">
-        </a>
-        <a class="navBarIcons" href="./add_task.html">
-            <img class="navBarImg" src="/Join/assets/img/navbar_addTask.svg" alt="Add Tasks">
-        </a>
-        <a class="navBarIcons" href="./contact.html">
-            <img class="navBarImg" src="/Join/assets/img/navbar_contacts.svg" alt="Contacts">
-        </a>
+      <a class="navBarIcons" href="./summary.html">
+        <img
+          class="navBarImg"
+          src="./assets/img/navbar_summary.svg"
+          alt="summary"
+        />
+      </a>
+      <a class="navBarIcons" href="./board.html">
+        <img
+          class="navBarImg"
+          src="/Join/assets/img/navbar_board.svg"
+          alt="Board"
+        />
+      </a>
+      <a class="navBarIcons" href="./add_task.html">
+        <img
+          class="navBarImg"
+          src="/Join/assets/img/navbar_addTask.svg"
+          alt="Add Tasks"
+        />
+      </a>
+      <a class="navBarIcons" href="./contact.html">
+        <img
+          class="navBarImg"
+          src="/Join/assets/img/navbar_contacts.svg"
+          alt="Contacts"
+        />
+      </a>
     </nav>
-</body>
+  </body>
 </html>
