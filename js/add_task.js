@@ -71,6 +71,7 @@ function checkDueDate() {
     }
 }
 
+
 function handleCategoryChange(selectElement) {
     var selectedCategory = selectElement.value;
     // Hier können Sie die gewählte Kategorie weiterverarbeiten, z. B. sie in einer Variable speichern oder eine Funktion aufrufen
@@ -326,7 +327,7 @@ function openAssignTo() {
     document.getElementById('arrowup').classList.remove('d-none');
     renderContacts();
     renderAssignedContacts();
-    restoreSelectedContacts()
+    restoreSelectedContacts();
 }
 
 function closeAssignTo() {
