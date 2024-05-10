@@ -129,6 +129,7 @@ textarea {
     padding: 18px 16px 18px 16px;
     gap: 10px;
     border-radius: 10px 0px 0px 0px;
+    font-family: 'Inter', sans-serif;
 }
 
 .padding-description {
