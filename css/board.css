@@ -398,6 +398,135 @@ input:focus {
 cursor: pointer;
 }
 
+/* assigned to section */
+
+.input-assignedTo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid #D1D1D1;
+  background: #fff;
+  padding: 12px 16px;
+  width: 100%;
+}
+
+#assignAddTask:hover {
+  cursor: pointer;
+  box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.assignToDropdown {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 440px;
+  z-index: 2;
+  padding-top: 0 !important;
+}
+
+.assignToDropDownMenu {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 288px;
+  overflow-y: auto;
+  background-color: #fff;
+  padding: 12px 16px;
+}
+
+.assignToDDArrow, #arrowup {
+  border-radius: 50px;
+  right: 13px;
+  top: 10px;
+  z-index: 999;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+.assignToContactField {
+  border: 1px solid #29abe2;
+  display: flex;
+  padding: 0px 16px;
+  width: 100%;
+  border-radius: 10px;
+  height: 48px;
+}
+
+.assignListContact {
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.assignToBadge {
+  font-size: 12px bold;
+  border-radius: 50%;
+  border: 2px solid white;
+  padding: 12px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.assignDetails {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.assignField {
+  border-radius: 10px;
+  border: solid 1px #D1D1D1;
+  background-color: white;
+  color: black !important;
+  display: flex;
+  align-items: flex-start;
+  text-align: start;
+  font-size: 16px;
+  cursor: pointer;
+  word-wrap: break-word;
+  resize: none;
+  position: relative;
+  width: 100%;
+}
+
+.drop-down-image-assign { 
+  border-radius: 10px;
+  height: 20px;
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.drop-down-image:hover, .assignToDDArrow:hover {
+  background-color: #ebeaec;
+  cursor: pointer;
+}
+
+.border-none {
+  border: unset;
+}
+
+.contactSelected {
+  background-color: #2A3647 !important;
+  color: white;
+}
+
+.assignedUserList {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 8px;
+}
+
 @media (max-width: 1400px){
   .headlineBoard, .table {
       margin-left: 140px;

@@ -3,9 +3,9 @@
  * @type {Array}
  */
 
-let taskData = [];
+// let taskData = [];
 let todos = [];
-let taskIdCounter = 0;
+// let taskIdCounter = 0;
 
 /**
  * Represents the ID of the currently dragged element.
