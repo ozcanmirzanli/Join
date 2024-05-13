@@ -3,9 +3,32 @@
  * @type {Array}
  */
 
-// let taskData = [];
-let todos = [];
-// let taskIdCounter = 0;
+
+let todos = [{id: 0,
+  title: 'reciptepage',
+  description: 'HTML for reciptepage',
+  assignTo: 'none',
+  dueDate: '22.06.2023',
+  category: 'medium',
+  subTasks:[ {id: 0,
+    subDescription: "head",
+    done: false,
+  },
+  {
+    id: 1,
+    subDescription: "beschreibung",
+    done: false,
+  },
+  {
+    id:2,
+    subDescription:"footer",
+    done: true,
+  }],
+  priority: 'selectedPrio',
+  todo: "toDo",
+}];
+//let taskIdCounter = 0;
+let subTaskIdCounter = 0;
 
 /**
  * Represents the ID of the currently dragged element.
@@ -13,18 +36,18 @@ let todos = [];
  */
 let currentDraggedElement = [];
 
-async function init(){
-  await loadTasksData();
+async function initBoard(){
+  //await loadTasksData();
   updateHTMLBoard();
 }
-
+/*
 async function loadTasksData(){
   try {
     todos = JSON.parse(await getItem('taskData'))
 }
 catch (e) {
     console.info('Could not load tasks')
-}}
+}}*/
 
 /**
  * Updates the HTML board based on the current state of todos.
@@ -236,6 +259,12 @@ async function saveTask(id) {
   // Werte aus den Abschnitten abrufen
   let subTasks = document.getElementById('addsubtask').value;
 
+  let subTasksArray = subTasks.split('\n').map(subTask => ({
+    id: subTaskIdCounter++,
+    content: subTask.trim(),
+    completed: false
+  }));
+
   taskData.push ({
       id: taskIdCounter++,
       title: document.getElementById('titleAddTask').value,
@@ -243,7 +272,7 @@ async function saveTask(id) {
       assignTo: document.getElementById('assignAddTask').value,
       dueDate: document.getElementById('dueDate').value,
       category: document.getElementById('categoryAddTask').value,
-      subTasks: subTasks.split('\n').map(subTask => ({ id: taskIdCounter++, content: subTask.trim() })),
+      subTasks: subTasksArray,
       priority: selectedPrio,
       todo: "toDo",
   });
@@ -319,3 +348,19 @@ function changeBorderColor() {
   let categoryContainer = document.getElementById('categoryContainer');
   categoryContainer.style.borderColor = "rgba(41, 171, 226, 1)";
 }
+ /* 
+function updateProgressBar(todo) {
+  let completedSubtasks = todo.subTasks.filter(subtask => subtask.done).length;
+  let progressBarId = `progress-bar-${todo.id}`;
+  let progressBar = document.getElementById(`progress-bar-${todo.id}`);
+  console.log(document.getElementById(progressBarId)); // Überprüfen Sie, ob das Element gefunden wurde
+  let progress = (completedSubtasks / todo.subTasks.length) * 100;
+
+  if (progressBar) {
+      let innerProgressBar = progressBar.querySelector('.progress-bar');
+      if (innerProgressBar) {
+          innerProgressBar.style.width = `${progress}%`;
+          innerProgressBar.style.backgroundColor = 'blue';
+      }
+  }
+}*/

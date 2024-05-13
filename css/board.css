@@ -239,7 +239,6 @@ input:focus {
   padding: 0px 64px 0px 0px;
   gap: 10px;
   border-radius: 8px;
-  background-color: #f4f4f4;
 }
 
 .Taskcounter {
@@ -380,6 +379,15 @@ input:focus {
   font-weight: 400;
   line-height: 24px;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.subTaskCheckBox{
+  padding-right: 16px;
+  height: 24px;
+  width: 24px;
 }
 
 .taskfooter {

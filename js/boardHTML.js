@@ -4,25 +4,42 @@
  * @returns {string} - The HTML string representing the todo element.
  */
 function generateTodoHTML(element) {
-  //erstellt element entsprechend category
-  return /*html*/ `
-      <div draggable="true" ondrag="startDragging(${element["id"]})"  class="userStoryMini" onclick="openTask(${element["id"]})"> 
-        <div>${element["story"]}</div>
-        <h4>${element["title"]}</h4>
-        <div class="TaskDescription">${element["description"]}</div>
-        <div class="TaskProgressbar" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar" id="progress-bar" style="width: 25%"><div class="Taskcounter">1/2 Subtasks</div></div>
+    let progressBarId = `progress-bar-${element.id}`;
+    let progressBarHTML = /*html*/ `
+        <div class="TaskProgressbar" role="progressbar" aria-label="Example with label" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar" id="${progressBarId}" style="width: 220px;"></div>
+            <div class="Taskcounter">${element.subTasks.filter(subtask => subtask.done).length}/${element.subTasks.length} Subtasks done</div>
         </div>
-        <div class="taskFooter"><img src="./assets/img/UserInitials.svg" alt="" class="TaskMembers"><img src="./assets/img/medium_orange_AddTask.svg" alt="" class="taskPriority"></div>
-      </div>
+    `;
+    updateProgressBar(element);
+
+    return /*html*/ `
+        <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})"> 
+            <div>${element.story}</div>
+            <h4>${element.title}</h4>
+            <div class="TaskDescription">${element.description}</div>
+            ${progressBarHTML}
+            <div class="taskFooter">
+                <img src="./assets/img/UserInitials.svg" alt="" class="TaskMembers">
+                <img src="./assets/img/medium_orange_AddTask.svg" alt="" class="taskPriority">
+            </div>
+        </div>
     `;
 }
+
 
 /**
  * Renders a big task with detailed information.
  * @param {Object} todo - The task object to render.
  */
 function renderBigTask(todo) {
+let subtasks = '';
+    for (let i = 0; i < todo["subTasks"].length; i++) {
+        subtasks += /*html*/ `
+                  <span><img src="./assets/img/check-box-disabled.png" alt="" id="subTaskCheckBox">${todo["subTasks"][i]["subDescription"]}</span>
+              `;
+      }
+
   document.getElementById("taskBig").classList.remove("d-none");
   const BigTaskHTML = /*html*/ `
        <div class="bigTask">
@@ -33,12 +50,12 @@ function renderBigTask(todo) {
         </div>
         <h3>${todo["description"]}</h3>
         <div class="dueDate">due date : ${todo["date"]}</div>
-        <div class="prio">Priority: Meduímum <img src="./assets/img/medium_orange_AddTask.svg" alt=""></div>
+        <div class="prio">Priority: ${todo['category']} <img src="./assets/img/medium_orange_AddTask.svg" alt=""></div>
         <div class="members">assigned to :
           <div class="userTask"><img src="./assets/img/edit contacts.svg" alt="user1" class="userImg"> Name user1</div>
           <div class="userTask"><img src="./assets/img/edit contacts.svg" alt="user2" class="userImg"> name user 2</div>
         </div>
-        <div class="subtask">subtasks</div>
+        <div class="subtask"><p>Subtasks</p>${subtasks}</div>
         <footer class="taskfooter">
           <img src="./assets/img/Delete contact.svg" alt="delete" class="iconTask" onclick="deleteTask(${todo["id"]})"> 
           <img src="./assets/img/edit contacts.svg" alt="edit" class="iconTask" onclick="editTask(${todo["id"]})">
@@ -263,7 +280,7 @@ function renderEditTaskForm(todo) {
       </div>
              <div id="showsubtasks" class="subtasks-list d-none"></div>
             </section>
-   <img src="./assets/img/button_OK.svg" alt="delete" class="iconTask" onclick="saveTask(${taskData["id"]})">
+   <img src="./assets/img/button_OK.svg" alt="delete" class="iconTask" onclick="saveTask(${todo["id"]})">
   </div>
     `;
 }
