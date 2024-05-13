@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   addSubtaskInput.addEventListener("blur", handleBlur);
 });
 
-// let subtask = [];
+let subtask = [];
 let taskData = [];
 let taskIdCounter = 0;
 let selectedPrio = "";
@@ -129,9 +129,13 @@ function saveSubtask() {
   let subtaskText = subtaskInput.value;
 
   if (subtaskText !== "") {
-    // Erstellen des HTML-Codes für den Subtask mit einer eindeutigen ID
-    const subtaskCount = document.querySelectorAll(".subtask-item").length; // Anzahl der vorhandenen Subtasks
-    const subtaskHTML = renderSubtaskItem(subtaskText, subtaskCount);
+    // Erstellen einer eindeutigen ID für den Subtask
+    let subtaskId = subtask.length;
+    // Hinzufügen des Subtasks zum globalen Array
+    subtask.push({ id: subtaskId, content: subtaskText });
+
+    // Erstellen des HTML-Codes für den Subtask
+    const subtaskHTML = renderSubtaskItem(subtaskText, subtaskId);
 
     // Hinzufügen des Subtask-HTML-Codes zum Element mit der ID 'showsubtasks'
     const showSubtasksContainer = document.getElementById("showsubtasks");
@@ -140,72 +144,61 @@ function saveSubtask() {
     // Clear subtask input
     subtaskInput.value = "";
 
-    // Hier entfernst du die Klasse d-none, um die Subtasks anzuzeigen
+    // Anzeigen der Subtasks
     showSubtasksContainer.classList.remove("d-none");
   }
 }
 
 function renderSubtaskItem(subtask, i) {
   return `
-        <div class="subtask-item">
-            <div id="subtask${i}" class="subtask-content">
-                <span>\u2022 ${subtask}</span>
-            </div>
-            <div id="subtaskEditInput${i}" class="subtask-content d-none">
-                <input value="${subtask}" class="subtask-input subtaskEditText" id="subtaskInput${i}">
-                <div class="subtask-bounding-box">
-                    <img onclick="subtaskDelete(${i})" src="assets/img/subtask_trash_AddTask.svg" alt="Delete Subtask" class="subtask-icon">
-                    <img src="assets/img/subtask_seperator_AddTask.svg" alt="Separator" class="subtask-icon">
-                    <img onclick="subtaskSaveEdit(${i})" src="assets/img/subtask_check_AddTask.svg" alt="Check Subtask" class="subtask-icon">
-                </div>
-            </div>
-            <div id="mainBoundingBox${i}" class="subtask-bounding-box">
-                <img onclick="subtaskEdit(${i})" src="assets/img/subtask_edit_AddTask.svg" alt="Edit Subtask" class="subtask-icon">
-                <img src="assets/img/subtask_seperator_AddTask.svg" alt="Separator" class="subtask-icon">
-                <img onclick="subtaskDelete(${i})" src="assets/img/subtask_trash_AddTask.svg" alt="Delete Subtask" class="subtask-icon">
-            </div>
-        </div>
-    `;
+      <div class="subtask-item">
+          <div id="subtask${i}" class="subtask-content">
+              <span>\u2022 ${subtask}</span>
+          </div>
+          <div id="subtaskEditInput${i}" class="subtask-content d-none">
+              <input value="${subtask}" class="subtask-input subtaskEditText" id="subtaskInput${i}">
+              <div class="subtask-bounding-box">
+                  <img onclick="subtaskDelete(${i})" src="assets/img/subtask_trash_AddTask.svg" alt="Delete Subtask" class="subtask-icon">
+                  <img src="assets/img/subtask_seperator_AddTask.svg" alt="Separator" class="subtask-icon">
+                  <img onclick="subtaskSaveEdit(${i})" src="assets/img/subtask_check_AddTask.svg" alt="Check Subtask" class="subtask-icon">
+              </div>
+          </div>
+          <div id="mainBoundingBox${i}" class="subtask-bounding-box">
+              <img onclick="subtaskEdit(${i})" src="assets/img/subtask_edit_AddTask.svg" alt="Edit Subtask" class="subtask-icon">
+              <img src="assets/img/subtask_seperator_AddTask.svg" alt="Separator" class="subtask-icon">
+              <img onclick="subtaskDelete(${i})" src="assets/img/subtask_trash_AddTask.svg" alt="Delete Subtask" class="subtask-icon">
+          </div>
+      </div>
+  `;
 }
 
 function subtaskEdit(i) {
   let subtaskContent = document.getElementById(`subtask${i}`);
   let subtaskEditInput = document.getElementById(`subtaskEditInput${i}`);
-  document.getElementById(`mainBoundingBox${i}`).classList.add("d-none");
+  document.getElementById(`mainBoundingBox${i}`).classList.add('d-none');
 
-  subtaskContent.classList.toggle("d-none");
-  subtaskEditInput.classList.toggle("d-none");
+  subtaskContent.classList.toggle('d-none');
+  subtaskEditInput.classList.toggle('d-none');
 }
 
 function subtaskSaveEdit(i) {
   let subtaskContent = document.getElementById(`subtask${i}`);
   let subtaskEditInput = document.getElementById(`subtaskEditInput${i}`);
   let subtaskInput = document.getElementById(`subtaskInput${i}`);
-  document.getElementById(`mainBoundingBox${i}`).classList.remove("d-none");
+  document.getElementById(`mainBoundingBox${i}`).classList.remove('d-none');
 
-  subtaskContent.querySelector(
-    "span"
-  ).textContent = `\u2022 ${subtaskInput.value}`;
-  subtaskContent.classList.toggle("d-none");
-  subtaskEditInput.classList.toggle("d-none");
+  subtaskContent.querySelector('span').textContent = `\u2022 ${subtaskInput.value}`;
+  subtaskContent.classList.toggle('d-none');
+  subtaskEditInput.classList.toggle('d-none');
 }
 
-function subtaskDelete(i) {
-  let subtaskContainer = document.getElementById(`subtask${i}`).value;
-  subtaskContainer.remove();
+function subtaskDelete(id) {
+  // Entfernen des Subtasks aus dem globalen Array anhand seiner ID
+  subtask = subtask.filter(sub => sub.id !== id);
 
-  // Nach dem Entfernen eines Subtasks werden die verbleibenden Subtasks neu nummeriert
-  let subtaskItems = document.querySelectorAll(".subtask-item");
-  subtaskItems.forEach((item, index) => {
-    item.querySelector(".subtask-content").id = `subtask${index}`;
-    item.querySelector(".subtask-content input").id = `subtaskInput${index}`;
-    item
-      .querySelector(".subtask-bounding-box img")
-      .setAttribute("onclick", `subtaskEdit(${index})`);
-    item
-      .querySelector(".subtask-bounding-box img:last-child")
-      .setAttribute("onclick", `subtaskDelete(${index})`);
-  });
+  // Entfernen des Subtasks aus dem DOM
+  let subtaskElement = document.getElementById(`subtask${id}`);
+  subtaskElement.remove();
 }
 
 function clearEntries() {
@@ -281,8 +274,7 @@ async function createTask() {
     alert("Please fill in all required fields.");
     return;
   }
-  // Werte aus den Abschnitten abrufen
-  let subTasks = document.getElementById("addsubtask").value;
+  let subTasks = subtask;
 
   taskData.push({
     id: taskIdCounter++,
@@ -291,9 +283,7 @@ async function createTask() {
     assignTo: assignedContacts,
     dueDate: dueDate,
     category: document.getElementById("categoryAddTask").value,
-    subTasks: subTasks
-      .split("\n")
-      .map((subTask) => ({ id: taskIdCounter++, content: subTask.trim() })),
+    subTasks: subTasks,
     priority: selectedPrio,
     todo: "toDo",
   });
