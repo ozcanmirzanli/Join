@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  background-color: #f6f7f8;
 }
 
 .d-none {
@@ -61,17 +62,15 @@ h4 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f6f7f8;
 }
 
 .allContacts {
+  background-color: white;
   width: 456px;
-  height: 928px;
-  padding-top: 96px;
-  padding-left: 232px;
+  height: calc(100vh - 96px);
   box-shadow: 4px 0px 6px 0px #00000014;
-  overflow-y: auto;
-  overflow-x: hidden;
+  padding: 32px 24px 32px 48px;
+  overflow-y: scroll;
 }
 
 .allContacts::-webkit-scrollbar {
@@ -115,11 +114,11 @@ h4 {
 }
 
 .addBtn {
-  width: 352px;
+  width: 100%;
   height: 56px;
-  margin-top: 22.5px;
-  padding: 12px 0px 12px 0px;
+  padding: 12px 0px;
   gap: 16px;
+  font-size: 21px;
   background-color: #2a3647;
   display: flex;
   align-items: center;
