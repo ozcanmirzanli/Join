@@ -3,30 +3,7 @@
  * @type {Array}
  */
 
-let todos =[];
-/*let todos = [{id: 0,
-  title: 'reciptepage',
-  description: 'HTML for reciptepage',
-  assignTo: 'none',
-  dueDate: '22.06.2023',
-  category: 'medium',
-  subTasks:[ {id: 0,
-    subDescription: "head",
-    done: false,
-  },
-  {
-    id: 1,
-    subDescription: "beschreibung",
-    done: false,
-  },
-  {
-    id:2,
-    subDescription:"footer",
-    done: true,
-  }],
-  priority: 'selectedPrio',
-  todo: "toDo",
-}];*/
+let taskData =[];
 //let taskIdCounter = 0;
 let subTaskIdCounter = 0;
 
@@ -37,13 +14,13 @@ let subTaskIdCounter = 0;
 let currentDraggedElement = [];
 
 async function initBoard(){
-  await loadTasksData();
+  await loadTasksDataBoard();
   updateHTMLBoard();
 }
 
-async function loadTasksData(){
+async function loadTasksDataBoard(){
   try {
-    todos = JSON.parse(await getItem('taskData'))
+    taskData = JSON.parse(await getItem('taskData'))
 }
 catch (e) {
     console.info('Could not load tasks')
@@ -53,7 +30,7 @@ catch (e) {
  * Updates the HTML board based on the current state of todos.
  */
 function updateHTMLBoard() {
-  let toDo = todos.filter((t) => t["todo"] == "toDo"); //Filter array nach category toDo
+  let toDo = taskData.filter((t) => t["todo"] == "toDo"); //Filter array nach category toDo
 
   document.getElementById("toDo").innerHTML = ""; //leert element mit id toDo
   if (toDo.length === 0) {
@@ -66,7 +43,7 @@ function updateHTMLBoard() {
     }
   }
 
-  let inProgress = todos.filter((t) => t["todo"] == "inProgress"); //Filter Array nach category: inProgress
+  let inProgress = taskData.filter((t) => t["todo"] == "inProgress"); //Filter Array nach category: inProgress
 
   document.getElementById("inProgress").innerHTML = ""; //leert element mit id inProgress
   if (inProgress.length === 0) {
@@ -80,7 +57,7 @@ function updateHTMLBoard() {
     }
   }
 
-  let awaitFeedback = todos.filter((t) => t["todo"] == "awaitFeedback"); //Filter Array nach category: awaitFeedback
+  let awaitFeedback = taskData.filter((t) => t["todo"] == "awaitFeedback"); //Filter Array nach category: awaitFeedback
 
   document.getElementById("awaitFeedback").innerHTML = ""; //leert element mit id awaitFeedback
   if (awaitFeedback.length === 0) {
@@ -94,7 +71,7 @@ function updateHTMLBoard() {
     }
   }
 
-  let done = todos.filter((t) => t["todo"] == "done"); //Filter Array nach category: done
+  let done = taskData.filter((t) => t["todo"] == "done"); //Filter Array nach category: done
 
   document.getElementById("done").innerHTML = ""; //leert element mit id done
   if (done.length === 0) {
@@ -129,8 +106,8 @@ function allowDrop(ev) {
  * @param {string} category - The category to move the task to.
  */
 async function moveTo(category) {
-  todos[currentDraggedElement]["todo"] = category; //change category of element
-  await saveDraggedTask(todos[currentDraggedElement]);
+  taskData[currentDraggedElement]["todo"] = category; //change category of element
+  await saveDraggedTask(taskData[currentDraggedElement]);
   updateHTMLBoard(); //update Board
 }
 
@@ -143,9 +120,8 @@ async function saveDraggedTask(updatedTask){
     assignTo: updatedTask["assignTo"],
     dueDate: updatedTask["dueDate"],
     category: updatedTask["category"],
-     /* subTasks: subTasks.split('\n').map(subTask => ({ id: taskIdCounter++, content: subTask.trim() })),
-      priority: updatedTask["priority"]*/
-      todo: updatedTask["todo"],
+     subTasks: updatedTask["subTasks"],
+    todo: updatedTask["todo"],
   });
     
   await setItem('taskData', JSON.stringify(taskData));
@@ -156,7 +132,7 @@ async function saveDraggedTask(updatedTask){
  * @param {number} id - The ID of the task to open.
  */
 function openTask(id) {
-  let task = todos.find((todo) => todo.id === id);
+  let task = taskData.find((todo) => todo.id === id);
   renderBigTask(task);
 }
 
@@ -174,16 +150,16 @@ function closeTaskBig() {
 function filterTasks() {
   let search = document.getElementById("search").value.toLowerCase(); //eingabe des inputfield speichern
 
-  let filteredTodos = todos.filter(
+  let filteredTodos = taskData.filter(
     (
       todo //erstellt neues array filterdTodos
     ) =>
-      (todos["title"].toLowerCase().includes(search) ||
-      todos.description.toLowerCase().includes(search)) && // filtert FilterdTodos nach 'title' and 'description'
-      ( todos["todo"] === "toDo" ||
-      todos["todo"] === "inProgress" ||
-      todos["todo"] === "awaitFeedback" ||
-        todos["todo"] === "done") //filtert filredTodos nach 'category'
+      (taskData["title"].toLowerCase().includes(search) ||
+      taskData.description.toLowerCase().includes(search)) && // filtert FilterdTodos nach 'title' and 'description'
+      ( taskData["todo"] === "toDo" ||
+      taskData["todo"] === "inProgress" ||
+      taskData["todo"] === "awaitFeedback" ||
+      taskData["todo"] === "done") //filtert filredTodos nach 'category'
   );
 
   displayFilteredTodos(filteredTodos); //ruft displayFilteredTodos() auf
@@ -348,12 +324,11 @@ function changeBorderColor() {
   let categoryContainer = document.getElementById('categoryContainer');
   categoryContainer.style.borderColor = "rgba(41, 171, 226, 1)";
 }
- /* 
+ 
 function updateProgressBar(todo) {
   let completedSubtasks = todo.subTasks.filter(subtask => subtask.done).length;
   let progressBarId = `progress-bar-${todo.id}`;
   let progressBar = document.getElementById(`progress-bar-${todo.id}`);
-  console.log(document.getElementById(progressBarId)); // Überprüfen Sie, ob das Element gefunden wurde
   let progress = (completedSubtasks / todo.subTasks.length) * 100;
 
   if (progressBar) {
@@ -363,4 +338,4 @@ function updateProgressBar(todo) {
           innerProgressBar.style.backgroundColor = 'blue';
       }
   }
-}*/
+}

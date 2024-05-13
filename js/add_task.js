@@ -132,7 +132,7 @@ function saveSubtask() {
     // Erstellen einer eindeutigen ID für den Subtask
     let subtaskId = subtask.length;
     // Hinzufügen des Subtasks zum globalen Array
-    subtask.push({ id: subtaskId, content: subtaskText });
+    subtask.push({ id: subtaskId, content: subtaskText, completed: false });
 
     // Erstellen des HTML-Codes für den Subtask
     const subtaskHTML = renderSubtaskItem(subtaskText, subtaskId);
