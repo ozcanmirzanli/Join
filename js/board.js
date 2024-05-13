@@ -1,16 +1,4 @@
-/**
- * Represents an array of todo objects.
- * @type {Array}
- */
-
-let taskData =[];
-//let taskIdCounter = 0;
 let subTaskIdCounter = 0;
-
-/**
- * Represents the ID of the currently dragged element.
- * @type {number}
- */
 let currentDraggedElement = [];
 
 async function initBoard(){
@@ -222,13 +210,21 @@ function closeAddTaskDialog() {
  * Deletes a task.
  * @param {number} id - The ID of the task to delete.
  */
-function deleteTask(id) {
+async function deleteTaskBoard(id) {
   const index = taskData.findIndex((todo) => todo.id === id);
   if (index !== -1) {
     taskData.splice(index, 1);
+
+    // Remove task from remote storage
+    try {
+      await deleteItem(index, 1); // Assuming "id" is the key for identifying tasks
+    } catch (error) {
+      console.error("Error deleting task from remote storage:", error);
+      // Handle error if needed
+    }
+    updateHTMLBoard();
+    closeAddTaskDialog();
   }
-  updateHTMLBoard();
-  closeAddTaskDialog();
 }
 
 async function saveTask(id) {

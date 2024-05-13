@@ -5,12 +5,15 @@
  */
 function generateTodoHTML(element) {
     let progressBarId = `progress-bar-${element.id}`;
+    let completedSubtasksCount = element.subTasks.filter(subtask => subtask.completed).length;
+    let totalSubtasksCount = element.subTasks.length;
+    let taskCounterText = `${completedSubtasksCount}/${totalSubtasksCount} Subtasks done`;
     let progressBarHTML = /*html*/ `
-        <div class="TaskProgressbar" role="progressbar" aria-label="Example with label" aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar" id="${progressBarId}" style="width: 220px;"></div>
-            <div class="Taskcounter">${element.subTasks.filter(subtask => subtask.completed).length}/${element.subTasks.length} Subtasks done</div>
-        </div>
-    `;
+    <div class="TaskProgressbar" role="progressbar" aria-label="Example with label" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar" id="${progressBarId}" style="width: 220px;"></div>
+        <div class="Taskcounter">${taskCounterText}</div>
+    </div>
+`;
     updateProgressBar(element);
 
     return /*html*/ `
@@ -35,9 +38,10 @@ function generateTodoHTML(element) {
 function renderBigTask(todo) {
 let subtasks = '';
     for (let i = 0; i < todo["subTasks"].length; i++) {
+        let subTaskIndex = todo["subTasks"][i];
         let imgSrc = todo["subTasks"][i]["completed"] ? "./assets/img/check-box-checked.png" : "./assets/img/check-box-disabled.png";
         subtasks += /*html*/ `
-                  <span><img src="${imgSrc}" alt="" id="subTaskCheckBox" onclick="changeCompletedBoard(${i}, ${subTaskIndex})">${todo["subTasks"][i]["subDescription"]}</span>
+                  <span><img src="${imgSrc}" alt="" id="subTaskCheckBox" onclick="changeCompletedBoard(${i}, ${subTaskIndex})">${todo["subTasks"][i]["content"]}</span>
               `;
       }
 
