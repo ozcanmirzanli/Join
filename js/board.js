@@ -3,8 +3,8 @@
  * @type {Array}
  */
 
-
-let todos = [{id: 0,
+let todos =[];
+/*let todos = [{id: 0,
   title: 'reciptepage',
   description: 'HTML for reciptepage',
   assignTo: 'none',
@@ -26,7 +26,7 @@ let todos = [{id: 0,
   }],
   priority: 'selectedPrio',
   todo: "toDo",
-}];
+}];*/
 //let taskIdCounter = 0;
 let subTaskIdCounter = 0;
 
@@ -37,17 +37,17 @@ let subTaskIdCounter = 0;
 let currentDraggedElement = [];
 
 async function initBoard(){
-  //await loadTasksData();
+  await loadTasksData();
   updateHTMLBoard();
 }
-/*
+
 async function loadTasksData(){
   try {
     todos = JSON.parse(await getItem('taskData'))
 }
 catch (e) {
     console.info('Could not load tasks')
-}}*/
+}}
 
 /**
  * Updates the HTML board based on the current state of todos.
@@ -256,7 +256,7 @@ function deleteTask(id) {
 }
 
 async function saveTask(id) {
-  // Werte aus den Abschnitten abrufen
+  
   let subTasks = document.getElementById('addsubtask').value;
 
   let subTasksArray = subTasks.split('\n').map(subTask => ({
