@@ -127,28 +127,29 @@ function getOverview(index) {
   document.getElementById("contactBig").innerHTML = /*html*/ `
   <div class="upperArea">
     <div class="initialsBig" style="background-color: ${contact["color"]};">${contact["initials"]}</div>
-<div class="nameArea">
-    <h3 class="nameBig">${contact["name"]}</h3>
-    <div class="btnArea">
-    <button class="deleteBtnContact" onclick="editContact(${index})">
-             <img src="./assets/img/edit.svg" alt="" class="btnImg"/>
-             <p class="deleteBtnText">Edit</p>
-    </button>
-    <button class="deleteBtnContact" onclick="deleteContact(${index})">
-             <img src="./assets/img/delete.png" alt="" class="btnImg"/>
-             <p class="deleteBtnText">Delete</p>
-    </button>
-</div>
-</div>
-</div>
+      <div>
+        <div class="nameArea">
+          <div class="nameBig">${contact["name"]}</div>
+            <div class="btnArea">
+              <button class="deleteBtnContact" onclick="editContact(${index})">
+                <img src="./assets/img/edit.svg" alt="" class="btnImg"/>
+                <p class="deleteBtnText">Edit</p>
+              </button>
+                <button class="deleteBtnContact" onclick="deleteContact(${index})">
+                <img src="./assets/img/delete.png" alt="" class="btnImg"/>
+                <p class="deleteBtnText">Delete</p>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     <h3 class="infoHead">Contact Information</h3>
     <div ><h5 class="mailHead">E-Mail</h5><a style="background-color: background: #007CEE;" class="email">${contact["email"]}</a></div>
     <div ><h5 class="mailHead">Phone</h5> <div class="email">${contact["number"]}</div></div>
   `;
 }
 
-function closeOverview(){
-
+function closeOverview() {
   document.getElementById("contactBig").classList.add("d-none");
 }
 

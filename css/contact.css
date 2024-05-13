@@ -1,6 +1,7 @@
 body {
   margin: 0;
   background-color: #f6f7f8;
+  box-sizing: border-box;
 }
 
 .d-none {
@@ -456,7 +457,6 @@ input {
 }
 
 .nameBig {
-  width: 287px;
   height: 56px;
   font-family: "Inter", sans-serif;
   font-size: 47px;
@@ -514,14 +514,16 @@ input {
 }
 
 .nameArea {
-  display: block;
-  margin-left: 54px;
-  margin-top: -50px;
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
 }
 
 .upperArea {
   display: flex;
   margin-top: 32px;
+  align-items: center;
+  gap: 54px;
 }
 
 .deleteBtnContact {
