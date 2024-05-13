@@ -340,15 +340,25 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   border-radius: inherit;
   background-color: #fff;
   font-size: inherit;
-  border: none;
   cursor: pointer;
+}
+
+.input-option {
+	padding: 0.5rem;
+	cursor: pointer;
+  border-radius: 10px;
+}
+
+.input-option:hover {
+   background-color: #eaeaea;
+   border-radius: 0.625rem;
 }
 
 .input-category:focus-visible {
   outline: none;
 }
 
-option {
+.input-category option {
   font-size: inherit;
   border-radius: 10px;
   background-color: #fff;
