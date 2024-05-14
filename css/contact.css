@@ -131,6 +131,7 @@ h4 {
 .addBtn:hover {
   background-color: rgb(41, 171, 226);
   cursor: pointer;
+  box-shadow: 0px 4px 4px 0px #00000040;
 }
 
 .AddContactText {
