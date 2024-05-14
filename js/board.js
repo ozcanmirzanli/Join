@@ -217,7 +217,7 @@ async function deleteTaskBoard(id) {
 
     // Remove task from remote storage
     try {
-      await deleteItem(index, 1); // Assuming "id" is the key for identifying tasks
+      await deleteItem('taskData', id); // Assuming "id" is the key for identifying tasks
     } catch (error) {
       console.error("Error deleting task from remote storage:", error);
       // Handle error if needed

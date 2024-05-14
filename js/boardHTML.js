@@ -4,8 +4,10 @@
  * @returns {string} - The HTML string representing the todo element.
  */
 function generateTodoHTML(element) {
-    let progressBarId = `progress-bar-${element.id}`;
-    let completedSubtasksCount = element.subTasks.filter(subtask => subtask.completed).length;
+ 
+    if (taskData['subTasks']) {
+        let progressBarId = `progress-bar-${element.id}`;
+        let completedSubtasksCount = element.subTasks.filter(subtask => subtask.completed).length;
     let totalSubtasksCount = element.subTasks.length;
     let taskCounterText = `${completedSubtasksCount}/${totalSubtasksCount} Subtasks done`;
     let progressBarHTML = /*html*/ `
@@ -15,20 +17,32 @@ function generateTodoHTML(element) {
     </div>
 `;
     updateProgressBar(element);
-
     return /*html*/ `
+    <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})"> 
+        <div>${element.story}</div>
+        <h4>${element.title}</h4>
+        <div class="TaskDescription">${element.description}</div>
+        ${progressBarHTML}
+        <div class="taskFooter">
+            <img src="./assets/img/UserInitials.svg" alt="" class="TaskMembers">
+            <img src="./assets/img/medium_orange_AddTask.svg" alt="" class="taskPriority">
+        </div>
+    </div>
+`;
+    } else {
+        return /*html*/ `
         <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})"> 
             <div>${element.story}</div>
             <h4>${element.title}</h4>
             <div class="TaskDescription">${element.description}</div>
-            ${progressBarHTML}
             <div class="taskFooter">
                 <img src="./assets/img/UserInitials.svg" alt="" class="TaskMembers">
                 <img src="./assets/img/medium_orange_AddTask.svg" alt="" class="taskPriority">
             </div>
         </div>
     `;
-}
+    }}
+    
 
 
 /**
@@ -37,13 +51,15 @@ function generateTodoHTML(element) {
  */
 function renderBigTask(todo) {
 let subtasks = '';
+if (taskData['subTasks']) {
     for (let i = 0; i < todo["subTasks"].length; i++) {
-        let subTaskIndex = todo["subTasks"][i];
-        let imgSrc = todo["subTasks"][i]["completed"] ? "./assets/img/check-box-checked.png" : "./assets/img/check-box-disabled.png";
-        subtasks += /*html*/ `
-                  <span><img src="${imgSrc}" alt="" id="subTaskCheckBox" onclick="changeCompletedBoard(${i}, ${subTaskIndex})">${todo["subTasks"][i]["content"]}</span>
-              `;
-      }
+    let subTaskIndex = todo["subTasks"][i];
+    let imgSrc = todo["subTasks"][i]["completed"] ? "./assets/img/check-box-checked.png" : "./assets/img/check-box-disabled.png";
+    subtasks += /*html*/ `
+              <span><img src="${imgSrc}" alt="" id="subTaskCheckBox" onclick="changeCompletedBoard(${i}, ${subTaskIndex})">${todo["subTasks"][i]["content"]}</span>
+          `;
+  }   
+}
 
   document.getElementById("taskBig").classList.remove("d-none");
   const BigTaskHTML = /*html*/ `
