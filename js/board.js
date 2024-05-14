@@ -212,19 +212,11 @@ function closeAddTaskDialog() {
  */
 async function deleteTaskBoard(id) {
   const index = taskData.findIndex((todo) => todo.id === id);
-  if (index !== -1) {
-    taskData.splice(index, 1);
-
-    // Remove task from remote storage
-    try {
-      await deleteItem('taskData', id); // Assuming "id" is the key for identifying tasks
-    } catch (error) {
-      console.error("Error deleting task from remote storage:", error);
-      // Handle error if needed
-    }
+     taskData.splice(index, 1);
+     await setItem("taskData", JSON.stringify(taskData));
+     await getContact();
     updateHTMLBoard();
     closeAddTaskDialog();
-  }
 }
 
 async function saveTask(id) {

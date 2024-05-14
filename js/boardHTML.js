@@ -32,7 +32,7 @@ function generateTodoHTML(element) {
     } else {
         return /*html*/ `
         <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})"> 
-            <div>${element.story}</div>
+            <div>${element.category}</div>
             <h4>${element.title}</h4>
             <div class="TaskDescription">${element.description}</div>
             <div class="taskFooter">
@@ -51,26 +51,26 @@ function generateTodoHTML(element) {
  */
 function renderBigTask(todo) {
 let subtasks = '';
-if (taskData['subTasks']) {
+if (todo['subTasks'] == 0) {
     for (let i = 0; i < todo["subTasks"].length; i++) {
     let subTaskIndex = todo["subTasks"][i];
     let imgSrc = todo["subTasks"][i]["completed"] ? "./assets/img/check-box-checked.png" : "./assets/img/check-box-disabled.png";
     subtasks += /*html*/ `
               <span><img src="${imgSrc}" alt="" id="subTaskCheckBox" onclick="changeCompletedBoard(${i}, ${subTaskIndex})">${todo["subTasks"][i]["content"]}</span>
           `;
-  }   
+  }  
 }
 
   document.getElementById("taskBig").classList.remove("d-none");
   const BigTaskHTML = /*html*/ `
        <div class="bigTask">
-        <div>${todo["story"]}</div> 
+        <div>${todo["category"]}</div> 
         <div class="taskTitle">
           <h2>${todo["title"]}</h2>
           <img src="./assets/img/plus button.svg" alt="" onclick="closeTaskBig()">
         </div>
         <h3>${todo["description"]}</h3>
-        <div class="dueDate">due date : ${todo["date"]}</div>
+        <div class="dueDate">due date : ${todo["dueDate"]}</div>
         <div class="prio">Priority: ${todo['category']}</div>
         <div class="members">assigned to :
           <div class="userTask"><img src="./assets/img/edit contacts.svg" alt="user1" class="userImg"> Name user1</div>
@@ -78,7 +78,7 @@ if (taskData['subTasks']) {
         </div>
         <div class="subtask"><p>Subtasks</p>${subtasks}</div>
         <footer class="taskfooter">
-          <img src="./assets/img/Delete contact.svg" alt="delete" class="iconTask" onclick="deleteTask(${todo["id"]})"> 
+          <img src="./assets/img/Delete contact.svg" alt="delete" class="iconTask" onclick="deleteTaskBoard(${todo["id"]})"> 
           <img src="./assets/img/edit contacts.svg" alt="edit" class="iconTask" onclick="editTask(${todo["id"]})">
         </footer>
       </div>

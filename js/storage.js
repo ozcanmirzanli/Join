@@ -34,14 +34,6 @@ async function getItem(key) {
     .then((res) => res.data.value);
 }
 
-async function deleteItem(key, value) {
-  const payload = { key, value, token: STORAGE_TOKEN };
-  return fetch(STORAGE_URL, {
-    method: "DELETE",
-    body: JSON.stringify(payload),
-  }).then((res) => res.json());
-}
-
 // Attaching functions to window object for global accessibility
 window.setItem = setItem;
 window.getItem = getItem;
