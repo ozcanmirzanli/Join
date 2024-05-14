@@ -19,7 +19,7 @@ function generateTodoHTML(element) {
     updateProgressBar(element);
     return /*html*/ `
     <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})"> 
-        <div>${element.story}</div>
+        <div>${element.category}</div>
         <h4>${element.title}</h4>
         <div class="TaskDescription">${element.description}</div>
         ${progressBarHTML}
@@ -37,7 +37,7 @@ function generateTodoHTML(element) {
             <div class="TaskDescription">${element.description}</div>
             <div class="taskFooter">
                 <img src="./assets/img/UserInitials.svg" alt="" class="TaskMembers">
-                <img src="./assets/img/medium_orange_AddTask.svg" alt="" class="taskPriority">
+                <img src="./assets/img/${element['priority']}_priority.svg" alt="" class="taskPriority">
             </div>
         </div>
     `;
@@ -71,7 +71,7 @@ if (todo['subTasks'] == 0) {
         </div>
         <h3>${todo["description"]}</h3>
         <div class="dueDate">due date : ${todo["dueDate"]}</div>
-        <div class="prio">Priority: ${todo['category']}</div>
+        <div class="prio">Priority: ${todo['priority']} <img src="./assets/img/${todo['priority']}_priority.svg" alt=""></div>
         <div class="members">assigned to :
           <div class="userTask"><img src="./assets/img/edit contacts.svg" alt="user1" class="userImg"> Name user1</div>
           <div class="userTask"><img src="./assets/img/edit contacts.svg" alt="user2" class="userImg"> name user 2</div>
