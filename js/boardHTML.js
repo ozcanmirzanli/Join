@@ -51,14 +51,15 @@ function generateTodoHTMLBoard(element) {
  */
 function renderBigTask(todo) {
 let subtasks = '';
-if (todo['subTasks'].length > 0) {
+let taskIndex = todo["id"];
+if (todo['subTasks'] && todo['subTasks'].length > 0) {
     for (let i = 0; i < todo["subTasks"].length; i++) {
-    let subTaskIndex = todo["subTasks"][i];
-    let imgSrc = todo["subTasks"][i]["completed"] ? "./assets/img/check-box-checked.png" : "./assets/img/check-box-disabled.png";
-    subtasks += /*html*/ `
-              <span><img src="${imgSrc}" alt="" id="subTaskCheckBox" onclick="changeCompletedBoard(${i}, ${subTaskIndex})">${todo["subTasks"][i]["content"]}</span>
-          `;
-  }  
+        let subTaskIndex = todo["subTasks"][i];
+        let imgSrc = subTaskIndex["completed"] ? "./assets/img/check-box-checked.png" : "./assets/img/check-box-disabled.png";
+        subtasks += /*html*/ `
+            <span><img src="${imgSrc}" alt="" id="subTaskCheckBox" onclick="changeCompletedBoard(${taskIndex}, ${i})">${subTaskIndex["content"]}</span>
+        `;
+    }  
 }
 let assignTo = '';
   for (let j = 0; j < todo["assignTo"].length; j++) {
@@ -94,6 +95,7 @@ let assignTo = '';
 
 function changeCompletedBoard(taskIndex, subTaskIndex) {
     taskData[taskIndex].subTasks[subTaskIndex].completed = !taskData[taskIndex].subTasks[subTaskIndex].completed;
+    renderBigTask(taskData[taskIndex]);
 }
 
 /**
