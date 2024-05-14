@@ -3,7 +3,7 @@
  * @param {Object} element - The todo object.
  * @returns {string} - The HTML string representing the todo element.
  */
-function generateTodoHTML(element) {
+function generateTodoHTMLBoard(element) {
  
     if (taskData['subTasks']) {
         let progressBarId = `progress-bar-${element.id}`;
@@ -51,7 +51,7 @@ function generateTodoHTML(element) {
  */
 function renderBigTask(todo) {
 let subtasks = '';
-if (todo['subTasks'] == 0) {
+if (todo['subTasks'].length > 0) {
     for (let i = 0; i < todo["subTasks"].length; i++) {
     let subTaskIndex = todo["subTasks"][i];
     let imgSrc = todo["subTasks"][i]["completed"] ? "./assets/img/check-box-checked.png" : "./assets/img/check-box-disabled.png";
@@ -60,7 +60,13 @@ if (todo['subTasks'] == 0) {
           `;
   }  
 }
-
+let assignTo = '';
+  for (let j = 0; j < todo["assignTo"].length; j++) {
+    let memberId = todo["assignTo"][j];
+    if (memberId) {
+      assignTo += `<div class="userTask"><div class="initialsBig" style="background-color: ${memberId["color"]}">${memberId["initials"]}</div>${memberId["name"]}</div>`;
+    }
+  }
   document.getElementById("taskBig").classList.remove("d-none");
   const BigTaskHTML = /*html*/ `
        <div class="bigTask">
@@ -73,8 +79,7 @@ if (todo['subTasks'] == 0) {
         <div class="dueDate">due date : ${todo["dueDate"]}</div>
         <div class="prio">Priority: ${todo['priority']} <img src="./assets/img/${todo['priority']}_priority.svg" alt=""></div>
         <div class="members">assigned to :
-          <div class="userTask"><img src="./assets/img/edit contacts.svg" alt="user1" class="userImg"> Name user1</div>
-          <div class="userTask"><img src="./assets/img/edit contacts.svg" alt="user2" class="userImg"> name user 2</div>
+          ${assignTo}
         </div>
         <div class="subtask"><p>Subtasks</p>${subtasks}</div>
         <footer class="taskfooter">
@@ -224,7 +229,7 @@ function renderAddTaskForm() {
  * @param {number} id - The ID of the task to edit.
  */
 function editTask(id) {
-  const todo = todos.find((todo) => todo.id === id);
+  const todo = taskData.find((todo) => todo.id === id);
   renderEditTaskForm(todo);
 }
 

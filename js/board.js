@@ -27,7 +27,7 @@ function updateHTMLBoard() {
   } else {
     for (let index = 0; index < toDo.length; index++) {
       const element = toDo[index];
-      document.getElementById("toDo").innerHTML += generateTodoHTML(element); //erstellt alle Tasks mit category: toDo
+      document.getElementById("toDo").innerHTML += generateTodoHTMLBoard(element); //erstellt alle Tasks mit category: toDo
     }
   }
 
@@ -41,7 +41,7 @@ function updateHTMLBoard() {
     for (let index = 0; index < inProgress.length; index++) {
       const element = inProgress[index];
       document.getElementById("inProgress").innerHTML += //erstellt alle Tasks mit category: inProgress
-        generateTodoHTML(element);
+      generateTodoHTMLBoard(element);
     }
   }
 
@@ -55,7 +55,7 @@ function updateHTMLBoard() {
     for (let index = 0; index < awaitFeedback.length; index++) {
       const element = awaitFeedback[index];
       document.getElementById("awaitFeedback").innerHTML += //erstellt alle Tasks mit category: awaitFeedback
-        generateTodoHTML(element);
+      generateTodoHTMLBoard(element);
     }
   }
 
@@ -68,7 +68,7 @@ function updateHTMLBoard() {
   } else {
     for (let index = 0; index < done.length; index++) {
       const element = done[index];
-      document.getElementById("done").innerHTML += generateTodoHTML(element); //erstellt alle Tasks mit category: done
+      document.getElementById("done").innerHTML += generateTodoHTMLBoard(element); //erstellt alle Tasks mit category: done
     }
   }
 }
@@ -216,7 +216,7 @@ async function deleteTaskBoard(id) {
      await setItem("taskData", JSON.stringify(taskData));
      await getContact();
     updateHTMLBoard();
-    closeAddTaskDialog();
+    closeTaskBig();
 }
 
 async function saveTask(id) {
