@@ -18,7 +18,6 @@ let taskData = [];
 let taskIdCounter = 0;
 let selectedPrio = "";
 let newTask = [];
-let users = [];
 let contacts = [];
 let selectedContacts = [];
 let assignedContacts = [];
@@ -29,9 +28,51 @@ let assignedContacts = [];
 async function init() {
   includeHTML();
   await loadTasksData();
-  await loadUsers();
   await getContact();
 }
+
+/**
+ * Loads task data from remote storage.
+ */
+async function loadTasksData() {
+  try {
+    taskData = JSON.parse(await getItem("taskData"));
+  } catch (e) {
+    console.info("Could not load tasks");
+  }
+}
+
+/**
+ * Loads contact data from remote storage.
+ */
+async function getContact() {
+  try {
+    contacts = JSON.parse(await getItem("contact"));
+  } catch (error) {
+    console.info("Could not load contacts");
+  }
+  // Loading selected contacts from local storage
+  try {
+    selectedContacts =
+      JSON.parse(localStorage.getItem("selectedContacts")) || [];
+  } catch (error) {
+    console.info("Could not load selected contacts");
+  }
+}
+
+/**
+ * Sets up event listeners for focus and blur events on the input element.
+ */
+document.addEventListener("DOMContentLoaded", function () {
+  var addSubtaskInput = document.getElementById("addsubtask");
+
+  // Setting up the event listeners for focus and blur events
+  addSubtaskInput.addEventListener("focus", handleFocus);
+  addSubtaskInput.addEventListener("blur", handleBlur);
+
+  // Set medium priority as default
+  changePriorityColor("medium");
+});
 
 /**
  * Sets all buttons back to default colors and font colors.
@@ -94,7 +135,7 @@ function checkDueDate() {
 
   if (selectedDate < currentDate) {
     alert("Please select a date that is today or later for the due date.");
-    document.getElementById("dueDate").value = ""; // Zurücksetzen des Eingabefelds
+    document.getElementById("dueDate").value = ""; // Reset the input field
   }
 }
 
@@ -105,7 +146,7 @@ function checkDueDate() {
  */
 function handleCategoryChange(selectElement) {
   var selectedCategory = selectElement.value;
-  // Hier können Sie die gewählte Kategorie weiterverarbeiten, z. B. sie in einer Variable speichern oder eine Funktion aufrufen
+  // Here you can further process the selected category, e.g., store it in a variable or call a function
   console.log("Selected category: " + selectedCategory);
 }
 
@@ -163,23 +204,16 @@ function saveSubtask() {
   let subtaskText = subtaskInput.value;
 
   if (subtaskText !== "") {
-    // Erstellen einer eindeutigen ID für den Subtask
-    let subtaskId = subtask.length;
-    // Hinzufügen des Subtasks zum globalen Array
-    subtask.push({ id: subtaskId, content: subtaskText, completed: false });
+    let subtaskId = subtask.length; // Creating a unique ID for the subtask
 
-    // Erstellen des HTML-Codes für den Subtask
-    const subtaskHTML = renderSubtaskItem(subtaskText, subtaskId);
-
-    // Hinzufügen des Subtask-HTML-Codes zum Element mit der ID 'showsubtasks'
-    const showSubtasksContainer = document.getElementById("showsubtasks");
+    subtask.push({ id: subtaskId, content: subtaskText, completed: false }); // Adding the subtask to the global array
+    const subtaskHTML = renderSubtaskItem(subtaskText, subtaskId); // Creating the HTML code for the subtask
+    const showSubtasksContainer = document.getElementById("showsubtasks"); // Adding the subtask HTML code to the element with ID 'showsubtasks'
     showSubtasksContainer.insertAdjacentHTML("beforeend", subtaskHTML);
+    
+    subtaskInput.value = ""; // Clear subtask input
 
-    // Clear subtask input
-    subtaskInput.value = "";
-
-    // Anzeigen der Subtasks
-    showSubtasksContainer.classList.remove("d-none");
+    showSubtasksContainer.classList.remove("d-none"); // Displaying the subtasks
   }
 }
 
@@ -191,7 +225,7 @@ function saveSubtask() {
  * @returns {string} The HTML code for the subtask item.
  */
 function renderSubtaskItem(subtask, i) {
-  return `
+  return /*HTML*/ `
       <div class="subtask-item">
           <div id="subtask${i}" class="subtask-content">
               <span>\u2022 ${subtask}</span>
@@ -249,12 +283,11 @@ function subtaskSaveEdit(i) {
  * @param {number} id - The ID of the subtask to delete.
  */
 function subtaskDelete(id) {
-  // Finden des Index des Subtasks im globalen Array anhand seiner ID
-  let index = subtask.findIndex(sub => sub.id === id);
+  let index = subtask.findIndex(sub => sub.id === id); // Finding the index of the subtask in the global array based on its ID
 
-  // Überprüfen, ob der Subtask gefunden wurde
+  // Checking if the subtask is found
   if (index !== -1) {
-    // Löschen des Subtasks aus dem globalen Array
+    // Deleting the subtask from the global array
     subtask.splice(index, 1);
 
     let subtaskElement = document.getElementById(`subtask${id}`);
@@ -269,22 +302,14 @@ function subtaskDelete(id) {
  * Clears all form entries.
  */
 function clearEntries() {
-  // Clear-Eingaben für die Titel-Section
-  document.getElementById("titleAddTask").value = "";
-  // Clear-Eingaben für die Description-Section
-  document.querySelector(".padding-description textarea").value = "";
-  // Clear-Eingaben für die Assigned To-Section
-  clearAssignedUser();
-  // Clear-Eingaben für die Due Date-Section
-  document.getElementById("dueDate").value = "";
-  // Clear-Eingaben für die Priority-Section
-  resetPriorityButtons();
-  // Clear-Eingaben für die Category-Section
-  resetCategorySection();
-  // Clear-Eingaben für die Subtasks-Section
-  document.getElementById("addsubtask").value = "";
-  // Clear-Einträge in der Show Subtasks-Section
-  clearShowSubtasks();
+  document.getElementById("titleAddTask").value = ""; // Clear entries for title section
+  document.querySelector(".padding-description textarea").value = ""; // Clear entries for description section
+  clearAssignedUser(); // Clear entries for assigned to section
+  document.getElementById("dueDate").value = ""; // Clear entries for due date section
+  resetPriorityButtons(); // Clear entries for priority section
+  resetCategorySection(); // Clear entries for category section
+  document.getElementById("addsubtask").value = ""; // Clear entries for subtasks section
+  clearShowSubtasks(); // Clear entries in the show subtasks section
   subtaskDelete();
 }
 
@@ -293,7 +318,7 @@ function clearEntries() {
  */
 function clearShowSubtasks() {
   const showSubtasks = document.getElementById("showsubtasks");
-  // Lösche alle untergeordneten Elemente der showSubtasks-DIV
+  // Remove all child elements of the showSubtasks DIV
   while (showSubtasks.firstChild) {
     showSubtasks.removeChild(showSubtasks.firstChild);
   }
@@ -303,24 +328,21 @@ function clearShowSubtasks() {
  * Resets priority buttons to default state.
  */
 function resetPriorityButtons() {
-  // Array mit den IDs der Priority-Buttons und ihren Standardbildern
+  // Array containing the IDs of the priority buttons and their default images
   const priorityButtons = [
     { id: "btnPrioUrgent", imgSrc: "assets/img/urgent_red_AddTask.svg" },
     { id: "btnPrioMedium", imgSrc: "assets/img/medium_orange_AddTask.svg" },
     { id: "btnPrioLow", imgSrc: "assets/img/low_green_AddTask.svg" },
   ];
 
-  // Schleife über alle Button-IDs
+  // Loop through all button IDs
   priorityButtons.forEach((button) => {
     const buttonElement = document.getElementById(button.id);
-    // Zurücksetzen der Hintergrundfarbe
-    buttonElement.style.backgroundColor = "rgba(255, 255, 255, 1)";
-    // Zurücksetzen der Border Color
-    buttonElement.style.borderColor = "#D1D1D1";
-    // Zurücksetzen der Schriftfarbe
-    buttonElement.style.color = "rgba(0, 0, 0, 1)";
-    // Zurücksetzen des Bildes
-    const imgElement = buttonElement.querySelector("img");
+    
+    buttonElement.style.backgroundColor = "rgba(255, 255, 255, 1)"; // Reset background color
+    buttonElement.style.borderColor = "#D1D1D1"; // Reset border color
+    buttonElement.style.color = "rgba(0, 0, 0, 1)"; // Reset font color
+    const imgElement = buttonElement.querySelector("img"); // Reset image
     imgElement.src = button.imgSrc;
   });
 }
@@ -330,11 +352,11 @@ function resetPriorityButtons() {
  */
 function resetCategorySection() {
   const categoryDropdown = document.getElementById("categoryAddTask");
-  // Setze den ausgewählten Index auf den Index des `<option>`-Elements mit dem Wert ""
+  // Set the selected index to the index of the `<option>` element with value ""
   categoryDropdown.selectedIndex = 0;
-  // Setze die Border Color zurück
+  // Reset border color
   categoryDropdown.style.borderColor = "#D1D1D1";
-  // Füge das onchange-Event wieder hinzu
+  // Re-add the onchange event
   categoryDropdown.onchange = handleCategoryChange;
 }
 
@@ -342,7 +364,7 @@ function resetCategorySection() {
  * Creates a new task for remote storage array taskData.
  */
 async function createTask() {
-  // Erforderliche Felder prüfen
+  // Check required fields
   let title = document.getElementById("titleAddTask").value;
   let dueDate = document.getElementById("dueDate").value;
 
@@ -366,52 +388,7 @@ async function createTask() {
     await setItem('taskData', JSON.stringify(taskData));
 
   checkDueDate();
-
-  // taskData.push(newTask);
   clearEntries();
-
-  // JSON-Array ausgeben (nur für Debugging-Zwecke)
-  // console.log(taskData);
-}
-
-/**
- * Loads task data from remote storage.
- */
-async function loadTasksData() {
-  try {
-    taskData = JSON.parse(await getItem("taskData"));
-  } catch (e) {
-    console.info("Could not load tasks");
-  }
-}
-
-/**
- * Loads user data from remote storage.
- */
-async function loadUsers() {
-  try {
-    users = JSON.parse(await getItem("users"));
-  } catch (e) {
-    console.error("Loading error:", e);
-  }
-}
-
-/**
- * Loads contact data from remote storage.
- */
-async function getContact() {
-  try {
-    contacts = JSON.parse(await getItem("contact"));
-  } catch (error) {
-    console.info("Could not load contacts");
-  }
-  // Laden der ausgewählten Kontakte aus dem Local Storage
-  try {
-    selectedContacts =
-      JSON.parse(localStorage.getItem("selectedContacts")) || [];
-  } catch (error) {
-    console.info("Could not load selected contacts");
-  }
 }
 
 /**
@@ -592,29 +569,24 @@ function clearAssignedUser() {
   document.querySelectorAll(".checkbox").forEach(function (checkbox) {
     checkbox.src = "./assets/img/addTask_AssignTo_Checkbox.svg";
   });
-  document
-    .querySelectorAll(".assignListContact")
-    .forEach(function (dropDownContact) {
-      dropDownContact.classList.remove("contactSelected");
-    });
-  closeAssignTo();
-  saveSelectedContacts();
+  let contactsElements = document.querySelectorAll(".assignListContact");
+  contactsElements.forEach(function (contact) {
+    contact.classList.remove("contactSelected");
+  });
 }
 
 /**
- * Handles focus event on input elements by setting a custom border color.
+ * Handles focus event on subtask input.
  */
-function handleFocus(event) {
-  if (event.target.tagName === "INPUT") {
-    event.target.parentElement.style.border = "1px solid #29ABE2";
-  }
+function handleFocus() {
+  let addSubtaskMain = document.querySelector(".addSubtaskMain");
+  addSubtaskMain.style.border = "1px solid rgba(41, 171, 226, 1)";
 }
 
 /**
- * Handles blur event on input elements by resetting the border color.
+ * Handles blur event on subtask input.
  */
-function handleBlur(event) {
-  if (event.target.tagName === "INPUT") {
-    event.target.parentElement.style.border = "";
-  }
+function handleBlur() {
+  let addSubtaskMain = document.querySelector(".addSubtaskMain");
+  addSubtaskMain.style.border = "1px solid rgba(209, 209, 209, 1)";
 }
