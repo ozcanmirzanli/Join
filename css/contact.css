@@ -618,3 +618,7 @@ input {
   text-align: center;
   color: #ffffff;
 }
+
+.contactsSeperator {
+  border: 1px solid #D1D1D1;
+}

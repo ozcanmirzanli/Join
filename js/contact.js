@@ -1,4 +1,5 @@
 let contacts = [];
+let firstLetters = [];
 
 let colors = [
   "#FF7A00",
@@ -26,7 +27,7 @@ async function getContact() {
   }
 }
 
-function addNewConatct() {
+function addNewContact() {
   let addContact = document.getElementById("addContact");
   addContact.classList.remove("d-none");
   addContact.classList.add("addContact");
@@ -79,6 +80,12 @@ async function saveContact() {
   getOverview(index);
   renderContacts();
   closeAddContact();
+
+  // Extrahiere den ersten Buchstaben des Vornamens des neuen Kontakts und füge ihn dem Array hinzu
+  const firstNameInitial = nameParts[0].charAt(0).toUpperCase();
+  if (!firstLetters.includes(firstNameInitial)) {
+    firstLetters.push(firstNameInitial);
+  }
 }
 
 function closeAddContact() {
@@ -108,6 +115,16 @@ function renderContacts() {
            </div>
         `;
   }
+}
+
+function generateLettersCategoriesHTML(firstLetter) {
+  return /*HTML*/ `
+                  <div id="container${firstLetter}">
+                      <div>${firstLetter}</div>
+                      <div class="contactsSeperator"></div>
+                      <div id="contactsList${firstLetter}"></div>
+                  </div>
+                  `;
 }
 
 function getInitials(name) {
@@ -175,30 +192,30 @@ function editContact(index) {
   addContact.classList.add("addContact");
 
   addContact.innerHTML = /*html*/ `
-  <section class="addContactLeft">
-  <img src="./assets/img/joinLogoWhite.svg" alt="" class="logo">
-  <h1>Edit Contact</h1><div class="vector"></div>
-</section>
-<section class="addContactRigth">
-<div class="close"><img src="./assets/img/Close.png" alt="" onclick="closeAddContact()"></div>
-<div class="inputarea">
-  <img src="./assets/img/Group 13.png" alt="" class="addInitials">
-<div class="inputFields">
-  <div class="input"><input type="text" placeholder="Name" id="name" value="${contact["name"]}"><img src="./assets/img/input_name.png" alt="" class="inputImg"></div>
-  <div class="input"><input type="e-mail" placeholder="E-Mail" id="mail" value="${contact["email"]}"><img src="./assets/img/mail.png" alt="" class="inputImg"></div>
-  <div class="input"><input type="number" placeholder="Telefonnummer" id="number" value="${contact["number"]}"><img src="./assets/img/call.png" alt="" class="inputImg"></div>
-</div>
-</div>
-<div class="btnArea" style= "margin-top: 80px;" >
-<button class="deleteBtnEdit" onclick="deleteContact(${index})">
-             <p class="deleteBtnEditText">Delete</p>
-    </button>
-    <button class="saveBtn" onclick="saveEditedContact(${index})">
-      <p class="saveBtnText">Save</p>
-             <img src="./assets/img/check.png" alt="" style="width: 20px; height: 18px;"/>
-    </button>
-</div>
-</section>`;
+    <section class="addContactLeft">
+      <img src="./assets/img/joinLogoWhite.svg" alt="" class="logo">
+      <h1>Edit Contact</h1><div class="vector"></div>
+    </section>
+    <section class="addContactRigth">
+      <div class="close"><img src="./assets/img/Close.png" alt="" onclick="closeAddContact()"></div>
+      <div class="inputarea">
+        <img src="./assets/img/Group 13.png" alt="" class="addInitials">
+        <div class="inputFields">
+          <div class="input"><input type="text" placeholder="Name" id="name" value="${contact["name"]}"><img src="./assets/img/input_name.png" alt="" class="inputImg"></div>
+          <div class="input"><input type="e-mail" placeholder="E-Mail" id="mail" value="${contact["email"]}"><img src="./assets/img/mail.png" alt="" class="inputImg"></div>
+          <div class="input"><input type="number" placeholder="Telefonnummer" id="number" value="${contact["number"]}"><img src="./assets/img/call.png" alt="" class="inputImg"></div>
+        </div>
+      </div>
+      <div class="btnArea" style= "margin-top: 80px;" >
+        <button class="deleteBtnEdit" onclick="deleteContact(${index})">
+          <p class="deleteBtnEditText">Delete</p>
+        </button>
+        <button class="saveBtn" onclick="saveEditedContact(${index})">
+          <p class="saveBtnText">Save</p>
+          <img src="./assets/img/check.png" alt="" style="width: 20px; height: 18px;"/>
+        </button>
+      </div>
+    </section>`;
 }
 
 async function saveEditedContact(index) {
@@ -216,4 +233,15 @@ async function saveEditedContact(index) {
   await setItem("contact", JSON.stringify(contacts));
   renderContacts();
   closeAddContact();
+
+  // Extrahiere den ersten Buchstaben des bearbeiteten Vornamens des Kontakts und aktualisiere das Array
+  const firstNameInitial = nameParts[0].charAt(0).toUpperCase();
+  const oldInitials = contacts[index]["initials"];
+  const oldInitialsIndex = firstLetters.indexOf(oldInitials);
+  if (oldInitialsIndex !== -1) {
+    firstLetters.splice(oldInitialsIndex, 1); // Entferne alte Initialen aus dem Array
+  }
+  if (!firstLetters.includes(firstNameInitial)) {
+    firstLetters.push(firstNameInitial); // Füge neue Initialen dem Array hinzu
+  }
 }
