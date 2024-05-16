@@ -314,7 +314,7 @@ function changeBorderColor() {
 }
  
 function updateProgressBar(todo) {
-  let completedSubtasks = todo.subTasks.filter(subtask => subtask.done).length;
+  let completedSubtasks = todo.subTasks.filter(subtask => subtask.completed).length;
   let progressBarId = `progress-bar-${todo.id}`;
   let progressBar = document.getElementById(`progress-bar-${todo.id}`);
   let progress = (completedSubtasks / todo.subTasks.length) * 100;
@@ -327,3 +327,22 @@ function updateProgressBar(todo) {
       }
   }
 }
+
+async function saveSubtaskBoard(id) {
+  
+  taskData.push ({
+      id: taskIdCounter++,
+      title: title,
+      description: description,
+      assignTo: assignTo,
+      dueDate: dueDate,
+      category: category,
+      subTasks: subTasks,
+      priority: selectedPrio,
+      todo: todo,
+  });
+    
+  await setItem('taskData', JSON.stringify(taskData));
+
+  closeAddTaskDialog();
+};

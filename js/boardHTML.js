@@ -5,7 +5,7 @@
  */
 function generateTodoHTMLBoard(element) {
  
-    if (taskData['subTasks']) {
+    if (element['subTasks'].length > 0) {
         let progressBarId = `progress-bar-${element.id}`;
         let completedSubtasksCount = element.subTasks.filter(subtask => subtask.completed).length;
     let totalSubtasksCount = element.subTasks.length;
@@ -96,6 +96,8 @@ let assignTo = '';
 function changeCompletedBoard(taskIndex, subTaskIndex) {
     taskData[taskIndex].subTasks[subTaskIndex].completed = !taskData[taskIndex].subTasks[subTaskIndex].completed;
     renderBigTask(taskData[taskIndex]);
+    saveSubtaskBoard(taskData[taskIndex]);
+    updateProgressBar(taskData[taskIndex]);
 }
 
 /**
