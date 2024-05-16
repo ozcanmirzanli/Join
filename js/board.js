@@ -328,19 +328,10 @@ function updateProgressBar(todo) {
   }
 }
 
-async function saveSubtaskBoard(id) {
-  
-  taskData.push ({
-      id: id,
-      title: title,
-      description: description,
-      assignTo: assignTo,
-      dueDate: dueDate,
-      category: category,
-      subTasks: subTasks,
-      priority: priority,
-      todo: todo,
-  });
-    
-  await setItem('taskData', JSON.stringify(taskData));
-};
+async function saveSubtaskBoard(id, subTasks) {
+  const updatedTask = taskData.find(task => task.id === id);
+  if (updatedTask) {
+      updatedTask.subTasks = subTasks;
+      await setItem('taskData', JSON.stringify(taskData));
+  }
+}

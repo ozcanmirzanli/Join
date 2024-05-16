@@ -81,7 +81,6 @@ async function saveContact() {
   renderContacts();
   closeAddContact();
 
-  // Extrahiere den ersten Buchstaben des Vornamens des neuen Kontakts und füge ihn dem Array hinzu
   const firstNameInitial = nameParts[0].charAt(0).toUpperCase();
   if (!firstLetters.includes(firstNameInitial)) {
     firstLetters.push(firstNameInitial);

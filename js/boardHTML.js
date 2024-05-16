@@ -94,12 +94,12 @@ let assignTo = '';
 }
 
 function changeCompletedBoard(taskIndex, subTaskIndex) {
-    taskData[taskIndex].subTasks[subTaskIndex].completed = !taskData[taskIndex].subTasks[subTaskIndex].completed;
+    const subTask = taskData[taskIndex].subTasks[subTaskIndex];
+    subTask.completed = !subTask.completed;
     renderBigTask(taskData[taskIndex]);
-    saveSubtaskBoard(taskData[taskIndex]);
+    saveSubtaskBoard(taskData[taskIndex]["id"], taskData[taskIndex]["subTasks"]);
     updateProgressBar(taskData[taskIndex]);
 }
-
 /**
  * Renders the add task form.
  * @returns {string} - The HTML for the add task form.
