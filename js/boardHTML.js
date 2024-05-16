@@ -129,18 +129,19 @@ function renderAddTaskForm() {
                         </section>
 
                         <!-- Assigend To -->
-                       <section class="padding-description">
+                        <section class="padding-description">
                             <div class="pd-bottom"><label>Assigned to</label></div>
-                                <div class="">
-                                <div id="assignAddTask" name="assignTo" class="border-none input-assignedTo"><span>Select contacts to assign</span>
-                                <img class="assignToDDArrow" src="assets/img/arrow_drop_down_AddTask.svg" onclick="openAssignTo()" id="arrowdown" alt="arrowdown"/>
-                                <img src="assets/img/arrow_drop_down_AddTask.svg" onclick="closeAssignTo()" id="arrowup" alt="arrowup" class="assignToDDArrow rotate d-none">
-                                </div>              
+                            <div class="">
+                                <div id="assignAddTask" name="assignTo" class="input-assignedTo">
+                                    <span id="select-contacts">Select contacts to assign</span>
+                                    <img class="assignToDDArrow" src="assets/img/arrow_drop_down_AddTask.svg" onclick="openAssignTo()" id="arrowdown" alt="arrowdown"/>
+                                    <img src="assets/img/arrow_drop_down_AddTask.svg" onclick="closeAssignTo()" id="arrowup" alt="arrowup"  class="assignToDDArrow rotate d-none"/>
+                                </div>
                             </div>
                             <div id="assignToDropdown" class="assignToDropdown assignField d-none">
-                                <!-- <input title="assignToFilter" type="text" onkeyup="filterNames()" id="contactSearch" class="assignToContactField">
-                                <img src="assets/img/arrow_drop_down_AddTask.svg" onclick="closeAssignTo()" id="arrowup" alt="arrowup" class="assignToDDArrow rotate"> -->
-                            <div id="assignToList" class="assignToDropDownMenu"></div>
+                            <!-- <input title="assignToFilter" type="text" onkeyup="filterNames()" id="contactSearch" class="assignToContactField">
+                                    <img src="assets/img/arrow_drop_down_AddTask.svg" onclick="closeAssignTo()" id="arrowup" alt="arrowup" class="assignToDDArrow rotate"> -->
+                                <div id="assignToList" class="assignToDropDownMenu"></div>
                             </div>
                             <div id="assignedUser" class="assignedUserList"></div>
                         </section>
