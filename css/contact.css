@@ -31,7 +31,7 @@ body {
 .seperator {
   height: 59px;
   border: 3px;
-  border: 3px solid #29abe2;
+  border-right: 3px solid #29abe2;
 }
 
 .headline {
@@ -52,7 +52,6 @@ h4 {
   font-weight: 400;
   line-height: 32.4px;
   text-align: left;
-  margin-left: 20px;
 }
 
 .contactOverview {
@@ -67,7 +66,7 @@ h4 {
 
 .allContacts {
   background-color: white;
-  width: 456px;
+  max-width: 456px;
   height: calc(100vh - 96px);
   box-shadow: 4px 0px 6px 0px #00000014;
   padding: 32px 24px 32px 48px;
@@ -88,34 +87,31 @@ h4 {
 
 .allContacts::-webkit-scrollbar-thumb {
   border-radius: 20px;
-  background-color: #A8A8A8;
+  background-color: #a8a8a8;
 }
-.allContacts::-webkit-scrollbar-track { 
+.allContacts::-webkit-scrollbar-track {
   border-radius: 8px;
-  background-color: #FFFFFF;
-} 
+  background-color: #ffffff;
+}
 
-.allContacts::-webkit-scrollbar-button
-{
+.allContacts::-webkit-scrollbar-button {
   border-style: solid;
   height: 16px;
   width: 16px;
 }
 
-.allContacts::-webkit-scrollbar-button:vertical:decrement
-{
+.allContacts::-webkit-scrollbar-button:vertical:decrement {
   border-width: 0 7px 14px 7px;
   border-color: transparent transparent #404040 transparent;
 }
 
-.allContacts::-webkit-scrollbar-button:vertical:increment
-{
+.allContacts::-webkit-scrollbar-button:vertical:increment {
   border-width: 14px 7px 0 7px;
   border-color: #404040 transparent transparent transparent;
 }
 
 .addBtn {
-  width: 100%;
+  width: 352px;
   height: 56px;
   padding: 12px 0px;
   gap: 16px;
@@ -126,6 +122,7 @@ h4 {
   justify-content: center;
   border: none;
   border-radius: 10px;
+  margin-bottom: 5px;
 }
 
 .addBtn:hover {
@@ -396,12 +393,15 @@ input {
   align-items: center;
   justify-content: center;
   display: flex;
+  color: white;
+  font-size: 12px;
+  font-weight: 400;
 }
 
 .contactSmall {
   cursor: pointer;
-  width: 352px;
-  height: 78px;
+  max-width: 304px;
+  max-height: 78px;
   padding: 15px 24px;
   gap: 35px;
   border-radius: 10px;
@@ -411,7 +411,7 @@ input {
 }
 
 .contactSmall:hover {
-  background-color: linear-gradient(180deg, #F9F9F9 0%, #F0F0F0 100%);
+  background-color: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);
 }
 
 .contactInfo {
@@ -492,13 +492,13 @@ input {
   font-weight: 400;
 }
 
-.contactdetails{
+.contactdetails {
   display: flex;
   flex-direction: column;
   gap: 22px;
 }
 
-.contactDetailsInfo{
+.contactDetailsInfo {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -509,7 +509,7 @@ input {
 }
 
 .email {
-  color: #007CEE;
+  color: #007cee;
 }
 
 .nameArea {
@@ -530,13 +530,18 @@ input {
   display: flex;
   border: none;
   align-items: center;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+  font-family: "Inter", sans-serif;
 }
 
 .deleteBtnContact:hover {
   cursor: pointer;
   color: rgb(0, 124, 238);
   font-weight: 700;
-  filter: invert(64%) sepia(70%) saturate(2202%) hue-rotate(165deg) brightness(91%) contrast(94%);
+  filter: invert(64%) sepia(70%) saturate(2202%) hue-rotate(165deg)
+    brightness(91%) contrast(94%);
 }
 
 .btnArea {
@@ -620,5 +625,21 @@ input {
 }
 
 .contactsSeperator {
-  border: 1px solid #D1D1D1;
+  border: 1px solid #d1d1d1;
+  margin-bottom: 8px;
+  max-width: 350px;
+}
+
+.container-letter {
+  width: 352px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  margin-left: 38px;
+}
+
+.contact-list-active {
+  background: #2a3647;
+  border-radius: 20px;
+  color: white;
 }

@@ -99,7 +99,7 @@ function renderContacts() {
 
   // Setze die ID jedes Kontakts auf den Array-Index, falls noch nicht gesetzt
   contacts.forEach((contact, index) => {
-    if (!contact.hasOwnProperty('id')) {
+    if (!contact.hasOwnProperty("id")) {
       contact.id = index;
     }
   });
@@ -137,7 +137,7 @@ function renderContactsByLetter(letter, contacts) {
 
   contacts.forEach(function (contact) {
     container.innerHTML += /*html*/ `
-      <div class="contactSmall" onclick="getOverview(${contact.id})">
+      <div class="contactSmall" data-id="${contact.id}" onclick="getOverview(${contact.id})">
         <div class="initials" style="background-color: ${contact.color};">${contact.initials}</div>
         <div class="contactInfo">
           <div class="name">${contact.name}</div>
@@ -151,7 +151,7 @@ function renderContactsByLetter(letter, contacts) {
 function generateLettersCategoriesHTML(firstLetter) {
   return /*HTML*/ `
                   <div id="container${firstLetter}">
-                      <div>${firstLetter}</div>
+                      <div class="container-letter">${firstLetter}</div>
                       <div class="contactsSeperator"></div>
                       <div id="contactsList${firstLetter}"></div>
                   </div>
@@ -170,7 +170,7 @@ contacts.forEach(function (contact) {
 });
 
 function getOverview(contactId) {
-  let contact = contacts.find(contact => contact.id === contactId);
+  let contact = contacts.find((contact) => contact.id === contactId);
   document.getElementById("contactBig").classList.remove("d-none");
   document.getElementById("contactBig").innerHTML = /*html*/ `
   <div class="upperArea">
@@ -192,7 +192,7 @@ function getOverview(contactId) {
     <div class="infoHead">Contact Information</div>
     <div class="contactdetails">
       <div class="contactDetailsInfo">
-        <div class="mailHead">E-Mail</div>
+        <div class="mailHead">Email</div>
         <div style="background-color: background: #007CEE;" class="email">${contact["email"]}</div>
       </div>
       <div class="contactDetailsInfo">
@@ -201,6 +201,19 @@ function getOverview(contactId) {
       </div>
     </div>
   `;
+  changeContactColor(contactId);
+}
+
+function changeContactColor(contactId) {
+  let allContacts = document.querySelectorAll(".contactSmall");
+
+  allContacts.forEach((contact) => {
+    if (contact.getAttribute("data-id") == contactId) {
+      contact.classList.add("contact-list-active");
+    } else {
+      contact.classList.remove("contact-list-active");
+    }
+  });
 }
 
 function closeOverview() {
@@ -208,7 +221,7 @@ function closeOverview() {
 }
 
 async function deleteContact(contactId) {
-  const index = contacts.findIndex(contact => contact.id === contactId);
+  const index = contacts.findIndex((contact) => contact.id === contactId);
   if (index !== -1) {
     contacts.splice(index, 1);
     await setItem("contact", JSON.stringify(contacts));
@@ -222,7 +235,7 @@ async function deleteContact(contactId) {
 }
 
 function editContact(contactId) {
-  const index = contacts.findIndex(contact => contact.id === contactId);
+  const index = contacts.findIndex((contact) => contact.id === contactId);
   if (index !== -1) {
     let contact = contacts[index];
     let addContact = document.getElementById("addContact");
@@ -263,7 +276,7 @@ function editContact(contactId) {
 }
 
 async function saveEditedContact(contactId) {
-  const index = contacts.findIndex(contact => contact.id === contactId);
+  const index = contacts.findIndex((contact) => contact.id === contactId);
   if (index !== -1) {
     let name = document.getElementById("name").value;
     let mail = document.getElementById("mail").value;
