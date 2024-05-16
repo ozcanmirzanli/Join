@@ -49,12 +49,12 @@ function generateTodoHTMLBoard(element) {
  * Renders a big task with detailed information.
  * @param {Object} todo - The task object to render.
  */
-function renderBigTask(todo) {
+function renderBigTask(task) {
 let subtasks = '';
-let taskIndex = todo["id"];
-if (todo['subTasks'] && todo['subTasks'].length > 0) {
-    for (let i = 0; i < todo["subTasks"].length; i++) {
-        let subTaskIndex = todo["subTasks"][i];
+let taskIndex = task["id"];
+if (task['subTasks'] && task['subTasks'].length > 0) {
+    for (let i = 0; i < task["subTasks"].length; i++) {
+        let subTaskIndex = task["subTasks"][i];
         let imgSrc = subTaskIndex["completed"] ? "./assets/img/check-box-checked.png" : "./assets/img/check-box-disabled.png";
         subtasks += /*html*/ `
             <span><img src="${imgSrc}" alt="" id="subTaskCheckBox" onclick="changeCompletedBoard(${taskIndex}, ${i})">${subTaskIndex["content"]}</span>
@@ -62,8 +62,8 @@ if (todo['subTasks'] && todo['subTasks'].length > 0) {
     }  
 }
 let assignTo = '';
-  for (let j = 0; j < todo["assignTo"].length; j++) {
-    let memberId = todo["assignTo"][j];
+  for (let j = 0; j < task["assignTo"].length; j++) {
+    let memberId = task["assignTo"][j];
     if (memberId) {
       assignTo += `<div class="userTask"><div class="initialsBig" style="background-color: ${memberId["color"]}">${memberId["initials"]}</div>${memberId["name"]}</div>`;
     }
@@ -71,21 +71,21 @@ let assignTo = '';
   document.getElementById("taskBig").classList.remove("d-none");
   const BigTaskHTML = /*html*/ `
        <div class="bigTask">
-        <div>${todo["category"]}</div> 
+        <div>${task["category"]}</div> 
         <div class="taskTitle">
-          <h2>${todo["title"]}</h2>
+          <h2>${task["title"]}</h2>
           <img src="./assets/img/plus button.svg" alt="" onclick="closeTaskBig()">
         </div>
-        <h3>${todo["description"]}</h3>
-        <div class="dueDate">due date : ${todo["dueDate"]}</div>
-        <div class="prio">Priority: ${todo['priority']} <img src="./assets/img/${todo['priority']}_priority.svg" alt=""></div>
+        <h3>${task["description"]}</h3>
+        <div class="dueDate">due date : ${task["dueDate"]}</div>
+        <div class="prio">Priority: ${task['priority']} <img src="./assets/img/${task['priority']}_priority.svg" alt=""></div>
         <div class="members">assigned to :
           ${assignTo}
         </div>
         <div class="subtask"><p>Subtasks</p>${subtasks}</div>
         <footer class="taskfooter">
-          <img src="./assets/img/Delete contact.svg" alt="delete" class="iconTask" onclick="deleteTaskBoard(${todo["id"]})"> 
-          <img src="./assets/img/edit contacts.svg" alt="edit" class="iconTask" onclick="editTask(${todo["id"]})">
+          <img src="./assets/img/Delete contact.svg" alt="delete" class="iconTask" onclick="deleteTaskBoard(${task["id"]})"> 
+          <img src="./assets/img/edit contacts.svg" alt="edit" class="iconTask" onclick="editTask(${task["id"]})">
         </footer>
       </div>
     `;

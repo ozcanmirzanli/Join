@@ -331,18 +331,16 @@ function updateProgressBar(todo) {
 async function saveSubtaskBoard(id) {
   
   taskData.push ({
-      id: taskIdCounter++,
+      id: id,
       title: title,
       description: description,
       assignTo: assignTo,
       dueDate: dueDate,
       category: category,
       subTasks: subTasks,
-      priority: selectedPrio,
+      priority: priority,
       todo: todo,
   });
     
   await setItem('taskData', JSON.stringify(taskData));
-
-  closeAddTaskDialog();
 };
