@@ -76,7 +76,7 @@ async function saveContact() {
     initials: initials,
   });
   await setItem("contact", JSON.stringify(contacts));
-  let index = contacts.length - 1;*
+  let index = contacts.length - 1;
   getOverview(index);
   renderContacts();
   closeAddContact();
