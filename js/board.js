@@ -102,7 +102,7 @@ async function moveTo(category) {
 async function saveDraggedTask(updatedTask){
 
   taskData.push ({
-    id: updatedTask["id"],
+    // id: updatedTask["id"],
     title: updatedTask["title"],
     description: updatedTask["description"],
     assignTo: updatedTask["assignTo"],
@@ -230,7 +230,7 @@ async function saveTask(id) {
   }));
 
   taskData.push ({
-      id: taskIdCounter++,
+      // id: taskIdCounter++,
       title: document.getElementById('titleAddTask').value,
       description: document.getElementById('descriptionAddTask').value,
       assignTo: document.getElementById('assignAddTask').value,
@@ -246,73 +246,6 @@ async function saveTask(id) {
   closeAddTaskDialog();
 };
 
-
-/**
- * Setze alle Buttons zurück auf die Standardfarben und Schriftfarben
- *
- * @param {*} priority
- */
-function changePriorityColor(priority) {
-  document.getElementById("btnPrioUrgent").style.backgroundColor = "#ffffff";
-  document.getElementById("btnPrioUrgent").style.color = "#000000";
-  document.getElementById("btnPrioUrgent").style.borderColor = "#D1D1D1";
-  document.getElementById("btnPrioUrgent").getElementsByTagName("img")[0].src = "assets/img/urgent_red_AddTask.svg";
-
-  document.getElementById("btnPrioMedium").style.backgroundColor = "#ffffff";
-  document.getElementById("btnPrioMedium").style.color = "#000000";
-  document.getElementById("btnPrioMedium").style.borderColor = "#D1D1D1";
-  document.getElementById("btnPrioMedium").getElementsByTagName("img")[0].src = "assets/img/medium_orange_AddTask.svg";
-
-  document.getElementById("btnPrioLow").style.backgroundColor = "#ffffff";
-  document.getElementById("btnPrioLow").style.color = "#000000";
-  document.getElementById("btnPrioLow").style.borderColor = "#D1D1D1";
-  document.getElementById("btnPrioLow").getElementsByTagName("img")[0].src = "assets/img/low_green_AddTask.svg";
-/**
-* Ändere die Farben des angeklickten Buttons entsprechend der Priorität
-*
-*/   
-  if (priority === 'urgent') {
-      document.getElementById("btnPrioUrgent").style.backgroundColor = "#FF3D00";
-      document.getElementById("btnPrioUrgent").style.color = "#FFFFFF";
-      document.getElementById("btnPrioUrgent").style.borderColor = "#FF3D00";
-      document.getElementById("btnPrioUrgent").getElementsByTagName("img")[0].src = "assets/img/urgent_white_AddTask.svg";
-      selectedPrio = 'urgent';
-  } else if (priority === 'medium') {
-      document.getElementById("btnPrioMedium").style.backgroundColor = "#FFA800";
-      document.getElementById("btnPrioMedium").style.color = "#FFFFFF";
-      document.getElementById("btnPrioMedium").style.borderColor = "#FFA800";
-      document.getElementById("btnPrioMedium").getElementsByTagName("img")[0].src = "assets/img/medium_white_AddTask.svg";
-      selectedPrio = 'medium';
-  } else if (priority === 'low') {
-      document.getElementById("btnPrioLow").style.backgroundColor = "#7AE229";
-      document.getElementById("btnPrioLow").style.color = "#FFFFFF";
-      document.getElementById("btnPrioLow").style.borderColor = "#7AE229";
-      document.getElementById("btnPrioLow").getElementsByTagName("img")[0].src = "assets/img/low_white_AddTask.svg";
-      selectedPrio = 'low';
-  }}
-
-  
-function checkDueDate() {
-  let selectedDate = new Date(document.getElementById('dueDate').value);
-  let currentDate = new Date();
-
-  if (selectedDate < currentDate.setHours(0, 0, 0, 0)) {
-      alert('Please select a date that is today or later for the due date.');
-      document.getElementById('dueDate').value = ''; // Zurücksetzen des Eingabefelds
-  }
-}
-
-function handleCategoryChange(selectElement) {
-  var selectedCategory = selectElement.value;
-  // Hier können Sie die gewählte Kategorie weiterverarbeiten, z. B. sie in einer Variable speichern oder eine Funktion aufrufen
-  console.log("Selected category: " + selectedCategory);
-}
-
-function changeBorderColor() {
-  let categoryContainer = document.getElementById('categoryContainer');
-  categoryContainer.style.borderColor = "rgba(41, 171, 226, 1)";
-}
- 
 function updateProgressBar(todo) {
   let completedSubtasks = todo.subTasks.filter(subtask => subtask.completed).length;
   let progressBarId = `progress-bar-${todo.id}`;
