@@ -95,25 +95,33 @@ function allowDrop(ev) {
  */
 async function moveTo(category) {
   taskData[currentDraggedElement]["todo"] = category; //change category of element
-  await saveDraggedTask(taskData[currentDraggedElement]);
+  await saveDraggedTask(taskData);
   updateHTMLBoard(); //update Board
 }
 
 async function saveDraggedTask(updatedTask){
+  // Finde die index der zu aktualisierenden Aufgabe im taskData-Array
+  const index = taskData.findIndex(task => task.id === updatedTask.id);
 
-  taskData.push ({
-    // id: updatedTask["id"],
-    title: updatedTask["title"],
-    description: updatedTask["description"],
-    assignTo: updatedTask["assignTo"],
-    dueDate: updatedTask["dueDate"],
-    category: updatedTask["category"],
-     subTasks: updatedTask["subTasks"],
-    todo: updatedTask["todo"],
-  });
-    
-  await setItem('taskData', JSON.stringify(taskData));
+  // Überprüfen, ob die Aufgabe gefunden wurde
+  if (index !== -1) {
+    // Aktualisiere die Aufgabe im taskData-Array
+    taskData[index] = {
+      id: updatedTask.id,
+      title: updatedTask.title,
+      description: updatedTask.description,
+      assignTo: updatedTask.assignTo,
+      dueDate: updatedTask.dueDate,
+      category: updatedTask.category,
+      subTasks: updatedTask.subTasks,
+      todo: updatedTask.todo,
+    };
+
+    // Speichere das aktualisierte taskData im lokalen Speicher
+    await setItem('taskData', JSON.stringify(taskData));
+  }
 }
+
 
 /**
  * Opens a task when clicked on.
