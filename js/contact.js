@@ -206,37 +206,70 @@ contacts.forEach(function (contact) {
 
 function getOverview(contactId) {
   let contact = contacts.find((contact) => contact.id === contactId);
-  document.getElementById("contactBig").classList.remove("d-none");
-  document.getElementById("contactBig").innerHTML = /*html*/ `
-  <div class="upperArea">
-    <div class="initialsBig" style="background-color: ${contact["color"]};">${contact["initials"]}</div>
+  displayContactDetails(contact);
+  changeContactColor(contactId);
+}
+
+function displayContactDetails(contact) {
+  let contactBig = document.getElementById("contactBig");
+  contactBig.classList.remove("d-none");
+  contactBig.innerHTML = generateContactDetailsHTML(contact);
+}
+
+// prettier-ignore
+function generateContactDetailsHTML(contact) {
+  return /*html*/ `
+    <div class="upperArea">
+      <div class="initialsBig" style="background-color: ${contact.color};">${contact.initials}</div>
       <div>
-        <div class="nameArea">
-          <div class="nameBig">${contact["name"]}</div>
-            <div class="btnArea">
-              <div class="deleteBtnContact" onclick="editContact(${contactId})">
-                <img src="./assets/img/edit.svg" alt="" class="imgEdit"/>Edit
-              </div>
-              <div class="deleteBtnContact" onclick="deleteContact(${contactId})">
-                <img src="./assets/img/delete.png" alt="" class="imgDelete" />Delete
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    <div class="infoHead">Contact Information</div>
-    <div class="contactdetails">
-      <div class="contactDetailsInfo">
-        <div class="mailHead">Email</div>
-        <div style="background-color: background: #007CEE;" class="email">${contact["email"]}</div>
-      </div>
-      <div class="contactDetailsInfo">
-        <div class="mailHead">Phone</div>
-        <div>${contact["number"]}</div>
+     ${generateContactNameAreaHTML(contact)}
       </div>
     </div>
+    <div class="infoHead">Contact Information</div>
+    <div class="contactdetails">
+      ${generateContactDetailsInfo(contact)}
+    </div>
   `;
-  changeContactColor(contactId);
+}
+
+function generateContactNameAreaHTML(contact) {
+  return /*html*/ `
+  <div class="nameArea">
+  <div class="nameBig">${contact.name}</div>
+  <div class="btnArea">
+    <div class="deleteBtnContact" onclick="editContact(${contact.id})">
+      <img src="./assets/img/edit.svg" alt="" class="imgEdit"/>Edit
+    </div>
+    <div class="deleteBtnContact" onclick="deleteContact(${contact.id})">
+      <img src="./assets/img/delete.png" alt="" class="imgDelete" />Delete
+    </div>
+  </div>
+</div>
+`;
+}
+
+function generateContactDetailsInfo(contact) {
+  return /*html*/ `
+    <div class="contactDetailsInfo">
+      <div class="mailHead">Email</div>
+      <div style="background-color: background: #007CEE;" class="email">${contact.email}</div>
+    </div>
+    <div class="contactDetailsInfo">
+      <div class="mailHead">Phone</div>
+      <div>${contact.number}</div>
+    </div>
+  `;
+}
+
+function changeContactColor(contactId) {
+  let allContacts = document.querySelectorAll(".contactSmall");
+  allContacts.forEach((contact) => {
+    if (contact.getAttribute("data-id") == contactId) {
+      contact.classList.add("contact-list-active");
+    } else {
+      contact.classList.remove("contact-list-active");
+    }
+  });
 }
 
 function changeContactColor(contactId) {
@@ -273,72 +306,119 @@ function editContact(contactId) {
   const index = contacts.findIndex((contact) => contact.id === contactId);
   if (index !== -1) {
     let contact = contacts[index];
-    let addContact = document.getElementById("addContact");
-    addContact.classList.remove("d-none");
-    addContact.classList.add("addContact");
-
-    addContact.innerHTML = /*html*/ `
-      <section class="addContactLeft">
-        <img src="./assets/img/joinLogoWhite.svg" alt="" class="logo">
-        <h1>Edit Contact</h1><div class="vector"></div>
-      </section>
-      <section class="addContactRigth">
-        <div class="close"><img src="./assets/img/Close.png" alt="" onclick="closeAddContact()"></div>
-        <div class="inputarea">
-          <img src="./assets/img/Group 13.png" alt="" class="addInitials">
-          <div class="inputFields">
-            <div class="input"><input type="text" placeholder="Name" id="name" value="${contact["name"]}"><img src="./assets/img/input_name.png" alt="" class="inputImg"></div>
-            <div class="input"><input type="e-mail" placeholder="E-Mail" id="mail" value="${contact["email"]}"><img src="./assets/img/mail.png" alt="" class="inputImg"></div>
-            <div class="input"><input type="number" placeholder="Telefonnummer" id="number" value="${contact["number"]}"><img src="./assets/img/call.png" alt="" class="inputImg"></div>
-          </div>
-        </div>
-        <div class="btnArea" style= "margin-top: 80px;" >
-          <button class="deleteBtnEdit" onclick="deleteContact(${contactId})">
-            <p class="deleteBtnEditText">Delete</p>
-          </button>
-          <button class="saveBtn" onclick="saveEditedContact(${contactId})">
-            <p class="saveBtnText">Save</p>
-            <img src="./assets/img/check.png" alt="" style="width: 20px; height: 18px;"/>
-          </button>
-        </div>
-      </section>`;
-
-    // Speichere die aktuelle Farbe des Kontakts in einem versteckten Feld
-    document.getElementById("badgeColor").value = contact.color;
+    displayEditContactForm(contact);
   } else {
     console.error("Contact not found with ID: ", contactId);
   }
 }
 
-async function saveEditedContact(contactId) {
-  const index = contacts.findIndex((contact) => contact.id === contactId);
-  if (index !== -1) {
-    let name = document.getElementById("name").value;
-    let mail = document.getElementById("mail").value;
-    let number = document.getElementById("number").value;
-    let color = colors[Math.floor(Math.random() * colors.length)];
-    let nameParts = name.split(" ");
-    let initials = getInitials(name);
-    contacts[index]["name"] = name;
-    contacts[index]["email"] = mail;
-    contacts[index]["number"] = number;
-    contacts[index]["color"] = color;
-    contacts[index]["initials"] = initials;
-    await setItem("contact", JSON.stringify(contacts));
-    renderContacts();
-    closeAddContact();
+function displayEditContactForm(contact) {
+  let addContact = document.getElementById("addContact");
+  addContact.classList.remove("d-none");
+  addContact.classList.add("addContact");
+  addContact.innerHTML = generateEditContactHTML(contact);
+  document.getElementById("badgeColor").value = contact.color;
+}
 
-    // Extrahiere den ersten Buchstaben des bearbeiteten Vornamens des Kontakts und aktualisiere das Array
-    const firstNameInitial = nameParts[0].charAt(0).toUpperCase();
-    const oldInitials = contacts[index]["initials"];
-    const oldInitialsIndex = firstLetters.indexOf(oldInitials);
-    if (oldInitialsIndex !== -1) {
-      firstLetters.splice(oldInitialsIndex, 1); // Entferne alte Initialen aus dem Array
-    }
-    if (!firstLetters.includes(firstNameInitial)) {
-      firstLetters.push(firstNameInitial); // Füge neue Initialen dem Array hinzu
-    }
+function generateEditContactHTML(contact) {
+  return /*html*/ `
+    <section class="addContactLeft">
+      <img src="./assets/img/joinLogoWhite.svg" alt="" class="logo">
+      <h1>Edit Contact</h1><div class="vector"></div>
+    </section>
+    <section class="addContactRigth">
+      <div class="close"><img src="./assets/img/Close.png" alt="" onclick="closeAddContact()"></div>
+      <div class="inputarea">
+        <img src="./assets/img/Group 13.png" alt="" class="addInitials">
+        ${generateEditContactInputsHTML(contact)}
+      </div>
+      ${generateEditContactButtonsHTML(contact.id)}
+    </section>`;
+}
+
+function generateEditContactInputsHTML(contact) {
+  return /*html*/ `
+    <div class="inputFields">
+      <div class="input">
+        <input type="text" placeholder="Name" id="name" value="${contact.name}">
+        <img src="./assets/img/input_name.png" alt="" class="inputImg">
+      </div>
+      <div class="input">
+        <input type="e-mail" placeholder="E-Mail" id="mail" value="${contact.email}">
+        <img src="./assets/img/mail.png" alt="" class="inputImg">
+      </div>
+      <div class="input">
+        <input type="number" placeholder="Telefonnummer" id="number" value="${contact.number}">
+        <img src="./assets/img/call.png" alt="" class="inputImg">
+      </div>
+    </div>`;
+}
+
+function generateEditContactButtonsHTML(contactId) {
+  return /*html*/ `
+    <div class="btnArea" style="margin-top: 80px;">
+      <button class="deleteBtnEdit" onclick="deleteContact(${contactId})">
+        <p class="deleteBtnEditText">Delete</p>
+      </button>
+      <button class="saveBtn" onclick="saveEditedContact(${contactId})">
+        <p class="saveBtnText">Save</p>
+        <img src="./assets/img/check.png" alt="" style="width: 20px; height: 18px;"/>
+      </button>
+    </div>`;
+}
+
+async function saveEditedContact(contactId) {
+  const index = findContactIndex(contactId);
+
+  if (index !== -1) {
+    updateContactDetails(index);
+    await saveContactsToStorage();
+    renderUpdatedContacts();
+    closeAddContact();
+    updateFirstLettersAfterEdit(index);
   } else {
     console.error("Contact not found with ID: ", contactId);
+  }
+}
+
+function findContactIndex(contactId) {
+  return contacts.findIndex((contact) => contact.id === contactId);
+}
+
+function updateContactDetails(index) {
+  let name = document.getElementById("name").value;
+  let mail = document.getElementById("mail").value;
+  let number = document.getElementById("number").value;
+  let color = colors[Math.floor(Math.random() * colors.length)];
+  let initials = getInitials(name);
+
+  contacts[index]["name"] = name;
+  contacts[index]["email"] = mail;
+  contacts[index]["number"] = number;
+  contacts[index]["color"] = color;
+  contacts[index]["initials"] = initials;
+}
+
+async function saveContactsToStorage() {
+  await setItem("contact", JSON.stringify(contacts));
+}
+
+function renderUpdatedContacts() {
+  renderContacts();
+}
+
+function updateFirstLettersAfterEdit(index) {
+  let name = document.getElementById("name").value;
+  let nameParts = name.split(" ");
+  const firstNameInitial = nameParts[0].charAt(0).toUpperCase();
+  const oldInitials = contacts[index]["initials"];
+  const oldInitialsIndex = firstLetters.indexOf(oldInitials);
+
+  if (oldInitialsIndex !== -1) {
+    firstLetters.splice(oldInitialsIndex, 1);
+  }
+
+  if (!firstLetters.includes(firstNameInitial)) {
+    firstLetters.push(firstNameInitial);
   }
 }
