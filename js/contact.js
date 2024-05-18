@@ -33,55 +33,78 @@ function addNewContact() {
   addContact.classList.add("addContact");
   let addBtn = document.querySelector(".addBtn");
   addBtn.style.backgroundColor = "rgb(9,25,49)";
-  addContact.innerHTML = /*html*/ `
-            <section class="addContactLeft">
-                <img src="./assets/img/joinLogoWhite.svg" alt="" class="logo">
-                <h1>AddContact</h1><h2>Tasks are better with a Team!</h2><div class="vector"></div>
-            </section>
-            <section class="addContactRigth">
-            <div class="close"><img src="./assets/img/Close.png" alt="" onclick="closeAddContact()"></div>
-            <div class="inputarea">
-                <img src="./assets/img/Group 13.png" alt="" class="addInitials">
-            <form class="inputFields">
-                <div class="input"><input type="text" placeholder="Name" id="name"><img src="./assets/img/input_name.png" alt="" class="inputImg"></div>
-                <div class="input"><input type="e-mail" placeholder="E-Mail" id="mail"><img src="./assets/img/mail.png" alt="" class="inputImg"></div>
-                <div class="input"><input type="number" placeholder="Telefonnummer" id="number"><img src="./assets/img/call.png" alt="" class="inputImg"></div>
-            </form>
-            </div>
-            <div class="btnArea" style= "margin-top: 80px;" >
-               <button class="addContactCancel" onclick="closeAddContact()">
-               <p class="cancelText">Cancel</p><img src="./assets/img/Close.png" alt="" class="close">
-               </button>
-               <button class="addContactSave" onclick="saveContact()">
-               <p class="saveText">Create Contact</p>
-              <img src="./assets/img/check.png" alt="" style="width: 20px; height: 18px;"/>
-              </button>
-            </div>
-            </section>      
-    `;
+  addContact.innerHTML = generateAddContactHTML();
+}
+
+function generateAddContactHTML() {
+  return /*html*/ `
+  <section class="addContactLeft">
+  <img src="./assets/img/joinLogoWhite.svg" alt="" class="logo">
+  <h1>AddContact</h1><h2>Tasks are better with a Team!</h2><div class="vector"></div>
+  </section>
+  <section class="addContactRight">
+  <div class="close"><img src="./assets/img/Close.png" alt="" onclick="closeAddContact()"></div>
+  <div class="inputarea">
+  <img src="./assets/img/Group 13.png" alt="" class="addInitials">
+  ${generateAddContactInputsHTML()}
+  </div>
+  ${generateAddContactButtonsHTML()}`;
+}
+
+function generateAddContactInputsHTML() {
+  return /*html*/ `
+  <form class="inputFields">
+  <div class="input"><input type="text" placeholder="Name" id="name"><img src="./assets/img/input_name.png" alt="" class="inputImg"></div>
+  <div class="input"><input type="e-mail" placeholder="E-Mail" id="mail"><img src="./assets/img/mail.png" alt="" class="inputImg"></div>
+  <div class="input"><input type="number" placeholder="Telefonnummer" id="number"><img src="./assets/img/call.png" alt="" class="inputImg"></div>
+  </form>`;
+}
+
+function generateAddContactButtonsHTML() {
+  return /*html*/ `
+  <div class="btnArea" style= "margin-top: 80px;" >
+     <button class="addContactCancel" onclick="closeAddContact()">
+     <p class="cancelText">Cancel</p><img src="./assets/img/Close.png" alt="" class="close">
+     </button>
+     <button class="addContactSave" onclick="saveContact()">
+     <p class="saveText">Create Contact</p>
+    <img src="./assets/img/check.png" alt="" style="width: 20px; height: 18px;"/>
+    </button>
+  </div>
+  </section> 
+  `;
 }
 
 async function saveContact() {
+  let contact = createContact();
+  contacts.push(contact);
+  await saveContacts();
+  updateUI(contacts.length - 1);
+  addFirstLetter(contact.name);
+}
+
+function createContact() {
   let name = document.getElementById("name").value;
   let mail = document.getElementById("mail").value;
   let number = document.getElementById("number").value;
   let color = colors[Math.floor(Math.random() * colors.length)];
-  let nameParts = name.split(" ");
   let initials = getInitials(name);
-  contacts.push({
-    name: name,
-    email: mail,
-    number: number,
-    color: color,
-    initials: initials,
-  });
+  let id = contacts.length > 0 ? contacts[contacts.length - 1].id + 1 : 0;
+  return { name, email: mail, number, color, initials, id };
+}
+
+async function saveContacts() {
   await setItem("contact", JSON.stringify(contacts));
-  let index = contacts.length - 1;
+}
+
+function updateUI(index) {
   getOverview(index);
   renderContacts();
   closeAddContact();
+}
 
-  const firstNameInitial = nameParts[0].charAt(0).toUpperCase();
+function addFirstLetter(name) {
+  let firstNameInitial = name.split(" ")[0].charAt(0).toUpperCase();
   if (!firstLetters.includes(firstNameInitial)) {
     firstLetters.push(firstNameInitial);
   }
@@ -97,38 +120,46 @@ function renderContacts() {
   let overview = document.getElementById("allContacts");
   overview.innerHTML = "";
 
+  setContactIds();
+  sortContacts();
+  // Initialisiere ein Objekt, um die Kontakte nach dem ersten Buchstaben ihres Namens zu gruppieren
+  let contactsByFirstLetter = groupContactsByFirstLetter();
+
+  // Rufe die Buchstabenkategorien-Funktion für jeden Buchstaben auf und füge sie dem DOM hinzu
+  for (let letter in contactsByFirstLetter) {
+    overview.innerHTML += generateLettersCategoriesHTML(letter);
+    // Rufe die Render-Funktion für die Kontakte jedes Buchstabens auf
+    renderContactsByLetter(letter, contactsByFirstLetter[letter]);
+  }
+}
+
+function setContactIds() {
   // Setze die ID jedes Kontakts auf den Array-Index, falls noch nicht gesetzt
   contacts.forEach((contact, index) => {
     if (!contact.hasOwnProperty("id")) {
       contact.id = index;
     }
   });
+}
 
+function sortContacts() {
   // Sortiere die Kontakte alphabetisch nach dem Namen
-  contacts.sort(function (a, b) {
+  contacts.sort((a, b) => {
     return a.name.localeCompare(b.name);
   });
+}
 
-  // Initialisiere ein Objekt, um die Kontakte nach dem ersten Buchstaben ihres Namens zu gruppieren
+function groupContactsByFirstLetter() {
   let contactsByFirstLetter = {};
-
   // Gruppiere die Kontakte nach dem ersten Buchstaben ihres Namens
-  for (let i = 0; i < contacts.length; i++) {
-    const contact = contacts[i];
+  contacts.forEach((contact) => {
     const firstLetter = contact.name.charAt(0).toUpperCase();
-    if (!(firstLetter in contactsByFirstLetter)) {
+    if (!contactsByFirstLetter[firstLetter]) {
       contactsByFirstLetter[firstLetter] = [];
     }
     contactsByFirstLetter[firstLetter].push(contact);
-  }
-
-  // Rufe die Buchstabenkategorien-Funktion für jeden Buchstaben auf und füge sie dem DOM hinzu
-  for (let letter in contactsByFirstLetter) {
-    overview.innerHTML += generateLettersCategoriesHTML(letter);
-
-    // Rufe die Render-Funktion für die Kontakte jedes Buchstabens auf
-    renderContactsByLetter(letter, contactsByFirstLetter[letter]);
-  }
+  });
+  return contactsByFirstLetter;
 }
 
 // Funktion zum Rendern der Kontakte für jeden Buchstaben
@@ -136,26 +167,30 @@ function renderContactsByLetter(letter, contacts) {
   let container = document.getElementById(`contactsList${letter}`);
 
   contacts.forEach(function (contact) {
-    container.innerHTML += /*html*/ `
-      <div class="contactSmall" data-id="${contact.id}" onclick="getOverview(${contact.id})">
-        <div class="initials" style="background-color: ${contact.color};">${contact.initials}</div>
-        <div class="contactInfo">
-          <div class="name">${contact.name}</div>
-          <div class="mail">${contact.email}</div>
-        </div>
-      </div>
-    `;
+    container.innerHTML += generateSmallContactHTML(contact);
   });
 }
 
+function generateSmallContactHTML(contact) {
+  return /*html*/ `
+  <div class="contactSmall" data-id="${contact.id}" onclick="getOverview(${contact.id})">
+    <div class="initials" style="background-color: ${contact.color};">${contact.initials}</div>
+    <div class="contactInfo">
+      <div class="name">${contact.name}</div>
+      <div class="mail">${contact.email}</div>
+    </div>
+  </div>
+`;
+}
+
 function generateLettersCategoriesHTML(firstLetter) {
-  return /*HTML*/ `
-                  <div id="container${firstLetter}">
-                      <div class="container-letter">${firstLetter}</div>
-                      <div class="contactsSeperator"></div>
-                      <div id="contactsList${firstLetter}"></div>
-                  </div>
-                  `;
+  return /*html*/ `
+   <div id="container${firstLetter}">
+      <div class="container-letter">${firstLetter}</div>
+      <div class="contactsSeperator"></div>
+      <div id="contactsList${firstLetter}"></div>
+   </div>
+   `;
 }
 
 function getInitials(name) {
