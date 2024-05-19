@@ -121,9 +121,8 @@ function addFirstLetter(name) {
 }
 
 function closeAddContact() {
-  let addContact = document.getElementById("add-contact");
-  addContact.classList.add("d-none");
-  addContact.classList.remove("add-contact");
+  let addContact = document.getElementById("add-contact-bg");
+  addContact.style.display = "none";
 }
 
 function renderContacts() {
