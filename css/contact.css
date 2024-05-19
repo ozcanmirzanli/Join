@@ -9,12 +9,12 @@ body {
   z-index: 0;
 }
 
-.rigthSection {
+.right-section {
   background-color: #f6f7f8;
   padding-left: 55px;
 }
 
-.contactPage {
+.contact-page {
   width: 1200px;
   height: 928px;
   display: flex;
@@ -57,7 +57,7 @@ h4 {
   text-align: left;
 }
 
-.contactOverview {
+.contact-overview {
   width: 569px;
   height: 73px;
   margin-top: 110px;
@@ -67,7 +67,7 @@ h4 {
   align-items: center;
 }
 
-.allContacts {
+.all-contacts {
   background-color: white;
   max-width: 456px;
   height: calc(100vh - 96px);
@@ -76,44 +76,44 @@ h4 {
   overflow-y: scroll;
 }
 
-.allContacts::-webkit-scrollbar {
+.all-contacts::-webkit-scrollbar {
   height: 24px;
   width: 24px;
 }
-.allContacts::-webkit-scrollbar:vertical {
+.all-contacts::-webkit-scrollbar:vertical {
   width: 11px;
 }
 
-.allContacts::-webkit-scrollbar:horizontal {
+.all-contacts::-webkit-scrollbar:horizontal {
   height: 11px;
 }
 
-.allContacts::-webkit-scrollbar-thumb {
+.all-contacts::-webkit-scrollbar-thumb {
   border-radius: 20px;
   background-color: #a8a8a8;
 }
-.allContacts::-webkit-scrollbar-track {
+.all-contacts::-webkit-scrollbar-track {
   border-radius: 8px;
   background-color: #ffffff;
 }
 
-.allContacts::-webkit-scrollbar-button {
+.all-contacts::-webkit-scrollbar-button {
   border-style: solid;
   height: 16px;
   width: 16px;
 }
 
-.allContacts::-webkit-scrollbar-button:vertical:decrement {
+.all-contacts::-webkit-scrollbar-button:vertical:decrement {
   border-width: 0 7px 14px 7px;
   border-color: transparent transparent #404040 transparent;
 }
 
-.allContacts::-webkit-scrollbar-button:vertical:increment {
+.all-contacts::-webkit-scrollbar-button:vertical:increment {
   border-width: 14px 7px 0 7px;
   border-color: #404040 transparent transparent transparent;
 }
 
-.addBtn {
+.add-btn {
   width: 352px;
   height: 56px;
   padding: 12px 0px;
@@ -128,7 +128,7 @@ h4 {
   margin-bottom: 5px;
 }
 
-.addBtn:hover {
+.add-btn:hover {
   background-color: rgb(41, 171, 226);
   cursor: pointer;
   box-shadow: 0px 4px 4px 0px #00000040;
@@ -386,7 +386,7 @@ input:focus {
   align-items: center;
 }
 
-.buttonArea {
+.button-area {
   width: 364px;
   height: 57px;
   top: 400px;
@@ -400,7 +400,7 @@ input:focus {
   padding-top: 100px;
 }
 
-.closeCreate {
+.close-create {
   width: 126px;
   height: 56px;
   padding: 16px;
@@ -413,7 +413,7 @@ input:focus {
   background-color: #ffffff;
 }
 
-.CloseText {
+.close-text {
   width: 66px;
   height: 24px;
   font-family: "Inter", sans-serif;
