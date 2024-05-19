@@ -116,11 +116,11 @@ function getCategoryColor(category) {
                     <div>${subtasks}</div>
                 </div>
                 <footer class="taskfooter">
-                    <div class="iconTask">
-                        <img src="./assets/img/delete.png" alt="delete" onclick="deleteTaskBoard(${task["id"]})">Delete
+                    <div class="iconTask" onclick="deleteTaskBoard(${task["id"]})">
+                        <img src="./assets/img/delete.png" alt="delete">Delete
                     </div>
-                    <div class="iconTask">
-                        <img src="./assets/img/edit.svg" alt="edit" onclick="editTask(${task["id"]})">Edit
+                    <div class="iconTask" onclick="editTask(${task["id"]})">
+                        <img src="./assets/img/edit.svg" alt="edit">Edit
                     </div>
                 </footer>
             </div>
