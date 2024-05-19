@@ -29,12 +29,11 @@ async function getContact() {
 
 function addNewContact() {
   let addContact = document.getElementById("add-contact-bg");
-
   addContact.style.display = "flex";
 
-  let addBtn = document.querySelector(".addBtn");
+  let addBtn = document.querySelector(".add-btn");
   addBtn.style.backgroundColor = "rgb(9,25,49)";
-  addContact.innerHTML = generateAddContactHTML();
+  document.getElementById("add-contact").innerHTML = generateAddContactHTML();
 }
 
 function generateAddContactHTML() {
@@ -85,7 +84,9 @@ function generateAddContactButtonsHTML() {
   `;
 }
 
-async function saveContact() {
+async function saveContact(event) {
+  event.preventDefault();
+
   let contact = createContact();
   contacts.push(contact);
   await saveContacts();
@@ -126,7 +127,7 @@ function closeAddContact() {
 }
 
 function renderContacts() {
-  let overview = document.getElementById("allContacts");
+  let overview = document.getElementById("all-contacts");
   overview.innerHTML = "";
 
   setContactIds();
