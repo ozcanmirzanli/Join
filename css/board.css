@@ -216,6 +216,9 @@ input:focus {
 }
 
 .userStoryMini {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
   margin-bottom: 16px;
   padding-left: 16px;
   width: 236px;
@@ -232,16 +235,38 @@ input:focus {
   transform: rotate(+5deg); /* Beispiel für Skalierung während des Ziehens */
 }
 
-.TaskDescription {
+.headerStoryMini {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.taskCategory {
+  padding: 4px 16px 4px 16px;
+  /* height: 27px; */
+  width: 144px;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+}
+
+.taskDescription {
+  color: rgba(168, 168, 168, 1);
   width: 220px;
   height: 38px;
   gap: 0px;
-  opacity: 0px;
-  font-family: "Inter", sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 19px;
   text-align: left;
+}
+
+.taskTitleMini {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19.2px;
 }
 
 .TaskProgressbar {
@@ -285,6 +310,7 @@ input:focus {
   gap: 0px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-top: 32px;
 }
 

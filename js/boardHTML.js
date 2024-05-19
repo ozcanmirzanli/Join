@@ -4,6 +4,7 @@
  * @returns {string} - The HTML string representing the todo element.
  */
 function generateTodoHTMLBoard(element) {
+    let categoryColor = getCategoryColor(element.category); // Get the background color based on the category
  
     if (element['subTasks'].length > 0) {
         let progressBarId = `progress-bar-${element.id}`;
@@ -19,10 +20,12 @@ function generateTodoHTMLBoard(element) {
     updateProgressBar(element);
     return /*html*/ `
     <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})"> 
-        <div>${element.category}</div>
-        <h4>${element.title}</h4>
-        <div class="TaskDescription">${element.description}</div>
-        ${progressBarHTML}
+        <div class="taskCategory" style="background-color: ${categoryColor};">${element.category}</div>
+            <div class="headerStoryMini">
+                <div class="taskTitleMini">${element.title}</div>
+                <div class="taskDescription">${element.description}</div>
+            </div>
+            <div>${progressBarHTML}</div>
         <div class="taskFooter">
             <img src="./assets/img/UserInitials.svg" alt="" class="TaskMembers">
             <img src="./assets/img/medium_orange_AddTask.svg" alt="" class="taskPriority">
@@ -31,19 +34,20 @@ function generateTodoHTMLBoard(element) {
 `;
     } else {
         return /*html*/ `
-        <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})"> 
-            <div>${element.category}</div>
-            <h4>${element.title}</h4>
-            <div class="TaskDescription">${element.description}</div>
-            <div class="taskFooter">
-                <img src="./assets/img/UserInitials.svg" alt="" class="TaskMembers">
-                <img src="./assets/img/${element['priority']}_priority.svg" alt="" class="taskPriority">
+    <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})"> 
+    <div class="taskCategory" style="background-color: ${categoryColor};">${element.category}</div>
+            <div>
+                <div class="taskTitleMini">${element.title}</div>
+                <div class="taskDescription">${element.description}</div>
             </div>
+            <div>${progressBarHTML}</div>
+        <div class="taskFooter">
+            <img src="./assets/img/UserInitials.svg" alt="" class="TaskMembers">
+            <img src="./assets/img/medium_orange_AddTask.svg" alt="" class="taskPriority">
         </div>
+    </div>
     `;
-    }}
-    
-
+    }} 
 
 /**
  * Returns the background color based on the category.
@@ -86,7 +90,7 @@ function getCategoryColor(category) {
       }
     }
     document.getElementById("taskBig").classList.remove("d-none");
-    const categoryColor = getCategoryColor(task["category"]); // Get the background color based on the category
+    let categoryColor = getCategoryColor(task["category"]); // Get the background color based on the category
     const BigTaskHTML = /*html*/ `
         <div class="bigTask">
             <div class="bigTaskContent">  
