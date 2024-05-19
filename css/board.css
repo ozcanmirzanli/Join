@@ -11,6 +11,18 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+.flexBetweenCenter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flexBetweenCenter img:hover{
+  background-color: #f2f2f2; /* Leichtes Grau */
+  cursor: pointer;
+  border-radius: 10px;
+}
+
 .headlineBoard {
   display: flex;
   justify-content: space-between;
@@ -283,80 +295,87 @@ input:focus {
   background-color: #fff;
   width: 525px;
   height: 931px;
-  padding: 48px 40px 48px 40px;
-  gap: 24px;
   border-radius: 30px;
   z-index: 5;
 }
 
+.bigTaskContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 48px 40px 48px 40px;
+}
+
+.bigTaskCategory {
+  padding: 4px 16px 4px 16px;
+  gap: 10px;
+  border-radius: 8px;
+  color: white;
+  font-size: 23px;
+}
+
 .taskTitle {
-  display: flex;
-  width: 445px;
-  height: 36px;
-  gap: 0px;
-  justify-content: space-between;
-  align-items: center;
-  opacity: 0px;
-}
-
-#h2 {
-  width: 445px;
-  height: 219px;
-  font-family: "Inter", sans-serif;
-  font-size: 61px;
   font-weight: 700;
-  line-height: 73px;
-  text-align: left;
+  font-size: 61px;
+  line-height: 73.2px;
 }
 
-#h3 {
-  width: 445px;
-  height: 24px;
-  font-family: "Inter", sans-serif;
-  font-size: 20px;
+.taskDescription {
   font-weight: 400;
+  font-size: 20px;
   line-height: 24px;
-  text-align: left;
-  margin: 25px;
 }
 
-.dueDate {
-  width: 445px;
-  height: 24px;
-  margin: 25px;
-  opacity: 0px;
-}
-
-.prio {
-  justify-content: space-between;
+.bigTaskSections {
   display: flex;
-  width: 445px;
-  height: 32px;
-  margin: 25px;
-  opacity: 0px;
+  align-items: center;
+  gap: 25px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.bigTaskColor {
+  color:  rgba(66, 82, 110, 1);
+}
+
+.bigTaskPrio {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bigTaskPrio img{
+  width: 17px;
+  height: 12px;
 }
 
 .members {
   display: flex;
   flex-direction: column;
-  width: 445px;
-  height: 208px;
-  margin: 8px;
-  opacity: 0px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  gap: 8px;
 }
 
 .userTask {
   display: flex;
-  width: 445px;
-  height: 56px;
+  gap: 16px;
+  align-items: center;
   padding: 7px 16px 7px 16px;
-  border-radius: 10px;
-  justify-content: space-between;
-  font-family: "Open Sans", sans-serif;
-  font-size: 19px;
-  font-weight: 400;
-  line-height: 22.8px;
-  text-align: left;
+}
+
+.initialsBig {
+  border-radius: 50%;
+  border: 2px solid white;
+  padding: 12px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
 }
 
 .userImg {
@@ -371,17 +390,17 @@ input:focus {
 .subTask {
   display: flex;
   flex-direction: column;
-  width: 445px;
-  height: 100px;
-  margin: 8px;
-  font-family: "Inter", sans-serif;
-  font-size: 20px;
   font-weight: 400;
+  font-size: 20px;
   line-height: 24px;
-  text-align: left;
+  gap: 8px;
+}
+
+.subtaskContent {
   display: flex;
-  flex-direction: column;
-  padding: 16px;
+  gap: 16px;
+  padding: 6px 16px 6px 16px;
+  align-items: center;
 }
 
 .subTaskCheckBox{
@@ -391,19 +410,24 @@ input:focus {
 }
 
 .taskfooter {
-  width: 525px;
-  margin: 8px;
-  justify-content: flex-end;
   display: flex;
+  gap: 18px;
+  justify-content: right;
 }
 
 .iconTask {
-  width: 70px;
-  height: 70px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.iconTask img{
+  width: 16px;
+  height: 18px;
 }
 
 .iconTask:hover{
-cursor: pointer;
+  cursor: pointer;
 }
 
 /* assigned to section */

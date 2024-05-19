@@ -46,53 +46,90 @@ function generateTodoHTMLBoard(element) {
 
 
 /**
- * Renders a big task with detailed information.
- * @param {Object} todo - The task object to render.
+ * Returns the background color based on the category.
+ * @param {string} category - The category of the task.
+ * @returns {string} - The background color.
  */
-function renderBigTask(task) {
-let subtasks = '';
-let taskIndex = task["id"];
-if (task['subTasks'] && task['subTasks'].length > 0) {
-    for (let i = 0; i < task["subTasks"].length; i++) {
+function getCategoryColor(category) {
+    if (category === 'Technical Story') {
+      return 'rgba(31, 215, 193, 1)'; // Set the desired color for Technical Story
+    } else if (category === 'User Story') {
+      return 'rgba(0, 56, 255, 1)'; // Set the desired color for User Story
+    }
+    return 'white'; // Default color if the category doesn't match
+  }
+  
+  /**
+   * Renders a big task with detailed information.
+   * @param {Object} task - The task object to render.
+   */
+  function renderBigTask(task) {
+    let subtasks = '';
+    let taskIndex = task["id"];
+    if (task['subTasks'] && task['subTasks'].length > 0) {
+      for (let i = 0; i < task["subTasks"].length; i++) {
         let subTaskIndex = task["subTasks"][i];
         let imgSrc = subTaskIndex["completed"] ? "./assets/img/check-box-checked.png" : "./assets/img/check-box-disabled.png";
         subtasks += /*html*/ `
-            <span><img src="${imgSrc}" alt="" id="subTaskCheckBox" onclick="changeCompletedBoard(${taskIndex}, ${i})">${subTaskIndex["content"]}</span>
+            <div class="subtaskContent">
+                <div><img src="${imgSrc}" alt="" id="subTaskCheckBox" onclick="changeCompletedBoard(${taskIndex}, ${i})"></div>
+                <div>${subTaskIndex["content"]}</div>
+            </div>
         `;
-    }  
-}
-let assignTo = '';
-  for (let j = 0; j < task["assignTo"].length; j++) {
-    let memberId = task["assignTo"][j];
-    if (memberId) {
-      assignTo += `<div class="userTask"><div class="initialsBig" style="background-color: ${memberId["color"]}">${memberId["initials"]}</div>${memberId["name"]}</div>`;
+      }
     }
+    let assignTo = '';
+    for (let j = 0; j < task["assignTo"].length; j++) {
+      let memberId = task["assignTo"][j];
+      if (memberId) {
+        assignTo += `<div class="userTask"><div class="initialsBig" style="background-color: ${memberId["color"]}">${memberId["initials"]}</div>${memberId["name"]}</div>`;
+      }
+    }
+    document.getElementById("taskBig").classList.remove("d-none");
+    const categoryColor = getCategoryColor(task["category"]); // Get the background color based on the category
+    const BigTaskHTML = /*html*/ `
+        <div class="bigTask">
+            <div class="bigTaskContent">  
+                <div class="flexBetweenCenter">
+                    <div class="bigTaskCategory" style="background-color: ${categoryColor};">${task["category"]}</div> 
+                    <img src="./assets/img/close.png" alt="" onclick="closeTaskBig()">
+                </div>
+                <div class="taskTitle">${task["title"]}</div>
+                <div class="taskDescription">${task["description"]}</div>
+                <div class="bigTaskSections">    
+                    <div class="bigTaskColor">Due date:</div>
+                    <div>${task["dueDate"]}</div>
+                </div>
+                <div class="bigTaskSections">
+                    <div class="bigTaskColor">Priority:</div>
+                    <div class="bigTaskPrio">
+                        <div>${task['priority']}</div>
+                        <div><img src="./assets/img/${task['priority']}_priority.svg" alt=""></div>
+                    </div>
+                </div>
+                <div class="members">
+                    <div class="bigTaskColor">Assigned To:</div>
+                    <div>${assignTo}</div>
+                </div>
+                <div class="subTask">
+                    <div class="bigTaskColor">Subtasks:</div>
+                    <div>${subtasks}</div>
+                </div>
+                <footer class="taskfooter">
+                    <div class="iconTask">
+                        <img src="./assets/img/delete.png" alt="delete" onclick="deleteTaskBoard(${task["id"]})">Delete
+                    </div>
+                    <div class="iconTask">
+                        <img src="./assets/img/edit.svg" alt="edit" onclick="editTask(${task["id"]})">Edit
+                    </div>
+                </footer>
+            </div>
+        </div>
+      `;
+  
+    document.getElementById("taskBig").innerHTML = BigTaskHTML;
   }
-  document.getElementById("taskBig").classList.remove("d-none");
-  const BigTaskHTML = /*html*/ `
-       <div class="bigTask">
-        <div>${task["category"]}</div> 
-        <div class="taskTitle">
-          <h2>${task["title"]}</h2>
-          <img src="./assets/img/plus button.svg" alt="" onclick="closeTaskBig()">
-        </div>
-        <h3>${task["description"]}</h3>
-        <div class="dueDate">due date : ${task["dueDate"]}</div>
-        <div class="prio">Priority: ${task['priority']} <img src="./assets/img/${task['priority']}_priority.svg" alt=""></div>
-        <div class="members">assigned to :
-          ${assignTo}
-        </div>
-        <div class="subtask"><p>Subtasks</p>${subtasks}</div>
-        <footer class="taskfooter">
-          <img src="./assets/img/Delete contact.svg" alt="delete" class="iconTask" onclick="deleteTaskBoard(${task["id"]})"> 
-          <img src="./assets/img/edit contacts.svg" alt="edit" class="iconTask" onclick="editTask(${task["id"]})">
-        </footer>
-      </div>
-    `;
-
-  document.getElementById("taskBig").innerHTML = BigTaskHTML;
-}
-
+  
 function changeCompletedBoard(taskIndex, subTaskIndex) {
     const subTask = taskData[taskIndex].subTasks[subTaskIndex];
     subTask.completed = !subTask.completed;
