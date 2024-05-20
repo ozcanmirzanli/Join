@@ -11,26 +11,32 @@
     <script src="./js/storage.js"></script>
   </head>
   <body onload="includeHTML(), init();">
+    <div id="add-contact-bg">
+      <div id="add-contact"></div>
+    </div>
     <div w3-include-html="./assets/templates/sidemenu.html"></div>
     <div w3-include-html="./assets/templates/header.html"></div>
 
-    <div class="contactPage">
-      <section class="allContacts">
-        <button class="addBtn" onclick="addNewContact()">
-          <p class="AddContactText">Add new Contact</p>
-          <img src="./assets/img/person_add.svg" alt="" class="addContactPic"/>
+    <div class="contact-page">
+      <section class="all-contacts">
+        <button class="add-btn" onclick="addNewContact()">
+          <p class="add-contact-text">Add new Contact</p>
+          <img
+            src="./assets/img/person_add.svg"
+            alt=""
+            class="add-contact-img"
+          />
         </button>
-        <div id="allContacts"></div>
+        <div id="all-contacts"></div>
       </section>
-      <section class="rigthSection">
-        <div class="contactOverview">
-        <h3 class="headline">Contacts</h3>
-        <div class="seperator"></div>
-        <h4>Better with a team</h4>
+      <section class="right-section">
+        <div class="contact-overview">
+          <h3 class="headline">Contacts</h3>
+          <div class="seperator"></div>
+          <h4>Better with a team</h4>
         </div>
         <div class="contactBig" id="contactBig"></div>
       </section>
-      <div id="addContact" class="d-none"></div>
     </div>
   </body>
 </html>

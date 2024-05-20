@@ -107,19 +107,19 @@ function changePriorityColor(priority) {
     document.getElementById("btnPrioUrgent").style.color = "#FFFFFF";
     document.getElementById("btnPrioUrgent").style.borderColor = "#FF3D00";
     document.getElementById("btnPrioUrgent").getElementsByTagName("img")[0].src ="assets/img/urgent_white_AddTask.svg";
-    selectedPrio = "urgent";
+    selectedPrio = "Urgent";
   } else if (priority === "medium") {
     document.getElementById("btnPrioMedium").style.backgroundColor = "#FFA800";
     document.getElementById("btnPrioMedium").style.color = "#FFFFFF";
     document.getElementById("btnPrioMedium").style.borderColor = "#FFA800";
     document.getElementById("btnPrioMedium").getElementsByTagName("img")[0].src ="assets/img/medium_white_AddTask.svg";
-    selectedPrio = "medium";
+    selectedPrio = "Medium";
   } else if (priority === "low") {
     document.getElementById("btnPrioLow").style.backgroundColor = "#7AE229";
     document.getElementById("btnPrioLow").style.color = "#FFFFFF";
     document.getElementById("btnPrioLow").style.borderColor = "#7AE229";
     document.getElementById("btnPrioLow").getElementsByTagName("img")[0].src ="assets/img/low_white_AddTask.svg";
-    selectedPrio = "low";
+    selectedPrio = "Low";
   }
 }
 

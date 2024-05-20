@@ -4,6 +4,7 @@
  * @returns {string} - The HTML string representing the todo element.
  */
 function generateTodoHTMLBoard(element) {
+    let categoryColor = getCategoryColor(element.category); // Get the background color based on the category
  
     if (element['subTasks'].length > 0) {
         let progressBarId = `progress-bar-${element.id}`;
@@ -19,10 +20,12 @@ function generateTodoHTMLBoard(element) {
     updateProgressBar(element);
     return /*html*/ `
     <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})"> 
-        <div>${element.category}</div>
-        <h4>${element.title}</h4>
-        <div class="TaskDescription">${element.description}</div>
-        ${progressBarHTML}
+        <div class="taskCategory" style="background-color: ${categoryColor};">${element.category}</div>
+            <div class="headerStoryMini">
+                <div class="taskTitleMini">${element.title}</div>
+                <div class="taskDescription">${element.description}</div>
+            </div>
+            <div>${progressBarHTML}</div>
         <div class="taskFooter">
             <img src="./assets/img/UserInitials.svg" alt="" class="TaskMembers">
             <img src="./assets/img/medium_orange_AddTask.svg" alt="" class="taskPriority">
@@ -31,68 +34,106 @@ function generateTodoHTMLBoard(element) {
 `;
     } else {
         return /*html*/ `
-        <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})"> 
-            <div>${element.category}</div>
-            <h4>${element.title}</h4>
-            <div class="TaskDescription">${element.description}</div>
-            <div class="taskFooter">
-                <img src="./assets/img/UserInitials.svg" alt="" class="TaskMembers">
-                <img src="./assets/img/${element['priority']}_priority.svg" alt="" class="taskPriority">
+    <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})"> 
+    <div class="taskCategory" style="background-color: ${categoryColor};">${element.category}</div>
+            <div>
+                <div class="taskTitleMini">${element.title}</div>
+                <div class="taskDescription">${element.description}</div>
             </div>
+            <div>${progressBarHTML}</div>
+        <div class="taskFooter">
+            <img src="./assets/img/UserInitials.svg" alt="" class="TaskMembers">
+            <img src="./assets/img/medium_orange_AddTask.svg" alt="" class="taskPriority">
         </div>
+    </div>
     `;
-    }}
-    
-
+    }} 
 
 /**
- * Renders a big task with detailed information.
- * @param {Object} todo - The task object to render.
+ * Returns the background color based on the category.
+ * @param {string} category - The category of the task.
+ * @returns {string} - The background color.
  */
-function renderBigTask(task) {
-let subtasks = '';
-let taskIndex = task["id"];
-if (task['subTasks'] && task['subTasks'].length > 0) {
-    for (let i = 0; i < task["subTasks"].length; i++) {
+function getCategoryColor(category) {
+    if (category === 'Technical Story') {
+      return 'rgba(31, 215, 193, 1)'; // Set the desired color for Technical Story
+    } else if (category === 'User Story') {
+      return 'rgba(0, 56, 255, 1)'; // Set the desired color for User Story
+    }
+    return 'white'; // Default color if the category doesn't match
+  }
+  
+  /**
+   * Renders a big task with detailed information.
+   * @param {Object} task - The task object to render.
+   */
+  function renderBigTask(task) {
+    let subtasks = '';
+    let taskIndex = task["id"];
+    if (task['subTasks'] && task['subTasks'].length > 0) {
+      for (let i = 0; i < task["subTasks"].length; i++) {
         let subTaskIndex = task["subTasks"][i];
         let imgSrc = subTaskIndex["completed"] ? "./assets/img/check-box-checked.png" : "./assets/img/check-box-disabled.png";
         subtasks += /*html*/ `
-            <span><img src="${imgSrc}" alt="" id="subTaskCheckBox" onclick="changeCompletedBoard(${taskIndex}, ${i})">${subTaskIndex["content"]}</span>
+            <div class="subtaskContent">
+                <div><img src="${imgSrc}" alt="" id="subTaskCheckBox" onclick="changeCompletedBoard(${taskIndex}, ${i})"></div>
+                <div>${subTaskIndex["content"]}</div>
+            </div>
         `;
-    }  
-}
-let assignTo = '';
-  for (let j = 0; j < task["assignTo"].length; j++) {
-    let memberId = task["assignTo"][j];
-    if (memberId) {
-      assignTo += `<div class="userTask"><div class="initialsBig" style="background-color: ${memberId["color"]}">${memberId["initials"]}</div>${memberId["name"]}</div>`;
+      }
     }
+    let assignTo = '';
+    for (let j = 0; j < task["assignTo"].length; j++) {
+      let memberId = task["assignTo"][j];
+      if (memberId) {
+        assignTo += `<div class="userTask"><div class="initialsBig" style="background-color: ${memberId["color"]}">${memberId["initials"]}</div>${memberId["name"]}</div>`;
+      }
+    }
+    document.getElementById("taskBig").classList.remove("d-none");
+    let categoryColor = getCategoryColor(task["category"]); // Get the background color based on the category
+    const BigTaskHTML = /*html*/ `
+        <div class="bigTask">
+            <div class="bigTaskContent">  
+                <div class="flexBetweenCenter">
+                    <div class="bigTaskCategory" style="background-color: ${categoryColor};">${task["category"]}</div> 
+                    <img src="./assets/img/close.png" alt="" onclick="closeTaskBig()">
+                </div>
+                <div class="taskTitle">${task["title"]}</div>
+                <div class="taskDescription">${task["description"]}</div>
+                <div class="bigTaskSections">    
+                    <div class="bigTaskColor">Due date:</div>
+                    <div>${task["dueDate"]}</div>
+                </div>
+                <div class="bigTaskSections">
+                    <div class="bigTaskColor">Priority:</div>
+                    <div class="bigTaskPrio">
+                        <div>${task['priority']}</div>
+                        <div><img src="./assets/img/${task['priority']}_priority.svg" alt=""></div>
+                    </div>
+                </div>
+                <div class="members">
+                    <div class="bigTaskColor">Assigned To:</div>
+                    <div>${assignTo}</div>
+                </div>
+                <div class="subTask">
+                    <div class="bigTaskColor">Subtasks:</div>
+                    <div>${subtasks}</div>
+                </div>
+                <footer class="taskfooter">
+                    <div class="iconTask" onclick="deleteTaskBoard(${task["id"]})">
+                        <img src="./assets/img/delete.png" alt="delete">Delete
+                    </div>
+                    <div class="iconTask" onclick="editTask(${task["id"]})">
+                        <img src="./assets/img/edit.svg" alt="edit">Edit
+                    </div>
+                </footer>
+            </div>
+        </div>
+      `;
+  
+    document.getElementById("taskBig").innerHTML = BigTaskHTML;
   }
-  document.getElementById("taskBig").classList.remove("d-none");
-  const BigTaskHTML = /*html*/ `
-       <div class="bigTask">
-        <div>${task["category"]}</div> 
-        <div class="taskTitle">
-          <h2>${task["title"]}</h2>
-          <img src="./assets/img/plus button.svg" alt="" onclick="closeTaskBig()">
-        </div>
-        <h3>${task["description"]}</h3>
-        <div class="dueDate">due date : ${task["dueDate"]}</div>
-        <div class="prio">Priority: ${task['priority']} <img src="./assets/img/${task['priority']}_priority.svg" alt=""></div>
-        <div class="members">assigned to :
-          ${assignTo}
-        </div>
-        <div class="subtask"><p>Subtasks</p>${subtasks}</div>
-        <footer class="taskfooter">
-          <img src="./assets/img/Delete contact.svg" alt="delete" class="iconTask" onclick="deleteTaskBoard(${task["id"]})"> 
-          <img src="./assets/img/edit contacts.svg" alt="edit" class="iconTask" onclick="editTask(${task["id"]})">
-        </footer>
-      </div>
-    `;
-
-  document.getElementById("taskBig").innerHTML = BigTaskHTML;
-}
-
+  
 function changeCompletedBoard(taskIndex, subTaskIndex) {
     const subTask = taskData[taskIndex].subTasks[subTaskIndex];
     subTask.completed = !subTask.completed;
@@ -245,77 +286,79 @@ function editTask(id) {
 function renderEditTaskForm(todo) {
   document.getElementById("taskBig").classList.remove("d-none");
   document.getElementById("taskBig").innerHTML = /*html*/ `
-     <div class="bigTask">
-      <section class="input-parts-addTask">
-       <div class="pd-bottom"><span>Title<span class="required-addTask">*</span></span></div>
-       <input id="titleAddTask" type="text" placeholder="Enter a Title" required class="border-input-addtask" value="${todo.title}"/>
-      </section>
-      <!-- Description -->
-      <section class="padding-description">
-       <div class="pd-bottom"><span>Description</span></div>
-       <textarea name="description" id="descriptionAddTask" cols="30" rows="10" placeholder="Enter a Description" class="border-input-addtask">${todo.description}</textarea>
-      </section>
-  <!-- Assigend To -->
-      <section class="padding-description">
-       <div class="pd-bottom"><label>Assigned to</label></div>
-       <div class="input-assignedTo border-input-addtask">
-       <input id="assignDropDown" type="text" name="assignTo" placeholder="Select contact to assign" class="border-none input-assignedTo"/>
-         <div class="drop-down-image-assign">
-          <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrowdown"/> 
-         </div>              
-        </div>       
+    <div class="bigTask">
+        <section class="input-parts-addTask">
+            <div class="pd-bottom"><span>Title<span class="required-addTask">*</span></span></div>
+            <input id="titleAddTask" type="text" placeholder="Enter a Title" required class="border-input-addtask" value="${todo.title}"/>
         </section>
-    <!-- Due Date -->
-      <section>
-         <div class="pd-bottom"><span>Due Date<span class="required-addTask">*</span></span></div>
-         <input id="dueDate" type="date" placeholder="yyyy/mm/dd" class="input-dueDate border-input-addtask" required/>
-      </section>
-      <!-- Priority -->
-      <section class="padding-prio">
-          <div class="pd-bottom"><span>Prio</span></div>
-          <div class="priority">
-              <button type="button" class="button-prio" id="btnPrioUrgent" onclick="changePriorityColor('urgent')">Urgent
-                  <img src="assets/img/urgent_red_AddTask.svg" alt="urgent_red_AddTask"/>
-              </button>                    
-              <button type="button" class="button-prio" id="btnPrioMedium" onclick="changePriorityColor('medium')">Medium
-                  <img src="assets/img/medium_orange_AddTask.svg" alt="medium_orange_AddTask"/>
-              </button>                    
-              <button type="button" class="button-prio" id="btnPrioLow" onclick="changePriorityColor('low')">Low
-                  <img src="assets/img/low_green_AddTask.svg" alt="low_green_AddTask"/>
-              </button>                    
-          </div>
-  </section>
-          <!-- Category -->
-  <section class="padding-category">
-      <div class="pd-bottom"><span>Category<span class="required-addTask">*</span></span></div>
-      <div class="input-assignedTo border-input-addtask" id="categoryAddTask" onclick="toggleCategoryDropdown()">
-          Select Task Category
-          <div id="categoryDropDownArrow" class="drop-down-image">
-              <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrow_drop_down_AddTask">
-          </div>
-      </div>
-      <div class="d-none category-menu">
-          <div class="category-option" onclick="selectCategory('User Story')">User Story</div>
-          <div class="category-option" onclick="selectCategory('Technical Story')">Technical Story</div>
-      </div>
-  </section>
-  <!-- Subtasks -->
-  <section>
-      <div class="pd-bottom"><span>Subtasks</span></div>
-      <div class="input-assignedTo border-input-addtask" id="addSubtaskMain" onfocus="handleInputFocus()">
-          <input id="addsubtask" type="text" placeholder="Add new subtasks" class="input-assignedTo border-none">
-          <div onclick="toggleSubtasks()" class="drop-down-image drop-down-subtask">
-              <img id="plusIcon" src="assets/img/plus_addTask.svg" alt="plus_addTask">
-          </div>
-          <div id="subtasks" class="d-none add-subtasks">
-              <img onclick="cancelSubtaskClick()" id="cancelSubtask" src="assets/img/subtask_cancel_AddTask.svg" class="subtasks" alt="subtask_cancel_AddTask">
-              <img src="assets/img/subtask_seperator_AddTask.svg" alt="subtask_seperator_AddTask">
-              <img onclick="saveSubtask()" id="checkSubtask" src="assets/img/subtask_check_AddTask.svg" class="subtasks" alt="subtask_check_AddTask">
-          </div>
-      </div>
-             <div id="showsubtasks" class="subtasks-list d-none"></div>
-            </section>
-   <img src="./assets/img/button_OK.svg" alt="delete" class="iconTask" onclick="saveTask(${todo["id"]})">
-  </div>
+        <!-- Description -->
+        <section class="padding-description">
+            <div class="pd-bottom"><span>Description</span></div>
+            <textarea name="description" id="descriptionAddTask" cols="30" rows="10" placeholder="Enter a Description" class="border-input-addtask">${todo.description}</textarea>
+        </section>
+        <!-- Assigend To -->
+        <section class="padding-description">
+            <div class="pd-bottom"><label>Assigned to</label></div>
+            <div class="input-assignedTo border-input-addtask">
+                <input id="assignDropDown" type="text" name="assignTo" placeholder="Select contact to assign" class="border-none input-assignedTo"/>
+                <div class="drop-down-image-assign">
+                    <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrowdown"/> 
+                </div>              
+            </div>       
+        </section>
+        <!-- Due Date -->
+        <section>
+            <div class="pd-bottom"><span>Due Date<span class="required-addTask">*</span></span></div>
+            <input id="dueDate" type="date" placeholder="yyyy/mm/dd" class="input-dueDate border-input-addtask" required/>
+        </section>
+        <!-- Priority -->
+        <section class="padding-prio">
+            <div class="pd-bottom"><span>Prio</span></div>
+            <div class="priority">
+                <button type="button" class="button-prio" id="btnPrioUrgent" onclick="changePriorityColor('urgent')">Urgent
+                    <img src="assets/img/urgent_red_AddTask.svg" alt="urgent_red_AddTask"/>
+                </button>                    
+                <button type="button" class="button-prio" id="btnPrioMedium" onclick="changePriorityColor('medium')">Medium
+                    <img src="assets/img/medium_orange_AddTask.svg" alt="medium_orange_AddTask"/>
+                </button>                    
+                <button type="button" class="button-prio" id="btnPrioLow" onclick="changePriorityColor('low')">Low
+                    <img src="assets/img/low_green_AddTask.svg" alt="low_green_AddTask"/>
+                </button>                    
+            </div>
+        </section>
+        <!-- Category -->
+        <section class="padding-category">
+            <div class="pd-bottom"><span>Category<span class="required-addTask">*</span></span></div>
+            <div class="input-assignedTo border-input-addtask" id="categoryAddTask" onclick="toggleCategoryDropdown()">
+                Select Task Category
+                <div id="categoryDropDownArrow" class="drop-down-image">
+                    <img src="assets/img/arrow_drop_down_AddTask.svg" alt="arrow_drop_down_AddTask">
+                </div>
+            </div>
+            <div class="d-none category-menu">
+                <div class="category-option" onclick="selectCategory('User Story')">User Story</div>
+                <div class="category-option" onclick="selectCategory('Technical Story')">Technical Story</div>
+            </div>
+        </section>
+        <!-- Subtasks -->
+        <section>
+            <div class="pd-bottom"><span>Subtasks</span></div>
+            <div class="input-assignedTo border-input-addtask" id="addSubtaskMain" onfocus="handleInputFocus()">
+                <input id="addsubtask" type="text" placeholder="Add new subtasks" class="input-assignedTo border-none">
+                <div onclick="toggleSubtasks()" class="drop-down-image drop-down-subtask">
+                    <img id="plusIcon" src="assets/img/plus_addTask.svg" alt="plus_addTask">
+                </div>
+                <div id="subtasks" class="d-none add-subtasks">
+                    <img onclick="cancelSubtaskClick()" id="cancelSubtask" src="assets/img/subtask_cancel_AddTask.svg" class="subtasks" alt="subtask_cancel_AddTask">
+                    <img src="assets/img/subtask_seperator_AddTask.svg" alt="subtask_seperator_AddTask">
+                    <img onclick="saveSubtask()" id="checkSubtask" src="assets/img/subtask_check_AddTask.svg" class="subtasks" alt="subtask_check_AddTask">
+                </div>
+            </div>
+            <div id="showsubtasks" class="subtasks-list d-none"></div>
+        </section>
+        <footer>
+            <img src="./assets/img/button_OK.svg" alt="delete" class="iconTask" onclick="saveTask(${todo["id"]})">
+        </footer>
+    </div>
     `;
 }
