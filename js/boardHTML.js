@@ -12,8 +12,8 @@ function generateTodoHTMLBoard(element) {
     let totalSubtasksCount = element.subTasks.length;
     let taskCounterText = `${completedSubtasksCount}/${totalSubtasksCount} Subtasks done`;
     let progressBarHTML = /*html*/ `
-    <div class="TaskProgressbar" role="progressbar" aria-label="Example with label" aria-valuemin="0" aria-valuemax="100">
-        <div class="progress-bar" id="${progressBarId}" style="width: 220px;"></div>
+    <div class="TaskProgressbar" role="progressbar">
+        <div id="${progressBarId}" style="width: 220px;"></div>
         <div class="Taskcounter">${taskCounterText}</div>
     </div>
 `;
