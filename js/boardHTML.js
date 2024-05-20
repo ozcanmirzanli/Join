@@ -5,7 +5,13 @@
  */
 function generateTodoHTMLBoard(element) {
     let categoryColor = getCategoryColor(element.category); // Get the background color based on the category
- 
+    let assignTo = '';
+    for (let j = 0; j < element["assignTo"].length; j++) {
+      let memberId = element["assignTo"][j];
+      if (memberId) {
+        assignTo += `<div class="" style="background-color: ${memberId["color"]}">${memberId["initials"]}</div>`;
+      }
+    }
     if (element['subTasks'].length > 0) {
         let progressBarId = `progress-bar-${element.id}`;
         let completedSubtasksCount = element.subTasks.filter(subtask => subtask.completed).length;
@@ -27,7 +33,7 @@ function generateTodoHTMLBoard(element) {
             </div>
             <div>${progressBarHTML}</div>
         <div class="taskFooter">
-            <img src="./assets/img/UserInitials.svg" alt="" class="TaskMembers">
+        <div>${assignTo}</div>
             <img src="./assets/img/medium_orange_AddTask.svg" alt="" class="taskPriority">
         </div>
     </div>
@@ -42,7 +48,7 @@ function generateTodoHTMLBoard(element) {
             </div>
             <div>${progressBarHTML}</div>
         <div class="taskFooter">
-            <img src="./assets/img/UserInitials.svg" alt="" class="TaskMembers">
+        <div>${assignTo}</div>
             <img src="./assets/img/medium_orange_AddTask.svg" alt="" class="taskPriority">
         </div>
     </div>
