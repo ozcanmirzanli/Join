@@ -23,6 +23,15 @@ body::-webkit-scrollbar {
   border-radius: 10px;
 }
 
+.headline {
+  width: 176px;
+  height: 73px;
+  font-size: 61px;
+  font-weight: 700;
+  line-height: 73.2px;
+  text-align: left;
+}
+
 .headlineBoard {
   display: flex;
   justify-content: space-between;
@@ -308,8 +317,27 @@ input:focus {
 .bigTaskContent {
   display: flex;
   flex-direction: column;
+  gap: 16px;
+  padding: 48px 40px 48px 40px;
+}
+
+.bigEditTaskContent {
+  display: flex;
+  flex-direction: column;
   gap: 24px;
   padding: 48px 40px 48px 40px;
+}
+
+.btnCloseEditTaks {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.btnCloseEditTaks img:hover {
+  background-color: #f2f2f2; /* Leichtes Grau */
+  cursor: pointer;
+  border-radius: 10px;
 }
 
 .bigTaskCategory {
