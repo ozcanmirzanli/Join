@@ -147,7 +147,7 @@ function checkDueDate() {
 function handleCategoryChange(selectElement) {
   var selectedCategory = selectElement.value;
   // Here you can further process the selected category, e.g., store it in a variable or call a function
-  console.log("Selected category: " + selectedCategory);
+  // console.log("Selected category: " + selectedCategory);
 }
 
 /**
