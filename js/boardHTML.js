@@ -6,54 +6,59 @@
 function generateTodoHTMLBoard(element) {
     let categoryColor = getCategoryColor(element.category); // Get the background color based on the category
     let assignTo = '';
+    let zIndex = 1; // Initialize zIndex with 1, so first member gets z-index: 1
+
     for (let j = 0; j < element["assignTo"].length; j++) {
-      let memberId = element["assignTo"][j];
-      if (memberId) {
-        assignTo += `<div class="" style="background-color: ${memberId["color"]}">${memberId["initials"]}</div>`;
-      }
+        let memberId = element["assignTo"][j];
+        const marginLeft = j !== 0 ? 'margin-left: -10%;' : ''; // Set marginLeft based on index j
+        if (memberId) {
+            assignTo += `<div class="initialsMini" style="z-index: ${zIndex++}; ${marginLeft} background-color: ${memberId["color"]}">${memberId["initials"]}</div>`;
+        }
     }
     if (element['subTasks'].length > 0) {
         let progressBarId = `progress-bar-${element.id}`;
         let completedSubtasksCount = element.subTasks.filter(subtask => subtask.completed).length;
-    let totalSubtasksCount = element.subTasks.length;
-    let taskCounterText = `${completedSubtasksCount}/${totalSubtasksCount} Subtasks done`;
-    let progressBarHTML = /*html*/ `
-    <div class="TaskProgressbar" role="progressbar">
-        <div id="${progressBarId}" style="width: 220px;"></div>
-        <div class="Taskcounter">${taskCounterText}</div>
-    </div>
-`;
-    updateProgressBar(element);
-    return /*html*/ `
-    <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})"> 
-        <div class="taskCategory" style="background-color: ${categoryColor};">${element.category}</div>
-            <div class="headerStoryMini">
-                <div class="taskTitleMini">${element.title}</div>
-                <div class="taskDescription">${element.description}</div>
+        let totalSubtasksCount = element.subTasks.length;
+        let taskCounterText = `${completedSubtasksCount}/${totalSubtasksCount} Subtasks done`;
+        let progressBarHTML = /*html*/ `
+            <div class="TaskProgressbar" role="progressbar">
+                <div id="${progressBarId}" style="width: 220px;"></div>
+                <div class="Taskcounter">${taskCounterText}</div>
             </div>
-            <div>${progressBarHTML}</div>
-        <div class="taskFooter">
-        <div>${assignTo}</div>
-            <img src="./assets/img/medium_orange_AddTask.svg" alt="" class="taskPriority">
-        </div>
-    </div>
-`;
+        `;
+        updateProgressBar(element);
+        return /*html*/ `
+            <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})"> 
+                <div class="taskCategory" style="background-color: ${categoryColor};">${element.category}</div>
+                <div class="headerStoryMini">
+                    <div class="taskTitleMini">${element.title}</div>
+                    <div class="taskDescription">${element.description}</div>
+                </div>
+                <div>${progressBarHTML}</div>
+                <div class="taskFooter">
+                    <div class="badgesMini">${assignTo}</div>
+                    <img src="./assets/img/medium_orange_AddTask.svg" alt="" class="taskPriority">
+                </div>
+            </div>
+        `;
     } else {
         return /*html*/ `
-    <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})"> 
-    <div class="taskCategory" style="background-color: ${categoryColor};">${element.category}</div>
-            <div>
-                <div class="taskTitleMini">${element.title}</div>
-                <div class="taskDescription">${element.description}</div>
+            <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})"> 
+                <div class="taskCategory" style="background-color: ${categoryColor};">${element.category}</div>
+                <div>
+                    <div class="taskTitleMini">${element.title}</div>
+                    <div class="taskDescription">${element.description}</div>
+                </div>
+                <div>${progressBarHTML}</div>
+                <div class="taskFooter">
+                    <div class="badgesMini">${assignTo}</div>
+                    <img src="./assets/img/medium_orange_AddTask.svg" alt="" class="taskPriority">
+                </div>
             </div>
-            <div>${progressBarHTML}</div>
-        <div class="taskFooter">
-        <div>${assignTo}</div>
-            <img src="./assets/img/medium_orange_AddTask.svg" alt="" class="taskPriority">
-        </div>
-    </div>
-    `;
-    }} 
+        `;
+    }
+}
+
 
 /**
  * Returns the background color based on the category.

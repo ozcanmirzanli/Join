@@ -410,6 +410,23 @@ input:focus {
   justify-content: center;
   width: 24px;
   height: 24px;
+  border: solid 1px white;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.initialsMini {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  width: 32px;
+  border-radius: 45px;
+  color: white;
+}
+
+.badgesMini {
+  display: flex;
 }
 
 .userImg {
