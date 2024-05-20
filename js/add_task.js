@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
  */
 let subtask = [];
 let taskData = [];
-// let taskIdCounter = 0;
+let taskIdCounter = 0;
 let selectedPrio = "";
 let newTask = [];
 let contacts = [];
@@ -375,7 +375,7 @@ async function createTask() {
   let subTasks = subtask;
 
   taskData.push({
-    // id: taskIdCounter++,
+    id: taskData.length,
     title: title,
     description: document.getElementById("descriptionAddTask").value,
     assignTo: assignedContacts,
