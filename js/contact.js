@@ -47,7 +47,7 @@ function generateAddContactHTML() {
   </div>
   </div>
   <div class="add-contact-right">
-  <div class="add-contact-close-btn"><img src="./assets/img/Close.png" alt="" onclick="closeAddContact()"></div>
+  <div class="add-contact-close-btn"><img src="./assets/img/Close.png" alt="" onclick="closePopUp()"></div>
 
     <div class="add-contact-right-container">
   <div class="input-area">
@@ -72,11 +72,11 @@ function generateAddContactInputsHTML() {
 function generateAddContactButtonsHTML() {
   return /*html*/ `
   <div class="add-contact-btns"  >
-     <button class="add-contact-cancel" onclick="closeAddContact()">
+     <button class="add-contact-cancel" onclick="closePopUp()">
      <p class="cancelText">Cancel</p><img src="./assets/img/Close.png" alt="" class="close">
      </button>
-     <button class="add-contact-save" onclick="saveContact()">
-     <p class="saveText">Create Contact</p>
+     <button class="add-contact-create" onclick="saveContact()">
+     <p class="save-text">Create Contact</p>
     <img src="./assets/img/check.png" alt="" style="width: 20px; height: 18px;"/>
     </button>
   </div>
@@ -111,7 +111,7 @@ async function saveContacts() {
 function updateUI(index) {
   getOverview(index);
   renderContacts();
-  closeAddContact();
+  closePopUp();
 }
 
 function addFirstLetter(name) {
@@ -121,7 +121,7 @@ function addFirstLetter(name) {
   }
 }
 
-function closeAddContact() {
+function closePopUp() {
   let addContact = document.getElementById("add-contact-bg");
   addContact.style.display = "none";
 }
@@ -304,7 +304,7 @@ async function deleteContact(contactId) {
     contacts.splice(index, 1);
     await setItem("contact", JSON.stringify(contacts));
     await getContact();
-    closeAddContact();
+    closePopUp();
     closeOverview();
     renderContacts();
   } else {
@@ -331,18 +331,23 @@ function displayEditContactForm(contact) {
 
 function generateEditContactHTML(contact) {
   return /*html*/ `
-    <section class="add-contact-left">
+  <div class="edit-contact-container">
+    <div class="edit-contact-left">
+    <div class="edit-contact-left-container">
       <img src="./assets/img/joinLogoWhite.svg" alt="" class="logo">
       <h1>Edit Contact</h1><div class="vector"></div>
-    </section>
-    <section class="add-contact-right">
-      <div class="close"><img src="./assets/img/Close.png" alt="" onclick="closeAddContact()"></div>
+      </div>
+</div>
+    <div class="edit-contact-right">
+    <div class="add-contact-close-btn"><img src="./assets/img/Close.png" alt="" onclick="closePopUp()"></div>
+      <div class="edit-contact-right-container">
       <div class="input-area">
         <img src="./assets/img/Group 13.png" alt="" class="contact-picture">
         ${generateEditContactInputsHTML(contact)}
       </div>
-      ${generateEditContactButtonsHTML(contact.id)}
-    </section>`;
+      </div>
+</div>
+</div>`;
 }
 
 function generateEditContactInputsHTML(contact) {
@@ -353,23 +358,28 @@ function generateEditContactInputsHTML(contact) {
         <img src="./assets/img/input_name.png" alt="" class="input-img">
       </div>
       <div class="input-container">
-        <input type="e-mail" placeholder="E-Mail" id="mail" value="${contact.email}">
+        <input type="e-mail" placeholder="E-Mail" id="mail" value="${
+          contact.email
+        }">
         <img src="./assets/img/mail.png" alt="" class="input-img">
       </div>
       <div class="input-container">
-        <input type="number" placeholder="Telefonnummer" id="number" value="${contact.number}">
+        <input type="number" placeholder="Telefonnummer" id="number" value="${
+          contact.number
+        }">
         <img src="./assets/img/call.png" alt="" class="input-img">
       </div>
+      ${generateEditContactButtonsHTML(contact.id)}
     </div>`;
 }
 
 function generateEditContactButtonsHTML(contactId) {
   return /*html*/ `
-    <div class="btnArea" style="margin-top: 80px;">
-      <button class="deleteBtnEdit" onclick="deleteContact(${contactId})">
+  <div class="edit-contact-btns">
+      <button class="edit-contact-delete" onclick="deleteContact(${contactId})">
         <p class="deleteBtnEditText">Delete</p>
       </button>
-      <button class="saveBtn" onclick="saveEditedContact(${contactId})">
+      <button class="edit-contact-save" onclick="saveEditedContact(${contactId})">
         <p class="saveBtnText">Save</p>
         <img src="./assets/img/check.png" alt="" style="width: 20px; height: 18px;"/>
       </button>
@@ -383,7 +393,7 @@ async function saveEditedContact(contactId) {
     updateContactDetails(index);
     await saveContactsToStorage();
     renderUpdatedContacts();
-    closeAddContact();
+    closePopUp();
     updateFirstLettersAfterEdit(index);
   } else {
     console.error("Contact not found with ID: ", contactId);
