@@ -7,12 +7,13 @@ function generateTodoHTMLBoard(element) {
     let categoryColor = getCategoryColor(element.category); // Get the background color based on the category
     let assignTo = '';
     let zIndex = 1; // Initialize zIndex with 1, so first member gets z-index: 1
-
-    for (let j = 0; j < element["assignTo"].length; j++) {
-        let memberId = element["assignTo"][j];
-        const marginLeft = j !== 0 ? 'margin-left: -10%;' : ''; // Set marginLeft based on index j
-        if (memberId) {
-            assignTo += `<div class="initialsMini" style="z-index: ${zIndex++}; ${marginLeft} background-color: ${memberId["color"]}">${memberId["initials"]}</div>`;
+    if (element["assignTo"].length > 0) {
+        for (let j = 0; j < element["assignTo"].length; j++) {
+            let memberId = element["assignTo"][j];
+            const marginLeft = j !== 0 ? 'margin-left: -10%;' : ''; // Set marginLeft based on index j
+            if (memberId) {
+                assignTo += `<div class="initialsMini" style="z-index: ${zIndex++}; ${marginLeft} background-color: ${memberId["color"]}">${memberId["initials"]}</div>`;
+            }
         }
     }
     let progressBarHTML = '';
