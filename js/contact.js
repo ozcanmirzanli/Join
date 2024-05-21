@@ -65,7 +65,6 @@ function generateAddContactInputsHTML() {
   <div class="input-container"><input type="e-mail" placeholder="Email" id="mail"><img src="./assets/img/mail.png" alt="" class="inputImg"></div>
   <div class="input-container"><input type="number" placeholder="Phone" id="number"><img src="./assets/img/call.png" alt="" class="inputImg"></div>
   ${generateAddContactButtonsHTML()};
-
   </form>`;
 }
 
@@ -75,7 +74,7 @@ function generateAddContactButtonsHTML() {
      <button class="add-contact-cancel" onclick="closePopUp()">
      <p class="cancelText">Cancel</p><img src="./assets/img/Close.png" alt="" class="close">
      </button>
-     <button class="add-contact-create" onclick="saveContact()">
+     <button class="add-contact-create" onclick="saveContact(event)">
      <p class="save-text">Create Contact</p>
     <img src="./assets/img/check.png" alt="" style="width: 20px; height: 18px;"/>
     </button>
@@ -92,6 +91,7 @@ async function saveContact(event) {
   await saveContacts();
   updateUI(contacts.length - 1);
   addFirstLetter(contact.name);
+  closePopUp();
 }
 
 function createContact() {

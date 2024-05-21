@@ -3,6 +3,8 @@ body {
   background-color: #f6f7f8;
   box-sizing: border-box;
   overflow: hidden;
+  max-width: 1900px;
+  height: 100%;
 }
 
 .d-none {
@@ -11,8 +13,9 @@ body {
 }
 
 .contact-page {
-  width: 1200px;
-  height: 928px;
+  max-width: 1440px;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   margin-left: 232px;
   margin-top: 96px;
