@@ -39,6 +39,17 @@ document.querySelectorAll(".third-row").forEach(function (element) {
   element.addEventListener("click", openBoard);
 });
 
+let todos = [];
+
+async function loadTodos() {
+  try {
+    const taskData = JSON.parse(await getItem("taskData")) || [];
+    todos = taskData;
+  } catch (e) {
+    console.error("Could not load tasks", e);
+  }
+}
+
 /**
  * Gets the current user's information from sessionStorage.
  * @returns {Object|null} The current user object or null if no user is stored.
