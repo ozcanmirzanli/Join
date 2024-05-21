@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }, 2900);
 
   changeGreetingText();
-  loadTodos().then(updateSummary);
+  loadtaskData().then(updateSummary);
 });
 
 let userNameSummary = document.getElementById("user-name");
@@ -39,12 +39,12 @@ document.querySelectorAll(".third-row").forEach(function (element) {
   element.addEventListener("click", openBoard);
 });
 
-let todos = [];
+let taskData = [];
 
-async function loadTodos() {
+async function loadtaskData() {
   try {
-    const taskData = JSON.parse(await getItem("taskData")) || [];
-    todos = taskData;
+    const loadedtaskData = JSON.parse(await getItem("taskData")) || [];
+    taskData = loadedtaskData;
   } catch (e) {
     console.error("Could not load tasks", e);
   }
@@ -127,12 +127,21 @@ function greetingTextCondition() {
  * Updates the display of various task categories.
  */
 function updateSummary() {
-  updateDisplay("to-do", todos.length);
-  updateDisplay("done", getCategoryCount("done"));
-  updateDisplay("urgent", getCategoryCount("urgent"));
-  updateDisplay("in-board", getCategoryCount("inBoard"));
-  updateDisplay("in-progress", getCategoryCount("inProgress"));
-  updateDisplay("awaiting-feedback", getCategoryCount("awaitingFeedback"));
+  let toDo = taskData.filter((task) => task.todo === "toDo").length;
+  let inProgress = taskData.filter((task) => task.todo === "inProgress").length;
+  let done = taskData.filter((task) => task.todo === "done").length;
+  let urgent = taskData.filter((task) => task.todo === "urgent").length;
+  let inBoard = taskData.length;
+  let awaitFeedback = taskData.filter(
+    (todo) => todo.todo === "awaitFeedback"
+  ).length;
+
+  updateDisplay("to-do", toDo);
+  updateDisplay("done", done);
+  updateDisplay("urgent", urgent);
+  updateDisplay("in-board", inBoard);
+  updateDisplay("in-progress", inProgress);
+  updateDisplay("awaiting-feedback", awaitFeedback);
 }
 
 /**
@@ -140,9 +149,6 @@ function updateSummary() {
  * @param {string} category - The category of tasks to count.
  * @returns {number} The number of tasks in the category.
  */
-function getCategoryCount(category) {
-  return todos.filter((todo) => todo.category === category).length;
-}
 
 /**
  * Updates the text content of an element with a specified count.
