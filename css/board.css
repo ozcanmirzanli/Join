@@ -642,6 +642,12 @@ input:focus {
   padding-top: 8px;
 }
 
+.editTaskFooter {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 @media (max-width: 1400px){
   .headlineBoard, .table {
       margin-left: 140px;

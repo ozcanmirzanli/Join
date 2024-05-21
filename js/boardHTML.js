@@ -383,8 +383,11 @@ function renderEditTaskForm(todo) {
                 </div>
                 <div id="showsubtasks" class="subtasks-list d-none"></div>
             </section>
-            <footer>
-                <img src="./assets/img/button_OK.svg" alt="delete" class="iconTask" onclick="saveTask(${todo["id"]})">
+            <footer class="editTaskFooter">
+                <button onclick="saveTask(${todo["id"]})" class="addTaskBtn" type="button" id="addTaskBtn">
+                    Ok
+                    <img src="./assets/img/board_addTask_button_check.svg" alt="addTask_Button_Board_Plus">
+                </button>
             </footer>
         </div>
     </div>
