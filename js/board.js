@@ -263,7 +263,7 @@ function updateProgressBar(todo) {
   if (progressBar) {
       let innerProgressBar = progressBar.querySelector('.progress-bar');
       if (innerProgressBar) {
-          innerProgressBar.style.width = `${progress}%`;
+          innerProgressBar.style.width = `${(progress * 128) / 100}px`;
           innerProgressBar.style.backgroundColor = 'blue';
       }
   }

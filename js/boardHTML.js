@@ -15,18 +15,21 @@ function generateTodoHTMLBoard(element) {
             assignTo += `<div class="initialsMini" style="z-index: ${zIndex++}; ${marginLeft} background-color: ${memberId["color"]}">${memberId["initials"]}</div>`;
         }
     }
+    let progressBarHTML = '';
     if (element['subTasks'].length > 0) {
         let progressBarId = `progress-bar-${element.id}`;
         let completedSubtasksCount = element.subTasks.filter(subtask => subtask.completed).length;
         let totalSubtasksCount = element.subTasks.length;
-        let taskCounterText = `${completedSubtasksCount}/${totalSubtasksCount} Subtasks done`;
+        let taskCounterText = `${completedSubtasksCount}/${totalSubtasksCount} Subtasks`;
         let progressBarHTML = /*html*/ `
-            <div class="TaskProgressbar" role="progressbar">
-                <div id="${progressBarId}" style="width: 220px;"></div>
+                <div class="TaskProgressbar" role="progressbar">
+                <div id="${progressBarId}" class="progressbar">
+                    <div class="progress-bar"></div>
+                </div>
                 <div class="Taskcounter">${taskCounterText}</div>
             </div>
         `;
-        updateProgressBar(element);
+       setTimeout(() => updateProgressBar(element), 0);
         return /*html*/ `
             <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})"> 
                 <div class="taskCategory" style="background-color: ${categoryColor};">${element.category}</div>
@@ -34,7 +37,7 @@ function generateTodoHTMLBoard(element) {
                     <div class="taskTitleMini">${element.title}</div>
                     <div class="taskDescription">${element.description}</div>
                 </div>
-                <div>${progressBarHTML}</div>
+                <div class="TaskProgressbar" role="progressbar">${progressBarHTML}</div>
                 <div class="taskFooter">
                     <div class="badgesMini">${assignTo}</div>
                     <img src="./assets/img/medium_orange_AddTask.svg" alt="" class="taskPriority">
