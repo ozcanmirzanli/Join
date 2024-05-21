@@ -393,12 +393,6 @@ input:focus {
   line-height: 73.2px;
 }
 
-.taskDescription {
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
-}
-
 .bigTaskSections {
   display: flex;
   align-items: center;
