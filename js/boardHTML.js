@@ -41,7 +41,7 @@ function generateTodoHTMLBoard(element) {
                 <div class="TaskProgressbar" role="progressbar">${progressBarHTML}</div>
                 <div class="taskFooter">
                     <div class="badgesMini">${assignTo}</div>
-                    <img src="./assets/img/medium_orange_AddTask.svg" alt="" class="taskPriority">
+                    <img img src="./assets/img/${element['priority']}_priority.svg" alt="" class="taskPriority">
                 </div>
             </div>
         `;
@@ -56,7 +56,7 @@ function generateTodoHTMLBoard(element) {
                 <div>${progressBarHTML}</div>
                 <div class="taskFooter">
                     <div class="badgesMini">${assignTo}</div>
-                    <img src="./assets/img/medium_orange_AddTask.svg" alt="" class="taskPriority">
+                    <img img src="./assets/img/${element['priority']}_priority.svg" alt="" class="taskPriority">
                 </div>
             </div>
         `;
