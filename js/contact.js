@@ -217,11 +217,13 @@ contacts.forEach(function (contact) {
   contact.initials = getInitials(contact.name);
 });
 
-function getOverview(contactId, index) {
+function getOverview(contactId, index = null) {
   let contact = contacts.find((contact) => contact.id === contactId);
   displayContactDetails(contact);
   changeContactColor(contactId);
-  updateUI(index);
+  if (index !== null) {
+    updateUI(index);
+  }
 }
 
 function displayContactDetails(contact) {
@@ -399,7 +401,7 @@ async function saveEditedContact(contactId) {
     renderContacts();
     closePopUp();
     updateFirstLettersAfterEdit(index);
-    getOverview(contactId, index);
+    getOverview(contactId);
   } else {
     console.error("Contact not found with ID: ", contactId);
   }
