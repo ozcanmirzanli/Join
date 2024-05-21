@@ -129,8 +129,10 @@ function greetingTextCondition() {
 function updateSummary() {
   let toDo = taskData.filter((task) => task.todo === "toDo").length;
   let inProgress = taskData.filter((task) => task.todo === "inProgress").length;
-  let done = taskData.filter((task) => task.todo === "done").length;
-  let urgent = taskData.filter((task) => task.todo === "urgent").length;
+  let done = taskData.filter((todo) => todo.todo === "done").length;
+  let urgent = taskData.filter(
+    (priority) => priority.priority === "Urgent"
+  ).length;
   let inBoard = taskData.length;
   let awaitFeedback = taskData.filter(
     (todo) => todo.todo === "awaitFeedback"
