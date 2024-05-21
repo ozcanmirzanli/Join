@@ -114,7 +114,7 @@ function getCategoryColor(category) {
                     <img src="./assets/img/close.png" alt="" onclick="closeTaskBig()">
                 </div>
                 <div class="taskTitle">${task["title"]}</div>
-                <div class="taskDescription">${task["description"]}</div>
+                <div class="bigTaskDescription">${task["description"]}</div>
                 <div class="bigTaskSections">    
                     <div class="bigTaskColor">Due date:</div>
                     <div>${task["dueDate"]}</div>

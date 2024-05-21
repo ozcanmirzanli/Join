@@ -252,6 +252,12 @@ input:focus {
   text-align: left;
 }
 
+.bigTaskDescription {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+}
+
 .taskTitleMini {
   font-weight: 700;
   font-size: 16px;
