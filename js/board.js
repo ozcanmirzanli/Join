@@ -94,9 +94,9 @@ function allowDrop(ev) {
  * @param {string} category - The category to move the task to.
  */
 async function moveTo(category) {
-  taskData[currentDraggedElement]["todo"] = category; //change category of element
+  taskData[currentDraggedElement]["todo"] = category; 
   await saveDraggedTask(taskData);
-  updateHTMLBoard(); //update Board
+  updateHTMLBoard(); 
 }
 
 async function saveDraggedTask(updatedTask){
@@ -263,8 +263,8 @@ function updateProgressBar(todo) {
   if (progressBar) {
       let innerProgressBar = progressBar.querySelector('.progress-bar');
       if (innerProgressBar) {
-          innerProgressBar.style.width = `${(progress * 128) / 100}px`;
-          innerProgressBar.style.backgroundColor = 'blue';
+          innerProgressBar.style.width = `${(progress / 100) * 128}px`;
+          innerProgressBar.style.backgroundColor = '#4589FF';
       }
   }
 }

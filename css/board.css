@@ -268,11 +268,21 @@ input:focus {
   border-radius: 8px;
 }
 
+.progressbar {
+  width: 128px;
+  height: 100%;
+  background-color: #F4F4F4; 
+  border-radius: 8px;
+  position: relative;
+}
+
 .progressbar .progress-bar {
   height: 100%;
-  width: 128px; /* Initial width */
-  background-color: lightgray; /* This will be updated by JS */
-  border-radius: 8px;
+  background-color: #4589FF; 
+  border-radius: 8px; 
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .Taskcounter {
