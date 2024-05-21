@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }, 2900);
 
   changeGreetingText();
-  updateSummary();
+  loadTodos().then(updateSummary);
 });
 
 let userNameSummary = document.getElementById("user-name");
