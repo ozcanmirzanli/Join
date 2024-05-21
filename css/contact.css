@@ -2,6 +2,7 @@ body {
   margin: 0;
   background-color: #f6f7f8;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .d-none {
@@ -132,7 +133,20 @@ h4 {
   display: none;
 }
 
-.add-contact {
+#edit-contact-bg {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.226);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.add-contact,
+.edit-contact {
   display: flex;
   align-items: center;
   width: 1212px;

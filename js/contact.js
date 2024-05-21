@@ -71,7 +71,7 @@ function generateAddContactInputsHTML() {
 
 function generateAddContactButtonsHTML() {
   return /*html*/ `
-  <div class="add-contact-btns"  >
+  <div class="add-contact-btns" >
      <button class="add-contact-cancel" onclick="closePopUp()">
      <p class="cancelText">Cancel</p><img src="./assets/img/Close.png" alt="" class="close">
      </button>
@@ -124,6 +124,9 @@ function addFirstLetter(name) {
 function closePopUp() {
   let addContact = document.getElementById("add-contact-bg");
   addContact.style.display = "none";
+
+  let editContact = document.getElementById("edit-contact-bg");
+  editContact.style.display = "none";
 }
 
 function renderContacts() {
@@ -323,9 +326,9 @@ function editContact(contactId) {
 }
 
 function displayEditContactForm(contact) {
-  let addContact = document.getElementById("add-contact-bg");
-  addContact.style.display = "flex";
-  addContact.innerHTML = generateEditContactHTML(contact);
+  let editContact = document.getElementById("edit-contact-bg");
+  editContact.style.display = "flex";
+  editContact.innerHTML = generateEditContactHTML(contact);
   document.getElementById("badgeColor").value = contact.color;
 }
 
