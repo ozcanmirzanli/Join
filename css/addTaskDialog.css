@@ -97,5 +97,15 @@
   }
 
   @media screen and (max-width: 1100px)  {
+    .dialog-content {
+        padding: 16px 32px;
+    }
 
+    #seperator {
+        display: none;
+    }
+
+    .mainAddTaskContainer {
+        flex-direction: column;
+    }   
   }
