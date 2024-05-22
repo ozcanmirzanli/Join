@@ -133,7 +133,6 @@ function renderBigTask(task) {
     `;
     document.getElementById("taskBig").innerHTML = BigTaskHTML;
 }
-
   
 /**
  * Toggles the completion status of a subtask, updates the task display, 
