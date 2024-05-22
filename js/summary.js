@@ -168,12 +168,43 @@ function countTasksByPriority(priority) {
  * @param {string} elementId - The ID of the element to update with the due date.
  */
 function setDueDateDisplay(elementId) {
-  let taskWithDueDate = taskData.find((task) => task.dueDate);
+  let closestDueDateTask = findClosestDueDateTask(getUrgentTasksWithDueDates());
 
-  if (taskWithDueDate) {
+  if (closestDueDateTask) {
     let displayElement = document.getElementById(elementId);
-    displayElement.innerText = formatDate(new Date(taskWithDueDate.dueDate));
+    displayElement.innerText = formatDate(new Date(closestDueDateTask.dueDate));
   }
+}
+
+/**
+ * Retrieves tasks with "Urgent" priority and due dates.
+ * @returns {Array} An array of tasks with "Urgent" priority and due dates.
+ */
+function getUrgentTasksWithDueDates() {
+  return taskData.filter((task) => task.priority === "Urgent" && task.dueDate);
+}
+
+/**
+ * Finds the task with the closest due date among the provided tasks.
+ * @param {Array} tasks - An array of tasks with due dates.
+ * @returns {Object|null} The task object with the closest due date or null if no tasks are provided.
+ */
+function findClosestDueDateTask(tasks) {
+  if (tasks.length === 0) return null;
+
+  let currentDate = new Date();
+  let closestTask = tasks[0];
+  let closestDifference = Math.abs(currentDate - new Date(closestTask.dueDate));
+
+  for (let i = 1; i < tasks.length; i++) {
+    let difference = Math.abs(currentDate - new Date(tasks[i].dueDate));
+    if (difference < closestDifference) {
+      closestTask = tasks[i];
+      closestDifference = difference;
+    }
+  }
+
+  return closestTask;
 }
 
 /**
