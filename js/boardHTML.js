@@ -4,14 +4,14 @@
  * @returns {string} - The HTML string representing the todo element.
  */
 function generateTodoHTMLBoard(element) {
-    let categoryColor = getCategoryColor(element.category); // Get the background color based on the category
+    let categoryColor = getCategoryColor(element.category); 
     let assignTo = '';
-    let zIndex = 1; // Initialize zIndex with 1, so first member gets z-index: 1
-    if (element["assignTo"].length > 0) {
+    let zIndex = 1; 
+    if (element["assignTo"] && element["assignTo"].length > 0) {
         for (let j = 0; j < element["assignTo"].length; j++) {
             let memberId = element["assignTo"][j];
-            const marginLeft = j !== 0 ? 'margin-left: -10%;' : ''; // Set marginLeft based on index j
-            if (memberId) {
+            const marginLeft = j !== 0 ? 'margin-left: -10%;' : ''; 
+                        if (memberId) {
                 assignTo += `<div class="initialsMini" style="z-index: ${zIndex++}; ${marginLeft} background-color: ${memberId["color"]}">${memberId["initials"]}</div>`;
             }
         }
@@ -71,11 +71,11 @@ function generateTodoHTMLBoard(element) {
  */
 function getCategoryColor(category) {
     if (category === 'Technical Story') {
-      return 'rgba(31, 215, 193, 1)'; // Set the desired color for Technical Story
+      return 'rgba(31, 215, 193, 1)'; 
     } else if (category === 'User Story') {
-      return 'rgba(0, 56, 255, 1)'; // Set the desired color for User Story
+      return 'rgba(0, 56, 255, 1)'; 
     }
-    return 'white'; // Default color if the category doesn't match
+    return 'white';
   }
   
   /**
@@ -98,14 +98,15 @@ function getCategoryColor(category) {
       }
     }
     let assignTo = '';
+    if (task["assignTo"] && task["assignTo"].length > 0){
     for (let j = 0; j < task["assignTo"].length; j++) {
       let memberId = task["assignTo"][j];
       if (memberId) {
         assignTo += `<div class="userTask"><div class="initialsBig" style="background-color: ${memberId["color"]}">${memberId["initials"]}</div>${memberId["name"]}</div>`;
       }
-    }
+    }}
     document.getElementById("taskBig").classList.remove("d-none");
-    let categoryColor = getCategoryColor(task["category"]); // Get the background color based on the category
+    let categoryColor = getCategoryColor(task["category"]);
     const BigTaskHTML = /*html*/ `
         <div class="bigTask">
             <div class="bigTaskContent">  
@@ -149,6 +150,13 @@ function getCategoryColor(category) {
     document.getElementById("taskBig").innerHTML = BigTaskHTML;
   }
   
+/**
+ * Toggles the completion status of a subtask, updates the task display, 
+ * and saves the updated subtask data.
+ * 
+ * @param {number} taskIndex - The index of the task in the taskData array.
+ * @param {number} subTaskIndex - The index of the subtask within the task's subTasks array.
+ */
 function changeCompletedBoard(taskIndex, subTaskIndex) {
     const subTask = taskData[taskIndex].subTasks[subTaskIndex];
     subTask.completed = !subTask.completed;
@@ -156,6 +164,7 @@ function changeCompletedBoard(taskIndex, subTaskIndex) {
     saveSubtaskBoard(taskData[taskIndex]["id"], taskData[taskIndex]["subTasks"]);
     updateProgressBar(taskData[taskIndex]);
 }
+
 /**
  * Renders the add task form.
  * @returns {string} - The HTML for the add task form.
@@ -274,7 +283,7 @@ function renderAddTaskForm() {
                             <img src="assets/img/subtask_cancel_AddTask.svg" alt="subtask_cancel_AddTask">
                         </button>
 
-                        <button onclick="saveTask(id)" class="footer-btn-text-img" type="button" id="create-btn">
+                        <button onclick="createTask()" class="footer-btn-text-img" type="button" id="create-btn">
                             Create Task
                             <img src="assets/img/create_hook_white_AddTask.svg" alt="create_hook_white_AddTask">
                         </button>

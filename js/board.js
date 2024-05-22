@@ -1,74 +1,82 @@
 let subTaskIdCounter = 0;
 let currentDraggedElement = [];
 
-async function initBoard(){
-  await loadTasksDataBoard();
-  updateHTMLBoard();
+/**
+ * Initializes the task board by loading task data and updating the HTML board.
+ * This function is asynchronous and waits for the task data to be loaded before updating the board.
+ */
+async function initBoard() {
+    await loadTasksDataBoard();
+    updateHTMLBoard();
 }
 
-async function loadTasksDataBoard(){
-  try {
-    taskData = JSON.parse(await getItem('taskData'))
+/**
+ * Loads the task data from storage and parses it into the `taskData` variable.
+ * This function is asynchronous and uses a try-catch block to handle potential errors during data loading.
+ */
+async function loadTasksDataBoard() {
+    try {
+        taskData = JSON.parse(await getItem('taskData'));
+    } catch (e) {
+        console.info('Could not load tasks');
+    }
 }
-catch (e) {
-    console.info('Could not load tasks')
-}}
 
 /**
  * Updates the HTML board based on the current state of todos.
  */
 function updateHTMLBoard() {
-  let toDo = taskData.filter((t) => t["todo"] == "toDo"); //Filter array nach category toDo
+  let toDo = taskData.filter((t) => t["todo"] == "toDo"); 
 
-  document.getElementById("toDo").innerHTML = ""; //leert element mit id toDo
+  document.getElementById("toDo").innerHTML = ""; 
   if (toDo.length === 0) {
     document.getElementById("toDo").innerHTML =
-      "<div class='noToDo'>No Tasks to do.</div>"; //erstellt div 'No Tasks to do.'
+      "<div class='noToDo'>No Tasks to do.</div>"; 
   } else {
     for (let index = 0; index < toDo.length; index++) {
       const element = toDo[index];
-      document.getElementById("toDo").innerHTML += generateTodoHTMLBoard(element); //erstellt alle Tasks mit category: toDo
+      document.getElementById("toDo").innerHTML += generateTodoHTMLBoard(element);
     }
   }
 
-  let inProgress = taskData.filter((t) => t["todo"] == "inProgress"); //Filter Array nach category: inProgress
+  let inProgress = taskData.filter((t) => t["todo"] == "inProgress"); 
 
-  document.getElementById("inProgress").innerHTML = ""; //leert element mit id inProgress
+  document.getElementById("inProgress").innerHTML = "";
   if (inProgress.length === 0) {
     document.getElementById("inProgress").innerHTML =
-      "<div class='noToDo'>No Tasks in Progress.</div>"; //erstellt div 'No Tasks in Progress.'
+      "<div class='noToDo'>No Tasks in Progress.</div>"; 
   } else {
     for (let index = 0; index < inProgress.length; index++) {
       const element = inProgress[index];
-      document.getElementById("inProgress").innerHTML += //erstellt alle Tasks mit category: inProgress
+      document.getElementById("inProgress").innerHTML += 
       generateTodoHTMLBoard(element);
     }
   }
 
-  let awaitFeedback = taskData.filter((t) => t["todo"] == "awaitFeedback"); //Filter Array nach category: awaitFeedback
+  let awaitFeedback = taskData.filter((t) => t["todo"] == "awaitFeedback"); 
 
-  document.getElementById("awaitFeedback").innerHTML = ""; //leert element mit id awaitFeedback
+  document.getElementById("awaitFeedback").innerHTML = ""; 
   if (awaitFeedback.length === 0) {
     document.getElementById("awaitFeedback").innerHTML =
-      "<div class='noToDo'>No Tasks await Feedback.</div>"; //erstellt div 'No Tasks await Feedback.'
+      "<div class='noToDo'>No Tasks await Feedback.</div>"; 
   } else {
     for (let index = 0; index < awaitFeedback.length; index++) {
       const element = awaitFeedback[index];
-      document.getElementById("awaitFeedback").innerHTML += //erstellt alle Tasks mit category: awaitFeedback
+      document.getElementById("awaitFeedback").innerHTML += 
       generateTodoHTMLBoard(element);
     }
   }
 
-  let done = taskData.filter((t) => t["todo"] == "done"); //Filter Array nach category: done
+  let done = taskData.filter((t) => t["todo"] == "done"); 
 
-  document.getElementById("done").innerHTML = ""; //leert element mit id done
+  document.getElementById("done").innerHTML = ""; 
   if (done.length === 0) {
     document.getElementById("done").innerHTML =
-      "<div class='noToDo'>No Tasks done.</div>"; //erstellt div 'No Tasks done.'
+      "<div class='noToDo'>No Tasks done.</div>"; 
   } else {
     for (let index = 0; index < done.length; index++) {
       const element = done[index];
-      document.getElementById("done").innerHTML += generateTodoHTMLBoard(element); //erstellt alle Tasks mit category: done
+      document.getElementById("done").innerHTML += generateTodoHTMLBoard(element); 
     }
   }
 }
@@ -94,31 +102,30 @@ function allowDrop(ev) {
  * @param {string} category - The category to move the task to.
  */
 async function moveTo(category) {
-  taskData[currentDraggedElement]["todo"] = category; 
-  await saveDraggedTask(taskData);
-  updateHTMLBoard(); 
+  let draggedTask = taskData.find(task => task.id === currentDraggedElement);
+
+  if (draggedTask) {
+    draggedTask.todo = category; 
+    await saveDraggedTask(draggedTask);
+    updateHTMLBoard(); 
+  }
 }
 
-async function saveDraggedTask(updatedTask){
-  // Finde die index der zu aktualisierenden Aufgabe im taskData-Array
+/**
+ * Saves the updated task after it has been dragged and dropped.
+ * This function finds the task in the `taskData` array by its ID and updates it.
+ * The updated task data is then saved back to storage.
+ * 
+ * @param {Object} updatedTask - The task object that has been updated after dragging.
+ * @param {number} updatedTask.id - The ID of the updated task.
+ * @returns {Promise<void>} A promise that resolves when the task data has been saved.
+ */
+async function saveDraggedTask(updatedTask) {
   const index = taskData.findIndex(task => task.id === updatedTask.id);
 
-  // Überprüfen, ob die Aufgabe gefunden wurde
   if (index !== -1) {
-    // Aktualisiere die Aufgabe im taskData-Array
-    taskData[index] = {
-      id: updatedTask.id,
-      title: updatedTask.title,
-      description: updatedTask.description,
-      assignTo: updatedTask.assignTo,
-      dueDate: updatedTask.dueDate,
-      category: updatedTask.category,
-      subTasks: updatedTask.subTasks,
-      todo: updatedTask.todo,
-    };
-
-    // Speichere das aktualisierte taskData im lokalen Speicher
-    await setItem('taskData', JSON.stringify(taskData));
+      taskData[index] = updatedTask;
+      await setItem('taskData', JSON.stringify(taskData));
   }
 }
 
@@ -144,21 +151,21 @@ function closeTaskBig() {
  * Filters tasks based on search criteria.
  */
 function filterTasks() {
-  let search = document.getElementById("search").value.toLowerCase(); //eingabe des inputfield speichern
+  let search = document.getElementById("search").value.toLowerCase();
 
   let filteredTodos = taskData.filter(
     (
-      todo //erstellt neues array filterdTodos
+      todo 
     ) =>
       (taskData["title"].toLowerCase().includes(search) ||
-      taskData.description.toLowerCase().includes(search)) && // filtert FilterdTodos nach 'title' and 'description'
+      taskData.description.toLowerCase().includes(search)) && 
       ( taskData["todo"] === "toDo" ||
       taskData["todo"] === "inProgress" ||
       taskData["todo"] === "awaitFeedback" ||
-      taskData["todo"] === "done") //filtert filredTodos nach 'category'
+      taskData["todo"] === "done") 
   );
 
-  displayFilteredTodos(filteredTodos); //ruft displayFilteredTodos() auf
+  displayFilteredTodos(filteredTodos); 
 }
 
 /**
@@ -166,22 +173,21 @@ function filterTasks() {
  * @param {Array} filteredTodos - The filtered tasks to display.
  */
 function displayFilteredTodos(filteredTodos) {
-  document.getElementById("toDo").innerHTML = ""; //leert element mit id 'toDo'
-  document.getElementById("inProgress").innerHTML = ""; //leert element mit id 'inProgress'
-  document.getElementById("awaitFeedback").innerHTML = ""; //leert element mit id 'awaitFeedback'
-  document.getElementById("done").innerHTML = ""; //leert element mit id 'done'
+  document.getElementById("toDo").innerHTML = "";
+  document.getElementById("inProgress").innerHTML = ""; 
+  document.getElementById("awaitFeedback").innerHTML = "";
+  document.getElementById("done").innerHTML = ""; 
 
   filteredTodos.forEach((todo) => {
-    //erstellt für filteredtodos nach category neues HTML
     if (taskData["todo"] === "toDo") {
-      document.getElementById("toDo").innerHTML += generateTodoHTML(todo); //erstellt in element 'toDo' für category 'toDo' neues Html
+      document.getElementById("toDo").innerHTML += generateTodoHTML(todo); 
     } else if (taskData["todo"] === "inProgress") {
-      document.getElementById("inProgress").innerHTML += generateTodoHTML(todo); //erstellt in element 'inProgress' für category 'inPrgress' neues Html
+      document.getElementById("inProgress").innerHTML += generateTodoHTML(todo); 
     } else if (taskData["todo"] === "awaitFeedback") {
       document.getElementById("awaitFeedback").innerHTML +=
-        generateTodoHTML(todo); //erstellt in element 'awaitFeedback' für category 'awaitFeedback' neues Html
+        generateTodoHTML(todo); 
     } else if (taskData["todo"] === "done") {
-      document.getElementById("done").innerHTML += generateTodoHTML(todo); //erstellt in element 'done' für category 'done' neues Html
+      document.getElementById("done").innerHTML += generateTodoHTML(todo); 
     }
   });
 }
@@ -199,20 +205,23 @@ function showaddTaskBoard() {
  * Opens the add task dialog.
  */
 function openAddTaskDialog() {
-  // Erstellen Sie das Dialogfenster und fügen Sie die AddTask-Form hinzu
   const dialogContent = document.createElement("div");
   dialogContent.innerHTML = renderAddTaskForm();
-
-  // Fügen Sie das Dialogfenster zum Body hinzu
   document.body.appendChild(dialogContent);
 }
 
+/**
+ * Closes the add task dialog.
+ * This function finds the element with the class `dialog-content` and removes it from the DOM,
+ * effectively closing the dialog.
+ */
 function closeAddTaskDialog() {
   const dialogContent = document.querySelector(".dialog-content");
   if (dialogContent) {
-    dialogContent.remove();
+      dialogContent.remove();
   }
 }
+
 
 /**
  * Deletes a task.
@@ -227,18 +236,27 @@ async function deleteTaskBoard(id) {
     closeTaskBig();
 }
 
+/**
+ * Saves a new or edited task with the specified ID.
+ * This function collects input values from the form, creates or updates a task object, and stores it in local storage.
+ * 
+ * @async
+ * @param {number} id - The ID of the task to save.
+ */
 async function saveTask(id) {
   
   let subTasks = document.getElementById('addsubtask').value;
-
   let subTasksArray = subTasks.split('\n').map(subTask => ({
-    id: subTaskIdCounter++,
-    content: subTask.trim(),
-    completed: false
+      id: subTaskIdCounter++,
+      content: subTask.trim(),
+      completed: false
   }));
 
-  taskData.push ({
-      // id: taskIdCounter++,
+  const existingTask = taskData.find(task => task.id === id);
+  let todoStatus = existingTask ? existingTask.todo : 'toDo';
+
+  const task = {
+      id: id,
       title: document.getElementById('titleAddTask').value,
       description: document.getElementById('descriptionAddTask').value,
       assignTo: document.getElementById('assignAddTask').value,
@@ -246,18 +264,30 @@ async function saveTask(id) {
       category: document.getElementById('categoryAddTask').value,
       subTasks: subTasksArray,
       priority: selectedPrio,
-      todo: "toDo",
-  });
-    
+      todo: todoStatus,
+  };
+
+  const index = taskData.findIndex(t => t.id === id);
+  if (index !== -1) {
+      taskData[index] = task;
+  } else {
+      taskData.push(task);
+  }
+
   await setItem('taskData', JSON.stringify(taskData));
-
   closeAddTaskDialog();
-};
+}
 
+/**
+* Updates the progress bar of a task.
+* This function calculates the completion percentage of subtasks and updates the progress bar element.
+* 
+* @param {Object} todo - The task object containing subtasks.
+*/
 function updateProgressBar(todo) {
   let completedSubtasks = todo.subTasks.filter(subtask => subtask.completed).length;
   let progressBarId = `progress-bar-${todo.id}`;
-  let progressBar = document.getElementById(`progress-bar-${todo.id}`);
+  let progressBar = document.getElementById(progressBarId);
   let progress = (completedSubtasks / todo.subTasks.length) * 100;
 
   if (progressBar) {
@@ -269,6 +299,14 @@ function updateProgressBar(todo) {
   }
 }
 
+/**
+* Saves updated subtasks of a task.
+* This function finds the task by ID, updates its subtasks, and stores the updated task list in local storage.
+* 
+* @async
+* @param {number} id - The ID of the task to update.
+* @param {Array} subTasks - The array of updated subtasks.
+*/
 async function saveSubtaskBoard(id, subTasks) {
   const updatedTask = taskData.find(task => task.id === id);
   if (updatedTask) {
