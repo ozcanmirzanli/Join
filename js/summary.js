@@ -140,6 +140,7 @@ function updateSummary() {
   updateDisplay("in-board", inBoard);
   updateDisplay("in-progress", inProgress);
   updateDisplay("awaiting-feedback", awaitFeedback);
+  setDueDateDisplay("due-date");
 }
 
 /**
@@ -160,6 +161,48 @@ function countTasksByStatus(status) {
  */
 function countTasksByPriority(priority) {
   return taskData.filter((task) => task.priority === priority).length;
+}
+
+/**
+ * Sets the due date display for a specific task.
+ * @param {string} elementId - The ID of the element to update with the due date.
+ */
+function setDueDateDisplay(elementId) {
+  let taskWithDueDate = taskData.find((task) => task.dueDate);
+
+  if (taskWithDueDate) {
+    let displayElement = document.getElementById(elementId);
+    displayElement.innerText = formatDate(new Date(taskWithDueDate.dueDate));
+  }
+}
+
+/**
+ * Formats the date to a textual representation.
+ *
+ * @param {Date} date - The date object to format.
+ * @returns {string} The formatted date string.
+ */
+function formatDate(date) {
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  let dd = date.getDate();
+  let mm = date.getMonth();
+  let yyyy = date.getFullYear();
+
+  return monthNames[mm] + " " + (dd < 10 ? "0" + dd : dd) + ", " + yyyy;
 }
 
 /**
