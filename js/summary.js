@@ -124,19 +124,15 @@ function greetingTextCondition() {
 }
 
 /**
- * Updates the display of various task categories.
+ * Updates the summary display with counts of tasks by their status and priority.
  */
 function updateSummary() {
-  let toDo = taskData.filter((task) => task.todo === "toDo").length;
-  let inProgress = taskData.filter((task) => task.todo === "inProgress").length;
-  let done = taskData.filter((todo) => todo.todo === "done").length;
-  let urgent = taskData.filter(
-    (priority) => priority.priority === "Urgent"
-  ).length;
+  let toDo = countTasksByStatus("toDo");
+  let inProgress = countTasksByStatus("inProgress");
+  let done = countTasksByStatus("done");
+  let urgent = countTasksByPriority("Urgent");
   let inBoard = taskData.length;
-  let awaitFeedback = taskData.filter(
-    (todo) => todo.todo === "awaitFeedback"
-  ).length;
+  let awaitFeedback = countTasksByStatus("awaitFeedback");
 
   updateDisplay("to-do", toDo);
   updateDisplay("done", done);
@@ -144,6 +140,26 @@ function updateSummary() {
   updateDisplay("in-board", inBoard);
   updateDisplay("in-progress", inProgress);
   updateDisplay("awaiting-feedback", awaitFeedback);
+}
+
+/**
+ * Counts the number of tasks with a specific status.
+ *
+ * @param {string} status - The status of the tasks to count (e.g., "toDo", "inProgress").
+ * @returns {number} The number of tasks with the specified status.
+ */
+function countTasksByStatus(status) {
+  return taskData.filter((task) => task.todo === status).length;
+}
+
+/**
+ * Counts the number of tasks with a specific priority.
+ *
+ * @param {string} priority - The priority of the tasks to count (e.g., "Urgent").
+ * @returns {number} The number of tasks with the specified priority.
+ */
+function countTasksByPriority(priority) {
+  return taskData.filter((task) => task.priority === priority).length;
 }
 
 /**
