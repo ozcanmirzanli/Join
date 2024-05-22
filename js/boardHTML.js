@@ -4,14 +4,14 @@
  * @returns {string} - The HTML string representing the todo element.
  */
 function generateTodoHTMLBoard(element) {
-    let categoryColor = getCategoryColor(element.category); 
+    let categoryStyle = getCategoryStyle(element.category); 
     let assignTo = '';
     let zIndex = 1; 
     if (element["assignTo"] && element["assignTo"].length > 0) {
         for (let j = 0; j < element["assignTo"].length; j++) {
             let memberId = element["assignTo"][j];
             const marginLeft = j !== 0 ? 'margin-left: -10%;' : ''; 
-                        if (memberId) {
+            if (memberId) {
                 assignTo += `<div class="initialsMini" style="z-index: ${zIndex++}; ${marginLeft} background-color: ${memberId["color"]}">${memberId["initials"]}</div>`;
             }
         }
@@ -22,96 +22,81 @@ function generateTodoHTMLBoard(element) {
         let completedSubtasksCount = element.subTasks.filter(subtask => subtask.completed).length;
         let totalSubtasksCount = element.subTasks.length;
         let taskCounterText = `${completedSubtasksCount}/${totalSubtasksCount} Subtasks`;
-        let progressBarHTML = /*html*/ `
-                <div class="TaskProgressbar" role="progressbar">
+        progressBarHTML = /*html*/ `
+            <div class="TaskProgressbar" role="progressbar">
                 <div id="${progressBarId}" class="progressbar">
                     <div class="progress-bar"></div>
                 </div>
                 <div class="Taskcounter">${taskCounterText}</div>
             </div>
         `;
-       setTimeout(() => updateProgressBar(element), 0);
-        return /*html*/ `
-            <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})"> 
-                <div class="taskCategory" style="background-color: ${categoryColor};">${element.category}</div>
-                <div class="headerStoryMini">
-                    <div class="taskTitleMini">${element.title}</div>
-                    <div class="taskDescription">${element.description}</div>
-                </div>
-                <div class="TaskProgressbar" role="progressbar">${progressBarHTML}</div>
-                <div class="taskFooter">
-                    <div class="badgesMini">${assignTo}</div>
-                    <img img src="./assets/img/${element['priority']}_priority.svg" alt="" class="taskPriority">
-                </div>
-            </div>
-        `;
-    } else {
-        return /*html*/ `
-            <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})"> 
-                <div class="taskCategory" style="background-color: ${categoryColor};">${element.category}</div>
-                <div>
-                    <div class="taskTitleMini">${element.title}</div>
-                    <div class="taskDescription">${element.description}</div>
-                </div>
-                <div>${progressBarHTML}</div>
-                <div class="taskFooter">
-                    <div class="badgesMini">${assignTo}</div>
-                    <img img src="./assets/img/${element['priority']}_priority.svg" alt="" class="taskPriority">
-                </div>
-            </div>
-        `;
+        setTimeout(() => updateProgressBar(element), 0);
     }
+    return /*html*/ `
+        <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})"> 
+            <div class="taskCategory" style="background-color: ${categoryStyle.color}; width: ${categoryStyle.width};">${element.category}</div>
+            <div class="headerStoryMini">
+                <div class="taskTitleMini">${element.title}</div>
+                <div class="taskDescription">${element.description}</div>
+            </div>
+            ${progressBarHTML}
+            <div class="taskFooter">
+                <div class="badgesMini">${assignTo}</div>
+                <img src="./assets/img/${element['priority']}_priority.svg" alt="" class="taskPriority">
+            </div>
+        </div>
+    `;
 }
 
-
 /**
- * Returns the background color based on the category.
+ * Returns the background color and width based on the category.
  * @param {string} category - The category of the task.
- * @returns {string} - The background color.
+ * @returns {Object} - An object containing the background color and width.
  */
-function getCategoryColor(category) {
+function getCategoryStyle(category) {
     if (category === 'Technical Story') {
-      return 'rgba(31, 215, 193, 1)'; 
+        return { color: 'rgba(31, 215, 193, 1)', width: '110px' }; // Set the desired color and width for Technical Story
     } else if (category === 'User Story') {
-      return 'rgba(0, 56, 255, 1)'; 
+        return { color: 'rgba(0, 56, 255, 1)', width: '80px' }; // Set the desired color and width for User Story
     }
-    return 'white';
-  }
+    return { color: 'white', width: 'auto' }; // Default color and width if the category doesn't match
+}
   
-  /**
-   * Renders a big task with detailed information.
-   * @param {Object} task - The task object to render.
-   */
-  function renderBigTask(task) {
+ /**
+ * Renders a big task with detailed information.
+ * @param {Object} task - The task object to render.
+ */
+function renderBigTask(task) {
     let subtasks = '';
     let taskIndex = task["id"];
     if (task['subTasks'] && task['subTasks'].length > 0) {
-      for (let i = 0; i < task["subTasks"].length; i++) {
-        let subTaskIndex = task["subTasks"][i];
-        let imgSrc = subTaskIndex["completed"] ? "./assets/img/check-box-checked.png" : "./assets/img/check-box-disabled.png";
-        subtasks += /*html*/ `
-            <div class="subtaskContent">
-                <div><img src="${imgSrc}" alt="" id="subTaskCheckBox" onclick="changeCompletedBoard(${taskIndex}, ${i})"></div>
-                <div>${subTaskIndex["content"]}</div>
-            </div>
-        `;
-      }
+        for (let i = 0; i < task["subTasks"].length; i++) {
+            let subTaskIndex = task["subTasks"][i];
+            let imgSrc = subTaskIndex["completed"] ? "./assets/img/check-box-checked.png" : "./assets/img/check-box-disabled.png";
+            subtasks += /*html*/ `
+                <div class="subtaskContent">
+                    <div><img src="${imgSrc}" alt="" id="subTaskCheckBox" onclick="changeCompletedBoard(${taskIndex}, ${i})"></div>
+                    <div>${subTaskIndex["content"]}</div>
+                </div>
+            `;
+        }
     }
     let assignTo = '';
-    if (task["assignTo"] && task["assignTo"].length > 0){
-    for (let j = 0; j < task["assignTo"].length; j++) {
-      let memberId = task["assignTo"][j];
-      if (memberId) {
-        assignTo += `<div class="userTask"><div class="initialsBig" style="background-color: ${memberId["color"]}">${memberId["initials"]}</div>${memberId["name"]}</div>`;
-      }
-    }}
+    if (task["assignTo"] && task["assignTo"].length > 0) {
+        for (let j = 0; j < task["assignTo"].length; j++) {
+            let memberId = task["assignTo"][j];
+            if (memberId) {
+                assignTo += `<div class="userTask"><div class="initialsBig" style="background-color: ${memberId["color"]}">${memberId["initials"]}</div>${memberId["name"]}</div>`;
+            }
+        }
+    }
     document.getElementById("taskBig").classList.remove("d-none");
-    let categoryColor = getCategoryColor(task["category"]);
+    let categoryStyle = getCategoryStyle(task["category"]);
     const BigTaskHTML = /*html*/ `
         <div class="bigTask">
             <div class="bigTaskContent">  
                 <div class="flexBetweenCenter">
-                    <div class="bigTaskCategory" style="background-color: ${categoryColor};">${task["category"]}</div> 
+                    <div class="bigTaskCategory" style="background-color: ${categoryStyle.color}; width: ${categoryStyle.width};">${task["category"]}</div> 
                     <img src="./assets/img/close.png" alt="" onclick="closeTaskBig()">
                 </div>
                 <div class="taskTitle">${task["title"]}</div>
@@ -145,10 +130,10 @@ function getCategoryColor(category) {
                 </footer>
             </div>
         </div>
-      `;
-  
+    `;
     document.getElementById("taskBig").innerHTML = BigTaskHTML;
-  }
+}
+
   
 /**
  * Toggles the completion status of a subtask, updates the task display, 
