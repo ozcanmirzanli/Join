@@ -275,6 +275,7 @@ a:hover {
   align-items: center;
   gap: 64px;
   z-index: 1;
+  display: none;
 }
 
 .navBarIcons {
@@ -293,35 +294,34 @@ a:hover {
 }
 
 @media screen and (max-width: 1400px) {
-  .sidebar {
-    display: none;
-  }
   .pLineHeader {
-    padding-left: 140px;
+    padding-left: 90px;
   }
   .legalNotice {
     padding-left: 140px;
     width: calc(100% - 140px);
   }
+
+  .header {
+    width: 85%;
+    padding-left: 200px;
+  }
 }
 
 @media (min-width: 1401px) {
-  .sidebar {
-    display: block;
-  }
-  .navBar {
-    display: none;
-  }
-
   .legalNotice {
     padding-bottom: 80px;
   }
 }
 
-@media screen and (max-width: 1200px) and (min-width: 1141px) {
-  .pLineHeader {
-    padding-left: 70px;
+@media (max-width: 1200px) {
+  .header {
+    width: 80%;
+    padding-left: 235px;
   }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 1141px) {
   .legalNotice {
     padding-left: 70px;
     width: calc(100% - 70px);
@@ -330,9 +330,6 @@ a:hover {
 }
 
 @media screen and (max-width: 1140px) and (min-width: 1101px) {
-  .pLineHeader {
-    padding-left: 35px;
-  }
   .legalNotice {
     padding-left: 35px;
     width: calc(100% - 35px);
@@ -341,24 +338,6 @@ a:hover {
 }
 
 @media (max-width: 1100px) {
-  .pLineHeader {
-    display: none;
-  }
-
-  #joinLogoHeader {
-    display: block;
-    height: 80px;
-    margin-left: -33px;
-  }
-
-  .header {
-    width: 95%;
-    height: 100px;
-    display: flex;
-    justify-content: space-between;
-    padding-left: 70px;
-  }
-
   .legalNotice {
     padding-left: 20px;
     padding-right: 20px;
@@ -372,9 +351,54 @@ a:hover {
   }
 }
 
+@media (max-width: 1000px) {
+  .sidebar {
+    display: none;
+  }
+
+  .navBar {
+    display: flex;
+  }
+
+  .pLineHeader {
+    display: none;
+  }
+
+  #joinLogoHeader {
+    display: block;
+    height: 80px;
+    position: absolute;
+    left: 30px;
+    top: 7px;
+  }
+
+  .header {
+    width: 83%;
+    padding-left: 193px;
+  }
+}
+
+@media (max-width: 900px) {
+  .header {
+    width: 80%;
+  }
+}
+
 @media (max-width: 800px) {
   .header {
-    width: 93%;
+    width: 77%;
+  }
+}
+
+@media (max-width: 680px) {
+  .header {
+    width: 73%;
+  }
+}
+
+@media (max-width: 580px) {
+  .header {
+    width: 70%;
   }
 }
 
@@ -405,24 +429,40 @@ a:hover {
 
   #joinLogoHeader {
     height: 55px;
-    margin-left: -48px;
+
+    top: 12px;
   }
 
   .header {
     height: 80px;
+    width: 66%;
   }
 }
 
-@media (max-width: 420px) {
-  .header {
-    width: 91%;
-  }
-
+@media (max-width: 440px) {
   #joinLogoHeader {
     height: 45px;
+    top: 18px;
   }
 
   .display {
     padding-right: 58px;
+  }
+
+  .header {
+    height: 80px;
+    width: 63%;
+  }
+}
+
+@media (max-width: 400px) {
+  .header {
+    width: 59%;
+  }
+}
+
+@media (max-width: 350px) {
+  .header {
+    width: 55%;
   }
 }

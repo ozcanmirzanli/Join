@@ -248,7 +248,10 @@ body {
 
 @media (max-width: 1400px) {
   .title {
-    margin: 165px 0 25px 80px;
+    margin: 165px 0 25px 280px;
+  }
+  .secondary-container {
+    margin-left: 200px;
   }
 
   .options-container {
