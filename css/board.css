@@ -188,22 +188,6 @@ input:focus {
   z-index: 9999; /* Stellen Sie sicher, dass das Dialogfenster über anderen Elementen liegt */
 }
 
-.dialog-content {
-  background-color: white;
-  border-radius: 24px;
-  border: 1px solid lightgray;
-  padding: 15px;
-  width: 70vw; /* Breite des Dialogfensters anpassen */
-  height: 70vh; /* Höhe des Dialogfensters anpassen */
-  max-height: calc(100% - 2rem);
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9999; /* Stellen Sie sicher, dass das Dialogfenster über anderen Inhalten liegt */
-  overflow: hidden;
-}
-
 .userStoryMini {
   display: flex;
   flex-direction: column;
@@ -664,15 +648,6 @@ input:focus {
   }
   .footer-btn-addTask {
       padding-top: 16px;
-  }
-
-  .dialog-content {
-    overflow-y: auto;
-    padding-left: 0;
-  }
-
-  .dialog-content::-webkit-scrollbar {
-    display: none;
   }
 }
 
