@@ -294,7 +294,7 @@ function renderEditTaskForm(todo) {
     <div class="bigTask">
         <div class="bigEditTaskContent">
             <section class="btnCloseEditTaks">
-                <img src="./assets/img/close.png" alt="" onclick="closeTaskBig()">
+                <img src="./assets/img/Close.png" alt="" onclick="closeTaskBig()">
             </section>
             <section class="input-parts-addTask">
                 <div class="pd-bottom"><span>Title<span class="required-addTask">*</span></span></div>
