@@ -76,7 +76,7 @@ function generateAddContactButtonsHTML() {
      </button>
      <button class="add-contact-create" onclick="saveContact(event)">
      <p class="save-text">Create Contact</p>
-    <img src="./assets/img/check.png" alt="" style="width: 20px; height: 18px;"/>
+    <img src="./assets/img/check.png" alt=""/>
     </button>
   </div>
   </div> 

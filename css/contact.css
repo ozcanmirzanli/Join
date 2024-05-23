@@ -173,8 +173,6 @@ h4 {
 }
 
 .add-contact-text {
-  width: 175px;
-  height: 25px;
   font-family: "Inter", sans-serif;
   font-size: 21px;
   font-weight: 700;
@@ -220,6 +218,7 @@ h4 {
   font-weight: 700;
   line-height: 73.2px;
   margin-top: 12px;
+  width: 100%;
 }
 
 .add-contact-left h2,
@@ -230,6 +229,7 @@ h4 {
   font-weight: 400;
   line-height: 32.4px;
   margin-top: 8px;
+  width: 100%;
 }
 
 .add-contact-left-container,
@@ -300,6 +300,8 @@ h4 {
   align-items: center;
   margin-left: 24px;
   cursor: pointer;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
 .add-contact-create:hover,
@@ -323,14 +325,13 @@ h4 {
 }
 
 .save-text {
-  width: 154px;
-  height: 25px;
   font-family: "Inter", sans-serif;
   font-size: 21px;
   font-weight: 700;
   line-height: 25.2px;
   text-align: left;
   color: #ffffff;
+  margin-right: 5px;
 }
 
 .logo {
