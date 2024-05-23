@@ -97,7 +97,7 @@ function renderBigTask(task) {
             <div class="bigTaskContent">  
                 <div class="flexBetweenCenter">
                     <div class="bigTaskCategory" style="background-color: ${categoryStyle.color}; width: ${categoryStyle.width};">${task["category"]}</div> 
-                    <img src="./assets/img/close.png" alt="" onclick="closeTaskBig()">
+                    <img src="./assets/img/Close.png" alt="" onclick="closeTaskBig()">
                 </div>
                 <div class="taskTitle">${task["title"]}</div>
                 <div class="bigTaskDescription">${task["description"]}</div>
