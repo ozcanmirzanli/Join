@@ -253,7 +253,6 @@ async function deleteTaskBoard(id) {
  * @param {number} id - The ID of the task to save.
  */
 async function saveTask(id) {
-  
   let subTasks = document.getElementById('addsubtask').value;
   let subTasksArray = subTasks.split('\n').map(subTask => ({
       id: subTaskIdCounter++,
@@ -261,34 +260,44 @@ async function saveTask(id) {
       completed: false
   }));
 
+  // Extrahieren der aktuellen Priorität aus dem vorhandenen todo-Objekt
+  const currentTodo = taskData.find(task => task.id === id);
+  const currentPriority = currentTodo ? currentTodo.priority : '';
+
+  // Extrahieren der aktuellen zugewiesenen Kontakte aus dem vorhandenen todo-Objekt
+  const currentAssignedTo = currentTodo ? currentTodo.assignTo : [];
+
   const updatedFields = {
       title: document.getElementById('titleAddTask').value,
       description: document.getElementById('descriptionAddTask').value,
-      assignTo: selectedContacts,
+      // Hinzufügen neuer Kontakte zu den bestehenden Kontakten
+      assignTo: [...currentAssignedTo, ...selectedContacts.filter(contact => !currentAssignedTo.some(existingContact => existingContact.email === contact.email))],
       dueDate: document.getElementById('dueDate').value,
       category: document.getElementById('categoryAddTask').value,
       subTasks: subTasksArray,
-      priority: selectedPrio,
+      // Verwenden der aktuellen Priorität, wenn der Benutzer sie nicht ändert
+      priority: selectedPrio || currentPriority,
   };
 
   const index = taskData.findIndex(t => t.id === id);
   if (index !== -1) {
       taskData[index] = {
-        ...taskData[index],
-        ...updatedFields
-    };;
+          ...taskData[index],
+          ...updatedFields
+      };
   } else {
-    
-    taskData.push({
-        id: id,
-        ...updatedFields,
-        todo: 'toDo' 
-    });
+      taskData.push({
+          id: id,
+          ...updatedFields,
+          todo: 'toDo'
+      });
+  }
+
+  await setItem('taskData', JSON.stringify(taskData));
+  closeTaskBig();
 }
 
-await setItem('taskData', JSON.stringify(taskData));
-closeAddTaskDialog();
-}
+
 /**
 * Updates the progress bar of a task.
 * This function calculates the completion percentage of subtasks and updates the progress bar element.
