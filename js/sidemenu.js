@@ -1,26 +1,38 @@
 /*Java Script für header.html & sidemenu.html*/
-/**
- * Changes the initials image source and displays the submenu.
- */
-function changeInitials() {
-  // Change the image source of the element with ID 'initials'
+
+let submenuOpen = false;
+
+function toggleSubmenu() {
+  if (!submenuOpen) {
+    openSubmenu();
+    submenuOpen = true;
+  } else {
+    closeSubmenu();
+    submenuOpen = false;
+  }
+}
+
+function openSubmenu() {
   let image = document.getElementById("initials");
   image.src = "/assets/img/UserInitialsHover.svg";
 
-  // Show the submenu by removing 'd-none' class and adding 'subMenu' class for styling
   let submenu = document.getElementById("subMenu");
   submenu.classList.remove("d-none");
   submenu.classList.add("subMenu");
+
+  submenuOpen = true;
 }
 
-/*ausgelagert in script.js
-function initSidemenu() {
-    let clickedBtnId = localStorage.getItem('clickedBtnId');
-    if (clickedBtnId) {
-        let clickedBtn = document.getElementById(clickedBtnId);
-        clickedBtn.classList.add('clickedSideBtn');
-    }
-}*/
+function closeSubmenu() {
+  let image = document.getElementById("initials");
+  image.src = "./assets/img/UserInitials.svg";
+
+  let submenu = document.getElementById("subMenu");
+  submenu.classList.add("d-none");
+  submenu.classList.remove("subMenu");
+
+  submenuOpen = false;
+}
 
 /**
  * Changes the background of the clicked button and saves its ID to local storage.
