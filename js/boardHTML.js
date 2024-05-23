@@ -298,7 +298,7 @@ function renderEditTaskForm(todo) {
     <div class="bigTask">
         <div class="bigEditTaskContent">
             <section class="btnCloseEditTaks">
-                <img src="./assets/img/close.png" alt="" onclick="closeTaskBig()">
+                <img src="./assets/img/Close.png" alt="" onclick="closeTaskBig()">
             </section>
             <section class="input-parts-addTask">
                 <div class="pd-bottom"><span>Title<span class="required-addTask">*</span></span></div>
@@ -362,9 +362,18 @@ function renderEditTaskForm(todo) {
             <!-- Subtasks -->
             <section>
                 <div class="pd-bottom"><span>Subtasks</span></div>
-                <div class="input-assignedTo border-input-addtask" id="addSubtaskMain">
-                    <textarea id="addsubtask" placeholder="Add new subtasks (each on a new line)" class="input-assignedTo border-none">${todo.subTasks.map(subTask => subTask.content).join('\n')}</textarea>
+                <div class="input-assignedTo border-input-addtask" id="addSubtaskMain" onfocus="handleInputFocus()">
+                    <input id="addsubtask" type="text" placeholder="Add new subtasks" class="input-assignedTo border-none">
+                    <div onclick="toggleSubtasks()" class="drop-down-image drop-down-subtask">
+                        <img id="plusIcon" src="assets/img/plus_addTask.svg" alt="plus_addTask">
+                    </div>
+                    <div id="subtasks" class="d-none add-subtasks">
+                        <img onclick="cancelSubtaskClick()" id="cancelSubtask" src="assets/img/subtask_cancel_AddTask.svg" class="subtasks" alt="subtask_cancel_AddTask">
+                        <img src="assets/img/subtask_seperator_AddTask.svg" alt="subtask_seperator_AddTask">
+                        <img onclick="saveSubtask()" id="checkSubtask" src="assets/img/subtask_check_AddTask.svg" class="subtasks" alt="subtask_check_AddTask">
+                    </div>
                 </div>
+                <div id="showsubtasks" class="subtasks-list d-none"></div>
             </section>
             <footer class="editTaskFooter">
                 <button onclick="saveTask(${todo.id})" class="addTaskBtn" type="button" id="addTaskBtn">
