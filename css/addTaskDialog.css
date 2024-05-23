@@ -55,7 +55,6 @@
 
   .rightAddTaskMini, .leftAddTaskMini {
     display: flex;
-    height: fit-content;
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
