@@ -167,12 +167,22 @@ a:hover {
 .subMenu {
   display: flex;
   flex-direction: column;
-  background-color: #2a3647;
-  padding-top: 20px;
-  padding-left: 20px;
-  border-radius: 20px 0px 20px 20px;
+  position: absolute;
   width: 150px;
   height: 158px;
+  top: 97px;
+  right: 20px;
+  background-color: #2a3647;
+  border-radius: 20px 0px 20px 20px;
+}
+
+.submenu-links {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  gap: 30px;
 }
 
 .help {
