@@ -7,15 +7,17 @@ function generateTodoHTMLBoard(element) {
     let categoryStyle = getCategoryStyle(element.category); 
     let assignTo = '';
     let zIndex = 1; 
+
     if (element["assignTo"] && element["assignTo"].length > 0) {
         for (let j = 0; j < element["assignTo"].length; j++) {
-            let memberId = element["assignTo"][j];
+            let member = element["assignTo"][j];
             const marginLeft = j !== 0 ? 'margin-left: -10%;' : ''; 
-            if (memberId) {
-                assignTo += `<div class="initialsMini" style="z-index: ${zIndex++}; ${marginLeft} background-color: ${memberId["color"]}">${memberId["initials"]}</div>`;
+            if (member) {
+                assignTo += `<div class="initialsMini" style="z-index: ${zIndex++}; ${marginLeft}; background-color: ${member.color}">${member.initials}</div>`;
             }
         }
     }
+
     let progressBarHTML = '';
     if (element['subTasks'].length > 0) {
         let progressBarId = `progress-bar-${element.id}`;
@@ -32,6 +34,7 @@ function generateTodoHTMLBoard(element) {
         `;
         setTimeout(() => updateProgressBar(element), 0);
     }
+
     return /*html*/ `
         <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})"> 
             <div class="taskCategory" style="background-color: ${categoryStyle.color}; width: ${categoryStyle.width};">${element.category}</div>
@@ -47,6 +50,7 @@ function generateTodoHTMLBoard(element) {
         </div>
     `;
 }
+
 
 /**
  * Returns the background color and width based on the category.
@@ -97,7 +101,7 @@ function renderBigTask(task) {
             <div class="bigTaskContent">  
                 <div class="flexBetweenCenter">
                     <div class="bigTaskCategory" style="background-color: ${categoryStyle.color}; width: ${categoryStyle.width};">${task["category"]}</div> 
-                    <img src="./assets/img/close.png" alt="" onclick="closeTaskBig()">
+                    <img src="./assets/img/Close.png" alt="" onclick="closeTaskBig()">
                 </div>
                 <div class="taskTitle">${task["title"]}</div>
                 <div class="bigTaskDescription">${task["description"]}</div>
@@ -156,15 +160,14 @@ function changeCompletedBoard(taskIndex, subTaskIndex) {
 function renderAddTaskForm() {
   return /*html*/ `
         <div class="dialog-content">
-            <form id="addTaskForm">
-                <!-- Hier die Inhalte der AddTask-Form einfügen -->
-                <div id="cardHeadline" >
-                    <h2>Add Task</h2>
-                    <p id="closeDialogBTN" onclick="closeAddTaskDialog()">&#10005;</p>
+            <div id="addTaskForm">
+                <div class="cardHeadlinecontainer" >
+                    <div class="cardHeadLine">Add Task</div>
+                    <img src="assets/img/subtask_cancel_AddTask.svg" alt="Close Task" onclick="closeAddTaskDialog()" id="closeDialogBTN">
                 </div>
 
-                <div class="main-addTask">
-                    <div class="sections-addTask">
+                <div class="mainAddTaskContainer">
+                    <div class="leftAddTaskMini">
                         <!-- Title -->
                         <section class="input-parts-addTask">
                             <div class="pd-bottom"><span>Title<span class="required-addTask">*</span></span></div>
@@ -174,22 +177,20 @@ function renderAddTaskForm() {
                         <!-- Description -->
                         <section class="padding-description">
                             <div class="pd-bottom"><span>Description</span></div>
-                            <textarea name="description" id="descriptionAddTask" cols="30" rows="10" placeholder="Enter a Description" class="border-input-addtask"></textarea>
+                            <textarea name="description" id="descriptionAddTask" cols="30" rows="10" placeholder="Enter a Description" class="textareadAddTaskMini"></textarea>
                         </section>
 
                         <!-- Assigend To -->
                         <section class="padding-description">
                             <div class="pd-bottom"><label>Assigned to</label></div>
                             <div class="">
-                                <div id="assignAddTask" name="assignTo" class="input-assignedTo">
+                                <div id="assignAddTask" name="assignTo" class="input-assignedTo width440">
                                     <span id="select-contacts">Select contacts to assign</span>
                                     <img class="assignToDDArrow" src="assets/img/arrow_drop_down_AddTask.svg" onclick="openAssignTo()" id="arrowdown" alt="arrowdown"/>
                                     <img src="assets/img/arrow_drop_down_AddTask.svg" onclick="closeAssignTo()" id="arrowup" alt="arrowup"  class="assignToDDArrow rotate d-none"/>
                                 </div>
                             </div>
                             <div id="assignToDropdown" class="assignToDropdown assignField d-none">
-                            <!-- <input title="assignToFilter" type="text" onkeyup="filterNames()" id="contactSearch" class="assignToContactField">
-                                    <img src="assets/img/arrow_drop_down_AddTask.svg" onclick="closeAssignTo()" id="arrowup" alt="arrowup" class="assignToDDArrow rotate"> -->
                                 <div id="assignToList" class="assignToDropDownMenu"></div>
                             </div>
                             <div id="assignedUser" class="assignedUserList"></div>
@@ -197,10 +198,10 @@ function renderAddTaskForm() {
                     </div>
 
                     <!-- Seperator -->
-                    <div><img src="assets/img/seperator_AddTask.svg" alt="seperator" id="seperator" /></div>
+                    <div><img src="assets/img/seperator_AddTask.svg" alt="seperator" id="seperator"/></div>
 
                     <!-- Right Part of Add Task -->
-                    <div class="sections-addTask">
+                    <div class="rightAddTaskMini">
                         <!-- Due Date -->
                         <section>
                             <div class="pd-bottom"><span>Due Date<span class="required-addTask">*</span></span></div>
@@ -226,8 +227,8 @@ function renderAddTaskForm() {
                         <!-- Category -->
                         <section class="padding-category">
                             <div class="pd-bottom"><span>Category<span class="required-addTask">*</span></span></div>
-                            <div class="input-assignedTo border-input-addtask" id="categoryContainer">
-                                <select title="category" id="categoryAddTask" class="input-category" onchange="handleCategoryChange(this)" onclick="changeBorderColor()">
+                            <div class="input-assignedTo border-input-addtask width440">
+                                <select title="category" id="categoryAddTask" class="input-category " onchange="handleCategoryChange(this)" onclick="changeBorderColor()">
                                     <option value="" selected disabled>Select Task Category</option>
                                     <option value="User Story">User Story</option>
                                     <option value="Technical Story">Technical Story</option>
@@ -238,7 +239,7 @@ function renderAddTaskForm() {
                         <!-- Subtasks -->
                         <section class="sectionSubtasks">
                             <div class="pd-bottom"><span>Subtasks</span></div>
-                            <div class="input-assignedTo border-input-addtask" id="addSubtaskMain" onfocus="handleInputFocus()">
+                            <div class="input-assignedTo border-input-addtask width440" id="addSubtaskMain" onfocus="handleInputFocus()">
                                 <input id="addsubtask" type="text" placeholder="Add new subtasks" class="input-assignedTo border-none">
                                 <div onclick="toggleSubtasks()" class="drop-down-image drop-down-subtask">
                                     <img id="plusIcon" src="assets/img/plus_addTask.svg" alt="plus_addTask">
@@ -273,7 +274,7 @@ function renderAddTaskForm() {
                         </button>
                     </div>
                 </footer>
-            </form>
+            </div>
         </div>
     `;
 }
@@ -297,7 +298,7 @@ function renderEditTaskForm(todo) {
     <div class="bigTask">
         <div class="bigEditTaskContent">
             <section class="btnCloseEditTaks">
-                <img src="./assets/img/close.png" alt="" onclick="closeTaskBig()">
+                <img src="./assets/img/Close.png" alt="" onclick="closeTaskBig()">
             </section>
             <section class="input-parts-addTask">
                 <div class="pd-bottom"><span>Title<span class="required-addTask">*</span></span></div>
@@ -314,13 +315,11 @@ function renderEditTaskForm(todo) {
                 <div class="">
                     <div id="assignAddTask" name="assignTo" class="input-assignedTo">
                         <span id="select-contacts">Select contacts to assign</span>
-                        <img class="assignToDDArrow" src="assets/img/arrow_drop_down_AddTask.svg" onclick="openAssignTo()" id="arrowdown" alt="arrowdown"/>
+                        <img class="assignToDDArrow" src="assets/img/arrow_drop_down_AddTask.svg" onclick="openAssignToBoard()" id="arrowdown" alt="arrowdown"/>
                         <img src="assets/img/arrow_drop_down_AddTask.svg" onclick="closeAssignTo()" id="arrowup" alt="arrowup"  class="assignToDDArrow rotate d-none"/>
                     </div>
                 </div>
                 <div id="assignToDropdown" class="assignToDropdown assignField d-none">
-                <!-- <input title="assignToFilter" type="text" onkeyup="filterNames()" id="contactSearch" class="assignToContactField">
-                            <img src="assets/img/arrow_drop_down_AddTask.svg" onclick="closeAssignTo()" id="arrowup" alt="arrowup" class="assignToDDArrow rotate"> -->
                     <div id="assignToList" class="assignToDropDownMenu"></div>
                 </div>
                 <div id="assignedUser" class="assignedUserList"></div>
@@ -330,7 +329,7 @@ function renderEditTaskForm(todo) {
                 <div class="pd-bottom">
                 <span>Due Date<span class="required-addTask">*</span></span>
                 </div>
-                <input id="dueDate" type="date" placeholder="yyyy/mm/dd" class="input-dueDate border-input-addtask"  onchange="checkDueDate()" required/>
+                <input id="dueDate" type="date" placeholder="yyyy/mm/dd" class="input-dueDate border-input-addtask" value="${todo.dueDate}" required/>
             </section>
             <!-- Priority -->
             <section class="padding-prio">
@@ -353,7 +352,7 @@ function renderEditTaskForm(todo) {
                     <span>Category<span class="required-addTask">*</span></span>
                 </div>
                 <div class="input-assignedTo border-input-addtask" id="categoryContainer">
-                    <select title="category" id="categoryAddTask" class="input-category" onchange="handleCategoryChange(this)" onclick="changeBorderColor()">
+                    <select title="category" id="categoryAddTask" class="input-category" onchange="handleCategoryChange(this)">
                         <option value="" selected disabled>Select Task Category</option>
                         <option class="input-option" value="User Story">User Story</option>
                         <option class="input-option" value="Technical Story">Technical Story</option>
@@ -377,12 +376,12 @@ function renderEditTaskForm(todo) {
                 <div id="showsubtasks" class="subtasks-list d-none"></div>
             </section>
             <footer class="editTaskFooter">
-                <button onclick="saveTask(${todo["id"]})" class="addTaskBtn" type="button" id="addTaskBtn">
+                <button onclick="saveTask(${todo.id})" class="addTaskBtn" type="button" id="addTaskBtn">
                     Ok
                     <img src="./assets/img/board_addTask_button_check.svg" alt="addTask_Button_Board_Plus">
                 </button>
             </footer>
         </div>
     </div>
-    `;
+  `;
 }

@@ -7,6 +7,7 @@ let currentDraggedElement = [];
  */
 async function initBoard() {
     await loadTasksDataBoard();
+    await getContactBoard();
     updateHTMLBoard();
 }
 
@@ -20,6 +21,14 @@ async function loadTasksDataBoard() {
     } catch (e) {
         console.info('Could not load tasks');
     }
+}
+
+async function getContactBoard() {
+  try {
+    contacts = JSON.parse(await getItem("contact"));
+  } catch (error) {
+    console.info("Could not load contacts");
+  }
 }
 
 /**
@@ -252,32 +261,34 @@ async function saveTask(id) {
       completed: false
   }));
 
-  const existingTask = taskData.find(task => task.id === id);
-  let todoStatus = existingTask ? existingTask.todo : 'toDo';
-
-  const task = {
-      id: id,
+  const updatedFields = {
       title: document.getElementById('titleAddTask').value,
       description: document.getElementById('descriptionAddTask').value,
-      assignTo: document.getElementById('assignAddTask').value,
+      assignTo: selectedContacts,
       dueDate: document.getElementById('dueDate').value,
       category: document.getElementById('categoryAddTask').value,
       subTasks: subTasksArray,
       priority: selectedPrio,
-      todo: todoStatus,
   };
 
   const index = taskData.findIndex(t => t.id === id);
   if (index !== -1) {
-      taskData[index] = task;
+      taskData[index] = {
+        ...taskData[index],
+        ...updatedFields
+    };;
   } else {
-      taskData.push(task);
-  }
-
-  await setItem('taskData', JSON.stringify(taskData));
-  closeAddTaskDialog();
+    
+    taskData.push({
+        id: id,
+        ...updatedFields,
+        todo: 'toDo' 
+    });
 }
 
+await setItem('taskData', JSON.stringify(taskData));
+closeAddTaskDialog();
+}
 /**
 * Updates the progress bar of a task.
 * This function calculates the completion percentage of subtasks and updates the progress bar element.
@@ -313,4 +324,152 @@ async function saveSubtaskBoard(id, subTasks) {
       updatedTask.subTasks = subTasks;
       await setItem('taskData', JSON.stringify(taskData));
   }
+}
+
+function openAssignToBoard() {
+  let dropDownMenu = document.getElementById("assignToDropdown");
+  let inputAssignedTo = document.querySelector(".input-assignedTo");
+  let selectContactsText = document.getElementById("select-contacts");
+  dropDownMenu.classList.remove("d-none");
+  document.getElementById("assignedUser").classList.add("d-none");
+  document.getElementById("arrowdown").classList.add("d-none");
+  document.getElementById("arrowup").classList.remove("d-none");
+  inputAssignedTo.style.border = "1px solid #29ABE2";
+  selectContactsText.innerHTML = "";
+  renderContactsBoard();
+  renderAssignedContactsBoard();
+  restoreSelectedContactsBoard();
+}
+
+function closeAssignToBoard() {
+  let dropDownMenu = document.getElementById("assignToDropdown");
+  let inputAssignedTo = document.querySelector(".input-assignedTo");
+  let selectContactsText = document.getElementById("select-contacts");
+
+  dropDownMenu.classList.add("d-none");
+  document.getElementById("assignedUser").classList.remove("d-none");
+  document.getElementById("arrowup").classList.add("d-none");
+  document.getElementById("arrowdown").classList.remove("d-none");
+  inputAssignedTo.style.border = "";
+  selectContactsText.innerHTML = "Select contacts to assign";
+}
+
+function saveSelectedContactsBoard() {
+  localStorage.setItem("selectedContacts", JSON.stringify(selectedContacts));
+}
+
+function renderAssignedContactsBoard() {
+  let assignedUser = document.getElementById("assignedUser");
+  renderAssignedUserBoard(assignedUser);
+}
+
+function restoreSelectedContactsBoard() {
+  let selectedContactsFromStorage = JSON.parse(localStorage.getItem("selectedContacts"));
+  if (selectedContactsFromStorage) {
+    selectedContacts = selectedContactsFromStorage;
+    selectedContacts.forEach((contact) => {
+      let index = contacts.findIndex((c) => c.name === contact.name);
+      if (index !== -1) {
+        let contactElement = document.getElementById(`contact${index}`);
+        contactElement.classList.add("contactSelected");
+        let checkbox = document.getElementById(`checkbox${index}`);
+        checkbox.src = "./assets/img/addTask_AssignTo_Checkbox_Checked.svg";
+      }
+    });
+  }
+}
+
+function renderContactsBoard() {
+  let assignList = document.getElementById("assignToList");
+  assignList.innerHTML = "";
+  for (let i = 0; i < contacts.length; i++) {
+    let contact = contacts[i];
+    let badgeColor = contact.color;
+    assignList.innerHTML += getassignListHTMLBoard(contact, badgeColor, i);
+  }
+}
+
+function getassignListHTMLBoard(contact, badgeColor, i) {
+  return /*HTML*/ `
+            <div class="assignListContact" id="contact${i}" onclick="assignContactBoard(${i}, '${contact.name}', '${contact.initials}')">
+                <div class="assignDetails">
+                    <div class="assignToBadge" style="background-color: ${badgeColor}">${contact.initials}</div>
+                    <div>${contact.name}</div>
+                </div>
+                <img id="checkbox${i}" src="./assets/img/addTask_AssignTo_Checkbox.svg" class="checkbox">
+            </div>
+            `;
+}
+
+function assignContactBoard(i, contactName) {
+  let contact = document.getElementById(`contact${i}`);
+  let checkbox = document.getElementById(`checkbox${i}`);
+  contact.classList.toggle("contactSelected");
+  let isSelected = contact.classList.contains("contactSelected");
+  if (isSelected) {
+    checkbox.src = "./assets/img/addTask_AssignTo_Checkbox_Checked.svg";
+    selectedContacts.push(contacts[i]) - 1;
+    addToAssignedUserBoard(i, contacts[i]);
+  } else {
+    unassignContactsBoard(contactName, checkbox);
+  }
+  saveSelectedContactsBoard();
+}
+
+function addToAssignedUserBoard(i) {
+  let assignedUser = document.getElementById("assignedUser");
+  let assignedContact = selectedContacts[i];
+  assignedContacts.push(assignedContact);
+  renderAssignedUserBoard(assignedUser);
+}
+
+function unassignContactsBoard(contactName, checkbox) {
+  checkbox.src = "./assets/img/addTask_AssignTo_Checkbox.svg";
+  let selectedContactIndex = findSelectedIndexBoard(contactName);
+  selectedContacts.splice(selectedContactIndex, 1);
+  removeFromAssignedListBoard(selectedContactIndex);
+}
+
+function findSelectedIndexBoard(contactName) {
+  return selectedContacts.findIndex((contact) => contact["name"] === contactName);
+}
+
+function removeFromAssignedListBoard(selectedContactIndex) {
+  let assignedUser = document.getElementById("assignedUser");
+  assignedContacts.splice(selectedContactIndex, 1);
+  renderAssignedUserBoard(assignedUser);
+  saveSelectedContactsBoard();
+}
+
+function renderAssignedUserBoard(assignedUser) {
+  assignedUser.innerHTML = "";
+  assignedContacts.forEach((assignedContact) => {
+    let badgeColor = assignedContact.color;
+    assignedUser.innerHTML += `
+            <div class="assignToBadge" style="background-color: ${badgeColor}">${assignedContact.initials}</div>
+        `;
+  });
+}
+
+function clearAssignedUserBoard() {
+  assignedContacts = [];
+  selectedContacts = [];
+  renderAssignedUserBoard(assignedUser);
+  document.querySelectorAll(".checkbox").forEach(function (checkbox) {
+    checkbox.src = "./assets/img/addTask_AssignTo_Checkbox.svg";
+  });
+  let contactsElements = document.querySelectorAll(".assignListContact");
+  contactsElements.forEach(function (contact) {
+    contact.classList.remove("contactSelected");
+  });
+}
+
+function handleFocusBoard() {
+  let addSubtaskMain = document.querySelector(".addSubtaskMain");
+  addSubtaskMain.style.border = "1px solid rgba(41, 171, 226, 1)";
+}
+
+function handleBlurBoard() {
+  let addSubtaskMain = document.querySelector(".addSubtaskMain");
+  addSubtaskMain.style.border = "1px solid rgba(209, 209, 209, 1)";
 }
