@@ -7,15 +7,17 @@ function generateTodoHTMLBoard(element) {
     let categoryStyle = getCategoryStyle(element.category); 
     let assignTo = '';
     let zIndex = 1; 
+
     if (element["assignTo"] && element["assignTo"].length > 0) {
         for (let j = 0; j < element["assignTo"].length; j++) {
-            let memberId = element["assignTo"][j];
+            let member = element["assignTo"][j];
             const marginLeft = j !== 0 ? 'margin-left: -10%;' : ''; 
-            if (memberId) {
-                assignTo += `<div class="initialsMini" style="z-index: ${zIndex++}; ${marginLeft} background-color: ${memberId["color"]}">${memberId["initials"]}</div>`;
+            if (member) {
+                assignTo += `<div class="initialsMini" style="z-index: ${zIndex++}; ${marginLeft}; background-color: ${member.color}">${member.initials}</div>`;
             }
         }
     }
+
     let progressBarHTML = '';
     if (element['subTasks'].length > 0) {
         let progressBarId = `progress-bar-${element.id}`;
@@ -32,6 +34,7 @@ function generateTodoHTMLBoard(element) {
         `;
         setTimeout(() => updateProgressBar(element), 0);
     }
+
     return /*html*/ `
         <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})"> 
             <div class="taskCategory" style="background-color: ${categoryStyle.color}; width: ${categoryStyle.width};">${element.category}</div>
@@ -47,6 +50,7 @@ function generateTodoHTMLBoard(element) {
         </div>
     `;
 }
+
 
 /**
  * Returns the background color and width based on the category.
@@ -311,13 +315,11 @@ function renderEditTaskForm(todo) {
                 <div class="">
                     <div id="assignAddTask" name="assignTo" class="input-assignedTo">
                         <span id="select-contacts">Select contacts to assign</span>
-                        <img class="assignToDDArrow" src="assets/img/arrow_drop_down_AddTask.svg" onclick="openAssignTo()" id="arrowdown" alt="arrowdown"/>
+                        <img class="assignToDDArrow" src="assets/img/arrow_drop_down_AddTask.svg" onclick="openAssignToBoard()" id="arrowdown" alt="arrowdown"/>
                         <img src="assets/img/arrow_drop_down_AddTask.svg" onclick="closeAssignTo()" id="arrowup" alt="arrowup"  class="assignToDDArrow rotate d-none"/>
                     </div>
                 </div>
                 <div id="assignToDropdown" class="assignToDropdown assignField d-none">
-                <!-- <input title="assignToFilter" type="text" onkeyup="filterNames()" id="contactSearch" class="assignToContactField">
-                            <img src="assets/img/arrow_drop_down_AddTask.svg" onclick="closeAssignTo()" id="arrowup" alt="arrowup" class="assignToDDArrow rotate"> -->
                     <div id="assignToList" class="assignToDropDownMenu"></div>
                 </div>
                 <div id="assignedUser" class="assignedUserList"></div>
@@ -327,7 +329,7 @@ function renderEditTaskForm(todo) {
                 <div class="pd-bottom">
                 <span>Due Date<span class="required-addTask">*</span></span>
                 </div>
-                <input id="dueDate" type="date" placeholder="yyyy/mm/dd" class="input-dueDate border-input-addtask"  onchange="checkDueDate()" required/>
+                <input id="dueDate" type="date" placeholder="yyyy/mm/dd" class="input-dueDate border-input-addtask" value="${todo.dueDate}" required/>
             </section>
             <!-- Priority -->
             <section class="padding-prio">
@@ -350,7 +352,7 @@ function renderEditTaskForm(todo) {
                     <span>Category<span class="required-addTask">*</span></span>
                 </div>
                 <div class="input-assignedTo border-input-addtask" id="categoryContainer">
-                    <select title="category" id="categoryAddTask" class="input-category" onchange="handleCategoryChange(this)" onclick="changeBorderColor()">
+                    <select title="category" id="categoryAddTask" class="input-category" onchange="handleCategoryChange(this)">
                         <option value="" selected disabled>Select Task Category</option>
                         <option class="input-option" value="User Story">User Story</option>
                         <option class="input-option" value="Technical Story">Technical Story</option>
@@ -360,26 +362,17 @@ function renderEditTaskForm(todo) {
             <!-- Subtasks -->
             <section>
                 <div class="pd-bottom"><span>Subtasks</span></div>
-                <div class="input-assignedTo border-input-addtask" id="addSubtaskMain" onfocus="handleInputFocus()">
-                    <input id="addsubtask" type="text" placeholder="Add new subtasks" class="input-assignedTo border-none">
-                    <div onclick="toggleSubtasks()" class="drop-down-image drop-down-subtask">
-                        <img id="plusIcon" src="assets/img/plus_addTask.svg" alt="plus_addTask">
-                    </div>
-                    <div id="subtasks" class="d-none add-subtasks">
-                        <img onclick="cancelSubtaskClick()" id="cancelSubtask" src="assets/img/subtask_cancel_AddTask.svg" class="subtasks" alt="subtask_cancel_AddTask">
-                        <img src="assets/img/subtask_seperator_AddTask.svg" alt="subtask_seperator_AddTask">
-                        <img onclick="saveSubtask()" id="checkSubtask" src="assets/img/subtask_check_AddTask.svg" class="subtasks" alt="subtask_check_AddTask">
-                    </div>
+                <div class="input-assignedTo border-input-addtask" id="addSubtaskMain">
+                    <textarea id="addsubtask" placeholder="Add new subtasks (each on a new line)" class="input-assignedTo border-none">${todo.subTasks.map(subTask => subTask.content).join('\n')}</textarea>
                 </div>
-                <div id="showsubtasks" class="subtasks-list d-none"></div>
             </section>
             <footer class="editTaskFooter">
-                <button onclick="saveTask(${todo["id"]})" class="addTaskBtn" type="button" id="addTaskBtn">
+                <button onclick="saveTask(${todo.id})" class="addTaskBtn" type="button" id="addTaskBtn">
                     Ok
                     <img src="./assets/img/board_addTask_button_check.svg" alt="addTask_Button_Board_Plus">
                 </button>
             </footer>
         </div>
     </div>
-    `;
+  `;
 }
