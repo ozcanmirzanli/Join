@@ -294,6 +294,15 @@ function editTask(id) {
  */
 function renderEditTaskForm(todo) {
     document.getElementById("taskBig").classList.remove("d-none");
+    let assignTo = '';
+    if (todo["assignTo"] && todo["assignTo"].length > 0) {
+        for (let j = 0; j < todo["assignTo"].length; j++) {
+            let memberId = todo["assignTo"][j];
+            if (memberId) {
+                assignTo += `<div class="initialsBig" style="background-color: ${memberId["color"]}">${memberId["initials"]}</div>`;
+            }
+        }
+    }
     document.getElementById("taskBig").innerHTML = /*html*/ `
       <div class="bigTask">
           <div class="bigEditTaskContent">
@@ -323,7 +332,7 @@ function renderEditTaskForm(todo) {
                       <div id="assignToList" class="assignToDropDownMenu"></div>
                   </div>
                   <div id="assignedUser" class="assignedUserList">
-                      ${todo.assignTo.map(user => `<div>${user.name}</div>`).join('')}
+                  ${assignTo}
                   </div>
               </section>
               <!-- Due Date -->
@@ -337,14 +346,14 @@ function renderEditTaskForm(todo) {
               <section class="padding-prio">
                   <div class="pd-bottom"><span>Prio</span></div>
                   <div class="priority">
-                      <button type="button" class="button-prio" id="btnPrioUrgent" onclick="changePriorityColor('urgent')" style="${todo.priority === 'Urgent' ? 'background-color: #FF3D00;' : ''}">Urgent
-                          <img src="assets/img/urgent_red_AddTask.svg" alt="urgent_red_AddTask"/>
+                      <button type="button" class="button-prio" id="btnPrioUrgent" onclick="changePriorityColor('urgent')" style="${todo.priority === 'Urgent' ? 'background-color: #FF3D00; color: #FFFFFF;' : ''}">Urgent
+                          <img id="imgPrioUrgent" src="${todo.priority === 'Urgent' ? 'assets/img/urgent_white_AddTask.svg' : 'assets/img/urgent_red_AddTask.svg'}" alt="urgent_red_AddTask"/>
                       </button>                    
-                      <button type="button" class="button-prio" id="btnPrioMedium" onclick="changePriorityColor('medium')" style="${todo.priority === 'Medium' ? 'background-color: #FFA800;' : ''}">Medium
-                          <img src="assets/img/medium_orange_AddTask.svg" alt="medium_orange_AddTask"/>
+                      <button type="button" class="button-prio" id="btnPrioMedium" onclick="changePriorityColor('medium')" style="${todo.priority === 'Medium' ? 'background-color: #FFA800; color: #FFFFFF;' : ''}">Medium
+                          <img id="imgPrioMedium" src="${todo.priority === 'Medium' ? 'assets/img/medium_white_AddTask.svg' : 'assets/img/medium_orange_AddTask.svg'}" alt="medium_orange_AddTask"/>
                       </button>                    
-                      <button type="button" class="button-prio" id="btnPrioLow" onclick="changePriorityColor('low')" style="${todo.priority === 'Low' ? 'background-color: #7AE229;' : ''}">Low
-                          <img src="assets/img/low_green_AddTask.svg" alt="low_green_AddTask"/>
+                      <button type="button" class="button-prio" id="btnPrioLow" onclick="changePriorityColor('low')" style="${todo.priority === 'Low' ? 'background-color: #7AE229; color: #FFFFFF;' : ''}">Low
+                          <img id="imgPrioLow" src="${todo.priority === 'Low' ? 'assets/img/low_white_AddTask.svg' : 'assets/img/low_green_AddTask.svg'}" alt="low_green_AddTask"/>
                       </button>                    
                   </div>
               </section>
