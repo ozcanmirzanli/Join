@@ -4,13 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Header</title>
-    <link rel="stylesheet" href="./css/sidemenu.css" />
-    <script src="./script.js"></script>
-    <link rel="stylesheet" href="./css/fonts.css" />
+    <link rel="stylesheet" href="/css/sidemenu.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="icon" href="./assets/img/joinLogoBlack.svg" />
-    <script src="./js/sidemenu.js"></script>
+  
   </head>
-  <body>
+  <body onload="initHeader()">
     <div class="header">
       <p class="pLineHeader">Kanban Project Management Tool</p>
       <div>
@@ -21,16 +20,10 @@
         />
       </div>
       <div class="display">
-        <a href="/Join/help.html"
+        <a href="./Join/help.html"
           ><img src="./assets/img/help.svg" alt="help" class="help"
         /></a>
-        <img
-          src="./assets/img/UserInitials.svg"
-          alt="PlatzhalterBenutzer"
-          class="user"
-          id="initials"
-          onclick="toggleSubmenu()"
-        /><!--Bild mit Js ändern-->
+       <div id="userHeader" class="user"></div>
       </div>
       <div id="subMenu" class="d-none">
         <div class="submenu-links">
@@ -40,5 +33,9 @@
         </div>
       </div>
     </div>
+    <script src="/js/sidemenu.js"></script>
+    <script src="/js/storage.js"></script>
+    <script src="/script.js"></script>
+  </head>
   </body>
 </html>

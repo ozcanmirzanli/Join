@@ -1,6 +1,20 @@
 /*Java Script für header.html & sidemenu.html*/
 
 let submenuOpen = false;
+let users = [];
+
+async function initHeader(){
+  loadUsersHead();
+  renderUserHeader();
+}
+
+async function loadUsersHead() {
+  try {
+    users = JSON.parse(await getItem("users"));
+  } catch (e) {
+    console.error("Loading error:", e);
+  }
+}
 
 function toggleSubmenu() {
   if (!submenuOpen) {
@@ -52,4 +66,31 @@ function changeBackground(id) {
 
 function goBack() {
   window.history.back();
+}
+
+function renderUserHeader() {
+  const currentUser = getCurrentUserHeader();
+  if (currentUser) {
+    const name = currentUser.userName; // Name zuerst definieren
+    const initials = getInitials(name);
+    const user = document.getElementById("userHeader");
+    user.innerHTML = `<div class="initialsHeader">${initials}</div>`;
+  } else {
+    document.getElementById("userHeader").innerHTML = `<div class="initialsHeader">G</div>`; // Fehlermeldung, falls kein Benutzer eingeloggt ist
+  }
+}
+
+function getCurrentUserHeader() {
+  const userName = JSON.parse(sessionStorage.getItem("currentUser"));
+  if (userName) {
+    return userName;
+  }
+  return null;
+}
+
+function getInitials(name) {
+  return name
+    .split(" ")
+    .map((word) => word.charAt(0))
+    .join("");
 }

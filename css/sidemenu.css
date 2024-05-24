@@ -199,13 +199,29 @@ a:hover {
 }
 
 .user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 56px;
-  height: 56px;
+height: 56px;
+border: 3px solid #2A3647;
+border-radius: 559px;
 }
 
 .user:hover {
   cursor: pointer;
 }
+
+.initialsHeader{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 14px;
+  color: #29ABE2;
+  font-weight: 700;
+}
+
 
 #privacy {
   width: 121px;
