@@ -295,7 +295,7 @@ function subtaskDelete(id) {
 
     let mainBoundingBox = document.getElementById(`mainBoundingBox${id}`);
     mainBoundingBox.remove();
-  }
+    }
 }
 
 /**
@@ -311,6 +311,9 @@ function clearEntries() {
   document.getElementById("addsubtask").value = ""; // Clear entries for subtasks section
   clearShowSubtasks(); // Clear entries in the show subtasks section
   subtaskDelete();
+  cancelSubtaskClick();
+  subtask = [];
+  changePriorityColor("medium");
 }
 
 /**
