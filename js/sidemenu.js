@@ -5,7 +5,6 @@ let users = [];
 
 async function initHeader(){
   loadUsersHead();
-  renderUserHeader();
 }
 
 async function loadUsersHead() {
@@ -14,6 +13,7 @@ async function loadUsersHead() {
   } catch (e) {
     console.error("Loading error:", e);
   }
+  renderUserHeader();
 }
 
 function toggleSubmenu() {
@@ -27,8 +27,7 @@ function toggleSubmenu() {
 }
 
 function openSubmenu() {
-  let image = document.getElementById("initials");
-  image.src = "/assets/img/UserInitialsHover.svg";
+  document.getElementById("userHeader").style.backgroundColor = "rgb(225,230,236)";
 
   let submenu = document.getElementById("subMenu");
   submenu.classList.remove("d-none");
