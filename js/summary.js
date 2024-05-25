@@ -5,9 +5,9 @@
  */
 document.addEventListener("DOMContentLoaded", function () {
   setTimeout(function () {
-    let welcomeBackground = document.querySelector(".welcome-backgound");
+    let welcomeBackground = document.querySelector(".welcome-background");
     let welcomeText = document.querySelector(".welcome-text");
-    if (window.innerWidth < 900) {
+    if (window.innerWidth < 1020) {
       welcomeBackground.style.display = "none";
       welcomeText.style.display = "none";
     }
