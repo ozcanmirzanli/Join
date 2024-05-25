@@ -292,14 +292,15 @@ body {
 
   .welcome-text {
     position: absolute;
-    top: 45%;
-    left: 33%;
     display: flex;
     flex-direction: column;
     align-items: center;
     z-index: 12;
     animation: opacity-fade 1s ease-in-out 2s;
     opacity: 1;
+    margin-left: 0;
+    width: 60%;
+    margin-bottom: 60px;
   }
 }
 
@@ -386,16 +387,6 @@ body {
   .third-row:hover p {
     color: #2a3647;
   }
-
-  .welcome-text {
-    left: 24%;
-  }
-}
-
-@media (max-width: 720px) {
-  .welcome-text {
-    left: 22%;
-  }
 }
 
 @media (max-width: 600px) {
@@ -459,10 +450,6 @@ body {
     width: 55%;
   }
 
-  .welcome-text {
-    left: 18%;
-  }
-
   .welcome-text h2 {
     font-size: 36px;
   }
@@ -518,7 +505,7 @@ body {
   }
 
   .welcome-text {
-    left: 15%;
+    margin-bottom: 0px;
   }
 }
 
@@ -545,7 +532,7 @@ body {
   }
 
   .welcome-text {
-    left: 12%;
+    width: 90%;
   }
 }
 
@@ -572,10 +559,6 @@ body {
   .date-text {
     width: 75%;
   }
-
-  .welcome-text {
-    left: 5%;
-  }
 }
 
 @media (max-width: 335px) {
@@ -589,9 +572,5 @@ body {
   }
   .date-text {
     width: 80%;
-  }
-
-  .welcome-text {
-    left: 1%;
   }
 }
