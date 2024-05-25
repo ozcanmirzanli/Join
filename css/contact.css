@@ -28,27 +28,19 @@ body {
 }
 
 .headline {
-  width: 274px;
   height: 73px;
-  font-family: "Inter", sans-serif;
   font-size: 61px;
   font-weight: 700;
   line-height: 73.2px;
-  text-align: left;
 }
 
 h4 {
-  width: 235px;
-  height: 32px;
-  font-family: "Inter", sans-serif;
   font-size: 27px;
   font-weight: 400;
   line-height: 32.4px;
-  text-align: left;
 }
 
 .contact-overview {
-  width: 569px;
   height: 73px;
   margin-top: 110px;
   gap: 30px;
@@ -580,7 +572,6 @@ input:focus {
   font-weight: 500;
   line-height: 56.4px;
   text-align: left;
-  padding-bottom: 8px;
 }
 
 .btn {
@@ -757,4 +748,65 @@ input:focus {
   background: #2a3647;
   border-radius: 20px;
   color: white;
+}
+
+@media (max-width: 1400px) {
+  .headline {
+    font-size: 50px;
+  }
+
+  h4 {
+    font-size: 23px;
+  }
+
+  .seperator {
+    height: 50px;
+  }
+
+  .nameBig {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 1250px) {
+  .right-section {
+    padding-left: 25px;
+  }
+
+  .contact-overview {
+    flex-direction: column;
+    align-items: flex-start;
+
+    margin-top: 70px;
+    margin-bottom: 65px;
+  }
+
+  .headline,
+  h4 {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    line-height: 0;
+  }
+
+  .seperator {
+    border-bottom: 3px solid #29abe2;
+    width: 100px;
+    height: 1px;
+    margin-top: 15px;
+  }
+
+  .upperArea {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 1160px) {
+  .initialsBig {
+    width: 95px;
+    height: 95px;
+  }
+
+  .nameBig {
+    font-size: 35px;
+  }
 }
