@@ -230,8 +230,12 @@ function getOverview(contactId, index = null) {
 
 function displayContactDetails(contact) {
   let contactBig = document.getElementById("contactBig");
+  let contactOverview = document.querySelector(".right-section");
+
   contactBig.classList.remove("d-none");
   contactBig.innerHTML = generateContactDetailsHTML(contact);
+
+  contactOverview.style.display = "block";
 }
 
 // prettier-ignore
