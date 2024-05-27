@@ -335,6 +335,9 @@ async function saveSubtaskBoard(id, subTasks) {
   }
 }
 
+/**
+ * Opens the "Assign To" dropdown menu and renders the contact list.
+ */
 function openAssignToBoard() {
   let dropDownMenu = document.getElementById("assignToDropdown");
   let inputAssignedTo = document.querySelector(".input-assignedTo");
@@ -350,6 +353,9 @@ function openAssignToBoard() {
   restoreSelectedContactsBoard();
 }
 
+/**
+ * Closes the "Assign To" dropdown menu.
+ */
 function closeAssignToBoard() {
   let dropDownMenu = document.getElementById("assignToDropdown");
   let inputAssignedTo = document.querySelector(".input-assignedTo");
@@ -363,15 +369,24 @@ function closeAssignToBoard() {
   selectContactsText.innerHTML = "Select contacts to assign";
 }
 
+/**
+ * Saves the selected contacts to local storage.
+ */
 function saveSelectedContactsBoard() {
   localStorage.setItem("selectedContacts", JSON.stringify(selectedContacts));
 }
 
+/**
+ * Renders the list of assigned contacts in the "Assign To" section.
+ */
 function renderAssignedContactsBoard() {
   let assignedUser = document.getElementById("assignedUser");
   renderAssignedUserBoard(assignedUser);
 }
 
+/**
+ * Restores the selected contacts from local storage and updates the UI.
+ */
 function restoreSelectedContactsBoard() {
   let selectedContactsFromStorage = JSON.parse(localStorage.getItem("selectedContacts"));
   if (selectedContactsFromStorage) {
@@ -388,6 +403,9 @@ function restoreSelectedContactsBoard() {
   }
 }
 
+/**
+ * Renders the contact list in the "Assign To" dropdown menu.
+ */
 function renderContactsBoard() {
   let assignList = document.getElementById("assignToList");
   assignList.innerHTML = "";
@@ -398,6 +416,14 @@ function renderContactsBoard() {
   }
 }
 
+/**
+ * Generates HTML for a contact list item in the "Assign To" dropdown menu.
+ * 
+ * @param {Object} contact - The contact object.
+ * @param {string} badgeColor - The color of the contact's badge.
+ * @param {number} i - The index of the contact.
+ * @returns {string} - The HTML string for the contact list item.
+ */
 function getassignListHTMLBoard(contact, badgeColor, i) {
   return /*HTML*/ `
             <div class="assignListContact" id="contact${i}" onclick="assignContactBoard(${i}, '${contact.name}', '${contact.initials}')">
@@ -410,6 +436,12 @@ function getassignListHTMLBoard(contact, badgeColor, i) {
             `;
 }
 
+/**
+ * Toggles the selection of a contact and updates the UI and local storage.
+ * 
+ * @param {number} i - The index of the contact.
+ * @param {string} contactName - The name of the contact.
+ */
 function assignContactBoard(i, contactName) {
   let contact = document.getElementById(`contact${i}`);
   let checkbox = document.getElementById(`checkbox${i}`);
@@ -425,6 +457,11 @@ function assignContactBoard(i, contactName) {
   saveSelectedContactsBoard();
 }
 
+/**
+ * Adds a contact to the list of assigned users and updates the UI.
+ * 
+ * @param {number} i - The index of the contact.
+ */
 function addToAssignedUserBoard(i) {
   let assignedUser = document.getElementById("assignedUser");
   let assignedContact = selectedContacts[i];
@@ -432,6 +469,12 @@ function addToAssignedUserBoard(i) {
   renderAssignedUserBoard(assignedUser);
 }
 
+/**
+ * Unassigns a contact and updates the UI and local storage.
+ * 
+ * @param {string} contactName - The name of the contact to unassign.
+ * @param {HTMLElement} checkbox - The checkbox element of the contact.
+ */
 function unassignContactsBoard(contactName, checkbox) {
   checkbox.src = "./assets/img/addTask_AssignTo_Checkbox.svg";
   let selectedContactIndex = findSelectedIndexBoard(contactName);
@@ -439,10 +482,21 @@ function unassignContactsBoard(contactName, checkbox) {
   removeFromAssignedListBoard(selectedContactIndex);
 }
 
+/**
+ * Finds the index of a selected contact by name.
+ * 
+ * @param {string} contactName - The name of the contact.
+ * @returns {number} - The index of the selected contact.
+ */
 function findSelectedIndexBoard(contactName) {
   return selectedContacts.findIndex((contact) => contact["name"] === contactName);
 }
 
+/**
+ * Removes a contact from the list of assigned users and updates the UI and local storage.
+ * 
+ * @param {number} selectedContactIndex - The index of the selected contact.
+ */
 function removeFromAssignedListBoard(selectedContactIndex) {
   let assignedUser = document.getElementById("assignedUser");
   assignedContacts.splice(selectedContactIndex, 1);
@@ -450,6 +504,11 @@ function removeFromAssignedListBoard(selectedContactIndex) {
   saveSelectedContactsBoard();
 }
 
+/**
+ * Renders the assigned users in the "Assigned To" section.
+ * 
+ * @param {HTMLElement} assignedUser - The HTML element to render the assigned users in.
+ */
 function renderAssignedUserBoard(assignedUser) {
   assignedUser.innerHTML = "";
   assignedContacts.forEach((assignedContact) => {
@@ -460,6 +519,9 @@ function renderAssignedUserBoard(assignedUser) {
   });
 }
 
+/**
+ * Clears the list of assigned users and updates the UI.
+ */
 function clearAssignedUserBoard() {
   assignedContacts = [];
   selectedContacts = [];
@@ -473,22 +535,30 @@ function clearAssignedUserBoard() {
   });
 }
 
+/**
+ * Handles the focus event on the subtask input, changing its border style.
+ */
 function handleFocusBoard() {
   let addSubtaskMain = document.querySelector(".addSubtaskMain");
   addSubtaskMain.style.border = "1px solid rgba(41, 171, 226, 1)";
 }
 
+/**
+ * Handles the blur event on the subtask input, resetting its border style.
+ */
 function handleBlurBoard() {
   let addSubtaskMain = document.querySelector(".addSubtaskMain");
   addSubtaskMain.style.border = "1px solid rgba(209, 209, 209, 1)";
 }
 
+/**
+ * Adjusts the onclick behavior of buttons based on window width.
+ */
 function adjustOnClickBehavior() {
   const plusMobile = document.getElementById("plusMobile");
   const addTaskBtns = document.querySelectorAll(".plus, #addTaskBtn");
 
   if (window.innerWidth < 580) {
-    // Set href link
     plusMobile.onclick = function() {
       window.location.href = './add_task.html';
     };
@@ -498,7 +568,7 @@ function adjustOnClickBehavior() {
       };
     });
   } else {
-    // Set openAddTaskDialog function
+   
     plusMobile.onclick = openAddTaskDialog;
     addTaskBtns.forEach(button => {
       button.onclick = openAddTaskDialog;
@@ -509,7 +579,7 @@ function adjustOnClickBehavior() {
 window.onload = function() {
   includeHTML();
   initBoard();
-  adjustOnClickBehavior(); // Call function on load
+  adjustOnClickBehavior(); 
 };
 
-window.onresize = adjustOnClickBehavior; // Call function on window resize
+window.onresize = adjustOnClickBehavior;
