@@ -646,8 +646,8 @@ input:focus {
     margin-left: auto;
     justify-content: space-around;
 }
-.bigTask{
-  margin-top: -1752px;
+  .bigTask{
+    margin-top: -1752px;
     margin-left: 308px;
     position: absolute;
     background-color: #fff;
@@ -658,6 +658,13 @@ input:focus {
     max-height: 80vh;
     overflow-y: auto;
 }
+
+  .Task {
+    height: auto;
+    display: flex;
+    width: 75vw;
+    overflow-x: auto;
+  }
 }
 
 @media (max-width: 1200px) {
@@ -717,19 +724,10 @@ input:focus {
     padding-left: 35px;
     padding-bottom: 100px;
   }
-
-  .Task {
-    height: auto;
-    display: flex;
-  }
 }
 
 @media (max-width: 970px) {
   .table {
     flex-direction: column;
-  }
-
-  .task {
-    width: 75vw;
   }
 }
