@@ -749,9 +749,16 @@ input:focus {
   }
 }
 
-@media (max-width: 970px) {
+@media (max-width: 750px) {
   .bigTask {
     max-width: 90vw;
     margin-left: 12%;
+  }
+}
+
+@media (max-width: 550px) {
+  .bigTask {
+    max-width: 90vw;
+    margin-left: 5%;
   }
 }
