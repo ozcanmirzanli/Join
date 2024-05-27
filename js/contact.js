@@ -279,25 +279,15 @@ function generateContactDetailsInfo(contact) {
 
 function changeContactColor(contactId) {
   let allContacts = document.querySelectorAll(".contactSmall");
-  allContacts.forEach((contact) => {
-    if (contact.getAttribute("data-id") == contactId) {
-      contact.classList.add("contact-list-active");
-    } else {
-      contact.classList.remove("contact-list-active");
-    }
-  });
-}
-
-function changeContactColor(contactId) {
-  let allContacts = document.querySelectorAll(".contactSmall");
-
-  allContacts.forEach((contact) => {
-    if (contact.getAttribute("data-id") == contactId) {
-      contact.classList.add("contact-list-active");
-    } else {
-      contact.classList.remove("contact-list-active");
-    }
-  });
+  if (window.innerWidth > 630) {
+    allContacts.forEach((contact) => {
+      if (contact.getAttribute("data-id") == contactId) {
+        contact.classList.add("contact-list-active");
+      } else {
+        contact.classList.remove("contact-list-active");
+      }
+    });
+  }
 }
 
 function closeOverview() {
@@ -348,7 +338,9 @@ function generateEditContactHTML(contact) {
     <div class="add-contact-close-btn"><img src="./assets/img/Close.png" alt="" onclick="closePopUp()"></div>
       <div class="edit-contact-right-container">
       <div class="input-area">
-        <div class="contact-picture initialsBig" style="background-color: ${contact.color};">${contact.initials}</div>
+        <div class="contact-picture initialsBig" style="background-color: ${
+          contact.color
+        };">${contact.initials}</div>
         ${generateEditContactInputsHTML(contact)}
       </div>
       </div>
