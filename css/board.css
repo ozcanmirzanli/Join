@@ -647,7 +647,7 @@ input:focus {
     justify-content: space-around;
 }
   .bigTask{
-    margin-top: -1752px;
+    margin-top: -764px;
     margin-left: 308px;
     position: absolute;
     background-color: #fff;
@@ -732,6 +732,8 @@ input:focus {
   }
 
   .bigTask {
+    max-width: 90vw;
+    margin-left: 25%;
     margin-top: 5%;
     top: 0;}
 }
@@ -739,5 +741,17 @@ input:focus {
 @media (max-width: 970px) {
   .table {
     flex-direction: column;
+  }
+
+  .bigTask {
+    max-width: 90vw;
+    margin-left: 25%;
+  }
+}
+
+@media (max-width: 970px) {
+  .bigTask {
+    max-width: 90vw;
+    margin-left: 12%;
   }
 }
