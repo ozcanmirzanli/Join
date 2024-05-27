@@ -166,34 +166,34 @@ function filterTasks() {
     (todo) =>
       (todo.title.toLowerCase().includes(search) ||
       todo.description.toLowerCase().includes(search)) &&
-      (todo.status === "toDo" ||
-      todo.status === "inProgress" ||
-      todo.status === "awaitFeedback" ||
-      todo.status === "done")
+      (todo.todo === "toDo" ||
+      todo.todo === "inProgress" ||
+      todo.todo === "awaitFeedback" ||
+      todo.todo === "done")
   );
 
   displayFilteredTodos(filteredTodos);
 }
+
 /**
  * Displays filtered tasks on the HTML board.
  * @param {Array} filteredTodos - The filtered tasks to display.
  */
 function displayFilteredTodos(filteredTodos) {
   document.getElementById("toDo").innerHTML = "";
-  document.getElementById("inProgress").innerHTML = ""; 
+  document.getElementById("inProgress").innerHTML = "";
   document.getElementById("awaitFeedback").innerHTML = "";
-  document.getElementById("done").innerHTML = ""; 
+  document.getElementById("done").innerHTML = "";
 
   filteredTodos.forEach((todo) => {
-    if (taskData["todo"] === "toDo") {
-      document.getElementById("toDo").innerHTML += generateTodoHTML(todo); 
-    } else if (taskData["todo"] === "inProgress") {
-      document.getElementById("inProgress").innerHTML += generateTodoHTML(todo); 
-    } else if (taskData["todo"] === "awaitFeedback") {
-      document.getElementById("awaitFeedback").innerHTML +=
-        generateTodoHTML(todo); 
-    } else if (taskData["todo"] === "done") {
-      document.getElementById("done").innerHTML += generateTodoHTML(todo); 
+    if (todo.todo === "toDo") {
+      document.getElementById("toDo").innerHTML += generateTodoHTMLBoard(todo);
+    } else if (todo.todo === "inProgress") {
+      document.getElementById("inProgress").innerHTML += generateTodoHTMLBoard(todo);
+    } else if (todo.todo === "awaitFeedback") {
+      document.getElementById("awaitFeedback").innerHTML += generateTodoHTMLBoard(todo);
+    } else if (todo.todo === "done") {
+      document.getElementById("done").innerHTML += generateTodoHTMLBoard(todo);
     }
   });
 }
@@ -249,7 +249,7 @@ async function deleteTaskBoard(id) {
  * @async
  * @param {number} id - The ID of the task to save.
  */
-async function saveTask(id) {
+async function saveTaskBoard(id) {
   let subTasks = document.getElementById('addsubtask').value;
   let subTasksArray = subTasks.split('\n').map(subTask => ({
       id: subTaskIdCounter++,

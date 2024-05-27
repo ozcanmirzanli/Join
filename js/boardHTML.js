@@ -406,7 +406,7 @@ function renderEditTaskForm(todo) {
                 `).join('')}
             </section>
             <footer class="editTaskFooter">
-                <button onclick="saveTask(${todo.id})" class="addTaskBtn" type="button" id="addTaskBtn">
+                <button onclick="saveTaskBoard(${todo.id})" class="addTaskBtn" type="button" id="addTaskBtn">
                     Ok
                     <img src="./assets/img/board_addTask_button_check.svg" alt="addTask_Button_Board_Plus">
                 </button>
