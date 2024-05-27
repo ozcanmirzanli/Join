@@ -664,7 +664,7 @@ input:focus {
     display: flex;
     width: 75vw;
     overflow-x: auto;
-    overflow: hidden;
+    scrollbar-width: thin;
   }
 }
 
