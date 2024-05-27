@@ -500,10 +500,11 @@ function assignContact(i, contactName) {
   let checkbox = document.getElementById(`checkbox${i}`);
   contact.classList.toggle("contactSelected");
   let isSelected = contact.classList.contains("contactSelected");
+
   if (isSelected) {
     checkbox.src = "./assets/img/addTask_AssignTo_Checkbox_Checked.svg";
-    selectedContacts.push(contacts[i]) - 1;
-    addToAssignedUser(i, contacts[i]);
+    selectedContacts.push(contacts[i]);
+    addToAssignedUser(contacts[i]);
   } else {
     unassignContacts(contactName, checkbox);
   }
@@ -513,10 +514,9 @@ function assignContact(i, contactName) {
 /**
  * Adds assigned contact to assigned user section.
  */
-function addToAssignedUser(i) {
+function addToAssignedUser(contact) {
   let assignedUser = document.getElementById("assignedUser");
-  let assignedContact = selectedContacts[i];
-  assignedContacts.push(assignedContact);
+  assignedContacts.push(contact);
   renderassignedUser(assignedUser);
 }
 
