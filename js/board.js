@@ -482,3 +482,34 @@ function handleBlurBoard() {
   let addSubtaskMain = document.querySelector(".addSubtaskMain");
   addSubtaskMain.style.border = "1px solid rgba(209, 209, 209, 1)";
 }
+
+function adjustOnClickBehavior() {
+  const plusMobile = document.getElementById("plusMobile");
+  const addTaskBtns = document.querySelectorAll(".plus, #addTaskBtn");
+
+  if (window.innerWidth < 580) {
+    // Set href link
+    plusMobile.onclick = function() {
+      window.location.href = './add_task.html';
+    };
+    addTaskBtns.forEach(button => {
+      button.onclick = function() {
+        window.location.href = './add_task.html';
+      };
+    });
+  } else {
+    // Set openAddTaskDialog function
+    plusMobile.onclick = openAddTaskDialog;
+    addTaskBtns.forEach(button => {
+      button.onclick = openAddTaskDialog;
+    });
+  }
+}
+
+window.onload = function() {
+  includeHTML();
+  initBoard();
+  adjustOnClickBehavior(); // Call function on load
+};
+
+window.onresize = adjustOnClickBehavior; // Call function on window resize
