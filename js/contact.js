@@ -42,7 +42,7 @@ function generateAddContactHTML() {
   <div class="add-contact-left">
     <div class="add-contact-left-container">
   <img src="./assets/img/joinLogoWhite.svg" alt="" class="logo">
-  <h1>AddContact</h1><h2>Tasks are better with a Team!</h2>
+  <h1>Add Contact</h1><h2>Tasks are better with a Team!</h2>
   <div class="vector"></div>
   </div>
   </div>

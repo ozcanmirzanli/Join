@@ -307,6 +307,7 @@ h4 {
   gap: 4px;
   border-radius: 10px;
   background: #2a3647;
+  border: 1px solid #2a3647;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -910,6 +911,81 @@ input:focus {
 
   .contactSmall:active {
     background-color: rgb(248, 248, 248);
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .add-contact-container,
+  .edit-contact-container {
+    flex-direction: column;
+    width: 396px;
+    height: 760px;
+    border-radius: 30px;
+  }
+
+  .add-contact-left-container,
+  .edit-contact-left-container {
+    height: 50%;
+    margin-left: 24px;
+  }
+
+  .add-contact-left,
+  .edit-contact-left {
+    width: 396px;
+    min-width: 396px;
+    height: 351px;
+    min-height: 351px;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 30px;
+    justify-content: flex-start;
+  }
+
+  .add-contact-left h1,
+  .edit-contact-left h1 {
+    font-size: 47px;
+    line-height: 56.4px;
+  }
+
+  .add-contact-left h2,
+  .edit-contact-left h2 {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .input-area {
+    flex-direction: column;
+    margin-top: -90px;
+  }
+
+  .input-fields {
+    width: 364px;
+    gap: 24px;
+  }
+
+  .input-container {
+    width: 360px;
+    height: 39px;
+  }
+
+  .contact-picture {
+    margin-right: 0;
+    margin-bottom: 32px;
+  }
+
+  .add-contact-cancel {
+    display: none;
+  }
+
+  .add-contact-create {
+    margin-left: 0;
+  }
+
+  .add-contact-create:hover,
+  .edit-contact-save:hover {
+    background-color: #2a3647;
+    border: 1px solid #2a3647;
   }
 }
 
