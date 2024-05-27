@@ -577,31 +577,21 @@ select.input-category option[value=""][disabled] {
 
 @media screen and (max-width: 1400px) and (min-width: 1201px) {
   form {
-    padding-left: 140px;
+    padding-left: 300px;
   }
-}
-
-@media screen and (max-width: 1400px) {
+  
   h1 {
     padding-top: 140px;
   }
 }
 
-@media screen and (max-width: 1200px) and (min-width: 1141px) {
+@media screen and (max-width: 1320px) {
   form {
-    padding-left: 70px;
-    margin: 0 auto;
+    padding-left: 280px;
   }
 }
 
-@media screen and (max-width: 1140px) and (min-width: 1101px) {
-  form {
-    padding-left: 35px;
-    margin: 0 auto;
-  }
-}
-
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1290px) {
   form {
     display: flex;
     flex-direction: column;
@@ -620,6 +610,7 @@ select.input-category option[value=""][disabled] {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin: auto;
   }
 
   .footer-btn-addTask {
