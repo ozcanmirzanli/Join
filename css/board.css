@@ -646,6 +646,18 @@ input:focus {
     margin-left: auto;
     justify-content: space-around;
 }
+.bigTask{
+  margin-top: -1752px;
+    margin-left: 308px;
+    position: absolute;
+    background-color: #fff;
+    width: 525px;
+    height: 931px;
+    border-radius: 30px;
+    z-index: 5;
+    max-height: 80vh;
+    overflow-y: auto;
+}
 }
 
 @media (max-width: 1200px) {

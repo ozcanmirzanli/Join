@@ -206,6 +206,7 @@ a:hover {
 height: 56px;
 border: 3px solid #2A3647;
 border-radius: 559px;
+background-color: rgb(255,255,255);
 }
 
 .user:hover {

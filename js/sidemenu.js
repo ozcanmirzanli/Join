@@ -37,9 +37,7 @@ function openSubmenu() {
 }
 
 function closeSubmenu() {
-  let image = document.getElementById("initials");
-  image.src = "./assets/img/UserInitials.svg";
-
+  document.getElementById("userHeader").style.backgroundColor = "rgb(255,255,255)";
   let submenu = document.getElementById("subMenu");
   submenu.classList.add("d-none");
   submenu.classList.remove("subMenu");

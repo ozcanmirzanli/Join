@@ -371,7 +371,7 @@ function renderEditTaskForm(todo) {
                   </div>
               </section>
                <!-- Subtasks -->
-            <section>
+               <section>
                 <div class="pd-bottom"><span>Subtasks</span></div>
                 <div class="input-assignedTo border-input-addtask" id="addSubtaskMain" onfocus="handleInputFocus()">
                     <input id="addsubtask" type="text" placeholder="Add new subtasks" class="input-assignedTo border-none">
@@ -384,9 +384,26 @@ function renderEditTaskForm(todo) {
                         <img onclick="saveSubtask()" id="checkSubtask" src="assets/img/subtask_check_AddTask.svg" class="subtasks" alt="subtask_check_AddTask">
                     </div>
                 </div>
-                <div id="showsubtasks" class="subtasks-list">
-                    ${todo.subTasks.map(subtask => `<div>${subtask.content}</div>`).join('')}
+                ${todo.subTasks.map((subtask, index) => `
+                <div class="subtask-item">
+                  <div id="subtask${index}" class="subtask-content">
+                      <span>\u2022 ${subtask.content}</span>
+                  </div>
+                  <div id="subtaskEditInput${index}" class="subtask-content d-none">
+                      <input value="${subtask.content}" class="subtask-input subtaskEditText" id="subtaskInput${index}">
+                      <div class="subtask-bounding-box">
+                          <img onclick="subtaskDelete(${index})" src="assets/img/subtask_trash_AddTask.svg" alt="Delete Subtask" class="subtask-icon">
+                          <img src="assets/img/subtask_seperator_AddTask.svg" alt="Separator" class="subtask-icon">
+                          <img onclick="subtaskSaveEdit(${index})" src="assets/img/subtask_check_AddTask.svg" alt="Check Subtask" class="subtask-icon">
+                      </div>
+                  </div>
+                  <div id="mainBoundingBox${index}" class="subtask-bounding-box">
+                      <img onclick="subtaskEdit(${index})" src="assets/img/subtask_edit_AddTask.svg" alt="Edit Subtask" class="subtask-icon">
+                      <img src="assets/img/subtask_seperator_AddTask.svg" alt="Separator" class="subtask-icon">
+                      <img onclick="subtaskDelete(${index})" src="assets/img/subtask_trash_AddTask.svg" alt="Delete Subtask" class="subtask-icon">
+                  </div>
                 </div>
+                `).join('')}
             </section>
             <footer class="editTaskFooter">
                 <button onclick="saveTask(${todo.id})" class="addTaskBtn" type="button" id="addTaskBtn">
