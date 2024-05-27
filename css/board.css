@@ -724,6 +724,15 @@ input:focus {
     padding-left: 35px;
     padding-bottom: 100px;
   }
+
+  .Task {
+    height: auto;
+    display: flex;
+  }
+
+  .bigTask {
+    margin-top: 5%;
+    top: 0;}
 }
 
 @media (max-width: 970px) {

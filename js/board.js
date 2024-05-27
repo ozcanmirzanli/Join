@@ -163,20 +163,17 @@ function filterTasks() {
   let search = document.getElementById("search").value.toLowerCase();
 
   let filteredTodos = taskData.filter(
-    (
-      todo 
-    ) =>
-      (taskData["title"].toLowerCase().includes(search) ||
-      taskData.description.toLowerCase().includes(search)) && 
-      ( taskData["todo"] === "toDo" ||
-      taskData["todo"] === "inProgress" ||
-      taskData["todo"] === "awaitFeedback" ||
-      taskData["todo"] === "done") 
+    (todo) =>
+      (todo.title.toLowerCase().includes(search) ||
+      todo.description.toLowerCase().includes(search)) &&
+      (todo.status === "toDo" ||
+      todo.status === "inProgress" ||
+      todo.status === "awaitFeedback" ||
+      todo.status === "done")
   );
 
-  displayFilteredTodos(filteredTodos); 
+  displayFilteredTodos(filteredTodos);
 }
-
 /**
  * Displays filtered tasks on the HTML board.
  * @param {Array} filteredTodos - The filtered tasks to display.
