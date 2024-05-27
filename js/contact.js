@@ -348,7 +348,7 @@ function generateEditContactHTML(contact) {
     <div class="add-contact-close-btn"><img src="./assets/img/Close.png" alt="" onclick="closePopUp()"></div>
       <div class="edit-contact-right-container">
       <div class="input-area">
-        <img src="./assets/img/Group 13.png" alt="" class="contact-picture">
+        <div class="contact-picture initialsBig" style="background-color: ${contact.color};">${contact.initials}</div>
         ${generateEditContactInputsHTML(contact)}
       </div>
       </div>
