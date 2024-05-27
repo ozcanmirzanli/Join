@@ -207,6 +207,14 @@ h4 {
   right: 7%;
 }
 
+.add-contact-close-mobile {
+  display: none;
+  position: absolute;
+  z-index: 99;
+  right: 100px;
+  top: 105px;
+}
+
 .add-contact-left,
 .edit-contact-left {
   width: 471px;
@@ -986,6 +994,14 @@ input:focus {
   .edit-contact-save:hover {
     background-color: #2a3647;
     border: 1px solid #2a3647;
+  }
+
+  .add-contact-close-btn {
+    display: none;
+  }
+
+  .add-contact-close-mobile {
+    display: block;
   }
 }
 

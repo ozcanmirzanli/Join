@@ -40,7 +40,10 @@ function generateAddContactHTML() {
   return /*html*/ `
   <div class="add-contact-container">
   <div class="add-contact-left">
+  <div class="add-contact-close-mobile"><img src="./assets/img/close-white.png" alt="" onclick="closePopUp()"></div>
+
     <div class="add-contact-left-container">
+
   <img src="./assets/img/joinLogoWhite.svg" alt="" class="logo">
   <h1>Add Contact</h1><h2>Tasks are better with a Team!</h2>
   <div class="vector"></div>
@@ -48,7 +51,6 @@ function generateAddContactHTML() {
   </div>
   <div class="add-contact-right">
   <div class="add-contact-close-btn"><img src="./assets/img/Close.png" alt="" onclick="closePopUp()"></div>
-
     <div class="add-contact-right-container">
   <div class="input-area">
   <img src="./assets/img/Group 13.png" alt="" class="contact-picture">
