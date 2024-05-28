@@ -68,12 +68,12 @@ function goBack() {
 function renderUserHeader() {
   const currentUser = getCurrentUserHeader();
   if (currentUser) {
-    const name = currentUser.userName; // Name zuerst definieren
+    const name = currentUser.userName; 
     const initials = getInitials(name);
     const user = document.getElementById("userHeader");
     user.innerHTML = `<div class="initialsHeader">${initials}</div>`;
   } else {
-    document.getElementById("userHeader").innerHTML = `<div class="initialsHeader">G</div>`; // Fehlermeldung, falls kein Benutzer eingeloggt ist
+    document.getElementById("userHeader").innerHTML = `<div class="initialsHeader">G</div>`; 
   }
 }
 

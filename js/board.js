@@ -8,6 +8,7 @@ let currentDraggedElement = [];
 async function initBoard() {
     await loadTasksDataBoard();
     await getContactBoard();
+    await initHeader();
     updateHTMLBoard();
 }
 
@@ -221,6 +222,7 @@ function filterTasks() {
     document.getElementById("done").innerHTML = "<div class='noToDo'>No Tasks done.</div>";
   }
 }
+
 /**
  * Shows the add task board.
  */
