@@ -178,26 +178,49 @@ function filterTasks() {
 /**
  * Displays filtered tasks on the HTML board.
  * @param {Array} filteredTodos - The filtered tasks to display.
- */
-function displayFilteredTodos(filteredTodos) {
+ */function displayFilteredTodos(filteredTodos) {
+  // Initial leeren der Spalten
   document.getElementById("toDo").innerHTML = "";
   document.getElementById("inProgress").innerHTML = "";
   document.getElementById("awaitFeedback").innerHTML = "";
   document.getElementById("done").innerHTML = "";
 
+  // Flags zum Überprüfen, ob Aufgaben hinzugefügt wurden
+  let hasToDo = false;
+  let hasInProgress = false;
+  let hasAwaitFeedback = false;
+  let hasDone = false;
+
   filteredTodos.forEach((todo) => {
     if (todo.todo === "toDo") {
       document.getElementById("toDo").innerHTML += generateTodoHTMLBoard(todo);
+      hasToDo = true;
     } else if (todo.todo === "inProgress") {
       document.getElementById("inProgress").innerHTML += generateTodoHTMLBoard(todo);
+      hasInProgress = true;
     } else if (todo.todo === "awaitFeedback") {
       document.getElementById("awaitFeedback").innerHTML += generateTodoHTMLBoard(todo);
+      hasAwaitFeedback = true;
     } else if (todo.todo === "done") {
       document.getElementById("done").innerHTML += generateTodoHTMLBoard(todo);
+      hasDone = true;
     }
   });
-}
 
+  // Nachrichten anzeigen, wenn keine Aufgaben vorhanden sind
+  if (!hasToDo) {
+    document.getElementById("toDo").innerHTML = "<div class='noToDo'>No Tasks to do.</div>";
+  }
+  if (!hasInProgress) {
+    document.getElementById("inProgress").innerHTML = "<div class='noToDo'>No Tasks in progress.</div>";
+  }
+  if (!hasAwaitFeedback) {
+    document.getElementById("awaitFeedback").innerHTML = "<div class='noToDo'>No Tasks awaiting feedback.</div>";
+  }
+  if (!hasDone) {
+    document.getElementById("done").innerHTML = "<div class='noToDo'>No Tasks done.</div>";
+  }
+}
 /**
  * Shows the add task board.
  */
