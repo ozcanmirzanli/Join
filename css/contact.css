@@ -798,6 +798,24 @@ input[type="number"] {
   color: white;
 }
 
+.contact-options-btn {
+  display: none;
+  position: absolute;
+  bottom: 200px;
+  right: 25px;
+  width: 56px;
+  height: 56px;
+  border-radius: 56px;
+  background-color: #2a3647;
+  border: 1px solid #2a3647;
+  box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.contact-options-btn:focus {
+  background-color: rgb(0, 124, 238);
+  border: 1px solid rgb(0, 124, 238);
+}
+
 @media (max-width: 1400px) {
   .headline {
     font-size: 50px;
@@ -1033,12 +1051,12 @@ input[type="number"] {
   }
 
   .upperArea {
-    align-items: flex-start;
     flex-direction: row;
   }
 
   .right-section {
     padding-left: 10px;
+    padding-top: 15px;
   }
 
   .initialsBig {
@@ -1056,9 +1074,11 @@ input[type="number"] {
   .edit-contact-btns {
     display: none;
     position: absolute;
-    justify-content: center;
+    bottom: 190px;
+    right: 15px;
     flex-wrap: wrap;
     flex-direction: row;
+    align-content: center;
     background-color: white;
     box-shadow: 0px 4px 4px 0px #00000040;
     max-width: 116px;
@@ -1066,11 +1086,21 @@ input[type="number"] {
     border-radius: 20px 20px 0px 20px;
     max-height: 96px;
     height: 96px;
-    gap: 0;
+    gap: 16px;
   }
 
   .back-btn {
     display: block;
+  }
+
+  .contact-options-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .deleteBtnContact {
+    margin-left: 21px;
   }
 }
 
