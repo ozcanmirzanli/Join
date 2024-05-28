@@ -1,3 +1,16 @@
+async function init() {
+  await getContact();
+  renderContacts();
+}
+
+async function getContact() {
+  try {
+    contacts = JSON.parse(await getItem("contact"));
+  } catch (error) {
+    console.info("Could not load contacts");
+  }
+}
+
 function generateAddContactHTML() {
   return /*html*/ `
     <div class="add-contact-container">

@@ -293,25 +293,15 @@ function showContactOptions() {
 }
 
 function closeContactOptions(event) {
-  let editBtn = document.querySelector(".edit-contact-btns");
-  if (editBtn) {
-    if (
-      !editBtn.contains(event.target) &&
-      !event.target.closest(".contact-options-btn")
-    ) {
-      editBtn.style.display = "none";
-    }
-  }
-}
-
-function toggleContactOptions(event) {
-  event.stopPropagation();
-  let editBtn = document.querySelector(".edit-contact-btns");
-  if (editBtn) {
-    if (editBtn.style.display === "flex") {
-      editBtn.style.display = "none";
-    } else {
-      editBtn.style.display = "flex";
+  if (window.innerWidth <= 630) {
+    let editBtn = document.querySelector(".edit-contact-btns");
+    if (editBtn) {
+      if (
+        !editBtn.contains(event.target) &&
+        !event.target.closest(".contact-options-btn")
+      ) {
+        editBtn.style.display = "none";
+      }
     }
   }
 }
