@@ -54,7 +54,7 @@ function createContact() {
   let number = document.getElementById("number").value;
   let color = colors[Math.floor(Math.random() * colors.length)];
   let initials = getInitials(name);
-  let id = contacts.length > 0 ? contacts[contacts.length - 1].id + 1 : 0;
+  let id = Date.now();
   return { name, email: mail, number, color, initials, id };
 }
 
@@ -163,7 +163,12 @@ function displayContactDetails(contact) {
   let contactOverview = document.querySelector(".right-section");
 
   contactBig.classList.remove("d-none");
-  contactBig.innerHTML = generateContactDetailsHTML(contact);
+  // Check if the contact object is valid and contains the color property
+  if (contact && contact.color) {
+    contactBig.innerHTML = generateContactDetailsHTML(contact);
+  } else {
+    console.error("Invalid contact object or missing color property");
+  }
 
   contactOverview.style.display = "block";
 }
