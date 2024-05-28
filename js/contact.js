@@ -34,6 +34,7 @@ function addNewContact() {
   let addBtn = document.querySelector(".add-btn");
   addBtn.style.backgroundColor = "rgb(9,25,49)";
   document.getElementById("add-contact").innerHTML = generateAddContactHTML();
+  removeScrollingOnNumberInput();
 }
 
 function generateAddContactHTML() {
@@ -41,9 +42,7 @@ function generateAddContactHTML() {
   <div class="add-contact-container">
   <div class="add-contact-left">
   <div class="add-contact-close-mobile"><img src="./assets/img/close-white.png" alt="" onclick="closePopUp()"></div>
-
-    <div class="add-contact-left-container">
-
+  <div class="add-contact-left-container">
   <img src="./assets/img/joinLogoWhite.svg" alt="" class="logo">
   <h1>Add Contact</h1><h2>Tasks are better with a Team!</h2>
   <div class="vector"></div>
@@ -66,7 +65,7 @@ function generateAddContactInputsHTML() {
   <div class="input-container"><input type="text" placeholder="Name" id="name"><img src="./assets/img/input_name.png" alt="" class="inputImg"></div>
   <div class="input-container"><input type="e-mail" placeholder="Email" id="mail"><img src="./assets/img/mail.png" alt="" class="inputImg"></div>
   <div class="input-container"><input type="number" placeholder="Phone" id="number"><img src="./assets/img/call.png" alt="" class="inputImg"></div>
-  ${generateAddContactButtonsHTML()};
+  ${generateAddContactButtonsHTML()}
   </form>`;
 }
 
@@ -258,7 +257,7 @@ function generateContactNameAreaHTML(contact) {
   return /*html*/ `
   <div class="nameArea">
   <div class="nameBig">${contact.name}</div>
-  <div class="add-contact-btns">
+  <div class="edit-contact-btns">
     <div class="deleteBtnContact" onclick="editContact(${contact.id})">
       <img src="./assets/img/edit.svg" alt="" class="imgEdit"/>Edit
     </div>
@@ -441,4 +440,12 @@ function updateFirstLettersAfterEdit(index) {
   if (!firstLetters.includes(firstNameInitial)) {
     firstLetters.push(firstNameInitial);
   }
+}
+
+function removeScrollingOnNumberInput() {
+  document.querySelectorAll('input[type="number"]').forEach(function (input) {
+    input.addEventListener("wheel", function (event) {
+      event.preventDefault();
+    });
+  });
 }
