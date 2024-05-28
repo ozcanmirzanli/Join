@@ -14,11 +14,17 @@ let colors = [
   "rgb(255,122,0)",
 ];
 
+/**
+ * Initialize the application by loading contacts and rendering them.
+ */
 async function init() {
   await getContact();
   renderContacts();
 }
 
+/**
+ * Retrieve contacts from storage.
+ */
 async function getContact() {
   try {
     contacts = JSON.parse(await getItem("contact"));
@@ -27,6 +33,9 @@ async function getContact() {
   }
 }
 
+/**
+ * Display the form to add a new contact.
+ */
 function addNewContact() {
   let addContact = document.getElementById("add-contact-bg");
   addContact.style.display = "flex";
@@ -37,6 +46,10 @@ function addNewContact() {
   removeScrollingOnNumberInput();
 }
 
+/**
+ * Save a new contact.
+ * @param {Event} event - The form submit event.
+ */
 async function saveContact(event) {
   event.preventDefault();
 
@@ -48,6 +61,10 @@ async function saveContact(event) {
   closePopUp();
 }
 
+/**
+ * Create a new contact object.
+ * @returns {Object} - The newly created contact object.
+ */
 function createContact() {
   let name = document.getElementById("name").value;
   let mail = document.getElementById("mail").value;
@@ -58,16 +75,27 @@ function createContact() {
   return { name, email: mail, number, color, initials, id };
 }
 
+/**
+ * Save contacts to storage.
+ */
 async function saveContacts() {
   await setItem("contact", JSON.stringify(contacts));
 }
 
+/**
+ * Update the UI after saving a contact.
+ * @param {number} index - The index of the newly added contact.
+ */
 function updateUI(index) {
   getOverview(index);
   renderContacts();
   closePopUp();
 }
 
+/**
+ * Add the first letter of a contact's name to the list of first letters.
+ * @param {string} name - The contact's name.
+ */
 function addFirstLetter(name) {
   let firstNameInitial = name.split(" ")[0].charAt(0).toUpperCase();
   if (!firstLetters.includes(firstNameInitial)) {
@@ -75,6 +103,9 @@ function addFirstLetter(name) {
   }
 }
 
+/**
+ * Close any open pop-up forms.
+ */
 function closePopUp() {
   let addContact = document.getElementById("add-contact-bg");
   addContact.style.display = "none";
@@ -83,23 +114,26 @@ function closePopUp() {
   editContact.style.display = "none";
 }
 
+/**
+ * Render all contacts.
+ */
 function renderContacts() {
   let overview = document.getElementById("all-contacts");
   overview.innerHTML = "";
 
   setContactIds();
   sortContacts();
-  // Initialisiere ein Objekt, um die Kontakte nach dem ersten Buchstaben ihres Namens zu gruppieren
   let contactsByFirstLetter = groupContactsByFirstLetter();
 
-  // Rufe die Buchstabenkategorien-Funktion für jeden Buchstaben auf und füge sie dem DOM hinzu
   for (let letter in contactsByFirstLetter) {
     overview.innerHTML += generateLettersCategoriesHTML(letter);
-    // Rufe die Render-Funktion für die Kontakte jedes Buchstabens auf
     renderContactsByLetter(letter, contactsByFirstLetter[letter]);
   }
 }
 
+/**
+ * Set IDs for contacts if not already set.
+ */
 function setContactIds() {
   // Setze die ID jedes Kontakts auf den Array-Index, falls noch nicht gesetzt
   contacts.forEach((contact, index) => {
@@ -109,13 +143,19 @@ function setContactIds() {
   });
 }
 
+/**
+ * Sort contacts alphabetically by name.
+ */
 function sortContacts() {
-  // Sortiere die Kontakte alphabetisch nach dem Namen
   contacts.sort((a, b) => {
     return a.name.localeCompare(b.name);
   });
 }
 
+/**
+ * Group contacts by the first letter of their name.
+ * @returns {Object} - An object with letters as keys and arrays of contacts as values.
+ */
 function groupContactsByFirstLetter() {
   let contactsByFirstLetter = {};
   // Gruppiere die Kontakte nach dem ersten Buchstaben ihres Namens
@@ -129,7 +169,11 @@ function groupContactsByFirstLetter() {
   return contactsByFirstLetter;
 }
 
-// Funktion zum Rendern der Kontakte für jeden Buchstaben
+/**
+ * Render contacts for a specific letter.
+ * @param {string} letter - The letter to group by.
+ * @param {Array} contacts - The list of contacts to render.
+ */
 function renderContactsByLetter(letter, contacts) {
   let container = document.getElementById(`contactsList${letter}`);
 
@@ -138,6 +182,11 @@ function renderContactsByLetter(letter, contacts) {
   });
 }
 
+/**
+ * Get the initials from a name.
+ * @param {string} name - The full name.
+ * @returns {string} - The initials.
+ */
 function getInitials(name) {
   return name
     .split(" ")
@@ -149,6 +198,11 @@ contacts.forEach(function (contact) {
   contact.initials = getInitials(contact.name);
 });
 
+/**
+ * Get the overview of a contact.
+ * @param {number} contactId - The ID of the contact.
+ * @param {number} [index=null] - The index of the contact.
+ */
 function getOverview(contactId, index = null) {
   let contact = contacts.find((contact) => contact.id === contactId);
   displayContactDetails(contact);
@@ -158,6 +212,10 @@ function getOverview(contactId, index = null) {
   }
 }
 
+/**
+ * Display the details of a contact.
+ * @param {Object} contact - The contact object.
+ */
 function displayContactDetails(contact) {
   let contactBig = document.getElementById("contactBig");
   let contactOverview = document.querySelector(".right-section");
@@ -173,6 +231,10 @@ function displayContactDetails(contact) {
   contactOverview.style.display = "block";
 }
 
+/**
+ * Change the color of the contact element in the list.
+ * @param {number} contactId - The ID of the contact.
+ */
 function changeContactColor(contactId) {
   let allContacts = document.querySelectorAll(".contactSmall");
   if (window.innerWidth > 630) {
@@ -186,10 +248,17 @@ function changeContactColor(contactId) {
   }
 }
 
+/**
+ * Close the detailed overview of a contact.
+ */
 function closeOverview() {
   document.getElementById("contactBig").classList.add("d-none");
 }
 
+/**
+ * Delete a contact by ID.
+ * @param {number} contactId - The ID of the contact to delete.
+ */
 async function deleteContact(contactId) {
   const index = contacts.findIndex((contact) => contact.id === contactId);
   if (index !== -1) {
@@ -204,6 +273,10 @@ async function deleteContact(contactId) {
   }
 }
 
+/**
+ * Edit a contact by ID.
+ * @param {number} contactId - The ID of the contact to edit.
+ */
 function editContact(contactId) {
   const index = contacts.findIndex((contact) => contact.id === contactId);
   if (index !== -1) {
@@ -214,6 +287,10 @@ function editContact(contactId) {
   }
 }
 
+/**
+ * Display the form to edit a contact.
+ * @param {Object} contact - The contact object to edit.
+ */
 function displayEditContactForm(contact) {
   let editContact = document.getElementById("edit-contact-bg");
   editContact.style.display = "flex";
@@ -221,6 +298,10 @@ function displayEditContactForm(contact) {
   document.getElementById("badgeColor").value = contact.color;
 }
 
+/**
+ * Save the edited contact.
+ * @param {number} contactId - The ID of the contact to save.
+ */
 async function saveEditedContact(contactId) {
   const index = findContactIndex(contactId);
 
@@ -236,10 +317,19 @@ async function saveEditedContact(contactId) {
   }
 }
 
+/**
+ * Find the index of a contact by ID.
+ * @param {number} contactId - The ID of the contact.
+ * @returns {number} - The index of the contact.
+ */
 function findContactIndex(contactId) {
   return contacts.findIndex((contact) => contact.id === contactId);
 }
 
+/**
+ * Update the details of a contact.
+ * @param {number} index - The index of the contact to update.
+ */
 function updateContactDetails(index) {
   let name = document.getElementById("name").value;
   let mail = document.getElementById("mail").value;
