@@ -449,3 +449,7 @@ function removeScrollingOnNumberInput() {
     });
   });
 }
+
+function closeContactOverview() {
+  document.querySelector(".right-section").style.display = "none";
+}

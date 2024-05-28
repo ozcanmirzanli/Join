@@ -49,6 +49,13 @@ h4 {
   align-items: center;
 }
 
+.back-btn {
+  display: none;
+  position: absolute;
+  right: 30px;
+  top: 40px;
+}
+
 .all-contacts {
   background-color: white;
   max-width: 456px;
@@ -453,6 +460,7 @@ input[type="number"]::-webkit-outer-spin-button {
 /* Hide the up and down arrows in Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+  appearance: initial;
 }
 
 .input-area {
@@ -1059,6 +1067,10 @@ input[type="number"] {
     max-height: 96px;
     height: 96px;
     gap: 0;
+  }
+
+  .back-btn {
+    display: block;
   }
 }
 
