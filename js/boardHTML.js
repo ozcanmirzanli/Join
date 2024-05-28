@@ -151,6 +151,7 @@ function changeCompletedBoard(taskIndex, subTaskIndex) {
     renderBigTask(taskData[taskIndex]);
     saveSubtaskBoard(taskData[taskIndex]["id"], taskData[taskIndex]["subTasks"]);
     updateProgressBar(taskData[taskIndex]);
+    changeCompletedBoard(taskData[taskIndex]);
 }
 
 /**
