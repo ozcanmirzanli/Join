@@ -113,7 +113,7 @@ function showSignedUpSuccess() {
   successContainer.style.display = "block";
 
   setTimeout(() => {
-    successContainer.style.display = "none";
+    successContainer.style.display = "flex";
     window.location.href = "login.html";
   }, 1200);
 }
