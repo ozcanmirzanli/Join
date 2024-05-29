@@ -60,6 +60,7 @@ async function saveContact(event) {
   updateUI(contacts.length - 1);
   addFirstLetter(contact.name);
   closePopUp();
+  contactAddedSuccess();
 }
 
 /**
@@ -407,3 +408,14 @@ function closeContactOptions(event) {
 document.querySelector(".edit-contact-btns").addEventListener("click", function (event) {
     event.stopPropagation();
   });
+
+function contactAddedSuccess() {
+  let addContactSuccessContainer = document.querySelector(
+    ".add-contact-success-container"
+  );
+  addContactSuccessContainer.style.display = "flex";
+
+  setTimeout(() => {
+    addContactSuccessContainer.style.display = "none";
+  }, 1200);
+}
