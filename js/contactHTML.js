@@ -116,6 +116,8 @@ function generateEditContactHTML(contact) {
   return /*html*/ `
     <div class="edit-contact-container">
       <div class="edit-contact-left">
+      <div class="add-contact-close-mobile"><img src="./assets/img/close-white.png" alt="" onclick="closePopUp()"></div>
+
       <div class="edit-contact-left-container">
         <img src="./assets/img/joinLogoWhite.svg" alt="" class="logo">
         <h1>Edit Contact</h1><div class="vector"></div>
@@ -162,7 +164,7 @@ function generateEditContactInputsHTML(contact) {
 
 function generateEditContactButtonsHTML(contactId) {
   return /*html*/ `
-    <div class="edit-contact-btns">
+    <div class="delete-save-btns">
         <button class="edit-contact-delete" onclick="deleteContact(${contactId})">
           <p class="deleteBtnEditText">Delete</p>
         </button>
