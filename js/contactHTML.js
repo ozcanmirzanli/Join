@@ -1,3 +1,7 @@
+/**
+ * Generates the HTML for the "Add Contact" form.
+ * @returns {string} The HTML string for the "Add Contact" form.
+ */
 function generateAddContactHTML() {
   return /*html*/ `
     <div class="add-contact-container">
@@ -20,6 +24,10 @@ function generateAddContactHTML() {
     </div>`;
 }
 
+/**
+ * Generates the HTML for the input fields in the "Add Contact" form.
+ * @returns {string} The HTML string for the input fields in the "Add Contact" form.
+ */
 function generateAddContactInputsHTML() {
   return /*html*/ `
     <form class="input-fields">
@@ -30,6 +38,10 @@ function generateAddContactInputsHTML() {
     </form>`;
 }
 
+/**
+ * Generates the HTML for the buttons in the "Add Contact" form.
+ * @returns {string} The HTML string for the buttons in the "Add Contact" form.
+ */
 function generateAddContactButtonsHTML() {
   return /*html*/ `
     <div class="add-contact-btns" >
@@ -45,6 +57,9 @@ function generateAddContactButtonsHTML() {
     `;
 }
 
+/**
+ * Generates the HTML for a small contact preview.
+ */
 function generateSmallContactHTML(contact) {
   return /*html*/ `
     <div class="contactSmall" data-id="${contact.id}" onclick="getOverview(${contact.id})">
@@ -57,6 +72,9 @@ function generateSmallContactHTML(contact) {
   `;
 }
 
+/**
+ * Generates the HTML for a letter category section.
+ */
 function generateLettersCategoriesHTML(firstLetter) {
   return /*html*/ `
      <div id="container${firstLetter}">
@@ -67,6 +85,9 @@ function generateLettersCategoriesHTML(firstLetter) {
      `;
 }
 
+/**
+ * Generates the HTML for the contact details view.
+ */
 // prettier-ignore
 function generateContactDetailsHTML(contact) {
     return /*html*/ `
@@ -83,6 +104,9 @@ function generateContactDetailsHTML(contact) {
     `;
   }
 
+/**
+ * Generates the HTML for the contact name area.
+ */
 function generateContactNameAreaHTML(contact) {
   return /*html*/ `
     <div class="nameArea">
@@ -99,6 +123,9 @@ function generateContactNameAreaHTML(contact) {
   `;
 }
 
+/**
+ * Generates the HTML for the contact details information.
+ */
 function generateContactDetailsInfo(contact) {
   return /*html*/ `
       <div class="contactDetailsInfo">
@@ -112,12 +139,14 @@ function generateContactDetailsInfo(contact) {
     `;
 }
 
+/**
+ * Generates the HTML for the "Edit Contact" form.
+ */
 function generateEditContactHTML(contact) {
   return /*html*/ `
     <div class="edit-contact-container">
       <div class="edit-contact-left">
       <div class="add-contact-close-mobile"><img src="./assets/img/close-white.png" alt="" onclick="closePopUp()"></div>
-
       <div class="edit-contact-left-container">
         <img src="./assets/img/joinLogoWhite.svg" alt="" class="logo">
         <h1>Edit Contact</h1><div class="vector"></div>
@@ -137,6 +166,9 @@ function generateEditContactHTML(contact) {
   </div>`;
 }
 
+/**
+ * Generates the HTML for the input fields in the "Edit Contact" form.
+ */
 function generateEditContactInputsHTML(contact) {
   return /*html*/ `
       <div class="input-fields">
@@ -162,6 +194,9 @@ function generateEditContactInputsHTML(contact) {
       </div>`;
 }
 
+/**
+ * Generates the HTML for the Buttons in the "Edit Contact" form.
+ */
 function generateEditContactButtonsHTML(contactId) {
   return /*html*/ `
     <div class="delete-save-btns">

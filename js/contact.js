@@ -346,10 +346,17 @@ function updateContactDetails(index) {
   contacts[index]["initials"] = initials;
 }
 
+/**
+ * Save the contacts array to storage.
+ */
 async function saveContactsToStorage() {
   await setItem("contact", JSON.stringify(contacts));
 }
 
+/**
+ * Update the first letters array after editing a contact.
+ * @param {number} index - The index of the contact being edited.
+ */
 function updateFirstLettersAfterEdit(index) {
   let name = document.getElementById("name").value;
   let nameParts = name.split(" ");
@@ -366,6 +373,9 @@ function updateFirstLettersAfterEdit(index) {
   }
 }
 
+/**
+ * Prevent scrolling on number input fields.
+ */
 function removeScrollingOnNumberInput() {
   document.querySelectorAll('input[type="number"]').forEach(function (input) {
     input.addEventListener("wheel", function (event) {
@@ -374,14 +384,20 @@ function removeScrollingOnNumberInput() {
   });
 }
 
+/**
+ * Close the contact overview section.
+ */
 function closeContactOverview() {
   document.querySelector(".right-section").style.display = "none";
 }
-
+// Close contact options when clicking outside of them
 document.addEventListener("click", function (event) {
   closeContactOptions(event);
 });
 
+/**
+ * Show the contact options for editing.
+ */
 function showContactOptions() {
   let editBtn = document.querySelector(".edit-contact-btns");
   if (editBtn) {
@@ -389,6 +405,10 @@ function showContactOptions() {
   }
 }
 
+/**
+ * Close the contact options if clicked outside.
+ * @param {Event} event - The click event.
+ */
 function closeContactOptions(event) {
   if (window.innerWidth <= 630) {
     let editBtn = document.querySelector(".edit-contact-btns");
@@ -409,6 +429,10 @@ document.querySelector(".edit-contact-btns").addEventListener("click", function 
     event.stopPropagation();
   });
 
+/**
+ * Display a success message when a contact is added.
+ * The message is shown for a short duration and then hidden.
+ */
 function contactAddedSuccess() {
   let addContactSuccessContainer = document.querySelector(
     ".add-contact-success-container"
