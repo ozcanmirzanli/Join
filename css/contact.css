@@ -154,6 +154,7 @@ h4 {
   align-items: center;
   display: none;
   z-index: 12;
+  animation: moveInRight 0.3s ease-out;
 }
 
 #edit-contact-bg {
@@ -167,6 +168,7 @@ h4 {
   align-items: center;
   display: none;
   overflow: hidden;
+  animation: moveInRight 0.3s ease-out;
 }
 
 #add-contact {
@@ -974,6 +976,11 @@ input[type="number"] {
 }
 
 @media (max-width: 1050px) {
+  #add-contact-bg,
+  #edit-contact-bg {
+    animation: moveFromBottom 0.3s ease-out;
+  }
+
   .add-contact-container,
   .edit-contact-container {
     flex-direction: column;
@@ -1366,6 +1373,24 @@ input[type="number"] {
   }
 
   100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes moveInRight {
+  from {
+    transform: translateX(1000px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveFromBottom {
+  from {
+    transform: translateY(1000px);
+  }
+  to {
     transform: translateY(0);
   }
 }
