@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
   setTimeout(function () {
     let welcomeBackground = document.querySelector(".welcome-background");
     let welcomeText = document.querySelector(".welcome-text");
+    let navBar = document.getElementById("navBar");
     if (window.innerWidth < 1020) {
       welcomeBackground.style.display = "none";
       welcomeText.style.display = "none";

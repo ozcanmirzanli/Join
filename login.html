@@ -11,10 +11,10 @@
   <body onload="init(); initHeader()" class="login-page">
     <div class="login-main-container">
       <div id="background-fade"></div>
+      <header>
       <div id="logo-container">
         <img id="login-logo" src="assets/img/Capa_1.png" alt="logo-capa-2" class="d-block" />
         <img id="login-logo-mobile" src="assets/img/mobile-logo.png" alt="mobile-logo" class="d-none" />
-
       </div>
 
       <div class="sign-up">
@@ -23,6 +23,7 @@
         <button id="sign-up-btn" type="submit">Sign up</button>
       </form>
       </div>
+    </header>
 
       <div class="login-form-card">
         <h1>Log in</h1>
@@ -42,7 +43,7 @@
             />
             <img src="assets/img/lock.png" alt="lock" id="password-logo" onclick="togglePassword()"/>
           </div>
-          <p id="wrong-password">Wrong password Ups! Try again.</p>
+          <p id="wrong-password"> Ups! Wrong password or E-Mail! Please try again.</p>
 
           <div class="check-box">
             <img src="assets/img/check-box-disabled.png" id="unchecked" onclick="checkBoxToggle()"/>
@@ -57,8 +58,17 @@
       </div>
     </form>
       <footer>
+        <div class="sign-up-mobile">
+          <h2>Not a Join user?</h2>
+          <form action="sign_up.html">
+          <button id="sign-up-btn" type="submit">Sign up</button>
+        </form>
+        </div>
+
+<div class="footer-links">
         <a href="/Join/PrivacyPolicy.html">Privacy Policy</a>
         <a href="/Join/LegalNotice.html">Legal notice</a>
+      </div>
       </footer>
     </div>
     <script src="js/storage.js"></script>
