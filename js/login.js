@@ -4,19 +4,15 @@
 document.addEventListener("DOMContentLoaded", function () {
   setTimeout(function () {
     let backgroundFade = document.getElementById("background-fade");
-    backgroundFade.style.display = "none";
+    if (backgroundFade) {
+      // Check if the element exists
+      backgroundFade.style.display = "none";
+    }
   }, 1000);
 });
 
 checkRememberMe();
 changeLogoToMobile();
-
-// Hide wrong password text when the input value changes
-let passwordInput = document.getElementById("password");
-passwordInput.addEventListener("input", hideWrongPassword);
-
-// Changes the password logo to default when the input field is empty
-passwordInput.addEventListener("input", handlePasswordChange);
 
 /**
  * Authenticates a user based on email and password, and handles the login process.
@@ -162,7 +158,7 @@ async function checkRememberMe() {
   if (isChecked && rememberedEmail && rememberedPassword && loginPage) {
     fillLoginForm(rememberedEmail, rememberedPassword)
   } else {
-    clearLoginForm()
+    clearInputFields()
   }
 }
 
@@ -180,11 +176,6 @@ function fillLoginForm(rememberedEmail, rememberedPassword) {
 /**
  * Clears the login form fields and adjusts the UI to reflect the "Remember Me" option being unchecked.
  */
-function clearLoginForm() {
-  document.getElementById("email").value = "";
-  document.getElementById("password").value = "";
-  uncheckedFunc();
-}
 
 /**
  * Clears the remembered credentials.
@@ -199,24 +190,47 @@ async function unCheckRememberMe() {
  * Helper function to indicate a checked state in the UI.
  */
 function checkedFunc() {
-  document.getElementById("checked").classList.remove("d-none");
-  document.getElementById("unchecked").classList.add("d-none");
+  const checked = document.getElementById("checked");
+  const unchecked = document.getElementById("unchecked");
+  if (checked) {
+    checked.classList.remove("d-none");
+  }
+  if (unchecked) {
+    unchecked.classList.add("d-none");
+  }
 }
 
 /**
  * Helper function to indicate an unchecked state in the UI.
  */
 function uncheckedFunc() {
-  document.getElementById("checked").classList.add("d-none");
-  document.getElementById("unchecked").classList.remove("d-none");
+  const checked = document.getElementById("checked");
+  const unchecked = document.getElementById("unchecked");
+  if (checked) {
+    checked.classList.add("d-none");
+  }
+  if (unchecked) {
+    unchecked.classList.remove("d-none");
+  }
 }
 
 /**
  * Helper function to clear input fields in the form.
  */
+
 function clearInputFields() {
-  document.getElementById("email").value = "";
-  document.getElementById("password").value = "";
+  const emailElement = document.getElementById("email");
+  const passwordElement = document.getElementById("password");
+
+  if (emailElement) {
+    emailElement.value = "";
+  }
+
+  if (passwordElement) {
+    passwordElement.value = "";
+  }
+
+  uncheckedFunc();
 }
 
 /* prettier-ignore */
