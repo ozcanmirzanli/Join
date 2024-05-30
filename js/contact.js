@@ -21,6 +21,7 @@ async function init() {
   await getContact();
   await initHeader();
   renderContacts();
+  changeInputBorder();
 }
 
 /**
@@ -45,6 +46,7 @@ function addNewContact() {
   addBtn.style.backgroundColor = "rgb(9,25,49)";
   document.getElementById("add-contact").innerHTML = generateAddContactHTML();
   removeScrollingOnNumberInput();
+  changeInputBorder();
 }
 
 /**
@@ -297,6 +299,10 @@ function displayEditContactForm(contact) {
   let editContact = document.getElementById("edit-contact-bg");
   editContact.style.display = "flex";
   editContact.innerHTML = generateEditContactHTML(contact);
+
+  removeScrollingOnNumberInput();
+  changeInputBorder();
+
   document.getElementById("badgeColor").value = contact.color;
 }
 
@@ -442,4 +448,30 @@ function contactAddedSuccess() {
   setTimeout(() => {
     addContactSuccessContainer.style.display = "none";
   }, 1200);
+}
+
+/**
+ * Change the border of input fields on focus and blur.
+ */
+function changeInputBorder() {
+  const inputContainers = document.querySelectorAll(".input-container input");
+
+  inputContainers.forEach((input) => {
+    input.addEventListener("focus", handleFocus);
+    input.addEventListener("blur", handleBlur);
+  });
+}
+
+/**
+ * Handles focus event on input elements by setting a custom border color.
+ */
+function handleFocus(event) {
+  event.target.parentElement.style.border = "1px solid #29ABE2";
+}
+
+/**
+ * Handles blur event on input elements by resetting the border color.
+ */
+function handleBlur(event) {
+  event.target.parentElement.style.border = "";
 }
