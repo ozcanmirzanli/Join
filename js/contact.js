@@ -228,8 +228,6 @@ function displayContactDetails(contact) {
   // Check if the contact object is valid and contains the color property
   if (contact && contact.color) {
     contactBig.innerHTML = generateContactDetailsHTML(contact);
-  } else {
-    console.error("Invalid contact object or missing color property");
   }
 
   contactOverview.style.display = "block";
@@ -302,8 +300,6 @@ function displayEditContactForm(contact) {
 
   removeScrollingOnNumberInput();
   changeInputBorder();
-
-  document.getElementById("badgeColor").value = contact.color;
 }
 
 /**
@@ -431,9 +427,12 @@ function closeContactOptions(event) {
 
 // Prevent clicks inside the edit button options from closing it
 // prettier-ignore
-document.querySelector(".edit-contact-btns").addEventListener("click", function (event) {
+var editContactBtns = document.querySelector(".edit-contact-btns");
+if (editContactBtns) {
+  editContactBtns.addEventListener("click", function (event) {
     event.stopPropagation();
   });
+}
 
 /**
  * Display a success message when a contact is added.
