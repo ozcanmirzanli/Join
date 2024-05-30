@@ -10,11 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 checkRememberMe();
 changeLogoToMobile();
-inputColorChange();
-
-// Event listener for guest login button click
-let guestLoginBtn = document.getElementById("guest-login-btn");
-guestLoginBtn.addEventListener("click", guestLogin);
 
 // Hide wrong password text when the input value changes
 let passwordInput = document.getElementById("password");
@@ -300,9 +295,4 @@ function changeLogoToMobile() {
       loginLogo.src = "assets/img/Capa_1.png";
     }, 1000);
   }
-}
-
-function inputColorChange() {
-  document.querySelector(".inputs").addEventListener("focusin", handleFocus);
-  document.querySelector(".inputs").addEventListener("focusout", handleBlur);
 }

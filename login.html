@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/fonts.css" />
     <link rel="icon" href="./assets/img/joinLogoBlack.svg">
   </head>
-  <body onload="init(); initHeader()" class="login-page">
+  <body onload="init(); " class="login-page">
     <div class="login-main-container">
       <div id="background-fade"></div>
       <header>
@@ -28,7 +28,7 @@
       <div class="login-form-card">
         <h1>Log in</h1>
         <div class="login-underline"></div>
-        <form class="inputs" onsubmit="login(event); return false;">
+        <form class="inputs" onsubmit="login(event); return false;" onfocusin="handleFocus(event)" onfocusout="handleBlur(event)">
           <div class="email-input">
             <input type="email" id="email" placeholder="Email" required />
             <img src="assets/img/mail.png" alt="mail" id="mail-logo" />
@@ -53,7 +53,7 @@
         
         <div class="bottom-btns">
           <button id="login-btn">Log in</button>
-          <button id="guest-login-btn">Guest Log in</button>
+          <button id="guest-login-btn" onclick="guestLogin()">Guest Log in</button>
         </div>
       </div>
     </form>
@@ -61,7 +61,7 @@
         <div class="sign-up-mobile">
           <h2>Not a Join user?</h2>
           <form action="sign_up.html">
-          <button id="sign-up-btn" type="submit">Sign up</button>
+          <button id="sign-up-btn"  type="submit">Sign up</button>
         </form>
         </div>
 

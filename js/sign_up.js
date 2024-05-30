@@ -13,22 +13,7 @@ let emailInput = document.getElementById("email");
 let emailContainer = document.querySelector(".email-input");
 let alertUsedEmail = document.querySelector(".used-email");
 
-let users = [];
-
 loadUsers();
-
-/* prettier-ignore */
-// Event listener to hide alert message for used email when the user starts typing in the email input field
-emailInput.addEventListener("input", () => (alertUsedEmail.style.display = "none"));
-
-// Adds an event listener to the password input field to hide the password mismatch warning when the user modifies the password
-password.addEventListener("input", hideMismatchWarning);
-
-// Adds an event listener to the confirm password input field to hide the password mismatch warning when the user modifies the confirmation password
-confirmPasswordInput.addEventListener("input", hideMismatchWarning);
-
-// Adds an event listener to the confirm password input field to handle changes in the confirmation password
-confirmPasswordInput.addEventListener("input", handleConfirmPasswordChange);
 
 /**
  * Initializes the application by loading user data from storage.
@@ -126,6 +111,9 @@ function confirmPasswordFunction() {
 
   wrongPasswordInput(passwordsMatch);
   disableSignUpButton(passwordsMatch);
+
+  // Adds an event listener to the confirm password input field to handle changes in the confirmation password
+  confirmPasswordInput.addEventListener("input", handleConfirmPasswordChange);
 }
 
 /* prettier-ignore */
@@ -141,6 +129,12 @@ function wrongPasswordInput(passwordsMatch) {
   } else {
     hideMismatchWarning();
   }
+
+  // Adds an event listener to the password input field to hide the password mismatch warning when the user modifies the password
+password.addEventListener("input", hideMismatchWarning);
+
+// Adds an event listener to the confirm password input field to hide the password mismatch warning when the user modifies the confirmation password
+confirmPasswordInput.addEventListener("input", hideMismatchWarning);
 }
 
 /**
@@ -149,6 +143,10 @@ function wrongPasswordInput(passwordsMatch) {
 function showMismatchWarning() {
   wrongPassword.style.display = "block";
   confirmPasswordContainer.style.border = "1px solid red";
+
+  /* prettier-ignore */
+  // Event listener to hide alert message for used email when the user starts typing in the email input field
+  emailInput.addEventListener("input", () => (alertUsedEmail.style.display = "none"));
 }
 
 /**
