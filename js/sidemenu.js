@@ -3,7 +3,7 @@
 let submenuOpen = false;
 let users = [];
 
-async function initHeader(){
+async function initHeader() {
   loadUsersHead();
 }
 
@@ -27,7 +27,8 @@ function toggleSubmenu() {
 }
 
 function openSubmenu() {
-  document.getElementById("userHeader").style.backgroundColor = "rgb(225,230,236)";
+  document.getElementById("userHeader").style.backgroundColor =
+    "rgb(225,230,236)";
 
   let submenu = document.getElementById("subMenu");
   submenu.classList.remove("d-none");
@@ -37,7 +38,8 @@ function openSubmenu() {
 }
 
 function closeSubmenu() {
-  document.getElementById("userHeader").style.backgroundColor = "rgb(255,255,255)";
+  document.getElementById("userHeader").style.backgroundColor =
+    "rgb(255,255,255)";
   let submenu = document.getElementById("subMenu");
   submenu.classList.add("d-none");
   submenu.classList.remove("subMenu");
@@ -68,12 +70,14 @@ function goBack() {
 function renderUserHeader() {
   const currentUser = getCurrentUserHeader();
   if (currentUser) {
-    const name = currentUser.userName; 
+    const name = currentUser.userName;
     const initials = getInitials(name);
     const user = document.getElementById("userHeader");
     user.innerHTML = `<div class="initialsHeader">${initials}</div>`;
   } else {
-    document.getElementById("userHeader").innerHTML = `<div class="initialsHeader">G</div>`; 
+    document.getElementById(
+      "userHeader"
+    ).innerHTML = `<div class="initialsHeader">G</div>`;
   }
 }
 

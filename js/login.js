@@ -8,21 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }, 1000);
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Getting the 'addsubtask' input element by its ID
-  var addSubtaskInput = document.getElementById("addsubtask");
-
-  // Setting up the event listeners for focus and blur events
-  addSubtaskInput.addEventListener("focus", handleFocus);
-  addSubtaskInput.addEventListener("blur", handleBlur);
-});
-
 checkRememberMe();
 changeLogoToMobile();
-
-// Event listeners for input focus states
-document.querySelector(".inputs").addEventListener("focusin", handleFocus);
-document.querySelector(".inputs").addEventListener("focusout", handleBlur);
+inputColorChange();
 
 // Event listener for guest login button click
 let guestLoginBtn = document.getElementById("guest-login-btn");
@@ -312,4 +300,9 @@ function changeLogoToMobile() {
       loginLogo.src = "assets/img/Capa_1.png";
     }, 1000);
   }
+}
+
+function inputColorChange() {
+  document.querySelector(".inputs").addEventListener("focusin", handleFocus);
+  document.querySelector(".inputs").addEventListener("focusout", handleBlur);
 }
