@@ -8,7 +8,6 @@ body {
   align-items: center;
   font-family: "Inter", sans-serif;
   height: 100%;
-  overflow: hidden;
 }
 
 header {
@@ -306,7 +305,7 @@ footer a:hover {
   width: 100%;
   justify-content: center;
   flex-direction: row;
-  margin-bottom: 40px;
+  margin-top: 15%;
 }
 
 @keyframes moving-to-target {
@@ -397,6 +396,7 @@ footer a:hover {
 
   .footer-links {
     margin-bottom: 5%;
+    margin-top: 5%;
   }
 
   .email-input,
@@ -499,12 +499,12 @@ footer a:hover {
     left: 25px;
   }
 
-  .login-underline {
-    margin-bottom: 16px;
-  }
-
   .login-form-card h1 {
     margin-bottom: 10px;
+  }
+
+  header {
+    height: 18%;
   }
 }
 
