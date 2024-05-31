@@ -545,6 +545,10 @@ header {
   .date-text {
     width: 70%;
   }
+
+  .secondary-container {
+    height: 55%;
+  }
 }
 
 @media (max-width: 380px) {
