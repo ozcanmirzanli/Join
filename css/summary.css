@@ -8,6 +8,10 @@ body {
   max-width: 1900px;
 }
 
+header {
+  height: 10%;
+}
+
 .summary-main-container {
   max-width: 1440px;
   width: 100vw;
@@ -15,7 +19,7 @@ body {
 }
 
 .title {
-  margin: 206px 0 56px 328px;
+  margin: 12% 0 1% 23%;
   display: flex;
   align-items: center;
   gap: 30px;
@@ -315,6 +319,9 @@ body {
   .secondary-container {
     justify-content: center;
     margin-left: 0;
+    height: 60%;
+    align-content: flex-start;
+    flex-wrap: wrap;
   }
 
   .title {
@@ -397,6 +404,10 @@ body {
 }
 
 @media (max-width: 600px) {
+  header {
+    height: 12%;
+  }
+
   .title {
     align-items: flex-start;
     flex-direction: column;
@@ -468,7 +479,7 @@ body {
 
 @media (max-width: 500px) {
   .title {
-    margin-left: 20px;
+    margin: 115px 0 20px 20px;
   }
 
   .first-row {
@@ -491,6 +502,7 @@ body {
 
   .options-container {
     height: 440px;
+    gap: 0px;
   }
 
   .first-row,
