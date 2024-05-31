@@ -206,14 +206,16 @@ body {
   margin-left: 80px;
 }
 
-.welcome-text h2 {
+.welcome-text h2,
+.welcome-text-mobile h2 {
   font-size: 47px;
   font-weight: 500;
   line-height: 56.4px;
   color: #2a3647;
 }
 
-.welcome-text h1 {
+.welcome-text h1,
+.welcome-text-mobile h1 {
   font-size: 64px;
   font-weight: 700;
   line-height: 76.8px;
@@ -225,7 +227,7 @@ body {
   width: 100vw;
   height: 100vh;
   background: #f6f7f8;
-  z-index: 10;
+  z-index: 13;
   animation: opacity-fade 1s ease-in-out 2s;
   overflow: hidden;
   opacity: 1;
@@ -287,20 +289,25 @@ body {
 
 @media (max-width: 1020px) {
   .welcome-background {
-    display: block;
+    display: flex;
+    /* align-content: center; */
+    justify-content: center;
+    align-items: center;
   }
 
   .welcome-text {
+    display: none;
+  }
+
+  .welcome-text-mobile {
     position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
-    z-index: 12;
+    z-index: 15;
     animation: opacity-fade 1s ease-in-out 2s;
     opacity: 1;
-    margin-left: 0;
-    width: 60%;
-    margin-bottom: 60px;
+    margin: 0 auto;
   }
 }
 
@@ -450,11 +457,11 @@ body {
     width: 55%;
   }
 
-  .welcome-text h2 {
+  .welcome-text-mobile h2 {
     font-size: 36px;
   }
 
-  .welcome-text h1 {
+  .welcome-text-mobile h1 {
     font-size: 47px;
   }
 }
@@ -503,10 +510,6 @@ body {
   .date-text {
     width: 60%;
   }
-
-  .welcome-text {
-    margin-bottom: 0px;
-  }
 }
 
 @media (max-width: 420px) {
@@ -529,10 +532,6 @@ body {
 
   .date-text {
     width: 70%;
-  }
-
-  .welcome-text {
-    width: 90%;
   }
 }
 

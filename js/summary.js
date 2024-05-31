@@ -6,8 +6,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   setTimeout(function () {
     let welcomeBackground = document.querySelector(".welcome-background");
-    let welcomeText = document.querySelector(".welcome-text");
-    let navBar = document.getElementById("navBar");
+    let welcomeText = document.querySelector(".welcome-text-mobile");
     if (window.innerWidth < 1020) {
       welcomeBackground.style.display = "none";
       welcomeText.style.display = "none";
@@ -17,9 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
   changeGreetingText();
   loadtaskData().then(updateSummary);
 });
-
-let userNameSummary = document.getElementById("user-name");
-let greetingText = document.getElementById("greeting-text");
 
 /**
  * Adds click event listeners to elements with class "first-row".
@@ -100,27 +96,67 @@ let curHr = today.getHours();
  * Updates the greeting text based on the current time and user's first name.
  */
 function changeGreetingText() {
-  const currentUser = getCurrentUser();
-  greetingText.innerText = "";
-  greetingTextCondition();
+  let userNameSummary = document.getElementById("user-name");
+  let userNameSummaryMobile = document.getElementById("user-name-mobile");
+  let greetingText = document.getElementById("greeting-text");
+  let greetingTextMobile = document.getElementById("greeting-text-mobile");
 
+  const currentUser = getCurrentUser();
+  clearGreetingText(greetingText, greetingTextMobile);
+  greetingTextCondition(greetingText, greetingTextMobile);
+
+  setUserNameSummary(userNameSummary, userNameSummaryMobile, currentUser);
+}
+
+/**
+ * Clears the greeting text content of both desktop and mobile versions.
+ */
+function clearGreetingText(greetingText, greetingTextMobile) {
+  greetingText.innerText = "";
+  greetingTextMobile.innerText = "";
+}
+
+/**
+ * Sets the user's name in the greeting text for both desktop and mobile versions.
+ * @param {HTMLElement} userNameSummary - The element representing the user's name in the desktop version.
+ * @param {HTMLElement} userNameSummaryMobile - The element representing the user's name in the mobile version.
+ */
+// prettier-ignore
+function setUserNameSummary(userNameSummary, userNameSummaryMobile, currentUser) {
   userNameSummary.innerText = "";
+  userNameSummaryMobile.innerText = "";
+
   if (currentUser) {
-    userNameSummary.innerText =
-      currentUser.userName[0].toUpperCase() + currentUser.userName.slice(1);
+    const formattedUserName = formatUserName(currentUser.userName);
+    userNameSummary.innerText = formattedUserName;
+    userNameSummaryMobile.innerText = formattedUserName;
   }
 }
 
 /**
- * Sets greeting text based on the current hour of the day.
+ * Formats the user's name by capitalizing the first letter.
+ * @param {string} userName - The user's name to be formatted.
+ * @returns {string} The formatted user's name.
  */
-function greetingTextCondition() {
+function formatUserName(userName) {
+  return userName[0].toUpperCase() + userName.slice(1);
+}
+
+/**
+ * Sets greeting text based on the current hour of the day.
+ * @param {HTMLElement} greetingText - The element representing the desktop greeting text.
+ * @param {HTMLElement} greetingTextMobile - The element representing the mobile greeting text.
+ */
+function greetingTextCondition(greetingText, greetingTextMobile) {
   if (curHr < 12) {
     greetingText.innerText = "Good morning,";
+    greetingTextMobile.innerText = "Good morning,";
   } else if (curHr < 18) {
     greetingText.innerText = "Good afternoon,";
+    greetingTextMobile.innerText = "Good afternoon,";
   } else {
     greetingText.innerText = "Good evening,";
+    greetingTextMobile.innerText = "Good evening,";
   }
 }
 
