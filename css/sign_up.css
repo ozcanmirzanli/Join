@@ -8,11 +8,6 @@ body {
   align-items: center;
   font-family: "Inter", sans-serif;
   height: 100%;
-  overflow: hidden;
-}
-
-header {
-  height: 15%;
 }
 
 p {
@@ -336,13 +331,22 @@ footer a:hover {
     left: 30px;
   }
 
+  .inputs {
+    height: 75%;
+  }
+
   footer {
     position: absolute;
     bottom: 20px;
   }
 
-  .inputs {
-    height: 75%;
+  footer a:first-child {
+    margin-right: 0;
+  }
+
+  .footer-links {
+    justify-content: space-evenly;
+    margin-top: 0;
   }
 }
 
@@ -418,10 +422,6 @@ footer a:hover {
 }
 
 @media (max-width: 380px) {
-  header {
-    height: 10%;
-  }
-
   input {
     width: 220px;
   }

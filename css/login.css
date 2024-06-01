@@ -380,6 +380,10 @@ footer a:hover {
 }
 
 @media (max-width: 600px) {
+  .login-main-container {
+    height: 90vh;
+  }
+
   header {
     height: 20%;
   }
@@ -416,7 +420,7 @@ footer a:hover {
 
   .bottom-btns {
     flex-direction: column;
-    margin-top: 30px;
+    margin-top: 40px;
     gap: 10px;
   }
 
@@ -428,6 +432,10 @@ footer a:hover {
   #login-logo {
     width: 85px;
     height: 109px;
+  }
+
+  .inputs {
+    height: 60%;
   }
 }
 
@@ -447,7 +455,7 @@ footer a:hover {
 
   footer {
     position: absolute;
-    bottom: 10px;
+    bottom: 0;
   }
 }
 
@@ -479,7 +487,7 @@ footer a:hover {
   }
 
   .login-form-card {
-    height: 60%;
+    height: 50%;
   }
 
   #login-btn,
@@ -507,9 +515,11 @@ footer a:hover {
   .login-form-card h1 {
     margin-bottom: 10px;
   }
+}
 
-  header {
-    height: 18%;
+@media (max-width: 400px) {
+  .login-main-container {
+    height: 100vh;
   }
 }
 
@@ -524,6 +534,10 @@ footer a:hover {
 
   .check-box {
     margin-top: 5%;
+    margin-bottom: 3%;
+  }
+
+  .sign-up-mobile {
     margin-bottom: 3%;
   }
 }
