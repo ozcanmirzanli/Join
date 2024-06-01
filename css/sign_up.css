@@ -37,12 +37,13 @@ h2 {
 
 .sign-up-main-container {
   max-width: 1440px;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 #sign-up-logo {
@@ -66,17 +67,15 @@ h2 {
 
 .sign-up-form-card {
   position: relative;
-  width: 422px;
-  height: 534px;
-  max-width: 652px;
+  width: 598px;
+  height: 630px;
+  max-width: 598px;
   max-height: 630px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  gap: 32px;
-  padding: 48px 88px 48px 88px;
   border-radius: 30px;
   background-color: white;
   margin: 0 auto;
@@ -89,6 +88,7 @@ h2 {
   text-align: center;
   margin-block-start: 0;
   margin-block-end: 0;
+  margin-bottom: 32px;
 }
 
 .sign-up-arrow {
@@ -102,6 +102,7 @@ h2 {
   border-bottom: 3px solid #29abe2;
   width: 150px;
   margin-top: -16px;
+  margin-bottom: 32px;
 }
 
 .inputs {
@@ -320,14 +321,28 @@ footer a:hover {
 }
 
 @media (max-width: 750px) {
+  .sign-up-main-container {
+    flex-direction: row;
+    height: 90vh;
+  }
+
   .sign-up-form-card {
-    width: 55%;
-    height: 65%;
+    width: 90%;
+    height: 60%;
   }
 
   .sign-up-arrow {
     top: 35px;
     left: 30px;
+  }
+
+  footer {
+    position: absolute;
+    bottom: 20px;
+  }
+
+  .inputs {
+    height: 75%;
   }
 }
 
@@ -381,11 +396,38 @@ footer a:hover {
   .inputs {
     align-items: center;
   }
+
+  .footer-links {
+    margin-bottom: 0;
+  }
+
+  .check-box {
+    margin-top: 4%;
+    margin-bottom: 7%;
+  }
+
+  .sign-up-underline {
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 400px) {
+  .sign-up-main-container {
+    height: 100vh;
+  }
 }
 
 @media (max-width: 380px) {
+  header {
+    height: 10%;
+  }
+
   input {
     width: 220px;
+  }
+
+  .sign-up-form-card {
+    height: 60%;
   }
 
   .sign-up-form-card h1 {
@@ -396,6 +438,11 @@ footer a:hover {
   .sign-up-arrow {
     top: 29px;
     left: 17px;
+  }
+
+  #logo-container {
+    top: 25px;
+    left: 25px;
   }
 }
 

@@ -444,6 +444,11 @@ footer a:hover {
     background: #2a3647;
     animation: opacity-fade 2s ease-in-out;
   }
+
+  footer {
+    position: absolute;
+    bottom: 10px;
+  }
 }
 
 @media (max-width: 420px) {
