@@ -323,7 +323,7 @@ footer a:hover {
 
   .sign-up-form-card {
     width: 90%;
-    height: 60%;
+    height: 65%;
   }
 
   .sign-up-arrow {
@@ -375,8 +375,9 @@ footer a:hover {
   .email-input,
   .password-input,
   .confirm-password-container {
-    width: 100%;
-    margin-bottom: 15px;
+    width: 85%;
+    max-height: 40px;
+    padding-right: 20px;
   }
 }
 
@@ -419,6 +420,13 @@ footer a:hover {
   .sign-up-main-container {
     height: 100vh;
   }
+
+  .user-name-input,
+  .email-input,
+  .password-input,
+  .confirm-password-container {
+    margin-bottom: 20px;
+  }
 }
 
 @media (max-width: 380px) {
@@ -426,11 +434,7 @@ footer a:hover {
     width: 220px;
   }
 
-  .sign-up-form-card {
-    height: 60%;
-  }
-
-  .sign-up-form-card h1 {
+  . .sign-up-form-card h1 {
     font-size: 40px;
     width: 150%;
   }
