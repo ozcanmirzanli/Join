@@ -655,7 +655,7 @@ select.input-category option[value=""][disabled] {
 }
 
 @media screen and (max-width: 550px) {
-  #create-btn {
+  #create-btn, #clear-btn {
     padding: 15px 12px 15px 24px;
   }
 }
@@ -663,6 +663,10 @@ select.input-category option[value=""][disabled] {
 @media screen and (max-width: 530px) {
   .addtask-footer {
     gap: 0;
+  }
+
+  h1 {
+    padding-top: 120px;
   }
 
   form {
@@ -716,8 +720,8 @@ select.input-category option[value=""][disabled] {
     font-size: 16px;
   }
 
-  #create-btn {
-    font-size: 15px;
+  #create-btn, #clear-btn {
+    font-size: 14px;
     padding: 15px 15px 15px 24px;
   }
 

@@ -47,6 +47,7 @@
   height: 48px;
   width: 312px;
   justify-content: space-around;
+  background-color: white;
 }
 
 .searchField {
