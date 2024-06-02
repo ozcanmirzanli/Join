@@ -637,18 +637,16 @@ select.input-category option[value=""][disabled] {
     padding-top: 24px;
   }
 
-  #clear-btn {
-    display: none;
-  }
-
   .addtask-footer {
-    gap: 100px;
-    padding-top: 40px;
-    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
   }
 
   #requiredFooter {
-    padding-top: 40px;
+    padding-top: 120px;
   }
 
   h1 {
