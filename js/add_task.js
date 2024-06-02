@@ -53,14 +53,15 @@ async function getContact() {
  * Sets up event listeners for focus and blur events on the input element.
  */
 document.addEventListener("DOMContentLoaded", function () {
-  var addSubtaskInput = document.getElementById("addsubtask");
+  let addSubtaskInput = document.getElementById("addsubtask");
 
-  // Setting up the event listeners for focus and blur events
-  addSubtaskInput.addEventListener("focus", handleFocus);
-  addSubtaskInput.addEventListener("blur", handleBlur);
-
-  // Set medium priority as default
-  changePriorityColor("medium");
+  if (addSubtaskInput) {
+    // Setting up the event listeners for focus and blur events
+    addSubtaskInput.addEventListener("focus", handleFocus);
+    addSubtaskInput.addEventListener("blur", handleBlur);
+    // Set medium priority as default
+    changePriorityColor("medium");
+  }
 });
 
 /**

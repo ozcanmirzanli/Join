@@ -1,6 +1,10 @@
 body {
   margin: 0;
   font-family: "Inter", sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  box-sizing: border-box;
 }
 
 body::-webkit-scrollbar {
