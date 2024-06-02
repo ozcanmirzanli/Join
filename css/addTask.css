@@ -170,7 +170,7 @@ textarea {
   display: flex;
   flex-direction: column;
   position: absolute;
-  width: 440px;
+  width: 75%;
   z-index: 2;
   padding-top: 0 !important;
 }
@@ -669,7 +669,7 @@ select.input-category option[value=""][disabled] {
 
   form {
     display: flex;
-    align-items: normal;
+    align-items: center;
   }
 
   #titleAddTask {
@@ -704,12 +704,6 @@ select.input-category option[value=""][disabled] {
     padding-top: 0;
   }
 
-  /* .padding-category, .sectionSubtasks {
-        display: none;
-    } */
-}
-
-@media screen and (max-width: 450px) {
   textarea,
   #titleAddTask {
     padding-right: 0px;
