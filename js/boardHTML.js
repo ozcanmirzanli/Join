@@ -185,10 +185,10 @@ function renderAddTaskForm() {
                         <section class="padding-description">
                             <div class="pd-bottom"><label>Assigned to</label></div>
                             <div class="">
-                                <div id="assignAddTask" name="assignTo" class="input-assignedTo width440">
+                                <div id="assignAddTask" name="assignTo" class="input-assignedTo width440" onclick="toggleAssignTo(event)">
                                     <span id="select-contacts">Select contacts to assign</span>
-                                    <img class="assignToDDArrow" src="assets/img/arrow_drop_down_AddTask.svg" onclick="openAssignTo()" id="arrowdown" alt="arrowdown"/>
-                                    <img src="assets/img/arrow_drop_down_AddTask.svg" onclick="closeAssignTo()" id="arrowup" alt="arrowup"  class="assignToDDArrow rotate d-none"/>
+                                    <img class="assignToDDArrow" src="assets/img/arrow_drop_down_AddTask.svg" id="arrowdown" alt="arrowdown"/>
+                                    <img src="assets/img/arrow_drop_down_AddTask.svg" id="arrowup" alt="arrowup"  class="assignToDDArrow rotate d-none"/>
                                 </div>
                             </div>
                             <div id="assignToDropdown" class="assignToDropdown assignField d-none">
