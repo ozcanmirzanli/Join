@@ -62,8 +62,8 @@ h2 {
 
 .sign-up-form-card {
   position: relative;
-  width: 598px;
-  height: 630px;
+  width: 51%;
+  height: 81%;
   max-width: 598px;
   max-height: 630px;
   display: flex;
@@ -75,7 +75,8 @@ h2 {
   background-color: white;
   margin: 0 auto;
   box-shadow: 0px 0px 14px 3px #0000000a;
-  margin-top: 197px;
+  margin-top: 137px;
+  gap: 32px;
 }
 
 .sign-up-form-card h1 {
@@ -84,7 +85,7 @@ h2 {
   text-align: center;
   margin-block-start: 0;
   margin-block-end: 0;
-  margin-bottom: 32px;
+  margin-top: 48px;
 }
 
 .sign-up-arrow {
@@ -98,13 +99,13 @@ h2 {
   border-bottom: 3px solid #29abe2;
   width: 150px;
   margin-top: -16px;
-  margin-bottom: 32px;
 }
 
 .inputs {
   display: flex;
   flex-direction: column;
   background-color: white;
+  gap: 32px;
 }
 
 input {
@@ -139,7 +140,6 @@ input::placeholder {
   background-color: white;
   border: 1px solid #e8e8e8;
   cursor: pointer;
-  margin-bottom: 24px;
 }
 
 #mail-logo,
@@ -165,6 +165,13 @@ input::placeholder {
   display: none;
 }
 
+.check-box {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
 .check-box p {
   color: #a8a8a8;
 }
@@ -175,14 +182,6 @@ input::placeholder {
   line-height: 19.2px;
   color: #29abe2;
   text-decoration: none;
-}
-
-.check-box {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  margin-top: 25px;
-  margin-bottom: 32px;
 }
 
 .check-box img {
@@ -216,6 +215,7 @@ input::placeholder {
   width: 126px;
   display: flex;
   align-items: center;
+  margin-bottom: 48px;
 }
 
 .signed-up-success-container {
@@ -260,7 +260,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 
 footer a {
@@ -339,11 +339,14 @@ footer a:hover {
 
   .inputs {
     height: 75%;
+    gap: 5%;
   }
 
   footer {
     position: absolute;
     bottom: 20px;
+    height: 0;
+    margin-bottom: 0;
   }
 
   footer a:first-child {
@@ -356,16 +359,15 @@ footer a:hover {
   }
 }
 
-@media (max-width: 600px) {
-  .check-box {
-    margin-top: 10%;
-    margin-bottom: 7%;
-  }
-}
-
 @media (max-width: 520px) {
   .sign-up-form-card h1 {
     font-size: 47px;
+    margin-top: 5%;
+    margin-bottom: -10px;
+  }
+
+  #sign-up-btn {
+    margin-bottom: 5%;
   }
 
   .sign-up-underline {
@@ -384,6 +386,11 @@ footer a:hover {
     width: 85%;
     max-height: 40px;
     padding-right: 20px;
+  }
+
+  .check-box {
+    margin-bottom: 4%;
+    margin-top: 6%;
   }
 }
 
@@ -411,27 +418,11 @@ footer a:hover {
   .footer-links {
     margin-bottom: 0;
   }
-
-  .check-box {
-    margin-top: 4%;
-    margin-bottom: 7%;
-  }
-
-  .sign-up-underline {
-    margin-bottom: 12px;
-  }
 }
 
 @media (max-width: 400px) {
   .sign-up-main-container {
     height: 100vh;
-  }
-
-  .user-name-input,
-  .email-input,
-  .password-input,
-  .confirm-password-container {
-    margin-bottom: 20px;
   }
 }
 
@@ -442,7 +433,6 @@ footer a:hover {
 
   .sign-up-form-card h1 {
     font-size: 40px;
-    width: 150%;
   }
 
   .sign-up-arrow {
