@@ -59,9 +59,9 @@ function generateTodoHTMLBoard(element) {
  */
 function getCategoryStyle(category) {
     if (category === 'Technical Story') {
-        return { color: 'rgba(31, 215, 193, 1)', width: '110px' }; // Set the desired color and width for Technical Story
+        return { color: 'rgba(31, 215, 193, 1)', width: '120px' }; // Set the desired color and width for Technical Story
     } else if (category === 'User Story') {
-        return { color: 'rgba(0, 56, 255, 1)', width: '80px' }; // Set the desired color and width for User Story
+        return { color: 'rgba(0, 56, 255, 1)', width: '90px' }; // Set the desired color and width for User Story
     }
     return { color: 'white', width: 'auto' }; // Default color and width if the category doesn't match
 }

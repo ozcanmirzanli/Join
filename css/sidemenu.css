@@ -1,10 +1,25 @@
 body {
   margin: 0;
   font-family: "Inter", sans-serif;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  box-sizing: border-box;
+}
+
+body::-webkit-scrollbar {
+  height: 90px;
+  width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  border: 8px solid rgba(168, 168, 168, 1);
+  border-radius: 8px;
+  height: 8px;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+body::-webkit-scrollbar-corner {
+  background-color: transparent;
 }
 
 .sidebar {
@@ -24,6 +39,11 @@ body {
   z-index: 11;
   padding-bottom: 0;
   overflow-y: auto;
+}
+
+.blueLetters {
+  color: #29ABE2;
+  display: inline;
 }
 
 .sidebar-container {
@@ -99,7 +119,6 @@ a:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: inherit;
 }
 
 .privacy {
@@ -118,6 +137,7 @@ a:hover {
   height: 37px;
   width: 37px;
   transition: height 1s, width 1s;
+  padding-right: 16px;
 }
 
 .arrow:hover {
@@ -129,13 +149,16 @@ a:hover {
 }
 
 .legalNotice {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding-left: 328px;
-  padding-top: 210px;
+  align-items: flex-start; */
+  position: relative;
+  left: 300px;
+  top: 120px;
   width: 103vh;
   width: calc(100% - 329px);
+  max-width: 1440px;
+  padding-bottom: 80px;
 }
 
 .header {
@@ -240,12 +263,6 @@ a:hover {
   font-weight: 400;
 }
 
-p {
-  font-family: "Inter", sans-serif;
-  font-weight: 400;
-  font-size: 20px;
-}
-
 h1 {
   font-family: "Inter", sans-serif;
   font-size: 61px;
@@ -263,12 +280,6 @@ h3 {
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
-}
-
-h5 {
-  font-family: "Inter", sans-serif;
-  font-weight: 700;
-  font-size: 20px;
 }
 
 a {
@@ -338,26 +349,7 @@ a:hover {
   }
 }
 
-@media screen and (max-width: 1200px) and (min-width: 1141px) {
-  .legalNotice {
-    padding-bottom: 80px;
-  }
-}
-
-@media screen and (max-width: 1140px) and (min-width: 1101px) {
-  .legalNotice {
-    width: calc(100% - 335px);
-    padding-bottom: 80px;
-  }
-}
-
 @media (max-width: 1100px) {
-  .legalNotice {
-    padding-right: 20px;
-    padding-top: 150px;
-    padding-bottom: 80px;
-  }
-
   .display {
     padding-right: 50px;
   }
@@ -365,8 +357,9 @@ a:hover {
 
 @media (max-width: 1000px) {
   .legalNotice {
-    width: calc(100% - 110px);
-    padding-left: 90px;
+    width: calc(100% - 56px);
+    left: 16px;
+    top: 84px;
   }
 
   .sidebar {
@@ -429,10 +422,7 @@ a:hover {
   }
 
   .legalNotice {
-    padding-left: 80px;
-    width: calc(100% - 160px);
-    padding-top: 150px;
-    padding-bottom: 80px;
+     width: calc(100% - 20px);
   }
 
   .user {

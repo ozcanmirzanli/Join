@@ -3,10 +3,6 @@
   box-sizing: border-box;
 }
 
-/* body::-webkit-scrollbar {
-  display: none;
-} */
-
 .d-none {
   display: none;
 }
