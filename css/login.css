@@ -394,7 +394,7 @@ footer a:hover {
   .sign-up-mobile {
     display: flex;
     margin-top: 10%;
-    margin-bottom: 6%;
+    margin-bottom: 5%;
   }
 
   .footer-links {
@@ -456,6 +456,11 @@ footer a:hover {
   footer {
     position: absolute;
     bottom: 0;
+    margin-bottom: 0;
+  }
+
+  .email-input {
+    margin-bottom: 5%;
   }
 }
 
@@ -482,10 +487,6 @@ footer a:hover {
     font-size: 18px;
   }
 
-  .login-form-card {
-    height: 50%;
-  }
-
   #login-btn,
   #guest-login-btn {
     max-width: 140px;
@@ -508,6 +509,10 @@ footer a:hover {
     left: 25px;
   }
 
+  .login-form-card {
+    height: 60%;
+  }
+
   .login-form-card h1 {
     margin-bottom: 10px;
   }
@@ -517,15 +522,16 @@ footer a:hover {
   .login-main-container {
     height: 100vh;
   }
+
+  .footer-links {
+    margin-bottom: 3%;
+    margin-top: 3%;
+  }
 }
 
 @media (max-width: 380px) {
   .login-form-card h1 {
     font-size: 40px;
-  }
-
-  .login-form-card {
-    height: 55%;
   }
 
   .check-box {

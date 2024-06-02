@@ -98,7 +98,7 @@ h2 {
 .sign-up-underline {
   border-bottom: 3px solid #29abe2;
   width: 150px;
-  margin-top: -16px;
+  margin-top: -10px;
 }
 
 .inputs {
@@ -344,7 +344,7 @@ footer a:hover {
 
   footer {
     position: absolute;
-    bottom: 20px;
+    bottom: 5%;
     height: 0;
     margin-bottom: 0;
   }
@@ -402,7 +402,8 @@ footer a:hover {
   }
 
   #sign-up-btn {
-    width: 178px;
+    width: 170px;
+    height: 50px;
     justify-content: center;
   }
 
@@ -421,6 +422,10 @@ footer a:hover {
 }
 
 @media (max-width: 400px) {
+  .sign-up-form-card h1 {
+    font-size: 43px;
+  }
+
   .sign-up-main-container {
     height: 100vh;
   }
