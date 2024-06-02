@@ -1,15 +1,4 @@
 /**
- * Sets up event listeners for focus and blur events on the input element.
- */
-document.addEventListener("DOMContentLoaded", function () {
-  var addSubtaskInput = document.getElementById("addsubtask");
-
-  // Setting up the event listeners for focus and blur events
-  addSubtaskInput.addEventListener("focus", handleFocus);
-  addSubtaskInput.addEventListener("blur", handleBlur);
-});
-
-/**
  * Global array to store data.
  * @type {Array<Object>}
  */
@@ -181,10 +170,11 @@ function toggleSubtasks() {
 function cancelSubtaskClick() {
   const subtasksDiv = document.getElementById("subtasks");
   const plusIcon = document.getElementById("plusIcon");
-  const cancelSubtask = document.getElementById("cancelSubtask");
+  const addSubtaskInput = document.getElementById("addsubtask");
 
   subtasksDiv.classList.add("d-none");
   plusIcon.classList.remove("d-none");
+  addSubtaskInput.value = "";
 }
 
 /**
@@ -365,6 +355,31 @@ async function createTask() {
 }
 
 /**
+ * Toggles the assign to dropdown menu.
+ */
+
+function toggleAssignTo(event) {
+  event.stopPropagation();
+  let dropDownMenu = document.getElementById("assignToDropdown");
+    if (dropDownMenu.classList.contains("d-none")) {
+      openAssignTo();
+    } else {
+      closeAssignTo();
+    }
+}
+
+/**
+ * Handles clicks outside the assignAddTask div.
+ */
+function handleClickOutside(event) {
+  let assignAddTask = document.getElementById("assignAddTask");
+  let assignToDropdown = document.getElementById("assignToDropdown");
+    if (!assignAddTask.contains(event.target) && !assignToDropdown.contains(event.target)) {
+        closeAssignTo();
+    }
+}
+
+/**
  * Opens the assign to dropdown menu.
  */
 function openAssignTo() {
@@ -380,6 +395,8 @@ function openAssignTo() {
   renderContacts();
   renderAssignedContacts();
   restoreSelectedContacts();
+
+  document.addEventListener("click", handleClickOutside);
 }
 
 /**
@@ -396,6 +413,8 @@ function closeAssignTo() {
   document.getElementById("arrowdown").classList.remove("d-none");
   inputAssignedTo.style.border = "";
   selectContactsText.innerHTML = "Select contacts to assign";
+
+  document.removeEventListener("click", handleClickOutside);
 }
 
 /**
