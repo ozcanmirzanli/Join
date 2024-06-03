@@ -70,7 +70,8 @@ h2 {
   margin-bottom: 42px;
 }
 
-#sign-up-btn {
+#sign-up-btn,
+#sign-up-btn-mobile {
   border: none;
   background-color: #2a3647;
   color: white;
@@ -370,9 +371,12 @@ footer a:hover {
   .sign-up {
     margin-right: 10%;
   }
-}
 
-@media (max-width: 750px) {
+  .email-input,
+  .password-input {
+    width: 90%;
+  }
+
   .login-form-card {
     width: 90%;
   }
@@ -400,11 +404,6 @@ footer a:hover {
   .footer-links {
     margin-bottom: 5%;
     margin-top: 5%;
-  }
-
-  .email-input,
-  .password-input {
-    width: 90%;
   }
 
   .check-box {
@@ -436,21 +435,10 @@ footer a:hover {
   .inputs {
     gap: 5%;
   }
-}
 
-@media (max-width: 520px) {
   .login-form-card h1 {
     font-size: 47px;
     margin-top: 5%;
-  }
-
-  .login-underline {
-    width: 88px;
-  }
-
-  #background-fade {
-    background: #2a3647;
-    animation: opacity-fade 2s ease-in-out;
   }
 
   footer {
@@ -461,6 +449,17 @@ footer a:hover {
 
   .email-input {
     margin-bottom: 5%;
+  }
+}
+
+@media (max-width: 520px) {
+  .login-underline {
+    width: 88px;
+  }
+
+  #background-fade {
+    background: #2a3647;
+    animation: opacity-fade 2s ease-in-out;
   }
 }
 
