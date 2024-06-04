@@ -36,6 +36,13 @@ async function getContactBoard() {
  * Updates the HTML board based on the current state of todos.
  */
 function updateHTMLBoard() {
+  updateTodo();
+  updateInProgress();
+  updateAwaitFeedback();
+  updateDone();
+}
+
+function updateTodo(){
   let toDo = taskData.filter((t) => t["todo"] == "toDo"); 
 
   document.getElementById("toDo").innerHTML = ""; 
@@ -48,7 +55,9 @@ function updateHTMLBoard() {
       document.getElementById("toDo").innerHTML += generateTodoHTMLBoard(element);
     }
   }
+}
 
+function updateInProgress(){
   let inProgress = taskData.filter((t) => t["todo"] == "inProgress"); 
 
   document.getElementById("inProgress").innerHTML = "";
@@ -63,6 +72,9 @@ function updateHTMLBoard() {
     }
   }
 
+}
+
+function updateAwaitFeedback(){
   let awaitFeedback = taskData.filter((t) => t["todo"] == "awaitFeedback"); 
 
   document.getElementById("awaitFeedback").innerHTML = ""; 
@@ -76,7 +88,9 @@ function updateHTMLBoard() {
       generateTodoHTMLBoard(element);
     }
   }
+}
 
+function updateDone(){
   let done = taskData.filter((t) => t["todo"] == "done"); 
 
   document.getElementById("done").innerHTML = ""; 
@@ -90,6 +104,7 @@ function updateHTMLBoard() {
     }
   }
 }
+
 
 /**
  * Initiates the dragging of a todo element.
@@ -175,50 +190,39 @@ function filterTasks() {
   displayFilteredTodos(filteredTodos);
 }
 
-/**
- * Displays filtered tasks on the HTML board.
- * @param {Array} filteredTodos - The filtered tasks to display.
- */
 function displayFilteredTodos(filteredTodos) {
+  resetTodoColumns();
+  const hasTodos = { toDo: false, inProgress: false, awaitFeedback: false, done: false };
+
+  filteredTodos.forEach((todo) => {
+    updateTodoColumn(todo);
+    hasTodos[todo.todo] = true;
+  });
+
+  displayEmptyMessage(hasTodos);
+}
+
+function resetTodoColumns() {
   document.getElementById("toDo").innerHTML = "";
   document.getElementById("inProgress").innerHTML = "";
   document.getElementById("awaitFeedback").innerHTML = "";
   document.getElementById("done").innerHTML = "";
+}
 
-  let hasToDo = false;
-  let hasInProgress = false;
-  let hasAwaitFeedback = false;
-  let hasDone = false;
-
-  filteredTodos.forEach((todo) => {
-    if (todo.todo === "toDo") {
-      document.getElementById("toDo").innerHTML += generateTodoHTMLBoard(todo);
-      hasToDo = true;
-    } else if (todo.todo === "inProgress") {
-      document.getElementById("inProgress").innerHTML += generateTodoHTMLBoard(todo);
-      hasInProgress = true;
-    } else if (todo.todo === "awaitFeedback") {
-      document.getElementById("awaitFeedback").innerHTML += generateTodoHTMLBoard(todo);
-      hasAwaitFeedback = true;
-    } else if (todo.todo === "done") {
-      document.getElementById("done").innerHTML += generateTodoHTMLBoard(todo);
-      hasDone = true;
-    }
-  });
-
-  if (!hasToDo) {
-    document.getElementById("toDo").innerHTML = "<div class='noToDo'>No Tasks to do.</div>";
-  }
-  if (!hasInProgress) {
-    document.getElementById("inProgress").innerHTML = "<div class='noToDo'>No Tasks in progress.</div>";
-  }
-  if (!hasAwaitFeedback) {
-    document.getElementById("awaitFeedback").innerHTML = "<div class='noToDo'>No Tasks awaiting feedback.</div>";
-  }
-  if (!hasDone) {
-    document.getElementById("done").innerHTML = "<div class='noToDo'>No Tasks done.</div>";
+function updateTodoColumn(todo) {
+  const column = document.getElementById(todo.todo);
+  if (column) {
+    column.innerHTML += generateTodoHTMLBoard(todo);
   }
 }
+
+function displayEmptyMessage(hasTodos) {
+  if (!hasTodos.toDo) document.getElementById("toDo").innerHTML = "<div class='noToDo'>No Tasks to do.</div>";
+  if (!hasTodos.inProgress) document.getElementById("inProgress").innerHTML = "<div class='noToDo'>No Tasks in progress.</div>";
+  if (!hasTodos.awaitFeedback) document.getElementById("awaitFeedback").innerHTML = "<div class='noToDo'>No Tasks awaiting feedback.</div>";
+  if (!hasTodos.done) document.getElementById("done").innerHTML = "<div class='noToDo'>No Tasks done.</div>";
+}
+
 
 /**
  * Shows the add task board.
@@ -280,7 +284,6 @@ async function saveTaskBoard(id) {
   const currentTodo = taskData.find(task => task.id === id);
   const currentPriority = currentTodo ? currentTodo.priority : '';
   const currentAssignedTo = currentTodo ? currentTodo.assignTo : [];
-
   const updatedFields = {
       title: document.getElementById('titleAddTask').value,
       description: document.getElementById('descriptionAddTask').value,
@@ -320,7 +323,6 @@ function updateProgressBar(todo) {
   let progressBarId = `progress-bar-${todo.id}`;
   let progressBar = document.getElementById(progressBarId);
   let progress = (completedSubtasks / todo.subTasks.length) * 100;
-
   if (progressBar) {
       let innerProgressBar = progressBar.querySelector('.progress-bar');
       if (innerProgressBar) {
@@ -517,7 +519,6 @@ function clearAssignedUserBoard() {
 function adjustOnClickBehavior() {
   const plusMobile = document.getElementById("plusMobile");
   const addTaskBtns = document.querySelectorAll(".plus, #addTaskBtn");
-
   if (window.innerWidth < 580) {
     plusMobile.onclick = function() {
       window.location.href = './add_task.html';
@@ -525,10 +526,8 @@ function adjustOnClickBehavior() {
     addTaskBtns.forEach(button => {
       button.onclick = function() {
         window.location.href = './add_task.html';
-      };
-    });
+      };});
   } else {
-   
     plusMobile.onclick = openAddTaskDialog;
     addTaskBtns.forEach(button => {
       button.onclick = openAddTaskDialog;
