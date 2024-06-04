@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  /**
+/**
  * Handles category change.
  *
  * @param {HTMLSelectElement} selectElement - The select element.
@@ -32,10 +32,10 @@ function handleFocus() {
     addSubtaskMain.style.border = "1px solid #29abe2";
   }
   
-  /**
-   * Handles blur event on subtask input.
-   */
-  function handleBlur() {
+/**
+ * Handles blur event on subtask input.
+ */
+function handleBlur() {
     let addSubtaskMain = document.getElementById(".addSubtaskMain");
     addSubtaskMain.style.border = "1px solid #29abe2"
   }
