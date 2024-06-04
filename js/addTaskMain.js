@@ -28,7 +28,7 @@ function handleCategoryChange(selectElement) {
  * Handles focus event on subtask input.
  */
 function handleFocus() {
-    let addSubtaskMain = document.getElementById(".addSubtaskMain");
+    let addSubtaskMain = document.getElementById("addSubtaskMain");
     addSubtaskMain.style.border = "1px solid #29abe2";
   }
   
@@ -36,6 +36,6 @@ function handleFocus() {
  * Handles blur event on subtask input.
  */
 function handleBlur() {
-    let addSubtaskMain = document.getElementById(".addSubtaskMain");
+    let addSubtaskMain = document.getElementById("addSubtaskMain");
     addSubtaskMain.style.border = "1px solid #29abe2"
   }
