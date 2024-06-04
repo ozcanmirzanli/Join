@@ -3,6 +3,19 @@
   box-sizing: border-box;
 }
 
+.dialog-bg {
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .d-none {
   display: none;
 }
@@ -638,7 +651,7 @@ input:focus {
   align-items: center;
 }
 
-@media (max-width: 1375px) {
+@media (max-width: 1376px) {
   .headlineBoard {
     margin-left: auto;
     justify-content: space-around;
