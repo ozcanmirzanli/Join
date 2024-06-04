@@ -267,49 +267,53 @@ async function deleteTaskBoard(id) {
     closeTaskBig();
 }
 
-/**
- * Saves a new or edited task with the specified ID.
- * This function collects input values from the form, creates or updates a task object, and stores it in local storage.
- * 
- * @async
- * @param {number} id - The ID of the task to save.
- */
 async function saveTaskBoard(id) {
-  let subTasks = document.getElementById('addsubtask').value;
-  let subTasksArray = subTasks.split('\n').map(subTask => ({
-      id: subTaskIdCounter++,
-      content: subTask.trim(),
-      completed: false
-  }));
+  const subTasksArray = getSubTasksArray();
   const currentTodo = taskData.find(task => task.id === id);
-  const currentPriority = currentTodo ? currentTodo.priority : '';
-  const currentAssignedTo = currentTodo ? currentTodo.assignTo : [];
-  const updatedFields = {
-      title: document.getElementById('titleAddTask').value,
-      description: document.getElementById('descriptionAddTask').value,
-      assignTo: [...currentAssignedTo, ...selectedContacts.filter(contact => !currentAssignedTo.some(existingContact => existingContact.email === contact.email))],
-      dueDate: document.getElementById('dueDate').value,
-      category: document.getElementById('categoryAddTask').value,
-      subTasks: subTasksArray,
-      priority: selectedPrio || currentPriority,
-  };
+  const updatedFields = getUpdatedFields(currentTodo, subTasksArray);
 
-  const index = taskData.findIndex(t => t.id === id);
-  if (index !== -1) {
-      taskData[index] = {
-          ...taskData[index],
-          ...updatedFields
-      };
-  } else {
-      taskData.push({
-          id: id,
-          ...updatedFields,
-          todo: 'toDo'
-      });
-  }
-
+  updateTaskData(id, updatedFields);
   await setItem('taskData', JSON.stringify(taskData));
   closeTaskBig();
+}
+
+function getSubTasksArray() {
+  let subTasks = document.getElementById('addsubtask').value;
+  return subTasks.split('\n').map(subTask => ({
+    id: subTaskIdCounter++,
+    content: subTask.trim(),
+    completed: false
+  }));
+}
+
+function getUpdatedFields(currentTodo, subTasksArray) {
+  const currentPriority = currentTodo ? currentTodo.priority : '';
+  const currentAssignedTo = currentTodo ? currentTodo.assignTo : [];
+  return {
+    title: document.getElementById('titleAddTask').value,
+    description: document.getElementById('descriptionAddTask').value,
+    assignTo: [...currentAssignedTo, ...selectedContacts.filter(contact => !currentAssignedTo.some(existingContact => existingContact.email === contact.email))],
+    dueDate: document.getElementById('dueDate').value,
+    category: document.getElementById('categoryAddTask').value,
+    subTasks: subTasksArray,
+    priority: selectedPrio || currentPriority,
+  };
+}
+
+function updateTaskData(id, updatedFields) {
+  const index = taskData.findIndex(t => t.id === id);
+  if (index !== -1) {
+    taskData[index] = {
+      ...taskData[index],
+      ...updatedFields
+    };
+  } else {
+    taskData.push({
+      id: id,
+      ...updatedFields,
+      todo: 'toDo'
+    });
+  }
 }
 
 /**
