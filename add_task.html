@@ -10,6 +10,7 @@
     <script src="script.js"></script>
     <script src="./js/add_task.js"></script>
     <script src="./js/addTaskHTML.js"></script>
+    <script src="./js/addTaskMain.js"></script>
     <script src="./js/sidemenu.js"></script>
     <script src="./js/storage.js"></script>
     <title>Join - Add Task</title>
@@ -101,7 +102,7 @@
               <span>Category<span class="required-addTask">*</span></span>
             </div>
             <div class="input-assignedTo border-input-addtask" id="categoryContainer">
-              <select title="category" id="categoryAddTask" class="input-category" onchange="handleCategoryChange(this)" onclick="changeBorderColor()">
+              <select title="category" id="categoryAddTask" class="input-category" onchange="handleCategoryChange(this)">
                 <option value="" selected disabled>Select Task Category</option>
                 <option class="input-option" value="User Story">User Story</option>
                 <option class="input-option" value="Technical Story">Technical Story</option>
