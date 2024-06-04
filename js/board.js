@@ -139,7 +139,6 @@ async function saveDraggedTask(updatedTask) {
   }
 }
 
-
 /**
  * Opens a task when clicked on.
  * @param {number} id - The ID of the task to open.
@@ -179,14 +178,13 @@ function filterTasks() {
 /**
  * Displays filtered tasks on the HTML board.
  * @param {Array} filteredTodos - The filtered tasks to display.
- */function displayFilteredTodos(filteredTodos) {
-  // Initial leeren der Spalten
+ */
+function displayFilteredTodos(filteredTodos) {
   document.getElementById("toDo").innerHTML = "";
   document.getElementById("inProgress").innerHTML = "";
   document.getElementById("awaitFeedback").innerHTML = "";
   document.getElementById("done").innerHTML = "";
 
-  // Flags zum Überprüfen, ob Aufgaben hinzugefügt wurden
   let hasToDo = false;
   let hasInProgress = false;
   let hasAwaitFeedback = false;
@@ -208,7 +206,6 @@ function filterTasks() {
     }
   });
 
-  // Nachrichten anzeigen, wenn keine Aufgaben vorhanden sind
   if (!hasToDo) {
     document.getElementById("toDo").innerHTML = "<div class='noToDo'>No Tasks to do.</div>";
   }
@@ -253,7 +250,6 @@ function closeAddTaskDialog() {
   }
 }
 
-
 /**
  * Deletes a task.
  * @param {number} id - The ID of the task to delete.
@@ -281,23 +277,17 @@ async function saveTaskBoard(id) {
       content: subTask.trim(),
       completed: false
   }));
-
-  // Extrahieren der aktuellen Priorität aus dem vorhandenen todo-Objekt
   const currentTodo = taskData.find(task => task.id === id);
   const currentPriority = currentTodo ? currentTodo.priority : '';
-
-  // Extrahieren der aktuellen zugewiesenen Kontakte aus dem vorhandenen todo-Objekt
   const currentAssignedTo = currentTodo ? currentTodo.assignTo : [];
 
   const updatedFields = {
       title: document.getElementById('titleAddTask').value,
       description: document.getElementById('descriptionAddTask').value,
-      // Hinzufügen neuer Kontakte zu den bestehenden Kontakten
       assignTo: [...currentAssignedTo, ...selectedContacts.filter(contact => !currentAssignedTo.some(existingContact => existingContact.email === contact.email))],
       dueDate: document.getElementById('dueDate').value,
       category: document.getElementById('categoryAddTask').value,
       subTasks: subTasksArray,
-      // Verwenden der aktuellen Priorität, wenn der Benutzer sie nicht ändert
       priority: selectedPrio || currentPriority,
   };
 
@@ -318,7 +308,6 @@ async function saveTaskBoard(id) {
   await setItem('taskData', JSON.stringify(taskData));
   closeTaskBig();
 }
-
 
 /**
 * Updates the progress bar of a task.
@@ -555,22 +544,6 @@ function clearAssignedUserBoard() {
   contactsElements.forEach(function (contact) {
     contact.classList.remove("contactSelected");
   });
-}
-
-/**
- * Handles the focus event on the subtask input, changing its border style.
- */
-function handleFocusBoard() {
-  let addSubtaskMain = document.querySelector(".addSubtaskMain");
-  addSubtaskMain.style.border = "1px solid rgba(41, 171, 226, 1)";
-}
-
-/**
- * Handles the blur event on the subtask input, resetting its border style.
- */
-function handleBlurBoard() {
-  let addSubtaskMain = document.querySelector(".addSubtaskMain");
-  addSubtaskMain.style.border = "1px solid rgba(209, 209, 209, 1)";
 }
 
 /**
