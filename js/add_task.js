@@ -327,17 +327,6 @@ function toggleAssignTo(event) {
 }
 
 /**
- * Handles clicks outside the assignAddTask div.
- */
-function handleClickOutside(event) {
-  let assignAddTask = document.getElementById("assignAddTask");
-  let assignToDropdown = document.getElementById("assignToDropdown");
-    if (!assignAddTask.contains(event.target) && !assignToDropdown.contains(event.target)) {
-        closeAssignTo();
-    }
-}
-
-/**
  * Opens the assign to dropdown menu.
  */
 function openAssignTo() {

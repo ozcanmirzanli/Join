@@ -39,3 +39,14 @@ function handleBlur() {
     let addSubtaskMain = document.getElementById("addSubtaskMain");
     addSubtaskMain.style.border = "1px solid #29abe2"
   }
+
+/**
+ * Handles clicks outside the assignAddTask div.
+ */
+function handleClickOutside(event) {
+    let assignAddTask = document.getElementById("assignAddTask");
+    let assignToDropdown = document.getElementById("assignToDropdown");
+      if (!assignAddTask.contains(event.target) && !assignToDropdown.contains(event.target)) {
+          closeAssignTo();
+      }
+  }
