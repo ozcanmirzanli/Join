@@ -428,26 +428,6 @@ function renderContactsBoard() {
 }
 
 /**
- * Generates HTML for a contact list item in the "Assign To" dropdown menu.
- * 
- * @param {Object} contact - The contact object.
- * @param {string} badgeColor - The color of the contact's badge.
- * @param {number} i - The index of the contact.
- * @returns {string} - The HTML string for the contact list item.
- */
-function getassignListHTMLBoard(contact, badgeColor, i) {
-  return /*HTML*/ `
-            <div class="assignListContact" id="contact${i}" onclick="assignContactBoard(${i}, '${contact.name}', '${contact.initials}')">
-                <div class="assignDetails">
-                    <div class="assignToBadge" style="background-color: ${badgeColor}">${contact.initials}</div>
-                    <div>${contact.name}</div>
-                </div>
-                <img id="checkbox${i}" src="./assets/img/addTask_AssignTo_Checkbox.svg" class="checkbox">
-            </div>
-            `;
-}
-
-/**
  * Toggles the selection of a contact and updates the UI and local storage.
  * 
  * @param {number} i - The index of the contact.
@@ -513,21 +493,6 @@ function removeFromAssignedListBoard(selectedContactIndex) {
   assignedContacts.splice(selectedContactIndex, 1);
   renderAssignedUserBoard(assignedUser);
   saveSelectedContactsBoard();
-}
-
-/**
- * Renders the assigned users in the "Assigned To" section.
- * 
- * @param {HTMLElement} assignedUser - The HTML element to render the assigned users in.
- */
-function renderAssignedUserBoard(assignedUser) {
-  assignedUser.innerHTML = "";
-  assignedContacts.forEach((assignedContact) => {
-    let badgeColor = assignedContact.color;
-    assignedUser.innerHTML += `
-            <div class="assignToBadge" style="background-color: ${badgeColor}">${assignedContact.initials}</div>
-        `;
-  });
 }
 
 /**
