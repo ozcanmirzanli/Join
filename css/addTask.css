@@ -674,41 +674,38 @@ select.input-category option[value=""][disabled] {
     align-items: center;
   }
 
-  #titleAddTask {
-    width: 100%;
-  }
-
   .input-assignedTo {
-    width: 97%;
+    width: 87%;
   }
 
   .input-dueDate {
     padding: 12px 3px 12px 16px;
-    width: 100%;
+    width: 90%;
   }
 
   .priority {
     display: flex;
     align-items: center;
-    width: 105%;
+    width: 95%;
   }
 
   #categoryContainer {
-    width: 97%;
+    width: 87%;
   }
 
   .input-subtasks {
-    width: 103%;
+    width: 93%;
   }
 
   .addtask-footer {
-    width: 106%;
+    width: 96%;
     padding-top: 0;
   }
 
   textarea,
   #titleAddTask {
     padding-right: 0px;
+    width: 90%;
   }
 
   h1 {
