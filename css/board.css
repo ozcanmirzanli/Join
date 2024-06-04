@@ -644,7 +644,7 @@ input:focus {
     justify-content: space-around;
 }
   .bigTask{
-    margin-top: -764px;
+    margin-top: -1500px;
     margin-left: 308px;
     position: absolute;
     background-color: #fff;
@@ -731,7 +731,7 @@ input:focus {
   .bigTask {
     max-width: 90vw;
     margin-left: 25%;
-    margin-top: 5%;
+    margin-top: 15%;
     top: 0;}
 }
 
@@ -757,5 +757,6 @@ input:focus {
   .bigTask {
     max-width: 90vw;
     margin-left: 5%;
+    margin-top: 30%;
   }
 }

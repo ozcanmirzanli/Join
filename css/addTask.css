@@ -594,7 +594,7 @@ select.input-category option[value=""][disabled] {
   content: url(/Join/assets/img/clear_hook_blue_AddTask.svg);
 }
 
-@media (max-width: 1400px) {
+@media screen and (max-width: 1400px) and (min-width: 1201px) {
   form {
     padding-left: 300px;
   }
@@ -604,13 +604,13 @@ select.input-category option[value=""][disabled] {
   }
 }
 
-@media (max-width: 1320px) {
+@media screen and (max-width: 1320px) {
   form {
     padding-left: 280px;
   }
 }
 
-@media (max-width: 1290px) {
+@media screen and (max-width: 1290px) {
   form {
     display: flex;
     flex-direction: column;
@@ -654,13 +654,13 @@ select.input-category option[value=""][disabled] {
   }
 }
 
-@media (max-width: 550px) {
+@media screen and (max-width: 550px) {
   #create-btn, #clear-btn {
     padding: 15px 12px 15px 24px;
   }
 }
 
-@media (max-width: 530px) {
+@media screen and (max-width: 530px) {
   .addtask-footer {
     gap: 0;
   }

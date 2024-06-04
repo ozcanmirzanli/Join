@@ -555,29 +555,3 @@ function handleBlur() {
   let addSubtaskMain = document.querySelector(".addSubtaskMain");
   addSubtaskMain.style.border = "1px solid rgba(209, 209, 209, 1)";
 }
-
-// Funktion zur Formularvalidierung
-function validateForm() {
-  const form = document.getElementById('addTaskForm');
-  const createBtn = document.getElementById('create-btn');
-
-  // Überprüfen, ob das Formular gültig ist
-  if (form.checkValidity()) {
-    createBtn.disabled = false;
-  } else {
-    createBtn.disabled = true;
-  }
-}
-
-// Initialisieren der Validierung
-document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('addTaskForm');
-
-  // Validierung bei jedem Eingabeereignis im Formular
-  form.addEventListener('input', validateForm);
-
-  // Initiale Validierung
-  validateForm();
-});
-
-

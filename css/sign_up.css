@@ -319,17 +319,17 @@ footer a:hover {
   .sign-up-form-card {
     margin-top: 0;
   }
-
-  .sign-up-form-card {
-    width: 90%;
-    height: 65%;
-  }
 }
 
 @media (max-width: 750px) {
   .sign-up-main-container {
     flex-direction: row;
     height: 90vh;
+  }
+
+  .sign-up-form-card {
+    width: 90%;
+    height: 65%;
   }
 
   .sign-up-arrow {
