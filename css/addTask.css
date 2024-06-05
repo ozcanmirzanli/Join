@@ -20,12 +20,22 @@ body::-webkit-scrollbar {
 
 /* main css for addTask */
 
-form {
+.paddingForm {
   padding-left: 328px;
 }
 
 .d-none {
   display: none;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  display: none;
+}
+
+.input-error {
+  border: 1px solid red !important;
 }
 
 input,
@@ -353,9 +363,12 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
   padding-bottom: 24px;
 }
 
+.width100 {
+  width: 100%;
+}
+
 .input-category {
   position: relative;
-  width: 100%;
   border: none;
   border-radius: 10px;
   border-radius: inherit;
@@ -598,7 +611,7 @@ select.input-category option[value=""][disabled] {
 }
 
 @media screen and (max-width: 1400px) and (min-width: 1201px) {
-  form {
+  .paddingForm {
     padding-left: 300px;
   }
   
@@ -608,13 +621,13 @@ select.input-category option[value=""][disabled] {
 }
 
 @media screen and (max-width: 1320px) {
-  form {
+  .paddingForm {
     padding-left: 280px;
   }
 }
 
 @media screen and (max-width: 1290px) {
-  form {
+  .paddingForm {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -680,7 +693,7 @@ select.input-category option[value=""][disabled] {
     padding-top: 120px;
   }
 
-  form {
+  .paddingForm {
     display: flex;
     align-items: center;
   }
@@ -744,5 +757,11 @@ select.input-category option[value=""][disabled] {
 
   .priority {
     flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 343px) {
+  #create-btn, #clear-btn {
+    font-size: 11px;
   }
 }

@@ -26,7 +26,7 @@
       <div w3-include-html="assets/templates/sidemenu.html"></div>
     </nav>
 
-    <form action="">
+    <form class="paddingForm" id="addTaskForm" action onsubmit="createTask()">
       <h1>Add Task</h1>
 
       <div class="main-addTask">
@@ -101,7 +101,7 @@
             <div class="pd-bottom">
               <span>Category<span class="required-addTask">*</span></span>
             </div>
-            <select title="category" id="categoryAddTask" class="input-category input-assignedTo border-input-addtask" onchange="handleCategoryChange(this)">
+            <select title="category" id="categoryAddTask" class="input-category input-assignedTo border-input-addtask width100" onchange="handleCategoryChange(this)">
                 <option value="" selected disabled>Select Task Category</option>
                 <option class="input-option" value="User Story">User Story</option>
                 <option class="input-option" value="Technical Story">Technical Story</option>
@@ -140,7 +140,7 @@
             <img src="assets/img/subtask_cancel_AddTask.svg" alt="subtask_cancel_AddTask"/>
           </button>
 
-          <button onclick="createTask()" class="footer-btn-text-img" type="button" id="create-btn">
+          <button class="footer-btn-text-img" type="submit" id="create-btn">
             Create Task
             <img src="assets/img/create_hook_white_AddTask.svg" alt="create_hook_white_AddTask"/>
           </button>

@@ -167,7 +167,7 @@ function changeCompletedBoard(taskIndex, subTaskIndex) {
 function renderAddTaskForm() {
   return /*html*/ `
         <div class="dialog-content">
-            <div id="addTaskForm">
+            <form id="addTaskForm" action onsubmit="createTask()">
                 <div class="cardHeadlinecontainer" >
                     <div class="cardHeadLine">Add Task</div>
                     <img src="assets/img/subtask_cancel_AddTask.svg" alt="Close Task" onclick="closeAddTaskDialog()" id="closeDialogBTN">
@@ -273,13 +273,13 @@ function renderAddTaskForm() {
                             <img src="assets/img/subtask_cancel_AddTask.svg" alt="subtask_cancel_AddTask">
                         </button>
 
-                        <button onclick="createTask()" class="footer-btn-text-img" type="button" id="create-btn">
+                        <button class="footer-btn-text-img" type="submit" id="create-btn">
                             Create Task
                             <img src="assets/img/create_hook_white_AddTask.svg" alt="create_hook_white_AddTask">
                         </button>
                     </div>
                 </footer>
-            </div>
+            </form>
         </div>
     `;
 }
