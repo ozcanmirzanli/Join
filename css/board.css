@@ -321,7 +321,7 @@ input:focus {
 }
 
 .bigTask {
-  margin-top: -920px;
+  margin-top: 5%;
   margin-left: 470px;
   position: absolute;
   background-color: #fff;
@@ -668,7 +668,7 @@ input:focus {
     justify-content: space-around;
 }
   .bigTask{
-    margin-top: -1430px;
+    margin-top: 8%;
     margin-left: 308px;
 }
 
@@ -762,8 +762,16 @@ input:focus {
   }
 }
 
+@media (max-width: 900px ) {
+  .bigTask {
+    margin-top: 5%;
+    margin-left: 19%;
+  }
+}
+
 @media (max-width: 750px) {
   .bigTask {
+    margin-top: 12%;
     max-width: 90vw;
     margin-left: 12%;
   }
