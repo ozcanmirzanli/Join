@@ -217,6 +217,30 @@ input:focus {
   transform: rotate(+5deg); /* Beispiel für Skalierung während des Ziehens */
 }
 
+.mobileHead{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mobilDrag{
+  background-color: #2A3647;
+  border-radius: 50px;
+  margin-right: 8px;
+  display: none;
+}
+
+.dragMenu{
+  display: flex;
+  flex-direction: column;
+  background-color: #2A3647;
+  border-radius: 12px;
+}
+
+.dragPara{
+  color: #fff;
+}
+
 .headerStoryMini {
   display: flex;
   flex-direction: column;
@@ -749,6 +773,10 @@ input:focus {
     margin-left: 25%;
     margin-top: 15%;
     top: 0;}
+
+  .mobilDrag {
+   display: block;
+    }
 }
 
 @media (max-width: 970px) {

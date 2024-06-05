@@ -37,7 +37,9 @@ function generateTodoHTMLBoard(element) {
 
     return /*html*/ `
         <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})"> 
-            <div class="taskCategory" style="background-color: ${categoryStyle.color}; width: ${categoryStyle.width};">${element.category}</div>
+            <div class="mobileHead"><div class="taskCategory" style="background-color: ${categoryStyle.color}; width: ${categoryStyle.width};">${element.category}</div>
+            <img src="./assets/img/mobile-contact-options.png" alt="" class="mobilDrag" onclick="openDragmenu()">
+            <div id="dragMenu" class="d-none"><p class="dragPara">toDo</p><p class="dragPara">in Progress</p><p class="dragPara">await Feedback</p><p class="dragPara">done</p><p>close</p></div></div>
             <div class="headerStoryMini">
                 <div class="taskTitleMini">${element.title}</div>
                 <div class="taskDescription">${element.description}</div>

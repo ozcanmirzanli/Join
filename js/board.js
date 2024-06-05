@@ -1,5 +1,6 @@
 let subTaskIdCounter = 0;
-let currentDraggedElement = [];
+let currentDraggedElement;
+let touchStartX, touchStartY;
 
 /**
  * Initializes the task board by loading task data and updating the HTML board.
@@ -160,7 +161,7 @@ async function saveDraggedTask(updatedTask) {
  */
 function openTask(id) {
   let task = taskData.find((todo) => todo.id === id);
-  document.getElementById("taskBig").classList.add("d-none");
+  document.getElementById("taskBig").classList.remove("d-none");
   document.getElementById("taskBig").classList.add("overlay");
   renderBigTask(task);
 }
@@ -242,6 +243,7 @@ function openAddTaskDialog() {
   const dialogContent = document.createElement("div");
   dialogContent.innerHTML = renderAddTaskForm();
   document.body.appendChild(dialogContent);
+  document.getElementById("addTaskDialog").classList.add("overlay");
 }
 
 /**
@@ -254,6 +256,7 @@ function closeAddTaskDialog() {
   if (dialogContent) {
       dialogContent.remove();
   }
+  document.getElementById("addTaskDialog").classList.remove("overlay");
 }
 
 /**
@@ -548,3 +551,8 @@ window.onload = function() {
 };
 
 window.onresize = adjustOnClickBehavior;
+
+function openDragmenu(){
+  document.getElementById("dragMenu").classList.remove('d-none');
+  document.getElementById("dragMenu").classList.add('dragMenu');
+}
