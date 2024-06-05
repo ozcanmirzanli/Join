@@ -235,6 +235,9 @@ input:focus {
   flex-direction: column;
   background-color: #2A3647;
   border-radius: 12px;
+  z-index: 12;
+  width: 150px;
+  height: 200px;
 }
 
 .dragPara{

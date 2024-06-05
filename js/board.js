@@ -1,6 +1,7 @@
 let subTaskIdCounter = 0;
 let currentDraggedElement;
 let touchStartX, touchStartY;
+let currentClickedElement = null;
 
 /**
  * Initializes the task board by loading task data and updating the HTML board.
@@ -106,6 +107,9 @@ function updateDone(){
   }
 }
 
+function setClickedElement(id) {
+    currentClickedElement = id;
+}
 
 /**
  * Initiates the dragging of a todo element.
@@ -127,13 +131,14 @@ function allowDrop(ev) {
  * Moves a task to a different category and updates the HTML board.
  * @param {string} category - The category to move the task to.
  */
-async function moveTo(category) {
-  let draggedTask = taskData.find(task => task.id === currentDraggedElement);
+function moveTo(category, event) {
+  event.stopPropagation();
+  let draggedTask = taskData.find(task => task.id === currentClickedElement);
 
   if (draggedTask) {
-    draggedTask.todo = category; 
-    await saveDraggedTask(draggedTask);
-    updateHTMLBoard(); 
+      draggedTask.todo = category;
+      saveDraggedTask(draggedTask)
+          .then(() => updateHTMLBoard());
   }
 }
 
@@ -556,7 +561,14 @@ window.onload = function() {
 
 window.onresize = adjustOnClickBehavior;
 
-function openDragmenu(){
-  document.getElementById("dragMenu").classList.remove('d-none');
-  document.getElementById("dragMenu").classList.add('dragMenu');
+function toggleDragmenu(event) {
+  event.stopPropagation();
+  const dragMenu = document.getElementById("dragMenu");
+  if (dragMenu.classList.contains('d-none')) {
+      dragMenu.classList.remove('d-none');
+      dragMenu.classList.add('dragMenu');
+  } else {
+      dragMenu.classList.add('d-none');
+      dragMenu.classList.remove('dragMenu');
+  }
 }
