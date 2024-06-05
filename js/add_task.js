@@ -99,22 +99,6 @@ function changePriorityColor(priority) {
 }
 
 /**
- * Checks if the selected due date is valid.
- * Only current day or future day are allowed.
- */
-function checkDueDate() {
-  let selectedDate = new Date(document.getElementById("dueDate").value);
-  let currentDate = new Date();
-
-  currentDate.setHours(0, 0, 0, 0);
-
-  if (selectedDate < currentDate) {
-    alert("Please select a date that is today or later for the due date.");
-    document.getElementById("dueDate").value = ""; // Reset the input field
-  }
-}
-
-/**
  * Toggles the visibility of subtasks section.
  */
 function toggleSubtasks() {
@@ -215,6 +199,7 @@ function subtaskDelete(id) {
     let mainBoundingBox = document.getElementById(`mainBoundingBox${id}`);
     mainBoundingBox.remove();
     }
+    
 }
 
 /**

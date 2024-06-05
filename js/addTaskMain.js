@@ -50,3 +50,28 @@ function handleClickOutside(event) {
           closeAssignTo();
       }
   }
+
+/**
+ * Changes the border color of a container.
+ */
+function changeBorderColor() {
+  let categoryContainer = document.getElementById("categoryAddTask");
+  categoryContainer.style.borderColor = "rgba(41, 171, 226, 1)";
+}
+
+/**
+ * Checks if the selected due date is valid.
+ * Only current day or future day are allowed.
+ * Set Function of, because there are issue when putting date manual 
+ */
+// function checkDueDate() {
+//   let selectedDate = new Date(document.getElementById("dueDate").value);
+//   let currentDate = new Date();
+
+//   currentDate.setHours(0, 0, 0, 0);
+
+//   if (selectedDate < currentDate) {
+//     alert("Please select a date that is today or later for the due date.");
+//     document.getElementById("dueDate").value = ""; // Reset the input field
+//   }
+// }
