@@ -101,13 +101,11 @@
             <div class="pd-bottom">
               <span>Category<span class="required-addTask">*</span></span>
             </div>
-            <div class="input-assignedTo border-input-addtask" id="categoryContainer">
-              <select title="category" id="categoryAddTask" class="input-category" onchange="handleCategoryChange(this)">
+            <select title="category" id="categoryAddTask" class="input-category input-assignedTo border-input-addtask" onchange="handleCategoryChange(this)">
                 <option value="" selected disabled>Select Task Category</option>
                 <option class="input-option" value="User Story">User Story</option>
                 <option class="input-option" value="Technical Story">Technical Story</option>
-              </select>
-            </div>
+            </select>
           </section>
 
           <!-- Subtasks -->

@@ -162,7 +162,7 @@ textarea {
   cursor: pointer;
 }
 
-#categoryContainer {
+#categoryAddTask {
   width: 93%;
 }
 
@@ -366,6 +366,7 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
   background-color: #fff;
   font-size: inherit;
   cursor: pointer;
+  max-width: 440px;
 }
 
 .input-option {
@@ -383,12 +384,18 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
   outline: none;
 }
 
-.input-category option {
-  font-size: inherit;
+select.option {
   border-radius: 10px;
-  background-color: #fff;
-  color: #000;
-  border: none;
+  border-color: #29abe2;
+}
+
+select.input-category {
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
+  background: #fff;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
 }
 
 /* CSS für das Dropdown-Menü */
