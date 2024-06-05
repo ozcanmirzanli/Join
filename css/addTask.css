@@ -28,6 +28,16 @@ form {
   display: none;
 }
 
+.error-message {
+  color: red;
+  font-size: 12px;
+  display: none;
+}
+
+.input-error {
+  border: 1px solid red !important;
+}
+
 input,
 textarea {
   flex-wrap: wrap;
@@ -353,9 +363,12 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
   padding-bottom: 24px;
 }
 
+.width100 {
+  width: 100%;
+}
+
 .input-category {
   position: relative;
-  width: 100%;
   border: none;
   border-radius: 10px;
   border-radius: inherit;
