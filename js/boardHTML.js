@@ -38,12 +38,12 @@ function generateTodoHTMLBoard(element) {
     return /*html*/ `
         <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})"> 
             <div class="mobileHead"><div class="taskCategory" style="background-color: ${categoryStyle.color}; width: ${categoryStyle.width};">${element.category}</div>
-            <img src="./assets/img/mobile-contact-options.png" alt="" class="mobilDrag" onclick="toggleDragmenu(event)">
-            <div id="dragMenu" class="d-none">       
-            <p class="dragPara" onclick="setClickedElement(${element.id}); moveTo('toDo', event)">toDo</p>
-            <p class="dragPara" onclick="setClickedElement(${element.id}); moveTo('inProgress', event)">in Progress</p>
-            <p class="dragPara" onclick="setClickedElement(${element.id}); moveTo('awaitFeedback', event)">await Feedback</p>
-            <p class="dragPara" onclick="setClickedElement(${element.id}); moveTo('done', event)">done</p></div></div>
+            <img src="./assets/img/mobile-contact-options.png" alt="" class="mobilDrag" onclick="toggleDragmenu(event, ${element.id}, 'dragMenu-${element.id}')">
+            <div id="dragMenu-${element.id}" class="d-none">       
+            <p class="dragPara" onclick="startDragging(${element.id}); moveToMenu('toDo', event)">toDo</p>
+            <p class="dragPara" onclick="startDragging(${element.id}); moveToMenu('inProgress', event)">in Progress</p>
+            <p class="dragPara" onclick="startDragging(${element.id}); moveToMenu('awaitFeedback', event)">await Feedback</p>
+            <p class="dragPara" onclick="startDragging(${element.id}); moveToMenu('done', event)">done</p></div></div>
             <div class="headerStoryMini">
                 <div class="taskTitleMini">${element.title}</div>
                 <div class="taskDescription">${element.description}</div>

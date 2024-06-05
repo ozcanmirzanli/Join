@@ -1,7 +1,6 @@
 let subTaskIdCounter = 0;
 let currentDraggedElement;
 let touchStartX, touchStartY;
-let currentClickedElement = null;
 
 /**
  * Initializes the task board by loading task data and updating the HTML board.
@@ -107,10 +106,6 @@ function updateDone(){
   }
 }
 
-function setClickedElement(id) {
-    currentClickedElement = id;
-}
-
 /**
  * Initiates the dragging of a todo element.
  * @param {number} id - The ID of the todo element.
@@ -132,8 +127,18 @@ function allowDrop(ev) {
  * @param {string} category - The category to move the task to.
  */
 function moveTo(category, event) {
+  let draggedTask = taskData.find(task => task.id === currentDraggedElement);
+
+  if (draggedTask) {
+      draggedTask.todo = category;
+      saveDraggedTask(draggedTask)
+          .then(() => updateHTMLBoard());
+  }
+}
+
+function moveToMenu(category, event) {
   event.stopPropagation();
-  let draggedTask = taskData.find(task => task.id === currentClickedElement);
+  let draggedTask = taskData.find(task => task.id === currentDraggedElement);
 
   if (draggedTask) {
       draggedTask.todo = category;
@@ -561,9 +566,16 @@ window.onload = function() {
 
 window.onresize = adjustOnClickBehavior;
 
-function toggleDragmenu(event) {
+function toggleDragmenu(event, taskId, menuId) {
   event.stopPropagation();
-  const dragMenu = document.getElementById("dragMenu");
+  const dragMenu = document.getElementById(menuId);
+  const allDragMenus = document.querySelectorAll('.dragMenu');
+  allDragMenus.forEach(menu => {
+    if (menu.id !== menuId) {
+      menu.classList.add('d-none');
+      menu.classList.remove('dragMenu');
+    }
+  });
   if (dragMenu.classList.contains('d-none')) {
       dragMenu.classList.remove('d-none');
       dragMenu.classList.add('dragMenu');
@@ -572,3 +584,4 @@ function toggleDragmenu(event) {
       dragMenu.classList.remove('dragMenu');
   }
 }
+
