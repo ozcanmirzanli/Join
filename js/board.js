@@ -163,6 +163,7 @@ function openTask(id) {
   let task = taskData.find((todo) => todo.id === id);
   document.getElementById("taskBig").classList.remove("d-none");
   document.getElementById("taskBig").classList.add("overlay");
+  document.body.style.overflow = 'hidden';
   renderBigTask(task);
 }
 
@@ -172,6 +173,7 @@ function openTask(id) {
 function closeTaskBig() {
   document.getElementById("taskBig").classList.remove("overlay");
   document.getElementById("taskBig").classList.add("d-none");
+  document.body.style.overflow = 'auto';
 }
 
 /**
@@ -244,6 +246,7 @@ function openAddTaskDialog() {
   dialogContent.innerHTML = renderAddTaskForm();
   document.body.appendChild(dialogContent);
   document.getElementById("addTaskDialog").classList.add("overlay");
+  document.body.style.overflow = 'hidden';
 }
 
 /**
@@ -257,6 +260,7 @@ function closeAddTaskDialog() {
       dialogContent.remove();
   }
   document.getElementById("addTaskDialog").classList.remove("overlay");
+  document.body.style.overflow = 'auto';
 }
 
 /**
