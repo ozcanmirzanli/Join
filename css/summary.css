@@ -520,6 +520,10 @@ header {
 }
 
 @media (max-width: 420px) {
+  .title {
+    margin-top: 100px;
+  }
+
   .first-row {
     max-width: 170px;
   }

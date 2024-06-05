@@ -46,7 +46,7 @@ body::-webkit-scrollbar-corner {
 }
 
 .blueLetters {
-  color: #29ABE2;
+  color: #29abe2;
   display: inline;
 }
 
@@ -423,7 +423,7 @@ a:hover {
   }
 
   .legalNotice {
-     width: calc(100% - 20px);
+    width: calc(100% - 20px);
   }
 
   .user {
@@ -450,7 +450,8 @@ a:hover {
 @media (max-width: 440px) {
   #joinLogoHeader {
     height: 45px;
-    top: 18px;
+    top: 15px;
+    left: 25px;
   }
 
   .display {
@@ -458,7 +459,7 @@ a:hover {
   }
 
   .header {
-    height: 80px;
+    height: 70px;
     width: 63%;
   }
 
