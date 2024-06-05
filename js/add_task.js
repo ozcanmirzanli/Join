@@ -98,6 +98,7 @@ function changePriorityColor(priority) {
   }
 }
 
+
 /**
  * Toggles the visibility of subtasks section.
  */

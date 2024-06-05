@@ -24,6 +24,10 @@ body::-webkit-scrollbar {
   padding-left: 328px;
 }
 
+.zindex {
+  z-index: -999;
+}
+
 .d-none {
   display: none;
 }
@@ -285,7 +289,6 @@ textarea {
 
 .drop-down-image:hover,
 .assignToDDArrow:hover {
-  background-color: #ebeaec;
   cursor: pointer;
 }
 

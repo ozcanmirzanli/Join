@@ -815,3 +815,9 @@ input:focus {
     margin-top: 30%;
   }
 }
+
+@media (max-height: 667px) {
+  .bigTask{
+    margin-top: 5%;
+  }
+}
