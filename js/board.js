@@ -160,6 +160,8 @@ async function saveDraggedTask(updatedTask) {
  */
 function openTask(id) {
   let task = taskData.find((todo) => todo.id === id);
+  document.getElementById("taskBig").classList.add("d-none");
+  document.getElementById("taskBig").classList.add("overlay");
   renderBigTask(task);
 }
 
@@ -167,7 +169,7 @@ function openTask(id) {
  * Closes the big task view.
  */
 function closeTaskBig() {
-  document.getElementById("taskBig").classList.remove("bigTask");
+  document.getElementById("taskBig").classList.remove("overlay");
   document.getElementById("taskBig").classList.add("d-none");
 }
 
