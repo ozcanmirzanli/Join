@@ -230,13 +230,11 @@ function renderAddTaskForm() {
                         <!-- Category -->
                         <section class="padding-category">
                             <div class="pd-bottom"><span>Category<span class="required-addTask">*</span></span></div>
-                            <div class="input-assignedTo border-input-addtask width440">
-                                <select title="category" id="categoryAddTask" class="input-category " onchange="handleCategoryChange(this)" onclick="changeBorderColor()">
-                                    <option value="" selected disabled>Select Task Category</option>
-                                    <option value="User Story">User Story</option>
-                                    <option value="Technical Story">Technical Story</option>
-                                </select>
-                            </div>
+                            <select title="category" id="categoryAddTask" class="input-category input-assignedTo border-input-addtask width440" onchange="handleCategoryChange(this)" onclick="changeBorderColor()">
+                                <option value="" selected disabled>Select Task Category</option>
+                                <option value="User Story">User Story</option>
+                                <option value="Technical Story">Technical Story</option>
+                            </select>
                         </section> 
 
                         <!-- Subtasks -->
@@ -361,18 +359,16 @@ function renderEditTaskForm(todo) {
                   </div>
               </section>
               <!-- Category -->
-              <section class="padding-category">
+                <section class="padding-category">
                   <div class="pd-bottom">
                       <span>Category<span class="required-addTask">*</span></span>
                   </div>
-                  <div class="input-assignedTo border-input-addtask" id="categoryContainer">
-                      <select title="category" id="categoryAddTask" class="input-category" onchange="handleCategoryChange(this)">
+                  <select title="category" id="categoryAddTask" class="input-category input-assignedTo border-input-addtask" onchange="handleCategoryChange(this)">
                           <option value="" selected disabled>Select Task Category</option>
                           <option class="input-option" value="User Story" ${todo.category === 'User Story' ? 'selected' : ''}>User Story</option>
                           <option class="input-option" value="Technical Story" ${todo.category === 'Technical Story' ? 'selected' : ''}>Technical Story</option>
-                      </select>
-                  </div>
-              </section>
+                  </select>
+                </section>
                <!-- Subtasks -->
                <section>
                 <div class="pd-bottom"><span>Subtasks</span></div>
