@@ -222,7 +222,7 @@ function getOverview(contactId, index = null) {
  */
 function displayContactDetails(contact) {
   let contactBig = document.getElementById("contactBig");
-  let contactOverview = document.querySelector(".right-section");
+  let contactOverview = document.querySelector(".contact-overview-container");
 
   contactBig.classList.remove("d-none");
   // Check if the contact object is valid and contains the color property
@@ -390,7 +390,7 @@ function removeScrollingOnNumberInput() {
  * Close the contact overview section.
  */
 function closeContactOverview() {
-  document.querySelector(".right-section").style.display = "none";
+  document.querySelector(".contact-overview-container").style.display = "none";
 }
 // Close contact options when clicking outside of them
 document.addEventListener("click", function (event) {

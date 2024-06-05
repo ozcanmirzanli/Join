@@ -412,8 +412,7 @@ header {
     align-items: flex-start;
     flex-direction: column;
     gap: 0;
-    margin-left: 45px;
-    margin-top: 115px;
+    margin: 115px 0 20px 20px;
   }
 
   .title h1 {
@@ -478,10 +477,6 @@ header {
 }
 
 @media (max-width: 500px) {
-  .title {
-    margin: 115px 0 20px 20px;
-  }
-
   .first-row {
     max-width: 190px;
   }
