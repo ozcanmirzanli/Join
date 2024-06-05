@@ -74,7 +74,7 @@
             <div class="pd-bottom">
               <span>Due Date<span class="required-addTask">*</span></span>
             </div>
-            <input id="dueDate" type="date" placeholder="yyyy/mm/dd" class="input-dueDate border-input-addtask"  onchange="checkDueDate()" required/>
+            <input id="dueDate" type="date" placeholder="yyyy/mm/dd" class="input-dueDate border-input-addtask" required/>
           </section>
 
           <!-- Priority -->
@@ -101,7 +101,7 @@
             <div class="pd-bottom">
               <span>Category<span class="required-addTask">*</span></span>
             </div>
-            <select title="category" id="categoryAddTask" class="input-category input-assignedTo border-input-addtask width100" onchange="handleCategoryChange(this)">
+            <select title="category" id="categoryAddTask" class="input-category input-assignedTo border-input-addtask width100" onchange="handleCategoryChange(this)" required>
                 <option value="" selected disabled>Select Task Category</option>
                 <option class="input-option" value="User Story">User Story</option>
                 <option class="input-option" value="Technical Story">Technical Story</option>

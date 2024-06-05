@@ -208,7 +208,7 @@ function renderAddTaskForm() {
                         <!-- Due Date -->
                         <section>
                             <div class="pd-bottom"><span>Due Date<span class="required-addTask">*</span></span></div>
-                            <input id="dueDate" type="date" placeholder="yyyy/mm/dd" class="input-dueDate border-input-addtask" onchange="checkDueDate()" required/>
+                            <input id="dueDate" type="date" placeholder="yyyy/mm/dd" class="input-dueDate border-input-addtask" required/>
                         </section>
 
                         <!-- Priority -->
@@ -230,7 +230,7 @@ function renderAddTaskForm() {
                         <!-- Category -->
                         <section class="padding-category">
                             <div class="pd-bottom"><span>Category<span class="required-addTask">*</span></span></div>
-                            <select title="category" id="categoryAddTask" class="input-category input-assignedTo border-input-addtask width440" onchange="handleCategoryChange(this)" onclick="changeBorderColor()">
+                            <select title="category" id="categoryAddTask" class="input-category input-assignedTo border-input-addtask width440" onchange="handleCategoryChange(this)" onclick="changeBorderColor()" required>
                                 <option value="" selected disabled>Select Task Category</option>
                                 <option value="User Story">User Story</option>
                                 <option value="Technical Story">Technical Story</option>
@@ -363,7 +363,7 @@ function renderEditTaskForm(todo) {
                   <div class="pd-bottom">
                       <span>Category<span class="required-addTask">*</span></span>
                   </div>
-                  <select title="category" id="categoryAddTask" class="input-category input-assignedTo border-input-addtask" onchange="handleCategoryChange(this)">
+                  <select title="category" id="categoryAddTask" class="input-category input-assignedTo border-input-addtask" onchange="handleCategoryChange(this)" required>
                           <option value="" selected disabled>Select Task Category</option>
                           <option class="input-option" value="User Story" ${todo.category === 'User Story' ? 'selected' : ''}>User Story</option>
                           <option class="input-option" value="Technical Story" ${todo.category === 'Technical Story' ? 'selected' : ''}>Technical Story</option>
