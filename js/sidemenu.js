@@ -62,14 +62,12 @@ function closeSubmenu() {
  * @param {string} id - The ID of the clicked button.
  */
 function changeBackground(id) {
-  console.log("Button ID:", id); // Überprüfen, ob die ID korrekt ist
   document.getElementById("sideBtn1").classList.remove("clickedSideBtn");
   document.getElementById("sideBtn2").classList.remove("clickedSideBtn");
   document.getElementById("sideBtn3").classList.remove("clickedSideBtn");
   document.getElementById("sideBtn4").classList.remove("clickedSideBtn");
   
   let clickedBtn = document.getElementById(id);
-  console.log("Clicked Button:", clickedBtn); // Überprüfen, ob das Element gefunden wurde
   localStorage.setItem("clickedBtnId", id); 
   clickedBtn.classList.add("clickedSideBtn"); 
 }
