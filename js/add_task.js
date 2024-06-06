@@ -55,49 +55,78 @@ async function getContact() {
  * @param {string} priority - The priority level.
  */
 function changePriorityColor(priority) {
-  document.getElementById("btnPrioUrgent").style.backgroundColor = "#ffffff";
-  document.getElementById("btnPrioUrgent").style.color = "#000000";
-  document.getElementById("btnPrioUrgent").style.borderColor = "#D1D1D1";
-  document.getElementById("btnPrioUrgent").getElementsByTagName("img")[0].src =
-    "assets/img/urgent_red_AddTask.svg";
+  resetPriorityButtons();
+  setPriorityButtonStyles(priority);
+}
 
-  document.getElementById("btnPrioMedium").style.backgroundColor = "#ffffff";
-  document.getElementById("btnPrioMedium").style.color = "#000000";
-  document.getElementById("btnPrioMedium").style.borderColor = "#D1D1D1";
-  document.getElementById("btnPrioMedium").getElementsByTagName("img")[0].src =
-    "assets/img/medium_orange_AddTask.svg";
+/**
+ * Resets the styles of all priority buttons to their default state.
+ */
+function resetPriorityButtons() {
+  const buttons = [
+    { id: "btnPrioUrgent", img: "assets/img/urgent_red_AddTask.svg" },
+    { id: "btnPrioMedium", img: "assets/img/medium_orange_AddTask.svg" },
+    { id: "btnPrioLow", img: "assets/img/low_green_AddTask.svg" },
+  ];
 
-  document.getElementById("btnPrioLow").style.backgroundColor = "#ffffff";
-  document.getElementById("btnPrioLow").style.color = "#000000";
-  document.getElementById("btnPrioLow").style.borderColor = "#D1D1D1";
-  document.getElementById("btnPrioLow").getElementsByTagName("img")[0].src =
-    "assets/img/low_green_AddTask.svg";
-  /**
-   * Change the colors of the clicked button according to priority
-   *
-   */
-  // prettier-ignore
-  if (priority === "urgent") {
-    document.getElementById("btnPrioUrgent").style.backgroundColor = "#FF3D00";
-    document.getElementById("btnPrioUrgent").style.color = "#FFFFFF";
-    document.getElementById("btnPrioUrgent").style.borderColor = "#FF3D00";
-    document.getElementById("btnPrioUrgent").getElementsByTagName("img")[0].src ="assets/img/urgent_white_AddTask.svg";
-    selectedPrio = "Urgent";
-  } else if (priority === "medium") {
-    document.getElementById("btnPrioMedium").style.backgroundColor = "#FFA800";
-    document.getElementById("btnPrioMedium").style.color = "#FFFFFF";
-    document.getElementById("btnPrioMedium").style.borderColor = "#FFA800";
-    document.getElementById("btnPrioMedium").getElementsByTagName("img")[0].src ="assets/img/medium_white_AddTask.svg";
-    selectedPrio = "Medium";
-  } else if (priority === "low") {
-    document.getElementById("btnPrioLow").style.backgroundColor = "#7AE229";
-    document.getElementById("btnPrioLow").style.color = "#FFFFFF";
-    document.getElementById("btnPrioLow").style.borderColor = "#7AE229";
-    document.getElementById("btnPrioLow").getElementsByTagName("img")[0].src ="assets/img/low_white_AddTask.svg";
-    selectedPrio = "Low";
+  buttons.forEach(button => {
+    const btn = document.getElementById(button.id);
+    btn.style.backgroundColor = "#ffffff";
+    btn.style.color = "#000000";
+    btn.style.borderColor = "#D1D1D1";
+    btn.getElementsByTagName("img")[0].src = button.img;
+  });
+}
+
+/**
+ * Sets the styles for the priority button based on the given priority.
+ *
+ * @param {string} priority - The priority level.
+ */
+function setPriorityButtonStyles(priority) {
+  const styles = {
+    urgent: {
+      backgroundColor: "#FF3D00",
+      color: "#FFFFFF",
+      borderColor: "#FF3D00",
+      img: "assets/img/urgent_white_AddTask.svg",
+      prio: "Urgent"
+    },
+    medium: {
+      backgroundColor: "#FFA800",
+      color: "#FFFFFF",
+      borderColor: "#FFA800",
+      img: "assets/img/medium_white_AddTask.svg",
+      prio: "Medium"
+    },
+    low: {
+      backgroundColor: "#7AE229",
+      color: "#FFFFFF",
+      borderColor: "#7AE229",
+      img: "assets/img/low_white_AddTask.svg",
+      prio: "Low"
+    }
+  };
+
+  const btn = document.getElementById(`btnPrio${capitalizeFirstLetter(priority)}`);
+  if (btn) {
+    btn.style.backgroundColor = styles[priority].backgroundColor;
+    btn.style.color = styles[priority].color;
+    btn.style.borderColor = styles[priority].borderColor;
+    btn.getElementsByTagName("img")[0].src = styles[priority].img;
+    selectedPrio = styles[priority].prio;
   }
 }
 
+/**
+ * Capitalizes the first letter of the given string.
+ *
+ * @param {string} string - The string to capitalize.
+ * @returns {string} - The string with the first letter capitalized.
+ */
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 /**
  * Toggles the visibility of subtasks section.
@@ -200,7 +229,6 @@ function subtaskDelete(id) {
     let mainBoundingBox = document.getElementById(`mainBoundingBox${id}`);
     mainBoundingBox.remove();
     }
-    
 }
 
 /**
@@ -233,29 +261,6 @@ function clearShowSubtasks() {
 }
 
 /**
- * Resets priority buttons to default state.
- */
-function resetPriorityButtons() {
-  // Array containing the IDs of the priority buttons and their default images
-  const priorityButtons = [
-    { id: "btnPrioUrgent", imgSrc: "assets/img/urgent_red_AddTask.svg" },
-    { id: "btnPrioMedium", imgSrc: "assets/img/medium_orange_AddTask.svg" },
-    { id: "btnPrioLow", imgSrc: "assets/img/low_green_AddTask.svg" },
-  ];
-
-  // Loop through all button IDs
-  priorityButtons.forEach((button) => {
-    const buttonElement = document.getElementById(button.id);
-    
-    buttonElement.style.backgroundColor = "rgba(255, 255, 255, 1)"; // Reset background color
-    buttonElement.style.borderColor = "#D1D1D1"; // Reset border color
-    buttonElement.style.color = "rgba(0, 0, 0, 1)"; // Reset font color
-    const imgElement = buttonElement.querySelector("img"); // Reset image
-    imgElement.src = button.imgSrc;
-  });
-}
-
-/**
  * Resets the category section to default state.
  */
 function resetCategorySection() {
@@ -275,11 +280,6 @@ async function createTask() {
   // Check required fields
   let title = document.getElementById("titleAddTask").value;
   let dueDate = document.getElementById("dueDate").value;
-
-  if (title === "" || dueDate === "") {
-    alert("Please fill in all required fields.");
-    return;
-  }
   let subTasks = subtask;
 
   taskData.push({
