@@ -1,12 +1,18 @@
-/*Java Script für header.html & sidemenu.html*/
+/* JavaScript für header.html & sidemenu.html */
 
 let submenuOpen = false;
 let users = [];
 
+/**
+ * Initialisiert den Header durch Laden der Benutzer.
+ */
 async function initHeader() {
-  loadUsersHead();
+  await loadUsersHead();
 }
 
+/**
+ * Lädt die Benutzerinformationen aus dem lokalen Speicher und rendert den Benutzer im Header.
+ */
 async function loadUsersHead() {
   try {
     users = JSON.parse(await getItem("users"));
@@ -16,6 +22,9 @@ async function loadUsersHead() {
   renderUserHeader();
 }
 
+/**
+ * Öffnet oder schließt das Untermenü basierend auf dem aktuellen Zustand.
+ */
 function toggleSubmenu() {
   if (!submenuOpen) {
     openSubmenu();
@@ -26,47 +35,55 @@ function toggleSubmenu() {
   }
 }
 
+/**
+ * Öffnet das Untermenü und ändert die Hintergrundfarbe des Benutzerheaders.
+ */
 function openSubmenu() {
-  document.getElementById("userHeader").style.backgroundColor =
-    "rgb(225,230,236)";
-
+  document.getElementById("userHeader").style.backgroundColor = "rgb(225,230,236)";
   let submenu = document.getElementById("subMenu");
   submenu.classList.remove("d-none");
   submenu.classList.add("subMenu");
-
   submenuOpen = true;
 }
 
+/**
+ * Schließt das Untermenü und stellt die ursprüngliche Hintergrundfarbe des Benutzerheaders wieder her.
+ */
 function closeSubmenu() {
-  document.getElementById("userHeader").style.backgroundColor =
-    "rgb(255,255,255)";
+  document.getElementById("userHeader").style.backgroundColor = "rgb(255,255,255)";
   let submenu = document.getElementById("subMenu");
   submenu.classList.add("d-none");
   submenu.classList.remove("subMenu");
-
   submenuOpen = false;
 }
 
 /**
- * Changes the background of the clicked button and saves its ID to local storage.
- * @param {string} id - The ID of the clicked button.
+ * Ändert den Hintergrund des geklickten Buttons und speichert dessen ID im lokalen Speicher.
+ * @param {string} id - Die ID des geklickten Buttons.
  */
 function changeBackground(id) {
-  // Remove 'clickedSideBtn' class from all buttons
+  // Entfernt die 'clickedSideBtn' Klasse von allen Buttons
   document.getElementById("sideBtn1").classList.remove("clickedSideBtn");
   document.getElementById("sideBtn2").classList.remove("clickedSideBtn");
   document.getElementById("sideBtn3").classList.remove("clickedSideBtn");
   document.getElementById("sideBtn4").classList.remove("clickedSideBtn");
-  // Get the clicked button and add 'clickedSideBtn' class to it
+  
+  // Holt den geklickten Button und fügt die 'clickedSideBtn' Klasse hinzu
   let clickedBtn = document.getElementById(id);
-  localStorage.setItem("clickedBtnId", id); // Save ID of clicked Button
-  clickedBtn.classList.add("clickedSideBtn"); // Highlight clicked Button
+  localStorage.setItem("clickedBtnId", id); // Speichert die ID des geklickten Buttons
+  clickedBtn.classList.add("clickedSideBtn"); // Hebt den geklickten Button hervor
 }
 
+/**
+ * Navigiert eine Seite zurück in der Browser-Historie.
+ */
 function goBack() {
   window.history.back();
 }
 
+/**
+ * Rendert den Benutzer im Header basierend auf den geladenen Benutzerinformationen.
+ */
 function renderUserHeader() {
   const currentUser = getCurrentUserHeader();
   if (currentUser) {
@@ -75,12 +92,14 @@ function renderUserHeader() {
     const user = document.getElementById("userHeader");
     user.innerHTML = `<div class="initialsHeader">${initials}</div>`;
   } else {
-    document.getElementById(
-      "userHeader"
-    ).innerHTML = `<div class="initialsHeader">G</div>`;
+    document.getElementById("userHeader").innerHTML = `<div class="initialsHeader">G</div>`;
   }
 }
 
+/**
+ * Holt den aktuellen Benutzer aus dem Session-Speicher.
+ * @returns {Object|null} - Das Benutzerobjekt oder null, wenn kein Benutzer gefunden wurde.
+ */
 function getCurrentUserHeader() {
   const userName = JSON.parse(sessionStorage.getItem("currentUser"));
   if (userName) {
@@ -89,6 +108,11 @@ function getCurrentUserHeader() {
   return null;
 }
 
+/**
+ * Gibt die Initialen eines Namens zurück.
+ * @param {string} name - Der vollständige Name des Benutzers.
+ * @returns {string} - Die Initialen des Namens.
+ */
 function getInitials(name) {
   return name
     .split(" ")
