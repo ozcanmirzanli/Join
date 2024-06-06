@@ -38,7 +38,7 @@ async function hideElements() {
     return; 
   }
 
-  const elementIDs = ["sideBtn1", "sideBtn2", "sideBtn3", "sideBtn4", "navBar", "navBar1", "navBar2", "navBar3", "navBar4", "legal", "privacy"];
+  const elementIDs = ["sideBtn1", "sideBtn2", "sideBtn3", "sideBtn4", "navBar", "navBar1", "navBar2", "navBar3", "navBar4", "legal", "privacy", "help"];
 
   elementIDs.forEach((id) => {
     const element = document.getElementById(id);

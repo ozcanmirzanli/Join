@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="/css/sidemenu.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="icon" href="./assets/img/joinLogoBlack.svg" />
+    <script src="script.js"></script>
   
   </head>
-  <body onload="initHeader()">
+  <body onload="hideElements(); initHeader()">
     <div class="header">
       <p class="pLineHeader">Kanban Project Management Tool</p>
       <div>
@@ -19,10 +20,8 @@
           alt="joinlogo"
         />
       </div>
-      <div class="display">
-        <a href="./help.html"
-          ><img src="./assets/img/help.svg" alt="help" class="help"
-        /></a>
+      <div id="help" class="display">
+        <a href="./help.html"><img src="./assets/img/help.svg" alt="help" class="help"/></a>
        <div id="userHeader" class="user" onclick="toggleSubmenu()"></div>
       </div>
       <div id="subMenu" class="d-none">
