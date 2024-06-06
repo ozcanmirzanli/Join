@@ -34,7 +34,7 @@ function initSidemenu() {
  */
 async function hideElements() {
   await new Promise(resolve => setTimeout(resolve, 25));
-  if (!document.referrer.includes("login.html")) {
+  if (!document.referrer.includes("login.html") && !document.referrer.includes("sign_up.html")) {
     return; 
   }
 
