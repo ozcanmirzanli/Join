@@ -66,11 +66,6 @@ async function createTask() {
   // Check required fields
   let title = document.getElementById("titleAddTask").value;
   let dueDate = document.getElementById("dueDate").value;
-  
-  // if (title === "" || dueDate === "") {
-  //   alert("Please fill in all required fields.");
-  //   return;
-  // }
 
   let subTasks = subtask;
 
@@ -95,7 +90,7 @@ async function createTask() {
   // Redirect to the board page after 2 seconds
     setTimeout(() => {
       window.location.href = "board.html";
-    }, 2000);
+    }, 1000);
 }
 
 /**

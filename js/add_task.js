@@ -40,13 +40,6 @@ async function getContact() {
   } catch (error) {
     console.info("Could not load contacts");
   }
-  // Loading selected contacts from local storage
-  try {
-    selectedContacts =
-      JSON.parse(localStorage.getItem("selectedContacts")) || [];
-  } catch (error) {
-    console.info("Could not load selected contacts");
-  }
 }
 
 /**

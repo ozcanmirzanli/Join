@@ -563,17 +563,6 @@ input:focus {
 
 /* assigned to section */
 
-.input-assignedTo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 10px;
-  border: 1px solid #D1D1D1;
-  background: #fff;
-  padding: 12px 16px;
-  width: 100%;
-}
-
 #assignAddTask:hover {
   cursor: pointer;
   box-shadow: 0px 4px 4px 0px #00000040;
@@ -668,15 +657,6 @@ input:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.drop-down-image:hover, .assignToDDArrow:hover {
-  background-color: #ebeaec;
-  cursor: pointer;
-}
-
-.border-none {
-  border: unset;
 }
 
 .contactSelected {
