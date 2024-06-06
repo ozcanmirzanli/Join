@@ -25,6 +25,12 @@ async function loadTasksDataBoard() {
     }
 }
 
+/**
+ * Fetches the contact list from storage and assigns it to the `contacts` variable.
+ * Logs an info message if the contacts could not be loaded.
+ *
+ * @returns {Promise<void>} - A promise that resolves when the contacts are loaded.
+ */
 async function getContactBoard() {
   try {
     contacts = JSON.parse(await getItem("contact"));
@@ -35,6 +41,7 @@ async function getContactBoard() {
 
 /**
  * Updates the HTML board based on the current state of todos.
+ * Calls functions to update each individual task category column.
  */
 function updateHTMLBoard() {
   updateTodo();
@@ -43,13 +50,17 @@ function updateHTMLBoard() {
   updateDone();
 }
 
-function updateTodo(){
-  let toDo = taskData.filter((t) => t["todo"] == "toDo"); 
+/**
+ * Updates the "To Do" column with tasks that have the status "toDo".
+ * If there are no tasks, displays a message indicating no tasks are available.
+ */
+function updateTodo() {
+  let toDo = taskData.filter((t) => t["todo"] == "toDo");
 
-  document.getElementById("toDo").innerHTML = ""; 
+  document.getElementById("toDo").innerHTML = "";
   if (toDo.length === 0) {
     document.getElementById("toDo").innerHTML =
-      "<div class='noToDo'>No Tasks to do.</div>"; 
+      "<div class='noToDo'>No Tasks to do.</div>";
   } else {
     for (let index = 0; index < toDo.length; index++) {
       const element = toDo[index];
@@ -58,53 +69,65 @@ function updateTodo(){
   }
 }
 
-function updateInProgress(){
-  let inProgress = taskData.filter((t) => t["todo"] == "inProgress"); 
+/**
+ * Updates the "In Progress" column with tasks that have the status "inProgress".
+ * If there are no tasks, displays a message indicating no tasks are in progress.
+ */
+function updateInProgress() {
+  let inProgress = taskData.filter((t) => t["todo"] == "inProgress");
 
   document.getElementById("inProgress").innerHTML = "";
   if (inProgress.length === 0) {
     document.getElementById("inProgress").innerHTML =
-      "<div class='noToDo'>No Tasks in Progress.</div>"; 
+      "<div class='noToDo'>No Tasks in Progress.</div>";
   } else {
     for (let index = 0; index < inProgress.length; index++) {
       const element = inProgress[index];
       document.getElementById("inProgress").innerHTML += 
-      generateTodoHTMLBoard(element);
+        generateTodoHTMLBoard(element);
     }
   }
-
 }
 
-function updateAwaitFeedback(){
-  let awaitFeedback = taskData.filter((t) => t["todo"] == "awaitFeedback"); 
+/**
+ * Updates the "Await Feedback" column with tasks that have the status "awaitFeedback".
+ * If there are no tasks, displays a message indicating no tasks are awaiting feedback.
+ */
+function updateAwaitFeedback() {
+  let awaitFeedback = taskData.filter((t) => t["todo"] == "awaitFeedback");
 
-  document.getElementById("awaitFeedback").innerHTML = ""; 
+  document.getElementById("awaitFeedback").innerHTML = "";
   if (awaitFeedback.length === 0) {
     document.getElementById("awaitFeedback").innerHTML =
-      "<div class='noToDo'>No Tasks await Feedback.</div>"; 
+      "<div class='noToDo'>No Tasks await Feedback.</div>";
   } else {
     for (let index = 0; index < awaitFeedback.length; index++) {
       const element = awaitFeedback[index];
       document.getElementById("awaitFeedback").innerHTML += 
-      generateTodoHTMLBoard(element);
+        generateTodoHTMLBoard(element);
     }
   }
 }
 
-function updateDone(){
-  let done = taskData.filter((t) => t["todo"] == "done"); 
+/**
+ * Updates the "Done" column with tasks that have the status "done".
+ * If there are no tasks, displays a message indicating no tasks are done.
+ */
+function updateDone() {
+  let done = taskData.filter((t) => t["todo"] == "done");
 
-  document.getElementById("done").innerHTML = ""; 
+  document.getElementById("done").innerHTML = "";
   if (done.length === 0) {
     document.getElementById("done").innerHTML =
-      "<div class='noToDo'>No Tasks done.</div>"; 
+      "<div class='noToDo'>No Tasks done.</div>";
   } else {
     for (let index = 0; index < done.length; index++) {
       const element = done[index];
-      document.getElementById("done").innerHTML += generateTodoHTMLBoard(element); 
+      document.getElementById("done").innerHTML += generateTodoHTMLBoard(element);
     }
   }
 }
+
 
 /**
  * Initiates the dragging of a todo element.
@@ -136,6 +159,13 @@ function moveTo(category, event) {
   }
 }
 
+/**
+ * Move the dragged task to a specified category and update the board.
+ * Updates the 'todo' property of the dragged task and saves the changes.
+ *
+ * @param {string} category - The new category to move the task to (e.g., 'toDo', 'inProgress', 'awaitFeedback', 'done').
+ * @param {Event} event - The event object representing the click event.
+ */
 function moveToMenu(category, event) {
   event.stopPropagation();
   let draggedTask = taskData.find(task => task.id === currentDraggedElement);
@@ -205,6 +235,12 @@ function filterTasks() {
   displayFilteredTodos(filteredTodos);
 }
 
+/**
+ * Display the filtered to-dos by updating the corresponding columns.
+ * Resets the columns, updates them with filtered to-dos, and displays a message if any column is empty.
+ *
+ * @param {Array<Object>} filteredTodos - An array of filtered to-do objects.
+ */
 function displayFilteredTodos(filteredTodos) {
   resetTodoColumns();
   const hasTodos = { toDo: false, inProgress: false, awaitFeedback: false, done: false };
@@ -217,6 +253,10 @@ function displayFilteredTodos(filteredTodos) {
   displayEmptyMessage(hasTodos);
 }
 
+/**
+ * Reset the content of all to-do columns.
+ * Clears the inner HTML of the columns to prepare for new content.
+ */
 function resetTodoColumns() {
   document.getElementById("toDo").innerHTML = "";
   document.getElementById("inProgress").innerHTML = "";
@@ -224,6 +264,12 @@ function resetTodoColumns() {
   document.getElementById("done").innerHTML = "";
 }
 
+/**
+ * Update a specific to-do column with a new to-do item.
+ * Appends the HTML for the to-do item to the appropriate column.
+ *
+ * @param {Object} todo - A to-do object containing the details of the to-do item.
+ */
 function updateTodoColumn(todo) {
   const column = document.getElementById(todo.todo);
   if (column) {
@@ -231,12 +277,23 @@ function updateTodoColumn(todo) {
   }
 }
 
+/**
+ * Display a message in each to-do column if it is empty.
+ * Adds a "No Tasks" message to columns that have no to-do items.
+ *
+ * @param {Object} hasTodos - An object indicating whether each to-do column has any items.
+ * @param {boolean} hasTodos.toDo - Indicates if the "To Do" column has items.
+ * @param {boolean} hasTodos.inProgress - Indicates if the "In Progress" column has items.
+ * @param {boolean} hasTodos.awaitFeedback - Indicates if the "Await Feedback" column has items.
+ * @param {boolean} hasTodos.done - Indicates if the "Done" column has items.
+ */
 function displayEmptyMessage(hasTodos) {
   if (!hasTodos.toDo) document.getElementById("toDo").innerHTML = "<div class='noToDo'>No Tasks to do.</div>";
   if (!hasTodos.inProgress) document.getElementById("inProgress").innerHTML = "<div class='noToDo'>No Tasks in progress.</div>";
   if (!hasTodos.awaitFeedback) document.getElementById("awaitFeedback").innerHTML = "<div class='noToDo'>No Tasks awaiting feedback.</div>";
   if (!hasTodos.done) document.getElementById("done").innerHTML = "<div class='noToDo'>No Tasks done.</div>";
 }
+
 
 
 /**
@@ -287,6 +344,13 @@ async function deleteTaskBoard(id) {
     closeTaskBig();
 }
 
+/**
+ * Save the task to the task board with updated details.
+ * Updates the task data and persists it to storage.
+ *
+ * @param {number} id - The ID of the task to be saved.
+ * @returns {Promise<void>} - A promise that resolves when the task data is saved.
+ */
 async function saveTaskBoard(id) {
   const subTasksArray = getSubTasksArray();
   const currentTodo = taskData.find(task => task.id === id);
@@ -297,15 +361,27 @@ async function saveTaskBoard(id) {
   closeTaskBig();
 }
 
+/**
+ * Retrieve the sub-tasks from the input field and format them into an array of objects.
+ *
+ * @returns {Array<Object>} - An array of sub-task objects.
+ */
 function getSubTasksArray() {
   let subTasks = document.getElementById('addsubtask').value;
   return subTasks.split('\n').map(subTask => ({
-    id: subTaskIdCounter++,
+    id: subTaskIdCounter++,  // Assumes subTaskIdCounter is defined elsewhere
     content: subTask.trim(),
     completed: false
   }));
 }
 
+/**
+ * Get the updated fields for a task based on user input and existing task details.
+ *
+ * @param {Object} currentTodo - The current task object.
+ * @param {Array<Object>} subTasksArray - An array of sub-task objects.
+ * @returns {Object} - An object containing the updated fields for the task.
+ */
 function getUpdatedFields(currentTodo, subTasksArray) {
   const currentPriority = currentTodo ? currentTodo.priority : '';
   const currentAssignedTo = currentTodo ? currentTodo.assignTo : [];
@@ -320,6 +396,12 @@ function getUpdatedFields(currentTodo, subTasksArray) {
   };
 }
 
+/**
+ * Update the task data array with the updated fields for a specific task.
+ *
+ * @param {number} id - The ID of the task to be updated.
+ * @param {Object} updatedFields - An object containing the updated fields for the task.
+ */
 function updateTaskData(id, updatedFields) {
   const index = taskData.findIndex(t => t.id === id);
   if (index !== -1) {
@@ -335,6 +417,7 @@ function updateTaskData(id, updatedFields) {
     });
   }
 }
+
 
 /**
 * Updates the progress bar of a task.
@@ -538,7 +621,9 @@ function clearAssignedUserBoard() {
 }
 
 /**
- * Adjusts the onclick behavior of buttons based on window width.
+ * Adjust the onclick behavior of specific buttons based on window width.
+ * If the window width is less than 580 pixels, clicking the buttons will redirect to 'add_task.html'.
+ * Otherwise, the buttons will open the 'Add Task' dialog.
  */
 function adjustOnClickBehavior() {
   const plusMobile = document.getElementById("plusMobile");
@@ -550,7 +635,8 @@ function adjustOnClickBehavior() {
     addTaskBtns.forEach(button => {
       button.onclick = function() {
         window.location.href = './add_task.html';
-      };});
+      };
+    });
   } else {
     plusMobile.onclick = openAddTaskDialog;
     addTaskBtns.forEach(button => {
@@ -559,14 +645,29 @@ function adjustOnClickBehavior() {
   }
 }
 
+/**
+ * Initialize functions on window load.
+ * Includes HTML content, initializes the board, and adjusts the onclick behavior of buttons.
+ */
 window.onload = function() {
   includeHTML();
   initBoard();
   adjustOnClickBehavior(); 
 };
 
+/**
+ * Adjust the onclick behavior of buttons when the window is resized.
+ */
 window.onresize = adjustOnClickBehavior;
 
+/**
+ * Toggle the visibility of the drag menu for a specific task.
+ * Closes other open drag menus and toggles the visibility of the clicked one.
+ * 
+ * @param {Event} event - The click event.
+ * @param {string} taskId - The ID of the task.
+ * @param {string} menuId - The ID of the drag menu to toggle.
+ */
 function toggleDragmenu(event, taskId, menuId) {
   event.stopPropagation();
   const dragMenu = document.getElementById(menuId);
@@ -577,9 +678,8 @@ function toggleDragmenu(event, taskId, menuId) {
     }
   });
   if (dragMenu.classList.contains('d-none')) {
-      dragMenu.classList.remove('d-none');
+    dragMenu.classList.remove('d-none');
   } else {
-      dragMenu.classList.add('d-none');
+    dragMenu.classList.add('d-none');
   }
 }
-
