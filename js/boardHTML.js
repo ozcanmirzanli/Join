@@ -175,7 +175,6 @@ function renderAddTaskForm() {
                     <div class="cardHeadLine">Add Task</div>
                     <img src="assets/img/subtask_cancel_AddTask.svg" alt="Close Task" onclick="closeAddTaskDialog()" id="closeDialogBTN">
                 </div>
-
                 <div class="mainAddTaskContainer">
                     <div class="leftAddTaskMini">
                         <!-- Title -->
@@ -206,10 +205,8 @@ function renderAddTaskForm() {
                             <div id="assignedUser" class="assignedUserList"></div>
                         </section>
                     </div>
-
                     <!-- Seperator -->
                     <div><img src="assets/img/seperator_AddTask.svg" alt="seperator" id="seperator"/></div>
-
                     <!-- Right Part of Add Task -->
                     <div class="rightAddTaskMini">
                         <!-- Due Date -->
@@ -217,7 +214,6 @@ function renderAddTaskForm() {
                             <div class="pd-bottom"><span>Due Date<span class="required-addTask">*</span></span></div>
                             <input id="dueDate" type="date" placeholder="yyyy/mm/dd" class="input-dueDate border-input-addtask" required/>
                         </section>
-
                         <!-- Priority -->
                         <section class="padding-prio">
                             <div class="pd-bottom"><span>Prio</span></div>
@@ -233,7 +229,6 @@ function renderAddTaskForm() {
                             </button>                    
                             </div>
                         </section>
-
                         <!-- Category -->
                         <section class="padding-category">
                             <div class="pd-bottom"><span>Category<span class="required-addTask">*</span></span></div>
@@ -243,7 +238,6 @@ function renderAddTaskForm() {
                                 <option value="Technical Story">Technical Story</option>
                             </select>
                         </section> 
-
                         <!-- Subtasks -->
                         <section class="sectionSubtasks">
                             <div class="pd-bottom"><span>Subtasks</span></div>
@@ -262,20 +256,17 @@ function renderAddTaskForm() {
                         </section>
                     </div>
                 </div>
-
                 <!-- Footer AddTask -->
                 <footer class="addtask-footer">
                     <div id="requiredFooter">
                         <span class="required-addTask">*</span>
                         This field is required
                     </div>
-
                     <div class="footer-btn-addTask">
                         <button onclick="clearEntries()" class="footer-btn-text-img" type="button" id="clear-btn">
                             Clear
                             <img src="assets/img/subtask_cancel_AddTask.svg" alt="subtask_cancel_AddTask">
                         </button>
-
                         <button class="footer-btn-text-img" type="submit" id="create-btn">
                             Create Task
                             <img src="assets/img/create_hook_white_AddTask.svg" alt="create_hook_white_AddTask">

@@ -62,16 +62,16 @@ function closeSubmenu() {
  * @param {string} id - The ID of the clicked button.
  */
 function changeBackground(id) {
-  // Remove 'clickedSideBtn' class from all buttons
+  console.log("Button ID:", id); // Überprüfen, ob die ID korrekt ist
   document.getElementById("sideBtn1").classList.remove("clickedSideBtn");
   document.getElementById("sideBtn2").classList.remove("clickedSideBtn");
   document.getElementById("sideBtn3").classList.remove("clickedSideBtn");
   document.getElementById("sideBtn4").classList.remove("clickedSideBtn");
   
-  // Get the clicked button and add 'clickedSideBtn' class to it
   let clickedBtn = document.getElementById(id);
-  localStorage.setItem("clickedBtnId", id); // Save ID of clicked button
-  clickedBtn.classList.add("clickedSideBtn"); // Highlight clicked button
+  console.log("Clicked Button:", clickedBtn); // Überprüfen, ob das Element gefunden wurde
+  localStorage.setItem("clickedBtnId", id); 
+  clickedBtn.classList.add("clickedSideBtn"); 
 }
 
 /**
