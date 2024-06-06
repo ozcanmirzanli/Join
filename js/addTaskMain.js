@@ -80,9 +80,7 @@ async function createTask() {
   });
   
   await setItem('taskData', JSON.stringify(taskData));
-
   await displaySuccessMessage();
-
   setTimeout(() => {
     window.location.href = "board.html";
     }, 2000);
