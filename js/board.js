@@ -257,6 +257,7 @@ function openAddTaskDialog() {
   document.body.appendChild(dialogContent);
   document.getElementById("addTaskDialog").classList.add("overlay");
   document.body.style.overflow = 'hidden';
+  changePriorityColor("medium");
 }
 
 /**
