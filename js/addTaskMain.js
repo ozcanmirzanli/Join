@@ -49,7 +49,7 @@ function handleClickOutside(event) {
       if (!assignAddTask.contains(event.target) && !assignToDropdown.contains(event.target)) {
           closeAssignTo();
       }
-  }
+}
 
 /**
  * Changes the border color of a container.
@@ -63,8 +63,15 @@ function changeBorderColor() {
  * Creates a new task for remote storage array taskData.
  */
 async function createTask() {
+  // Check required fields
   let title = document.getElementById("titleAddTask").value;
   let dueDate = document.getElementById("dueDate").value;
+  
+  // if (title === "" || dueDate === "") {
+  //   alert("Please fill in all required fields.");
+  //   return;
+  // }
+
   let subTasks = subtask;
 
   taskData.push({
@@ -78,11 +85,16 @@ async function createTask() {
     priority: selectedPrio,
     todo: "toDo",
   });
-  
-  await setItem('taskData', JSON.stringify(taskData));
-  await displaySuccessMessage();
-  setTimeout(() => {
-    window.location.href = "board.html";
+    await setItem('taskData', JSON.stringify(taskData));
+
+  checkDueDate();
+  clearEntries();
+  // Display success message
+  displaySuccessMessage();
+
+  // Redirect to the board page after 2 seconds
+    setTimeout(() => {
+      window.location.href = "board.html";
     }, 2000);
 }
 
@@ -104,14 +116,14 @@ function displaySuccessMessage() {
  * Only current day or future day are allowed.
  * Set Function of, because there are issue when putting date manual 
  */
-// function checkDueDate() {
-//   let selectedDate = new Date(document.getElementById("dueDate").value);
-//   let currentDate = new Date();
+function checkDueDate() {
+  let selectedDate = new Date(document.getElementById("dueDate").value);
+  let currentDate = new Date();
 
-//   currentDate.setHours(0, 0, 0, 0);
+  currentDate.setHours(0, 0, 0, 0);
 
-//   if (selectedDate < currentDate) {
-//     alert("Please select a date that is today or later for the due date.");
-//     document.getElementById("dueDate").value = ""; // Reset the input field
-//   }
-// }
+  if (selectedDate < currentDate) {
+    alert("Please select a date that is today or later for the due date.");
+    document.getElementById("dueDate").value = ""; // Reset the input field
+  }
+}
