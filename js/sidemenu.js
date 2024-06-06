@@ -1,17 +1,17 @@
-/* JavaScript für header.html & sidemenu.html */
+/* JavaScript for header.html & sidemenu.html */
 
 let submenuOpen = false;
 let users = [];
 
 /**
- * Initialisiert den Header durch Laden der Benutzer.
+ * Initializes the header by loading the users.
  */
 async function initHeader() {
   await loadUsersHead();
 }
 
 /**
- * Lädt die Benutzerinformationen aus dem lokalen Speicher und rendert den Benutzer im Header.
+ * Loads the user information from local storage and renders the user in the header.
  */
 async function loadUsersHead() {
   try {
@@ -23,7 +23,7 @@ async function loadUsersHead() {
 }
 
 /**
- * Öffnet oder schließt das Untermenü basierend auf dem aktuellen Zustand.
+ * Toggles the submenu based on its current state.
  */
 function toggleSubmenu() {
   if (!submenuOpen) {
@@ -36,7 +36,7 @@ function toggleSubmenu() {
 }
 
 /**
- * Öffnet das Untermenü und ändert die Hintergrundfarbe des Benutzerheaders.
+ * Opens the submenu and changes the background color of the user header.
  */
 function openSubmenu() {
   document.getElementById("userHeader").style.backgroundColor = "rgb(225,230,236)";
@@ -47,7 +47,7 @@ function openSubmenu() {
 }
 
 /**
- * Schließt das Untermenü und stellt die ursprüngliche Hintergrundfarbe des Benutzerheaders wieder her.
+ * Closes the submenu and restores the original background color of the user header.
  */
 function closeSubmenu() {
   document.getElementById("userHeader").style.backgroundColor = "rgb(255,255,255)";
@@ -58,31 +58,31 @@ function closeSubmenu() {
 }
 
 /**
- * Ändert den Hintergrund des geklickten Buttons und speichert dessen ID im lokalen Speicher.
- * @param {string} id - Die ID des geklickten Buttons.
+ * Changes the background of the clicked button and saves its ID to local storage.
+ * @param {string} id - The ID of the clicked button.
  */
 function changeBackground(id) {
-  // Entfernt die 'clickedSideBtn' Klasse von allen Buttons
+  // Remove 'clickedSideBtn' class from all buttons
   document.getElementById("sideBtn1").classList.remove("clickedSideBtn");
   document.getElementById("sideBtn2").classList.remove("clickedSideBtn");
   document.getElementById("sideBtn3").classList.remove("clickedSideBtn");
   document.getElementById("sideBtn4").classList.remove("clickedSideBtn");
   
-  // Holt den geklickten Button und fügt die 'clickedSideBtn' Klasse hinzu
+  // Get the clicked button and add 'clickedSideBtn' class to it
   let clickedBtn = document.getElementById(id);
-  localStorage.setItem("clickedBtnId", id); // Speichert die ID des geklickten Buttons
-  clickedBtn.classList.add("clickedSideBtn"); // Hebt den geklickten Button hervor
+  localStorage.setItem("clickedBtnId", id); // Save ID of clicked button
+  clickedBtn.classList.add("clickedSideBtn"); // Highlight clicked button
 }
 
 /**
- * Navigiert eine Seite zurück in der Browser-Historie.
+ * Navigates one page back in the browser history.
  */
 function goBack() {
   window.history.back();
 }
 
 /**
- * Rendert den Benutzer im Header basierend auf den geladenen Benutzerinformationen.
+ * Renders the user in the header based on the loaded user information.
  */
 function renderUserHeader() {
   const currentUser = getCurrentUserHeader();
@@ -97,8 +97,8 @@ function renderUserHeader() {
 }
 
 /**
- * Holt den aktuellen Benutzer aus dem Session-Speicher.
- * @returns {Object|null} - Das Benutzerobjekt oder null, wenn kein Benutzer gefunden wurde.
+ * Gets the current user from session storage.
+ * @returns {Object|null} - The user object or null if no user is found.
  */
 function getCurrentUserHeader() {
   const userName = JSON.parse(sessionStorage.getItem("currentUser"));
@@ -109,9 +109,9 @@ function getCurrentUserHeader() {
 }
 
 /**
- * Gibt die Initialen eines Namens zurück.
- * @param {string} name - Der vollständige Name des Benutzers.
- * @returns {string} - Die Initialen des Namens.
+ * Returns the initials of a name.
+ * @param {string} name - The full name of the user.
+ * @returns {string} - The initials of the name.
  */
 function getInitials(name) {
   return name
