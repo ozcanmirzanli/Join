@@ -60,6 +60,48 @@ function changeBorderColor() {
 }
 
 /**
+ * Creates a new task for remote storage array taskData.
+ */
+async function createTask() {
+  let title = document.getElementById("titleAddTask").value;
+  let dueDate = document.getElementById("dueDate").value;
+  let subTasks = subtask;
+
+  taskData.push({
+    id: taskData.length,
+    title: title,
+    description: document.getElementById("descriptionAddTask").value,
+    assignTo: assignedContacts,
+    dueDate: dueDate,
+    category: document.getElementById("categoryAddTask").value,
+    subTasks: subTasks,
+    priority: selectedPrio,
+    todo: "toDo",
+  });
+  
+  await setItem('taskData', JSON.stringify(taskData));
+
+  await displaySuccessMessage();
+
+  setTimeout(() => {
+    window.location.href = "board.html";
+    }, 2000);
+}
+
+/**
+ * Displays a success message in the center of the screen.
+ */
+function displaySuccessMessage() {
+  const successMessage = document.createElement("img");
+  successMessage.src = "assets/img/addedTaskToBoard.svg";
+  successMessage.style.position = "fixed";
+  successMessage.style.top = "50%";
+  successMessage.style.left = "50%";
+  successMessage.style.transform = "translate(-50%, -50%)";
+  document.body.appendChild(successMessage);
+}
+
+/**
  * Checks if the selected due date is valid.
  * Only current day or future day are allowed.
  * Set Function of, because there are issue when putting date manual 

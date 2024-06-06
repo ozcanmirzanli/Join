@@ -274,32 +274,6 @@ function resetCategorySection() {
 }
 
 /**
- * Creates a new task for remote storage array taskData.
- */
-async function createTask() {
-  // Check required fields
-  let title = document.getElementById("titleAddTask").value;
-  let dueDate = document.getElementById("dueDate").value;
-  let subTasks = subtask;
-
-  taskData.push({
-    id: taskData.length,
-    title: title,
-    description: document.getElementById("descriptionAddTask").value,
-    assignTo: assignedContacts,
-    dueDate: dueDate,
-    category: document.getElementById("categoryAddTask").value,
-    subTasks: subTasks,
-    priority: selectedPrio,
-    todo: "toDo",
-  });
-    await setItem('taskData', JSON.stringify(taskData));
-
-  checkDueDate();
-  clearEntries();
-}
-
-/**
  * Toggles the assign to dropdown menu.
  */
 function toggleAssignTo(event) {
