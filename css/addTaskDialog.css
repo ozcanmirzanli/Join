@@ -19,6 +19,7 @@
     padding: 64px;
     animation: boxSlideIn 0.325s ease-in forwards;
     overflow-y: auto; 
+    scrollbar-width: none;
   }
 
   .cardHeadlinecontainer {
