@@ -574,15 +574,12 @@ function toggleDragmenu(event, taskId, menuId) {
   allDragMenus.forEach(menu => {
     if (menu.id !== menuId) {
       menu.classList.add('d-none');
-      menu.classList.remove('dragMenu');
     }
   });
   if (dragMenu.classList.contains('d-none')) {
       dragMenu.classList.remove('d-none');
-      dragMenu.classList.add('dragMenu');
   } else {
       dragMenu.classList.add('d-none');
-      dragMenu.classList.remove('dragMenu');
   }
 }
 
