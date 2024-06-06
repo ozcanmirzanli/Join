@@ -43,7 +43,7 @@ function getassignListHTML(contact, badgeColor, i) {
               `;
   }
 
-  /**
+/**
  * Renders assigned users.
  */
 function renderassignedUser(assignedUser) {
