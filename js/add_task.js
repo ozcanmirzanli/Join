@@ -179,7 +179,7 @@ function saveSubtask() {
  * @param {number} i - The index of the subtask to edit.
  */
 function subtaskEdit(i) {
-  let subtaskContent = document.getElementById(`subtask${i}`);
+  let subtaskContent = document.getElementById(`subtaskContent${i}`);
   let subtaskEditInput = document.getElementById(`subtaskEditInput${i}`);
   document.getElementById(`mainBoundingBox${i}`).classList.add('d-none');
 
@@ -193,7 +193,7 @@ function subtaskEdit(i) {
  * @param {number} i - The index of the subtask to save edit.
  */
 function subtaskSaveEdit(i) {
-  let subtaskContent = document.getElementById(`subtask${i}`);
+  let subtaskContent = document.getElementById(`subtaskContent${i}`);
   let subtaskEditInput = document.getElementById(`subtaskEditInput${i}`);
   let subtaskInput = document.getElementById(`subtaskInput${i}`);
   document.getElementById(`mainBoundingBox${i}`).classList.remove('d-none');

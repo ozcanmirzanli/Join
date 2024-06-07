@@ -470,6 +470,7 @@ select.input-category option[value=""][disabled] {
   display: flex;
   flex-direction: column;
   gap: 8px; /* Abstand zwischen den DIVs */
+  max-width: 429px;
 }
 
 .subtasks-list img {

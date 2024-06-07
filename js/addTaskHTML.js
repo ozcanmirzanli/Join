@@ -7,8 +7,8 @@
  */
 function renderSubtaskItem(subtask, i) {
     return /*HTML*/ `
-        <div class="subtask-item">
-            <div class="subtask-content"  id="subtask${i}">
+        <div class="subtask-item" id="subtask${i}">
+            <div class="subtask-content"  id="subtaskContent${i}">
                 <span>\u2022 ${subtask}</span>
             </div>
             <div id="subtaskEditInput${i}" class="subtask-content d-none">
