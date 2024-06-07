@@ -183,8 +183,8 @@ function subtaskEdit(i) {
   let subtaskEditInput = document.getElementById(`subtaskEditInput${i}`);
   document.getElementById(`mainBoundingBox${i}`).classList.add('d-none');
 
-  subtaskContent.classList.toggle('d-none');
-  subtaskEditInput.classList.toggle('d-none');
+  subtaskContent.classList.add('d-none');
+  subtaskEditInput.classList.remove('d-none');
 }
 
 /**
