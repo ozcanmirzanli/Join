@@ -465,12 +465,11 @@ select.input-category option[value=""][disabled] {
 
 .subtasks-list {
   border-radius: 10px;
-  padding: 6px 16px;
   margin-top: 10px;
   display: flex;
   flex-direction: column;
   gap: 8px; /* Abstand zwischen den DIVs */
-  max-width: 429px;
+  max-width: 444px;
 }
 
 .subtasks-list img {

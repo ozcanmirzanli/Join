@@ -1,3 +1,9 @@
+document.addEventListener('DOMContentLoaded', (event) => {
+    initBoard();
+    updateTodo();
+    updateHTMLBoard(); 
+  });
+
 /**
  * Generates HTML for a todo element.
  * @param {Object} element - The todo object.

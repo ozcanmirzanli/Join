@@ -1,4 +1,20 @@
 /**
+ * Event listener for the DOMContentLoaded event.
+ * This event listener checks if the element with ID 'login-logo' is present in the DOM.
+ * If the element is found, it calls the changeLogoToMobile function.
+ * If the element is not found, it logs a warning message to the console.
+ *
+ * @param {Event} event - The DOMContentLoaded event object.
+ */
+document.addEventListener('DOMContentLoaded', (event) => {
+  if (document.getElementById('login-logo')) {
+    changeLogoToMobile();
+  } else {
+      console.warn('Element mit ID "login-logo" nicht gefunden. Funktionen werden nicht ausgeführt.');
+  }
+});
+
+/**
  * Sets up the DOMContentLoaded event to hide the background fade after a set timeout.
  */
 document.addEventListener("DOMContentLoaded", function () {
@@ -303,10 +319,14 @@ function hideWrongPassword() {
  */
 function changeLogoToMobile() {
   let loginLogo = document.getElementById("login-logo");
+  if (!loginLogo) {
+      console.warn('Element mit ID "login-logo" nicht gefunden.');
+      return;
+  }
   if (window.innerWidth < 600) {
-    loginLogo.src = "assets/img/mobile-logo.png";
-    setTimeout(function () {
-      loginLogo.src = "assets/img/Capa_1.png";
-    }, 1000);
+      loginLogo.src = "assets/img/mobile-logo.png";
+      setTimeout(function () {
+          loginLogo.src = "assets/img/Capa_1.png";
+      }, 1000);
   }
 }

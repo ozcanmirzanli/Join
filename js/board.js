@@ -3,15 +3,55 @@ let currentDraggedElement;
 let touchStartX, touchStartY;
 
 /**
+ * Event listener for the DOMContentLoaded event.
+ * This event listener initializes various functions and behaviors after the DOM content is loaded.
+ *
+ * @param {Event} event - The DOMContentLoaded event object.
+ */
+document.addEventListener('DOMContentLoaded', async (event) => {
+  // Include HTML content from external files
+  includeHTML();
+  // Wait for the window.onload event to ensure all external resources are loaded
+  await new Promise(resolve => {
+      window.onload = resolve;
+  });
+  // Check if the 'toDo' element exists on the page
+  if (document.getElementById('toDo')) {
+      // If 'toDo' element exists, initialize the board functionality
+      await initBoard();
+  } else {
+      // If 'toDo' element does not exist, log a warning message
+      console.warn('Element mit ID "toDo" nicht gefunden. Board-Funktionalität wird auf dieser Seite nicht benötigt.');
+  }
+  // Get the 'plusMobile' element and 'addTaskBtns' elements
+  const plusMobile = document.getElementById("plusMobile");
+  const addTaskBtns = document.querySelectorAll(".plus, #addTaskBtn");
+  // Check if 'plusMobile' element and 'addTaskBtns' elements exist
+  if (plusMobile && addTaskBtns.length > 0) {
+      // If both elements exist, adjust onClick behavior
+      adjustOnClickBehavior();
+  } else {
+      // If any of the elements do not exist, log a warning message
+      console.warn('Elemente mit ID "plusMobile" oder Klasse "plus" bzw. ID "addTaskBtn" nicht gefunden.');
+  }
+});
+
+
+/**
  * Initializes the task board by loading task data and updating the HTML board.
  * This function is asynchronous and waits for the task data to be loaded before updating the board.
  */
-async function initBoard() {
-    await loadTasksDataBoard();
-    await getContactBoard();
-    await initHeader();
-    updateHTMLBoard();
+function updateHTMLBoard() {
+  try {
+      updateTodo();
+      updateInProgress();
+      updateAwaitFeedback();
+      updateDone();
+  } catch (error) {
+      console.error('Fehler in updateHTMLBoard:', error);
+  }
 }
+
 
 /**
  * Loads the task data from storage and parses it into the `taskData` variable.
