@@ -66,7 +66,6 @@ function generateTodoHTMLBoard(element) {
     `;
 }
 
-
 /**
  * Returns the background color and width based on the category.
  * @param {string} category - The category of the task.
