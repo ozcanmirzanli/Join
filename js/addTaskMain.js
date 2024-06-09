@@ -5,11 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let addSubtaskInput = document.getElementById("addsubtask");
   
     if (addSubtaskInput) {
-      // Setting up the event listeners for focus and blur events
       addSubtaskInput.addEventListener("focus", handleFocus);
       addSubtaskInput.addEventListener("blur", handleBlur);
-      // Set medium priority as default
-      changePriorityColor("medium");
+       changePriorityColor("medium");
     }
   });
 
@@ -20,8 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
  */
 function handleCategoryChange(selectElement) {
     var selectedCategory = selectElement.value;
-    // Here you can further process the selected category, e.g., store it in a variable or call a function
-    // console.log("Selected category: " + selectedCategory);
   }
 
 /**
@@ -63,7 +59,6 @@ function changeBorderColor() {
  * Creates a new task for remote storage array taskData.
  */
 async function createTask() {
-  // Check required fields
   let title = document.getElementById("titleAddTask").value;
   let dueDate = document.getElementById("dueDate").value;
 
@@ -84,10 +79,8 @@ async function createTask() {
 
   checkDueDate();
   clearEntries();
-  // Display success message
   displaySuccessMessage();
 
-  // Redirect to the board page after 2 seconds
     setTimeout(() => {
       window.location.href = "board.html";
     }, 1000);
@@ -119,6 +112,6 @@ function checkDueDate() {
 
   if (selectedDate < currentDate) {
     alert("Please select a date that is today or later for the due date.");
-    document.getElementById("dueDate").value = ""; // Reset the input field
+    document.getElementById("dueDate").value = "";
   }
 }

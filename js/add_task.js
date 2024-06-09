@@ -160,16 +160,15 @@ function saveSubtask() {
   let subtaskText = subtaskInput.value;
 
   if (subtaskText !== "") {
-    let subtaskId = subtask.length; // Creating a unique ID for the subtask
+    let subtaskId = subtask.length;
 
-    subtask.push({ id: subtaskId, content: subtaskText, completed: false }); // Adding the subtask to the global array
-    const subtaskHTML = renderSubtaskItem(subtaskText, subtaskId); // Creating the HTML code for the subtask
-    const showSubtasksContainer = document.getElementById("showsubtasks"); // Adding the subtask HTML code to the element with ID 'showsubtasks'
+    subtask.push({ id: subtaskId, content: subtaskText, completed: false });
+    const subtaskHTML = renderSubtaskItem(subtaskText, subtaskId);
+    const showSubtasksContainer = document.getElementById("showsubtasks");
     showSubtasksContainer.insertAdjacentHTML("beforeend", subtaskHTML);
     
-    subtaskInput.value = ""; // Clear subtask input
-
-    showSubtasksContainer.classList.remove("d-none"); // Displaying the subtasks
+    subtaskInput.value = "";
+    showSubtasksContainer.classList.remove("d-none");
   }
 }
 
@@ -209,11 +208,9 @@ function subtaskSaveEdit(i) {
  * @param {number} id - The ID of the subtask to delete.
  */
 function subtaskDelete(id) {
-  let index = subtask.findIndex(sub => sub.id === id); // Finding the index of the subtask in the global array based on its ID
+  let index = subtask.findIndex(sub => sub.id === id);
 
-  // Checking if the subtask is found
   if (index !== -1) {
-    // Deleting the subtask from the global array
     subtask.splice(index, 1);
 
     let subtaskElement = document.getElementById(`subtask${id}`);
@@ -228,14 +225,14 @@ function subtaskDelete(id) {
  * Clears all form entries.
  */
 function clearEntries() {
-  document.getElementById("titleAddTask").value = ""; // Clear entries for title section
-  document.querySelector(".padding-description textarea").value = ""; // Clear entries for description section
-  clearAssignedUser(); // Clear entries for assigned to section
-  document.getElementById("dueDate").value = ""; // Clear entries for due date section
-  resetPriorityButtons(); // Clear entries for priority section
-  resetCategorySection(); // Clear entries for category section
-  document.getElementById("addsubtask").value = ""; // Clear entries for subtasks section
-  clearShowSubtasks(); // Clear entries in the show subtasks section
+  document.getElementById("titleAddTask").value = "";
+  document.querySelector(".padding-description textarea").value = "";
+  clearAssignedUser();
+  document.getElementById("dueDate").value = "";
+  resetPriorityButtons();
+  resetCategorySection();
+  document.getElementById("addsubtask").value = "";
+  clearShowSubtasks();
   subtaskDelete();
   cancelSubtaskClick();
   subtask = [];
@@ -247,7 +244,7 @@ function clearEntries() {
  */
 function clearShowSubtasks() {
   const showSubtasks = document.getElementById("showsubtasks");
-  // Remove all child elements of the showSubtasks DIV
+ 
   while (showSubtasks.firstChild) {
     showSubtasks.removeChild(showSubtasks.firstChild);
   }
@@ -258,11 +255,8 @@ function clearShowSubtasks() {
  */
 function resetCategorySection() {
   const categoryDropdown = document.getElementById("categoryAddTask");
-  // Set the selected index to the index of the `<option>` element with value ""
   categoryDropdown.selectedIndex = 0;
-  // Reset border color
   categoryDropdown.style.borderColor = "#D1D1D1";
-  // Re-add the onchange event
   categoryDropdown.onchange = handleCategoryChange;
 }
 

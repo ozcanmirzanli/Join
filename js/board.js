@@ -61,7 +61,6 @@ function updateHTMLBoard() {
   }
 }
 
-
 /**
  * Loads the task data from storage and parses it into the `taskData` variable.
  * This function is asynchronous and uses a try-catch block to handle potential errors during data loading.
@@ -176,7 +175,6 @@ function updateDone() {
     }
   }
 }
-
 
 /**
  * Initiates the dragging of a todo element.
@@ -343,8 +341,6 @@ function displayEmptyMessage(hasTodos) {
   if (!hasTodos.done) document.getElementById("done").innerHTML = "<div class='noToDo'>No Tasks done.</div>";
 }
 
-
-
 /**
  * Shows the add task board.
  */
@@ -466,7 +462,6 @@ function updateTaskData(id, updatedFields) {
     });
   }
 }
-
 
 /**
 * Updates the progress bar of a task.
