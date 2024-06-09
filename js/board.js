@@ -36,6 +36,15 @@ document.addEventListener('DOMContentLoaded', async (event) => {
   }
 });
 
+/**
+ * Initializes the task board by loading task data and updating the HTML board.
+ * This function is asynchronous and waits for the task data to be loaded before updating the board.
+ */
+async function initBoard() {
+  await loadTasksDataBoard();
+  await getContactBoard();
+  await initHeader();
+  updateHTMLBoard();}
 
 /**
  * Initializes the task board by loading task data and updating the HTML board.
