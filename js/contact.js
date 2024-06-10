@@ -335,7 +335,7 @@ function updateContactDetails(index) {
   let name = document.getElementById("name").value;
   let mail = document.getElementById("mail").value;
   let number = document.getElementById("number").value;
-  let color = colors[Math.floor(Math.random() * colors.length)];
+  let color = contacts[index]['color'];
   let initials = getInitials(name);
 
   contacts[index]["name"] = name;
