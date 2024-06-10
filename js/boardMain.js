@@ -1,3 +1,78 @@
+/**
+ * Event listener for the DOMContentLoaded event.
+ * This event listener initializes various functions and behaviors after the DOM content is loaded.
+ *
+ * @param {Event} event - The DOMContentLoaded event object.
+ */
+document.addEventListener('DOMContentLoaded', async (event) => {
+  includeHTML();
+  await new Promise(resolve => {
+      window.onload = resolve;
+  });
+  if (document.getElementById('toDo')) {
+      await initBoard();
+  } else {
+      console.warn('Element mit ID "toDo" nicht gefunden. Board-Funktionalität wird auf dieser Seite nicht benötigt.');
+  }
+  const plusMobile = document.getElementById("plusMobile");
+  const addTaskBtns = document.querySelectorAll(".plus, #addTaskBtn");
+  if (plusMobile && addTaskBtns.length > 0) {
+      adjustOnClickBehavior();
+  } else {
+      console.warn('Elemente mit ID "plusMobile" oder Klasse "plus" bzw. ID "addTaskBtn" nicht gefunden.');
+  }
+});
+
+/**
+ * Initializes the task board by loading task data and updating the HTML board.
+ * This function is asynchronous and waits for the task data to be loaded before updating the board.
+ */
+async function initBoard() {
+  await loadTasksDataBoard();
+  await getContactBoard();
+  updateHTMLBoard();
+}
+
+/**
+ * Initializes the task board by loading task data and updating the HTML board.
+ * This function is asynchronous and waits for the task data to be loaded before updating the board.
+ */
+function updateHTMLBoard() {
+  try {
+      updateTodo();
+      updateInProgress();
+      updateAwaitFeedback();
+      updateDone();
+  } catch (error) {
+      console.error('Fehler in updateHTMLBoard:', error);
+  }
+}
+
+/**
+ * Loads the task data from storage and parses it into the `taskData` variable.
+ * This function is asynchronous and uses a try-catch block to handle potential errors during data loading.
+ */
+async function loadTasksDataBoard() {
+  try {
+      taskData = JSON.parse(await getItem('taskData'));
+  } catch (e) {
+      console.info('Could not load tasks');
+  }
+}
+
+/**
+* Fetches the contact list from storage and assigns it to the `contacts` variable.
+* Logs an info message if the contacts could not be loaded.
+*
+* @returns {Promise<void>} - A promise that resolves when the contacts are loaded.
+*/
+async function getContactBoard() {
+try {
+  contacts = JSON.parse(await getItem("contact"));
+} catch (error) {
+  console.info("Could not load contacts");
+}
+}
 
 /**
  * Updates the "To Do" column with tasks that have the status "toDo".
@@ -143,3 +218,77 @@ function updateTaskData(id, updatedFields) {
         }
     }
   }
+
+/**
+ * Display the filtered to-dos by updating the corresponding columns.
+ * Resets the columns, updates them with filtered to-dos, and displays a message if any column is empty.
+ *
+ * @param {Array<Object>} filteredTodos - An array of filtered to-do objects.
+ */
+function displayFilteredTodos(filteredTodos) {
+  resetTodoColumns();
+  const hasTodos = { toDo: false, inProgress: false, awaitFeedback: false, done: false };
+
+  filteredTodos.forEach((todo) => {
+    updateTodoColumn(todo);
+    hasTodos[todo.todo] = true;
+  });
+
+  displayEmptyMessage(hasTodos);
+}
+
+/**
+ * Reset the content of all to-do columns.
+ * Clears the inner HTML of the columns to prepare for new content.
+ */
+function resetTodoColumns() {
+  document.getElementById("toDo").innerHTML = "";
+  document.getElementById("inProgress").innerHTML = "";
+  document.getElementById("awaitFeedback").innerHTML = "";
+  document.getElementById("done").innerHTML = "";
+}
+
+/**
+ * Update a specific to-do column with a new to-do item.
+ * Appends the HTML for the to-do item to the appropriate column.
+ *
+ * @param {Object} todo - A to-do object containing the details of the to-do item.
+ */
+function updateTodoColumn(todo) {
+  const column = document.getElementById(todo.todo);
+  if (column) {
+    column.innerHTML += generateTodoHTMLBoard(todo);
+  }
+}
+
+/**
+ * Display a message in each to-do column if it is empty.
+ * Adds a "No Tasks" message to columns that have no to-do items.
+ *
+ * @param {Object} hasTodos - An object indicating whether each to-do column has any items.
+ * @param {boolean} hasTodos.toDo - Indicates if the "To Do" column has items.
+ * @param {boolean} hasTodos.inProgress - Indicates if the "In Progress" column has items.
+ * @param {boolean} hasTodos.awaitFeedback - Indicates if the "Await Feedback" column has items.
+ * @param {boolean} hasTodos.done - Indicates if the "Done" column has items.
+ */
+function displayEmptyMessage(hasTodos) {
+  if (!hasTodos.toDo) document.getElementById("toDo").innerHTML = "<div class='noToDo'>No Tasks to do.</div>";
+  if (!hasTodos.inProgress) document.getElementById("inProgress").innerHTML = "<div class='noToDo'>No Tasks in progress.</div>";
+  if (!hasTodos.awaitFeedback) document.getElementById("awaitFeedback").innerHTML = "<div class='noToDo'>No Tasks awaiting feedback.</div>";
+  if (!hasTodos.done) document.getElementById("done").innerHTML = "<div class='noToDo'>No Tasks done.</div>";
+}
+  
+/**
+ * Initialize functions on window load.
+ * Includes HTML content, initializes the board, and adjusts the onclick behavior of buttons.
+ */
+window.onload = function() {
+  includeHTML();
+  initBoard();
+  adjustOnClickBehavior(); 
+};
+
+/**
+ * Adjust the onclick behavior of buttons when the window is resized.
+ */
+window.onresize = adjustOnClickBehavior;
