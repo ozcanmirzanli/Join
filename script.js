@@ -34,12 +34,12 @@ function initSidemenu() {
  * @returns {Promise<void>}
  */
 async function hideElements() {
-  await new Promise(resolve => setTimeout(resolve, 25));
+  await new Promise(resolve => setTimeout(resolve, 100));
   if (!document.referrer.includes("login.html") && !document.referrer.includes("sign_up.html")) {
     return; 
   }
 
-  const elementIDs = ["sideBtn1", "sideBtn2", "sideBtn3", "sideBtn4", "navBar", "navBar1", "navBar2", "navBar3", "navBar4", "legal", "privacy", "help", "userHeader"];
+  const elementIDs = ["help", "sideBtn1", "sideBtn2", "sideBtn3", "sideBtn4", "navBar", "navBar1", "navBar2", "navBar3", "navBar4", "legal", "privacy"];
 
   elementIDs.forEach((id) => {
     const element = document.getElementById(id);
