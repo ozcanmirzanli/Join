@@ -197,6 +197,8 @@ function subtaskSaveEdit(i) {
   let subtaskInput = document.getElementById(`subtaskInput${i}`);
   document.getElementById(`mainBoundingBox${i}`).classList.remove('d-none');
 
+  subtask[i].content = subtaskInput.value;
+
   subtaskContent.querySelector('span').textContent = `\u2022 ${subtaskInput.value}`;
   subtaskContent.classList.toggle('d-none');
   subtaskEditInput.classList.toggle('d-none');
