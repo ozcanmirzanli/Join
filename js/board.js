@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', async (event) => {
 async function initBoard() {
   await loadTasksDataBoard();
   await getContactBoard();
-  await initHeader();
   updateHTMLBoard();}
 
 /**
@@ -85,17 +84,6 @@ async function getContactBoard() {
   } catch (error) {
     console.info("Could not load contacts");
   }
-}
-
-/**
- * Updates the HTML board based on the current state of todos.
- * Calls functions to update each individual task category column.
- */
-function updateHTMLBoard() {
-  updateTodo();
-  updateInProgress();
-  updateAwaitFeedback();
-  updateDone();
 }
 
 /**

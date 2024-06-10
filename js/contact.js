@@ -19,7 +19,6 @@ let colors = [
  */
 async function init() {
   await getContact();
-  await initHeader();
   renderContacts();
   changeInputBorder();
 }
