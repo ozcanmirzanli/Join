@@ -139,7 +139,6 @@ function renderContacts() {
  * Set IDs for contacts if not already set.
  */
 function setContactIds() {
-  // Setze die ID jedes Kontakts auf den Array-Index, falls noch nicht gesetzt
   contacts.forEach((contact, index) => {
     if (!contact.hasOwnProperty("id")) {
       contact.id = index;
@@ -162,7 +161,6 @@ function sortContacts() {
  */
 function groupContactsByFirstLetter() {
   let contactsByFirstLetter = {};
-  // Gruppiere die Kontakte nach dem ersten Buchstaben ihres Namens
   contacts.forEach((contact) => {
     const firstLetter = contact.name.charAt(0).toUpperCase();
     if (!contactsByFirstLetter[firstLetter]) {

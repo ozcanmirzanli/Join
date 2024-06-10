@@ -222,24 +222,6 @@ function subtaskDelete(id) {
 }
 
 /**
- * Clears all form entries.
- */
-function clearEntries() {
-  document.getElementById("titleAddTask").value = "";
-  document.querySelector(".padding-description textarea").value = "";
-  clearAssignedUser();
-  document.getElementById("dueDate").value = "";
-  resetPriorityButtons();
-  resetCategorySection();
-  document.getElementById("addsubtask").value = "";
-  clearShowSubtasks();
-  subtaskDelete();
-  cancelSubtaskClick();
-  subtask = [];
-  changePriorityColor("medium");
-}
-
-/**
  * Clears all subtask entries displayed in HTML.
  */
 function clearShowSubtasks() {
