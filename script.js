@@ -15,6 +15,7 @@ async function includeHTML() {
     }
   }
   initSidemenu();
+  initHeader();
 }
 
 /**
