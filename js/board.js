@@ -258,13 +258,6 @@ function closeAssignToBoard() {
 }
 
 /**
- * Saves the selected contacts to local storage.
- */
-function saveSelectedContactsBoard() {
-  localStorage.setItem("selectedContacts", JSON.stringify(selectedContacts));
-}
-
-/**
  * Renders the list of assigned contacts in the "Assign To" section.
  */
 function renderAssignedContactsBoard() {
@@ -322,7 +315,6 @@ function assignContactBoard(i, contactName) {
   } else {
     unassignContactsBoard(contactName, checkbox);
   }
-  saveSelectedContactsBoard();
 }
 
 /**
@@ -369,7 +361,6 @@ function removeFromAssignedListBoard(selectedContactIndex) {
   let assignedUser = document.getElementById("assignedUser");
   assignedContacts.splice(selectedContactIndex, 1);
   renderAssignedUserBoard(assignedUser);
-  saveSelectedContactsBoard();
 }
 
 /**
