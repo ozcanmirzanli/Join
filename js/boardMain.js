@@ -11,16 +11,12 @@ document.addEventListener('DOMContentLoaded', async (event) => {
   });
   if (document.getElementById('toDo')) {
       await initBoard();
-  } else {
-      console.warn('Element mit ID "toDo" nicht gefunden. Board-Funktionalität wird auf dieser Seite nicht benötigt.');
-  }
+  } 
   const plusMobile = document.getElementById("plusMobile");
   const addTaskBtns = document.querySelectorAll(".plus, #addTaskBtn");
   if (plusMobile && addTaskBtns.length > 0) {
       adjustOnClickBehavior();
-  } else {
-      console.warn('Elemente mit ID "plusMobile" oder Klasse "plus" bzw. ID "addTaskBtn" nicht gefunden.');
-  }
+  } 
 });
 
 /**

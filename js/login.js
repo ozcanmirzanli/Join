@@ -9,9 +9,7 @@
 document.addEventListener('DOMContentLoaded', (event) => {
   if (document.getElementById('login-logo')) {
     changeLogoToMobile();
-  } else {
-      console.warn('Element mit ID "login-logo" nicht gefunden. Funktionen werden nicht ausgeführt.');
-  }
+  } 
 });
 
 /**
@@ -320,7 +318,6 @@ function hideWrongPassword() {
 function changeLogoToMobile() {
   let loginLogo = document.getElementById("login-logo");
   if (!loginLogo) {
-      console.warn('Element mit ID "login-logo" nicht gefunden.');
       return;
   }
   if (window.innerWidth < 600) {
