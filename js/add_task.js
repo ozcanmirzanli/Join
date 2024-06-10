@@ -216,9 +216,7 @@ function subtaskDelete(id) {
     let subtaskElement = document.getElementById(`subtask${id}`);
     subtaskElement.remove();
 
-    let mainBoundingBox = document.getElementById(`mainBoundingBox${id}`);
-    mainBoundingBox.remove();
-    }
+     }
 }
 
 /**
