@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
  * @param {HTMLSelectElement} selectElement - The select element.
  */
 function handleCategoryChange(selectElement) {
-    var selectedCategory = selectElement.value;
+    let selectedCategory = selectElement.value;
   }
 
 /**

@@ -312,13 +312,6 @@ function closeAssignTo() {
 }
 
 /**
- * Saves selected contacts to local storage.
- */
-function saveSelectedContacts() {
-  localStorage.setItem("selectedContacts", JSON.stringify(selectedContacts));
-}
-
-/**
  * Renders assigned contacts.
  */
 function renderAssignedContacts() {
@@ -376,7 +369,6 @@ function assignContact(i, contactName) {
   } else {
     unassignContacts(contactName, checkbox);
   }
-  saveSelectedContacts();
 }
 
 /**
@@ -414,7 +406,6 @@ function removeFromAssignedList(selectedContactIndex) {
   let assignedUser = document.getElementById("assignedUser");
   assignedContacts.splice(selectedContactIndex, 1);
   renderassignedUser(assignedUser);
-  saveSelectedContacts();
 }
 
 /**
