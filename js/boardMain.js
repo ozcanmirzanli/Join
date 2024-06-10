@@ -195,25 +195,30 @@ function updateTaskData(id, updatedFields) {
     }
   }
   
-  /**
-  * Updates the progress bar of a task.
-  * This function calculates the completion percentage of subtasks and updates the progress bar element.
-  * 
-  * @param {Object} todo - The task object containing subtasks.
-  */
-  function updateProgressBar(todo) {
-    let completedSubtasks = todo.subTasks.filter(subtask => subtask.completed).length;
-    let progressBarId = `progress-bar-${todo.id}`;
-    let progressBar = document.getElementById(progressBarId);
-    let progress = (completedSubtasks / todo.subTasks.length) * 100;
-    if (progressBar) {
-        let innerProgressBar = progressBar.querySelector('.progress-bar');
-        if (innerProgressBar) {
-            innerProgressBar.style.width = `${(progress / 100) * 128}px`;
-            innerProgressBar.style.backgroundColor = '#4589FF';
-        }
-    }
+/**
+ * Updates the progress bar and task counter of a task.
+ * This function calculates the completion percentage of subtasks and updates the progress bar element.
+ * 
+ * @param {Object} todo - The task object containing subtasks.
+ */
+function updateProgressBar(todo) {
+  let completedSubtasks = todo.subTasks.filter(subtask => subtask.completed).length;
+  let progressBarId = `progress-bar-${todo.id}`;
+  let progressBar = document.getElementById(progressBarId);
+  let progress = (completedSubtasks / todo.subTasks.length) * 100;
+  if (progressBar) {
+      let innerProgressBar = progressBar.querySelector('.progress-bar');
+      if (innerProgressBar) {
+          innerProgressBar.style.width = `${(progress / 100) * 128}px`;
+          innerProgressBar.style.backgroundColor = '#4589FF';
+      }
   }
+  let taskCounter = progressBar.nextElementSibling;
+  if (taskCounter) {
+      taskCounter.textContent = `${completedSubtasks}/${todo.subTasks.length} Subtasks`;
+  }
+}
+
 
 /**
  * Display the filtered to-dos by updating the corresponding columns.
