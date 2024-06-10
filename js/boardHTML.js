@@ -160,12 +160,15 @@ function renderBigTask(task) {
  * @param {number} subTaskIndex - The index of the subtask within the task's subTasks array.
  */
 function changeCompletedBoard(taskIndex, subTaskIndex) {
-    const subTask = taskData[taskIndex].subTasks[subTaskIndex];
-    subTask.completed = !subTask.completed;
-    renderBigTask(taskData[taskIndex]);
-    saveSubtaskBoard(taskData[taskIndex]["id"], taskData[taskIndex]["subTasks"]);
-    updateProgressBar(taskData[taskIndex]);
-    changeCompletedBoard(taskData[taskIndex]);
+    if (taskData[taskIndex] && taskData[taskIndex].subTasks) {
+        const subTask = taskData[taskIndex].subTasks[subTaskIndex];
+        subTask.completed = !subTask.completed;
+        renderBigTask(taskData[taskIndex]);
+        saveSubtaskBoard(taskData[taskIndex].id, taskData[taskIndex].subTasks);
+        updateProgressBar(taskData[taskIndex]);
+    } else {
+        console.error('Task or subTasks are undefined', taskIndex, taskData[taskIndex]);
+    }
 }
 
 /**
