@@ -10,7 +10,7 @@
     <script src="script.js"></script>
   
   </head>
-  <body onload="hideElements(); initHeader()">
+  <body onload="initHeader()">
     <div class="header">
       <p class="pLineHeader">Kanban Project Management Tool</p>
       <div>
@@ -26,8 +26,8 @@
       </div>
       <div id="subMenu" class="d-none">
         <div class="submenu-links">
-          <a href="./PrivacyPolicy.html">Privacy Policy</a>
-          <a href="./LegalNotice.html">Legal notice</a>
+          <a id="PP" href="./PrivacyPolicy.html">Privacy Policy</a>
+          <a id="LN" href="./LegalNotice.html">Legal notice</a>
           <a href="#" onclick="logoutUser()">Log out</a>
         </div>
       </div>
