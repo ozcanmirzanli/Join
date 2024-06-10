@@ -3,32 +3,6 @@ let currentDraggedElement;
 let touchStartX, touchStartY;
 
 /**
- * Loads the task data from storage and parses it into the `taskData` variable.
- * This function is asynchronous and uses a try-catch block to handle potential errors during data loading.
- */
-async function loadTasksDataBoard() {
-    try {
-        taskData = JSON.parse(await getItem('taskData'));
-    } catch (e) {
-        console.info('Could not load tasks');
-    }
-}
-
-/**
- * Fetches the contact list from storage and assigns it to the `contacts` variable.
- * Logs an info message if the contacts could not be loaded.
- *
- * @returns {Promise<void>} - A promise that resolves when the contacts are loaded.
- */
-async function getContactBoard() {
-  try {
-    contacts = JSON.parse(await getItem("contact"));
-  } catch (error) {
-    console.info("Could not load contacts");
-  }
-}
-
-/**
  * Initiates the dragging of a todo element.
  * @param {number} id - The ID of the todo element.
  */
