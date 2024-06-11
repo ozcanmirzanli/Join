@@ -132,6 +132,7 @@ function clearEntries() {
   cancelSubtaskClick();
   subtask = [];
   changePriorityColor("medium");
+  localStorage.removeItem("selectedContacts");
 }
 
 /**
