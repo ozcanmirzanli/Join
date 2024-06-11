@@ -171,7 +171,6 @@ function toggleDragmenu(event, taskId, menuId) {
       dragMenu.classList.add('d-none');
     }
   }
-
   
 /**
  * Update the task data array with the updated fields for a specific task.
@@ -218,7 +217,6 @@ function updateProgressBar(todo) {
       taskCounter.textContent = `${completedSubtasks}/${todo.subTasks.length} Subtasks`;
   }
 }
-
 
 /**
  * Display the filtered to-dos by updating the corresponding columns.

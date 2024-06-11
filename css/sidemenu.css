@@ -186,7 +186,7 @@ a:hover {
 }
 
 .d-none {
-  display: none !important;
+  display: none;
 }
 
 .subMenu {

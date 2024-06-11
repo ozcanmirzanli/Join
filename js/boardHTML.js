@@ -463,3 +463,24 @@ function renderAssignedUserBoard(assignedUser) {
           `;
     });
   }
+
+/**
+ * Updated assignedContactOnTaskBoard function to store assigned contacts in localStorage.
+ */
+function assignedContactOnTaskBoard(taskId) {
+    if (taskId >= 0 && taskId < taskData.length) {
+      let assignedContacts = taskData[taskId]['assignTo'];
+      localStorage.setItem("selectedContacts", JSON.stringify(assignedContacts));
+        
+    } else {
+      console.error('Ungültige Task-ID.');
+    }
+  }
+  
+  /**
+   * Function to clear selectedContacts array from localStorage.
+   */
+  function clearSelectedContacts() {
+    localStorage.removeItem("selectedContacts");
+  }
+  
