@@ -133,3 +133,10 @@ function clearEntries() {
   subtask = [];
   changePriorityColor("medium");
 }
+
+/**
+ * Saves selected contacts to local storage.
+ */
+function saveSelectedContacts() {
+  localStorage.setItem("selectedContacts", JSON.stringify(selectedContacts));
+}

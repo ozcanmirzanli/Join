@@ -351,6 +351,7 @@ function assignContact(i, contactName) {
   } else {
     unassignContacts(contactName, checkbox);
   }
+  saveSelectedContacts();
 }
 
 /**
@@ -388,6 +389,7 @@ function removeFromAssignedList(selectedContactIndex) {
   let assignedUser = document.getElementById("assignedUser");
   assignedContacts.splice(selectedContactIndex, 1);
   renderassignedUser(assignedUser);
+  saveSelectedContacts();
 }
 
 /**

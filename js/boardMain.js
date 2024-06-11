@@ -293,3 +293,10 @@ window.onload = function() {
  * Adjust the onclick behavior of buttons when the window is resized.
  */
 window.onresize = adjustOnClickBehavior;
+
+/**
+ * Saves the selected contacts to local storage.
+ */
+function saveSelectedContactsBoard() {
+  localStorage.setItem("selectedContacts", JSON.stringify(selectedContacts));
+}

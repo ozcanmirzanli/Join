@@ -329,10 +329,10 @@ function renderEditTaskForm(todo) {
               <section class="padding-description">
                   <div class="pd-bottom"><label>Assigned to</label></div>
                   <div class="">
-                      <div id="assignAddTask" name="assignTo" class="input-assignedTo">
+                      <div id="assignAddTask" name="assignTo" class="input-assignedTo" onclick="toggleAssignToBoard(event)">
                           <span id="select-contacts">Select contacts to assign</span>
-                          <img class="assignToDDArrow" src="assets/img/arrow_drop_down_AddTask.svg" onclick="openAssignToBoard()" id="arrowdown" alt="arrowdown"/>
-                          <img src="assets/img/arrow_drop_down_AddTask.svg" onclick="closeAssignTo()" id="arrowup" alt="arrowup"  class="assignToDDArrow rotate d-none"/>
+                          <img class="assignToDDArrow" src="assets/img/arrow_drop_down_AddTask.svg" id="arrowdown" alt="arrowdown"/>
+                          <img src="assets/img/arrow_drop_down_AddTask.svg" id="arrowup" alt="arrowup"  class="assignToDDArrow rotate d-none"/>
                       </div>
                   </div>
                   <div id="assignToDropdown" class="assignToDropdown assignField d-none">
@@ -439,6 +439,14 @@ function getassignListHTMLBoard(contact, badgeColor, i) {
                   <img id="checkbox${i}" src="./assets/img/addTask_AssignTo_Checkbox.svg" class="checkbox">
               </div>
               `;
+  }
+
+/**
+ * Renders the list of assigned contacts in the "Assign To" section.
+ */
+function renderAssignedContactsBoard() {
+    let assignedUser = document.getElementById("assignedUser");
+    renderAssignedUserBoard(assignedUser);
   }
 
   /**

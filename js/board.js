@@ -225,6 +225,19 @@ async function saveSubtaskBoard(id, subTasks) {
 }
 
 /**
+ * Toggles the assign to dropdown menu.
+ */
+function toggleAssignToBoard(event) {
+  event.stopPropagation();
+  let dropDownMenu = document.getElementById("assignToDropdown");
+    if (dropDownMenu.classList.contains("d-none")) {
+      openAssignToBoard();
+    } else {
+      closeAssignToBoard();
+    }
+}
+
+/**
  * Opens the "Assign To" dropdown menu and renders the contact list.
  */
 function openAssignToBoard() {
@@ -240,6 +253,8 @@ function openAssignToBoard() {
   renderContactsBoard();
   renderAssignedContactsBoard();
   restoreSelectedContactsBoard();
+
+  document.addEventListener("click", handleClickOutside);
 }
 
 /**
@@ -255,14 +270,8 @@ function closeAssignToBoard() {
   document.getElementById("arrowdown").classList.remove("d-none");
   inputAssignedTo.style.border = "";
   selectContactsText.innerHTML = "Select contacts to assign";
-}
 
-/**
- * Renders the list of assigned contacts in the "Assign To" section.
- */
-function renderAssignedContactsBoard() {
-  let assignedUser = document.getElementById("assignedUser");
-  renderAssignedUserBoard(assignedUser);
+  document.removeEventListener("click", handleClickOutside);
 }
 
 /**
@@ -315,6 +324,7 @@ function assignContactBoard(i, contactName) {
   } else {
     unassignContactsBoard(contactName, checkbox);
   }
+  saveSelectedContactsBoard();
 }
 
 /**
@@ -327,6 +337,7 @@ function addToAssignedUserBoard(i) {
   let assignedContact = selectedContacts[i];
   assignedContacts.push(assignedContact);
   renderAssignedUserBoard(assignedUser);
+  saveSelectedContactsBoard();
 }
 
 /**
