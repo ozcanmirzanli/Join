@@ -196,7 +196,7 @@ function getSubTasksArray() {
  */
 function getUpdatedFields(currentTodo, subTasksArray) {
   const currentPriority = currentTodo ? currentTodo.priority : '';
-  const updatedAssignedTo = selectedContacts;
+  const updatedAssignedTo = selectedContacts.length > 0 ? selectedContacts : currentTodo.assignTo;;
   return {
     title: document.getElementById('titleAddTask').value,
     description: document.getElementById('descriptionAddTask').value,

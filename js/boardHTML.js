@@ -389,6 +389,7 @@ function renderEditTaskForm(todo) {
                         <img onclick="saveSubtask()" id="checkSubtask" src="assets/img/subtask_check_AddTask.svg" class="subtasks" alt="subtask_check_AddTask">
                     </div>
                 </div>
+                <div id="showsubtasks">
                 ${todo.subTasks.map((subtask, index) => `
                 <div class="subtask-item">
                   <div id="subtask${index}" class="subtask-content">
@@ -409,6 +410,7 @@ function renderEditTaskForm(todo) {
                   </div>
                 </div>
                 `).join('')}
+                </div>
             </section>
             <footer class="editTaskFooter">
                 <button onclick="saveTaskBoard(${todo.id})" class="addTaskBtn" type="button">
@@ -420,6 +422,7 @@ function renderEditTaskForm(todo) {
     </div>
   `;
 }
+showsubtasks
 
 /**
  * Generates HTML for a contact list item in the "Assign To" dropdown menu.
