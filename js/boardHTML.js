@@ -329,7 +329,7 @@ function renderEditTaskForm(todo) {
               <section class="padding-description">
                   <div class="pd-bottom"><label>Assigned to</label></div>
                   <div class="">
-                      <div id="assignAddTask" name="assignTo" class="input-assignedTo" onclick="toggleAssignToBoard(event)">
+                      <div id="assignAddTask" name="assignTo" class="input-assignedTo" onclick="toggleAssignToBoard(event, ${todo.id})">
                           <span id="select-contacts">Select contacts to assign</span>
                           <img class="assignToDDArrow" src="assets/img/arrow_drop_down_AddTask.svg" id="arrowdown" alt="arrowdown"/>
                           <img src="assets/img/arrow_drop_down_AddTask.svg" id="arrowup" alt="arrowup"  class="assignToDDArrow rotate d-none"/>
@@ -470,8 +470,7 @@ function renderAssignedUserBoard(assignedUser) {
 function assignedContactOnTaskBoard(taskId) {
     if (taskId >= 0 && taskId < taskData.length) {
       let assignedContacts = taskData[taskId]['assignTo'];
-      localStorage.setItem("selectedContacts", JSON.stringify(assignedContacts));
-        
+      localStorage.setItem("selectedContacts", JSON.stringify(assignedContacts)); 
     } else {
       console.error('Ungültige Task-ID.');
     }

@@ -227,10 +227,11 @@ async function saveSubtaskBoard(id, subTasks) {
 /**
  * Toggles the assign to dropdown menu.
  */
-function toggleAssignToBoard(event) {
+function toggleAssignToBoard(event, taskId) {
   event.stopPropagation();
   let dropDownMenu = document.getElementById("assignToDropdown");
     if (dropDownMenu.classList.contains("d-none")) {
+      assignedContactOnTaskBoard(taskId)
       openAssignToBoard();
     } else {
       closeAssignToBoard();
