@@ -196,11 +196,11 @@ function getSubTasksArray() {
  */
 function getUpdatedFields(currentTodo, subTasksArray) {
   const currentPriority = currentTodo ? currentTodo.priority : '';
-  const currentAssignedTo = currentTodo ? currentTodo.assignTo : [];
+  const updatedAssignedTo = selectedContacts;
   return {
     title: document.getElementById('titleAddTask').value,
     description: document.getElementById('descriptionAddTask').value,
-    assignTo: [...currentAssignedTo, ...selectedContacts.filter(contact => !currentAssignedTo.some(existingContact => existingContact.email === contact.email))],
+    assignTo: updatedAssignedTo,
     dueDate: document.getElementById('dueDate').value,
     category: document.getElementById('categoryAddTask').value,
     subTasks: subTasksArray,
