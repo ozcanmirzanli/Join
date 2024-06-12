@@ -1085,6 +1085,10 @@ input[type="number"] {
     margin-left: 0;
     width: 100vw;
   }
+
+  .all-contacts{
+    height: 74vh;
+  }
 }
 
 @media (max-width: 800px) {
