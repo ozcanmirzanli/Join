@@ -398,15 +398,15 @@ function renderEditTaskForm(todo) {
                   <div id="subtaskEditInput${index}" class="subtask-content d-none">
                       <input value="${subtask.content}" class="subtask-input subtaskEditText" id="subtaskInput${index}">
                       <div class="subtask-bounding-box">
-                          <img onclick="subtaskDelete(${index})" src="assets/img/subtask_trash_AddTask.svg" alt="Delete Subtask" class="subtask-icon">
+                          <img onclick="subtaskDeleteBoard(${index})" src="assets/img/subtask_trash_AddTask.svg" alt="Delete Subtask" class="subtask-icon">
                           <img src="assets/img/subtask_seperator_AddTask.svg" alt="Separator" class="subtask-icon">
-                          <img onclick="subtaskSaveEdit(${index})" src="assets/img/subtask_check_AddTask.svg" alt="Check Subtask" class="subtask-icon">
+                          <img onclick="subtaskSaveEditBoard(${index})" src="assets/img/subtask_check_AddTask.svg" alt="Check Subtask" class="subtask-icon">
                       </div>
                   </div>
                   <div id="mainBoundingBox${index}" class="subtask-bounding-box">
-                      <img onclick="subtaskEdit(${index})" src="assets/img/subtask_edit_AddTask.svg" alt="Edit Subtask" class="subtask-icon">
+                      <img onclick="subtaskEditBoard(${index})" src="assets/img/subtask_edit_AddTask.svg" alt="Edit Subtask" class="subtask-icon">
                       <img src="assets/img/subtask_seperator_AddTask.svg" alt="Separator" class="subtask-icon">
-                      <img onclick="subtaskDelete(${index})" src="assets/img/subtask_trash_AddTask.svg" alt="Delete Subtask" class="subtask-icon">
+                      <img onclick="subtaskDeleteBoard(${index})" src="assets/img/subtask_trash_AddTask.svg" alt="Delete Subtask" class="subtask-icon">
                   </div>
                 </div>
                 `).join('')}
