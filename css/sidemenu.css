@@ -195,7 +195,7 @@ a:hover {
   position: absolute;
   width: 150px;
   height: 158px;
-  top: 97px;
+  top: 100%;
   right: 20px;
   background-color: #2a3647;
   border-radius: 20px 0px 20px 20px;
@@ -339,8 +339,12 @@ a:hover {
   }
 
   .header {
-    width: 85%;
+    width: 86%;
     padding-left: 200px;
+  }
+
+  .subMenu {
+    right: 3%;
   }
 }
 
@@ -354,6 +358,10 @@ a:hover {
 @media (max-width: 1100px) {
   .display {
     padding-right: 50px;
+  }
+
+  .subMenu {
+    right: 5%;
   }
 }
 
@@ -399,6 +407,10 @@ a:hover {
 @media (max-width: 800px) {
   .header {
     width: 77%;
+  }
+
+  .subMenu {
+    right: 7%;
   }
 }
 
@@ -448,6 +460,12 @@ a:hover {
   }
 }
 
+@media (max-width: 490px) {
+  .subMenu {
+    right: 9%;
+  }
+}
+
 @media (max-width: 440px) {
   #joinLogoHeader {
     height: 45px;
@@ -467,6 +485,10 @@ a:hover {
   .navBar {
     z-index: 13;
   }
+
+  .subMenu {
+    right: 12%;
+  }
 }
 
 @media (max-width: 400px) {
@@ -475,8 +497,12 @@ a:hover {
   }
 }
 
-@media (max-width: 350px) {
+@media (max-width: 360px) {
   .header {
     width: 55%;
+  }
+
+  .subMenu {
+    right: 15%;
   }
 }
