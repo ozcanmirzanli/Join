@@ -389,28 +389,27 @@ function renderEditTaskForm(todo) {
                         <img onclick="saveSubtask()" id="checkSubtask" src="assets/img/subtask_check_AddTask.svg" class="subtasks" alt="subtask_check_AddTask">
                     </div>
                 </div>
-                <div id="showsubtasks">
-                    ${todo.subTasks.map((subtask, index) => `
-                    <div class="subtask-item">
-                        <div id="subtask${index}" class="subtask-content">
-                            <span>\u2022 ${subtask.content}</span>
-                        </div>
-                        <div id="subtaskEditInput${index}" class="subtask-content d-none">
-                            <input value="${subtask.content}" class="subtask-input subtaskEditText" id="subtaskInput${index}">
-                            <div class="subtask-bounding-box">
-                                <img onclick="subtaskDelete(${index})" src="assets/img/subtask_trash_AddTask.svg" alt="Delete Subtask" class="subtask-icon">
-                                <img src="assets/img/subtask_seperator_AddTask.svg" alt="Separator" class="subtask-icon">
-                                <img onclick="subtaskSaveEdit(${index})" src="assets/img/subtask_check_AddTask.svg" alt="Check Subtask" class="subtask-icon">
-                            </div>
-                        </div>
-                        <div id="mainBoundingBox${index}" class="subtask-bounding-box">
-                            <img onclick="subtaskEdit(${index})" src="assets/img/subtask_edit_AddTask.svg" alt="Edit Subtask" class="subtask-icon">
-                            <img src="assets/img/subtask_seperator_AddTask.svg" alt="Separator" class="subtask-icon">
-                            <img onclick="subtaskDelete(${index})" src="assets/img/subtask_trash_AddTask.svg" alt="Delete Subtask" class="subtask-icon">
-                        </div>
-                    </div>
-                    `).join('')}
+                <div id></div>
+                ${todo.subTasks.map((subtask, index) => `
+                <div class="subtask-item">
+                  <div id="subtask${index}" class="subtask-content">
+                      <span>\u2022 ${subtask.content}</span>
+                  </div>
+                  <div id="subtaskEditInput${index}" class="subtask-content d-none">
+                      <input value="${subtask.content}" class="subtask-input subtaskEditText" id="subtaskInput${index}">
+                      <div class="subtask-bounding-box">
+                          <img onclick="subtaskDelete(${index})" src="assets/img/subtask_trash_AddTask.svg" alt="Delete Subtask" class="subtask-icon">
+                          <img src="assets/img/subtask_seperator_AddTask.svg" alt="Separator" class="subtask-icon">
+                          <img onclick="subtaskSaveEdit(${index})" src="assets/img/subtask_check_AddTask.svg" alt="Check Subtask" class="subtask-icon">
+                      </div>
+                  </div>
+                  <div id="mainBoundingBox${index}" class="subtask-bounding-box">
+                      <img onclick="subtaskEdit(${index})" src="assets/img/subtask_edit_AddTask.svg" alt="Edit Subtask" class="subtask-icon">
+                      <img src="assets/img/subtask_seperator_AddTask.svg" alt="Separator" class="subtask-icon">
+                      <img onclick="subtaskDelete(${index})" src="assets/img/subtask_trash_AddTask.svg" alt="Delete Subtask" class="subtask-icon">
+                  </div>
                 </div>
+                `).join('')}
             </section>
             <footer class="editTaskFooter">
                 <button onclick="saveTaskBoard(${todo.id})" class="addTaskBtn" type="button">
@@ -458,10 +457,11 @@ function renderAssignedContactsBoard() {
  * @param {HTMLElement} assignedUser - The HTML element to render the assigned users in.
  */
 function renderAssignedUserBoard(assignedUser) {
+    assignedUser.innerHTML = "";
     assignedContacts.forEach((assignedContact) => {
       let badgeColor = assignedContact.color;
       assignedUser.innerHTML += `
-              <div class="initialsBig" style="background-color: ${badgeColor}">${assignedContact.initials}</div>
+              <div class="assignToBadge" style="background-color: ${badgeColor}">${assignedContact.initials}</div>
           `;
     });
   }

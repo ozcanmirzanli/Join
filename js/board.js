@@ -157,6 +157,15 @@ async function deleteTaskBoard(id) {
     closeTaskBig();
 }
 
+async function saveTaskContent(id){
+  const subTasksArray = getSubTasksArray();
+  const currentTodo = taskData.find(task => task.id === id);
+  const updatedFields = getUpdatedFields(currentTodo, subTasksArray);
+
+  updateTaskData(id, updatedFields);
+  await setItem('taskData', JSON.stringify(taskData));
+}
+
 /**
  * Save the task to the task board with updated details.
  * Updates the task data and persists it to storage.
@@ -165,12 +174,7 @@ async function deleteTaskBoard(id) {
  * @returns {Promise<void>} - A promise that resolves when the task data is saved.
  */
 async function saveTaskBoard(id) {
-  const subTasksArray = getSubTasksArray();
-  const currentTodo = taskData.find(task => task.id === id);
-  const updatedFields = getUpdatedFields(currentTodo, subTasksArray);
-
-  updateTaskData(id, updatedFields);
-  await setItem('taskData', JSON.stringify(taskData));
+  saveTaskContent(id);
   closeTaskBig();
 }
 
@@ -235,7 +239,7 @@ function toggleAssignToBoard(event, taskId) {
       assignedContactOnTaskBoard(taskId)
       openAssignToBoard();
     } else {
-      closeAssignToBoard();
+      closeAssignToBoard(taskId);
     }
 }
 
@@ -253,7 +257,6 @@ function openAssignToBoard() {
   inputAssignedTo.style.border = "1px solid #29ABE2";
   selectContactsText.innerHTML = "";
   renderContactsBoard();
-  renderAssignedContactsBoard();
   restoreSelectedContactsBoard();
 
   document.addEventListener("click", handleClickOutside);
@@ -262,7 +265,7 @@ function openAssignToBoard() {
 /**
  * Closes the "Assign To" dropdown menu.
  */
-function closeAssignToBoard() {
+function closeAssignToBoard(taskId) {
   let dropDownMenu = document.getElementById("assignToDropdown");
   let inputAssignedTo = document.querySelector(".input-assignedTo");
   let selectContactsText = document.getElementById("select-contacts");
@@ -272,7 +275,8 @@ function closeAssignToBoard() {
   document.getElementById("arrowdown").classList.remove("d-none");
   inputAssignedTo.style.border = "";
   selectContactsText.innerHTML = "Select contacts to assign";
-  renderAssignedUserBoard();
+  saveTaskContent(taskId);
+  renderAssignedContactsBoard();
 
   document.removeEventListener("click", handleClickOutside);
 }
