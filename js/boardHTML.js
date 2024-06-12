@@ -391,7 +391,7 @@ function renderEditTaskForm(todo) {
                 </div>
                 <div id></div>
                 ${todo.subTasks.map((subtask, index) => `
-                <div class="subtask-item">
+                <div id="subtaskContainer${index}" class="subtask-item">
                   <div id="subtask${index}" class="subtask-content">
                       <span>\u2022 ${subtask.content}</span>
                   </div>

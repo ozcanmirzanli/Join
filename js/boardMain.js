@@ -337,7 +337,7 @@ function subtaskSaveEditBoard(index) {
  * @param {number} index - The index of the subtask to delete.
  */
 function subtaskDeleteBoard(index) {
-  let subtaskElement = document.getElementById(`subtask${index}`);
+  let subtaskElement = document.getElementById(`subtaskContainer${index}`);
   if (subtaskElement) {
     subtaskElement.remove();
     // Hier sollte der Code ergänzt werden, um das Löschen der Subtask im Datenspeicher zu berücksichtigen.
