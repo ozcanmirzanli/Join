@@ -87,6 +87,7 @@ function closeTaskBig() {
   document.getElementById("taskBig").classList.remove("overlay");
   document.getElementById("taskBig").classList.add("d-none");
   document.body.style.overflow = 'auto';
+  localStorage.removeItem("selectedContacts");
 }
 
 /**
@@ -271,6 +272,7 @@ function closeAssignToBoard() {
   document.getElementById("arrowdown").classList.remove("d-none");
   inputAssignedTo.style.border = "";
   selectContactsText.innerHTML = "Select contacts to assign";
+  renderAssignedUserBoard();
 
   document.removeEventListener("click", handleClickOutside);
 }

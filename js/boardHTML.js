@@ -458,11 +458,10 @@ function renderAssignedContactsBoard() {
  * @param {HTMLElement} assignedUser - The HTML element to render the assigned users in.
  */
 function renderAssignedUserBoard(assignedUser) {
-    assignedUser.innerHTML = "";
     assignedContacts.forEach((assignedContact) => {
       let badgeColor = assignedContact.color;
       assignedUser.innerHTML += `
-              <div class="assignToBadge" style="background-color: ${badgeColor}">${assignedContact.initials}</div>
+              <div class="initialsBig" style="background-color: ${badgeColor}">${assignedContact.initials}</div>
           `;
     });
   }
