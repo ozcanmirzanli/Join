@@ -180,10 +180,10 @@ async function saveTaskBoard(id) {
  * @returns {Array<Object>} - An array of sub-task objects.
  */
 function getSubTasksArray() {
-  let subTasks = document.getElementById('addsubtask').value;
-  return subTasks.split('\n').map(subTask => ({
-    id: subTaskIdCounter++,  // Assumes subTaskIdCounter is defined elsewhere
-    content: subTask.trim(),
+  let subTasks = document.querySelectorAll('[id^="subtaskInput"]');
+  return Array.from(subTasks).map(subTask => ({
+    id: subTask.id,
+    content: subTask.value.trim(),
     completed: false
   }));
 }
