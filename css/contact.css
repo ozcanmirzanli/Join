@@ -159,7 +159,7 @@ h4 {
   justify-content: center;
   align-items: center;
   display: none;
-  z-index: 12;
+  z-index: 15;
   animation: moveInRight 0.3s ease-out;
 }
 
@@ -167,7 +167,7 @@ h4 {
   width: 100vw;
   height: 100vh;
   position: absolute;
-  z-index: 12;
+  z-index: 15;
   background-color: rgba(0, 0, 0, 0.226);
   display: flex;
   justify-content: center;
@@ -1031,7 +1031,6 @@ input[type="number"] {
 
   .input-area {
     flex-direction: column;
-    margin-top: -120px;
   }
 
   .input-fields {
@@ -1173,10 +1172,6 @@ input[type="number"] {
     z-index: 10;
   }
 
-  .edit-contact-right {
-    height: 52%;
-  }
-
   .edit-contact-right-container {
     position: relative;
   }
@@ -1229,13 +1224,11 @@ input[type="number"] {
 
   .add-contact-left,
   .edit-contact-left {
-    width: 100vw;
+    width: 100%;
+    height: 40%;
+    min-height: 0;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
-  }
-
-  .input-area {
-    margin-top: -260px;
   }
 
   .input-container {
@@ -1251,8 +1244,11 @@ input[type="number"] {
     right: 40px;
   }
 
-  .edit-contact-right {
-    height: 59%;
+  .edit-contact-right,
+  .add-contact-right {
+    height: 60%;
+    position: fixed;
+    margin-top: 55%;
   }
 
   .initialsBig {
@@ -1328,51 +1324,6 @@ input[type="number"] {
 
   .add-contact-close-mobile {
     right: 50px;
-  }
-}
-
-@media (max-height: 900px) and (max-width: 400px) {
-  .input-area {
-    margin-top: -230px;
-  }
-
-  .edit-contact-right {
-    height: 55%;
-  }
-}
-
-@media (max-height: 850px) and (max-width: 400px) {
-  .input-area {
-    margin-top: -190px;
-  }
-}
-
-@media (max-height: 750px) and (max-width: 400px) {
-  .add-contact-left-container,
-  .edit-contact-left-container {
-    height: 67%;
-  }
-
-  .input-area {
-    margin-top: -223px;
-  }
-}
-
-@media (max-height: 670px) and (max-width: 400px) {
-  .input-area {
-    margin-top: -213px;
-  }
-
-  .contact-picture {
-    margin-bottom: 22px;
-  }
-
-  .input-fields {
-    gap: 5px;
-  }
-
-  .edit-contact-right {
-    height: 42%;
   }
 }
 
