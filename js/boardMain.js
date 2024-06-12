@@ -5,7 +5,7 @@
  * @param {Event} event - The DOMContentLoaded event object.
  */
 document.addEventListener('DOMContentLoaded', async (event) => {
-  includeHTML();
+  await includeHTML();
   await new Promise(resolve => {
       window.onload = resolve;
   });
