@@ -39,18 +39,22 @@ function toggleSubmenu() {
  * Opens the submenu and changes the background color of the user header.
  */
 function openSubmenu() {
-  document.getElementById("userHeader").style.backgroundColor = "rgb(225,230,236)";
+  document.getElementById("userHeader").style.backgroundColor =
+    "rgb(225,230,236)";
   let submenu = document.getElementById("subMenu");
   submenu.classList.remove("d-none");
   submenu.classList.add("subMenu");
   submenuOpen = true;
+
+  addHelpToSubMenu();
 }
 
 /**
  * Closes the submenu and restores the original background color of the user header.
  */
 function closeSubmenu() {
-  document.getElementById("userHeader").style.backgroundColor = "rgb(255,255,255)";
+  document.getElementById("userHeader").style.backgroundColor =
+    "rgb(255,255,255)";
   let submenu = document.getElementById("subMenu");
   submenu.classList.add("d-none");
   submenu.classList.remove("subMenu");
@@ -66,10 +70,10 @@ function changeBackground(id) {
   document.getElementById("sideBtn2").classList.remove("clickedSideBtn");
   document.getElementById("sideBtn3").classList.remove("clickedSideBtn");
   document.getElementById("sideBtn4").classList.remove("clickedSideBtn");
-  
+
   let clickedBtn = document.getElementById(id);
-  localStorage.setItem("clickedBtnId", id); 
-  clickedBtn.classList.add("clickedSideBtn"); 
+  localStorage.setItem("clickedBtnId", id);
+  clickedBtn.classList.add("clickedSideBtn");
 }
 
 /**
@@ -90,7 +94,9 @@ function renderUserHeader() {
     const user = document.getElementById("userHeader");
     user.innerHTML = `<div class="initialsHeader">${initials}</div>`;
   } else {
-    document.getElementById("userHeader").innerHTML = `<div class="initialsHeader">G</div>`;
+    document.getElementById(
+      "userHeader"
+    ).innerHTML = `<div class="initialsHeader">G</div>`;
   }
 }
 
@@ -116,4 +122,10 @@ function getInitials(name) {
     .split(" ")
     .map((word) => word.charAt(0))
     .join("");
+}
+
+function addHelpToSubMenu() {
+  if (window.innerWidth < 551) {
+    document.getElementById("help-link").classList.remove("d-none");
+  }
 }

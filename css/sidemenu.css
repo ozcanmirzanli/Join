@@ -458,6 +458,15 @@ a:hover {
     height: 80px;
     width: 66%;
   }
+
+  .subMenu {
+    height: 204px;
+  }
+
+  .submenu-links {
+    margin-top: 25px;
+    gap: 25px;
+  }
 }
 
 @media (max-width: 490px) {
