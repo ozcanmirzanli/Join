@@ -421,7 +421,7 @@ function renderEditTaskForm(todo) {
     </div>
   `;
 }
-showsubtasks
+
 
 /**
  * Generates HTML for a contact list item in the "Assign To" dropdown menu.
@@ -446,9 +446,9 @@ function getassignListHTMLBoard(contact, badgeColor, i) {
 /**
  * Renders the list of assigned contacts in the "Assign To" section.
  */
-function renderAssignedContactsBoard() {
+function renderAssignedContactsBoard(taskId) {
     let assignedUser = document.getElementById("assignedUser");
-    renderAssignedUserBoard(assignedUser);
+    renderAssignedUserBoard(assignedUser, taskId);
   }
 
   /**
@@ -456,7 +456,8 @@ function renderAssignedContactsBoard() {
  * 
  * @param {HTMLElement} assignedUser - The HTML element to render the assigned users in.
  */
-function renderAssignedUserBoard(assignedUser) {
+function renderAssignedUserBoard(assignedUser, taskId) {
+    let assignedContacts = taskData[taskId]['assignTo'];
     assignedUser.innerHTML = "";
     assignedContacts.forEach((assignedContact) => {
       let badgeColor = assignedContact.color;

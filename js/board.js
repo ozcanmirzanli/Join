@@ -276,7 +276,7 @@ function closeAssignToBoard(taskId) {
   inputAssignedTo.style.border = "";
   selectContactsText.innerHTML = "Select contacts to assign";
   saveTaskContent(taskId);
-  renderAssignedContactsBoard();
+  renderAssignedContactsBoard(taskId);
 
   document.removeEventListener("click", handleClickOutside);
 }
