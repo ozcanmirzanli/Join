@@ -174,7 +174,7 @@ async function saveTaskContent(id){
  * @returns {Promise<void>} - A promise that resolves when the task data is saved.
  */
 async function saveTaskBoard(id) {
-  saveTaskContent(id);
+  await saveTaskContent(id);
   closeTaskBig();
 }
 
