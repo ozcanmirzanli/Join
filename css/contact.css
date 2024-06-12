@@ -1031,6 +1031,7 @@ input[type="number"] {
 
   .input-area {
     flex-direction: column;
+    margin-top: -35%;
   }
 
   .input-fields {
@@ -1235,6 +1236,10 @@ input[type="number"] {
     width: 310px;
   }
 
+  .input-area {
+    margin-top: 0;
+  }
+
   .add-contact-left-container,
   .edit-contact-left-container {
     margin-left: 40px;
@@ -1248,13 +1253,25 @@ input[type="number"] {
   .add-contact-right {
     height: 60%;
     position: fixed;
+  }
+
+  .edit-contact-right {
     margin-top: 55%;
+  }
+
+  .add-contact-right {
+    margin-top: 58%;
   }
 
   .initialsBig {
     width: 90px;
     height: 90px;
     font-size: 40px;
+  }
+
+  .contact-picture {
+    width: 100px;
+    height: 100px;
   }
 
   .contact-overview-header {
