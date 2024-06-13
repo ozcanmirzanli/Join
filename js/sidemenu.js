@@ -62,6 +62,24 @@ function closeSubmenu() {
 }
 
 /**
+ * Sets the background of the default or previously clicked button after a delay.
+ * If no button ID is stored in local storage, defaults to "sideBtn1".
+ * This will guarantee that Summary Button is marked if user moved from login.html to summary.html
+ */
+function changeBackgroundSummaryDefault() {
+  setTimeout(() => {
+    let clickedBtnId = localStorage.getItem("clickedBtnId");
+
+    if (!clickedBtnId) {
+      clickedBtnId = "sideBtn1";
+      localStorage.setItem("clickedBtnId", clickedBtnId);
+    }
+
+    changeBackground(clickedBtnId);
+  }, 100);
+}
+
+/**
  * Changes the background of the clicked button and saves its ID to local storage.
  * @param {string} id - The ID of the clicked button.
  */
