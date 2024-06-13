@@ -80,6 +80,7 @@ async function createTask() {
   checkDueDate();
   clearEntries();
   displaySuccessMessage();
+  changeBackground('sideBtn3');
 
     setTimeout(() => {
       window.location.href = "board.html";
