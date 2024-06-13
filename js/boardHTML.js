@@ -15,12 +15,16 @@ function generateTodoHTMLBoard(element) {
     let zIndex = 1; 
 
     if (element["assignTo"] && element["assignTo"].length > 0) {
-        for (let j = 0; j < element["assignTo"].length; j++) {
+        const maxContactsToShow = 3;
+        for (let j = 0; j < Math.min(maxContactsToShow, element["assignTo"].length); j++) {
             let member = element["assignTo"][j];
             const marginLeft = j !== 0 ? 'margin-left: -10%;' : ''; 
             if (member) {
                 assignTo += `<div class="initialsMini" style="z-index: ${zIndex++}; ${marginLeft}; background-color: ${member.color}">${member.initials}</div>`;
             }
+        }
+        if (element["assignTo"].length > maxContactsToShow) {
+            assignTo += `<div class="initialsMini" style="z-index: ${zIndex++}; margin-left: -10%; background-color: grey">+${element["assignTo"].length - maxContactsToShow}</div>`;
         }
     }
 
