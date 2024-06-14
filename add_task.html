@@ -112,8 +112,8 @@
           <section class="sectionSubtasks">
             <div class="pd-bottom"><span>Subtasks</span></div>
             <div class="input-subtasks border-input-addtask" id="addSubtaskMain" onfocus="handleInputFocus()">
-              <input onclick="toggleSubtasks()" id="addsubtask" type="text" placeholder="Add new subtasks" class="input-assignedTo border-none"/>
-              <div class="drop-down-image drop-down-subtask">
+              <input id="addsubtask" type="text" placeholder="Add new subtasks" class="input-assignedTo border-none"/>
+              <div onclick="toggleSubtasks()" class="drop-down-image drop-down-subtask">
                 <img id="plusIcon" src="assets/img/plus_addTask.svg" alt="plus_addTask"/>
               </div>
               <div id="subtasks" class="d-none add-subtasks">
