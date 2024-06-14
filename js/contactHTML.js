@@ -30,9 +30,9 @@ function generateAddContactHTML() {
  */
 function generateAddContactInputsHTML() {
   return /*html*/ `
-    <form class="input-fields">
-    <div class="input-container"><input type="text" placeholder="Name" id="name"><img src="./assets/img/input_name.png" alt="" class="inputImg"></div>
-    <div class="input-container"><input type="e-mail" placeholder="Email" id="mail"><img src="./assets/img/mail.png" alt="" class="inputImg"></div>
+    <form onsubmit="saveContact(event)" class="input-fields">
+    <div class="input-container"><input type="text" placeholder="Name" id="name" required><img src="./assets/img/input_name.png" alt="" class="inputImg"></div>
+    <div class="input-container"><input type="email" placeholder="Email" id="mail" required><img src="./assets/img/mail.png" alt="" class="inputImg"></div>
     <div class="input-container"><input type="number" placeholder="Phone" id="number"><img src="./assets/img/call.png" alt="" class="inputImg"></div>
     ${generateAddContactButtonsHTML()}
     </form>`;
@@ -48,7 +48,7 @@ function generateAddContactButtonsHTML() {
        <button class="add-contact-cancel" onclick="closePopUp()">
        <p class="cancelText">Cancel</p><img src="./assets/img/Close.png" alt="" class="close">
        </button>
-       <button class="add-contact-create" onclick="saveContact(event)">
+       <button class="add-contact-create" type="submit">
        <p class="save-text">Create Contact</p>
       <img src="./assets/img/check.png" alt=""/>
       </button>
