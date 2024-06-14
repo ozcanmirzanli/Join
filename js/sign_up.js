@@ -7,11 +7,13 @@ let confirmPasswordContainer = document.querySelector(".confirm-password-contain
 let confirmPasswordLogo = document.getElementById("confirm-password-logo");
 let signUpBtn = document.getElementById("sign-up-btn");
 let checked = document.getElementById("checked");
-let wrongPassword = document.getElementById("alert");
+let mismatchPassword = document.querySelector(".mismatched-password");
 let confirmPasswordInput = document.getElementById("confirm-password");
 let emailInput = document.getElementById("email");
 let emailContainer = document.querySelector(".email-input");
 let alertUsedEmail = document.querySelector(".used-email");
+let uncheckedPrivacy = document.querySelector(".unchecked-privacy");
+let checkBox = document.querySelector(".check-box");
 
 loadUsers();
 
@@ -45,8 +47,10 @@ let inputChecked = false;
  * If all conditions are met, it proceeds to register the user.
  */
 async function signUp() {
-  if (!inputChecked) {
-      alert("Please check the Privacy Policy box to proceed.");
+ if (!inputChecked) {
+    uncheckedPrivacy.style.display = "block";
+    mismatchPassword.style.display = "none";
+    alertUsedEmail.style.display = "none";
       return;  
   }
 
@@ -141,7 +145,9 @@ confirmPasswordInput.addEventListener("input", hideMismatchWarning);
  * Displays an error message and styles if the passwords do not match.
  */
 function showMismatchWarning() {
-  wrongPassword.style.display = "block";
+  uncheckedPrivacy.style.display = "none";
+  alertUsedEmail.style.display = "none";
+  mismatchPassword.style.display = "block";
   confirmPasswordContainer.style.border = "1px solid red";
 
   /* prettier-ignore */
@@ -153,8 +159,8 @@ function showMismatchWarning() {
  * Hides the error message and resets styles related to password mismatch.
  */
 function hideMismatchWarning() {
-  if (wrongPassword.style.display === "block") {
-    wrongPassword.style.display = "none";
+  if (mismatchPassword.style.display === "block") {
+    mismatchPassword.style.display = "none";
     confirmPasswordContainer.style.border = "";
   }
 }
@@ -226,6 +232,8 @@ function updateEmailUI() {
  * It changes the border color of the email input container to red and makes a warning message visible.
  */
 function usedEmailUI() {
+  mismatchPassword.style.display = "none";
+  uncheckedPrivacy.style.display = "none";
   emailContainer.style.border = "1px solid red";
   alertUsedEmail.style.display = "block";
 }

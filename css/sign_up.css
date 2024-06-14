@@ -105,7 +105,6 @@ h2 {
   display: flex;
   flex-direction: column;
   background-color: white;
-  gap: 32px;
 }
 
 input {
@@ -140,6 +139,7 @@ input::placeholder {
   background-color: white;
   border: 1px solid #e8e8e8;
   cursor: pointer;
+  margin-bottom: 32px;
 }
 
 #mail-logo,
@@ -155,21 +155,26 @@ input::placeholder {
 }
 
 #alert {
-  position: absolute;
-  top: 445px;
-  left: 93px;
   color: #ff8190;
   font-size: 13px;
   font-weight: 400;
-  line-height: 15.6px;
+  line-height: 0;
   display: none;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  margin-left: 15px;
+}
+
+.unchecked-privacy {
+  display: none;
+  margin-top: -10px;
 }
 
 .check-box {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  margin-bottom: 32px;
+  margin-bottom: 25px;
 }
 
 .check-box p {
@@ -199,7 +204,7 @@ input::placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 35px;
+  margin-top: 32px;
 }
 
 #sign-up-btn {
@@ -316,26 +321,25 @@ footer a:hover {
     height: 98px;
   }
 
-  .sign-up-form-card h1{
+  .sign-up-form-card h1 {
     margin-top: 24px;
-  }
-
-  .inputs {
-    gap: 22px;
   }
 }
 
-@media (max-width:850px) {
-  .user-name-input, .email-input, .password-input, .confirm-password-container {
+@media (max-width: 850px) {
+  .user-name-input,
+  .email-input,
+  .password-input,
+  .confirm-password-container {
     width: 90%;
     margin-left: 10px;
   }
-  
+
   #sign-up-logo {
     height: 57px;
     width: 49px;
   }
-  .sign-up-form-card h1{
+  .sign-up-form-card h1 {
     font-size: 45px;
   }
 
@@ -353,7 +357,7 @@ footer a:hover {
   }
 
   .sign-up-form-card {
-    width: 90%;
+    width: 70%;
     height: 65%;
   }
 
@@ -364,7 +368,6 @@ footer a:hover {
 
   .inputs {
     height: 75%;
-    gap: 5%;
   }
 
   footer {
@@ -380,15 +383,23 @@ footer a:hover {
 
   .footer-links {
     justify-content: space-evenly;
-    margin-top: 0;
+    margin-top: 60px;
+  }
+
+  .user-name-input,
+  .email-input,
+  .password-input,
+  .confirm-password-container {
+    margin-bottom: 5%;
   }
 }
 
 @media (max-width: 520px) {
   .sign-up-form-card {
     margin-top: 73px;
+    width: 90%;
   }
-  
+
   .sign-up-form-card h1 {
     font-size: 40px;
     margin-top: 5%;
@@ -415,11 +426,22 @@ footer a:hover {
     width: 85%;
     max-height: 40px;
     padding-right: 20px;
+    margin-bottom: 5%;
   }
 
   .check-box {
     margin-bottom: 4%;
     margin-top: 6%;
+  }
+
+  #alert {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 11px;
+  }
+
+  .footer-links {
+    margin-top: 0;
   }
 }
 
@@ -448,6 +470,13 @@ footer a:hover {
 
   .footer-links {
     margin-bottom: 0;
+  }
+
+  .user-name-input,
+  .email-input,
+  .password-input,
+  .confirm-password-container {
+    padding-right: 13px;
   }
 }
 
@@ -482,13 +511,6 @@ footer a:hover {
 }
 
 @media (max-width: 340px) {
-  .user-name-input,
-  .email-input,
-  .password-input,
-  .confirm-password-container {
-    gap: 0;
-  }
-
   .sign-up-underline {
     width: 67px;
   }
