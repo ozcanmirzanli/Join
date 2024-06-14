@@ -706,7 +706,7 @@ input[type="number"] {
 .deleteBtnContact:hover {
   cursor: pointer;
   color: rgb(0, 124, 238);
-  font-weight: 700;
+  font-weight: 400;
   filter: invert(64%) sepia(70%) saturate(2202%) hue-rotate(165deg)
     brightness(91%) contrast(94%);
 }
