@@ -492,7 +492,7 @@ footer a:hover {
 
 @media (max-width: 380px) {
   input {
-    width: 220px;
+    width: 100%;
   }
 
   .sign-up-form-card h1 {
