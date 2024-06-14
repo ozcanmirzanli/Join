@@ -372,6 +372,18 @@ footer a:hover {
   }
 }
 
+@media (max-width:900px){
+  .password-input{
+    width: 90%;
+    margin-left: 10px;
+  }
+
+  .email-input{
+    width: 90%;
+    margin-left: 10px;
+  }
+}
+
 @media (max-width: 750px) {
   .login-form-card {
     width: 90%;
@@ -381,6 +393,10 @@ footer a:hover {
 @media (max-width: 600px) {
   .login-main-container {
     height: 90vh;
+  }
+
+  .login-form-card{
+    margin-top: 33%;
   }
 
   header {
@@ -395,6 +411,10 @@ footer a:hover {
     display: flex;
     margin-top: 10%;
     margin-bottom: 5%;
+  }
+
+  footer{
+    margin-top: 10%;
   }
 
   .footer-links {
