@@ -320,7 +320,7 @@ function changeLogoToMobile() {
   if (!loginLogo) {
       return;
   }
-  if (window.innerWidth < 600) {
+  if (window.innerWidth < 601) {
       loginLogo.src = "assets/img/mobile-logo.png";
       setTimeout(function () {
           loginLogo.src = "assets/img/Capa_1.png";

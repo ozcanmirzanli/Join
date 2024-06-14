@@ -118,7 +118,7 @@ h2 {
 
 .login-form-card {
   width: 51%;
-  height: 63%;
+  height: 70%;
   max-width: 652px;
   max-height: 493px;
   display: flex;
@@ -139,7 +139,7 @@ h2 {
   margin-block-start: 0;
   margin-block-end: 0;
   margin-bottom: 16px;
-  margin-top: 48px;
+  margin-top: 24px;
 }
 
 #wrong-password {
@@ -399,6 +399,10 @@ footer a:hover {
     margin-top: 33%;
   }
 
+  .login-form-card h1 {
+    font-size: 56px;
+  }
+
   header {
     height: 20%;
   }
@@ -440,7 +444,7 @@ footer a:hover {
   .bottom-btns {
     flex-direction: column;
     margin-top: 40px;
-    gap: 10px;
+    gap: 5px;
   }
 
   #login-btn {
@@ -449,12 +453,13 @@ footer a:hover {
   }
 
   #login-logo {
-    width: 85px;
-    height: 109px;
-  }
+    width: 72px;
+        height: 94px;
+    }
 
   .inputs {
     gap: 5%;
+    height: 72%;
   }
 }
 
