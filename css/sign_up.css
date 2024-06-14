@@ -127,7 +127,7 @@ input::placeholder {
 .password-input,
 .confirm-password-container {
   width: 401px;
-  height: fit-content;
+  height: 46px;
   max-width: 401px;
   max-height: 48px;
   display: flex;
