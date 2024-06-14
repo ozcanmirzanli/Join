@@ -342,3 +342,42 @@ function subtaskDeleteBoard(index) {
     subtaskElement.remove();
   }
 }
+
+/**
+ * Updated assignedContactOnTaskBoard function to store assigned contacts in localStorage.
+ */
+function assignedContactOnTaskBoard(taskId) {
+  if (taskId >= 0 && taskId < taskData.length) {
+    let assignedContacts = taskData[taskId]['assignTo'];
+    localStorage.setItem("selectedContacts", JSON.stringify(assignedContacts)); 
+  } else {
+    console.error('Ungültige Task-ID.');
+  }
+}
+
+/**
+ * Edits a task.
+ * @param {number} id - The ID of the task to edit.
+ */
+function editTask(id) {
+  const todo = taskData.find((todo) => todo.id === id);
+  renderEditTaskForm(todo);
+}
+
+
+/**
+ * Renders the list of assigned contacts in the "Assign To" section.
+ */
+function renderAssignedContactsBoard(taskId) {
+  let assignedUser = document.getElementById("assignedUser");
+  renderAssignedUserBoard(assignedUser, taskId);
+}
+
+
+
+  /**
+   * Function to clear selectedContacts array from localStorage.
+   */
+  function clearSelectedContacts() {
+    localStorage.removeItem("selectedContacts");
+  }
