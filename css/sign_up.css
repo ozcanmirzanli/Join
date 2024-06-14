@@ -321,6 +321,14 @@ footer a:hover {
   }
 }
 
+@media (max-width:850px) {
+  .user-name-input, .email-input, .password-input, .confirm-password-container {
+    width: 90%;
+    margin-left: 10px;
+  }
+  
+}
+
 @media (max-width: 750px) {
   .sign-up-main-container {
     flex-direction: row;
