@@ -444,7 +444,7 @@ footer a:hover {
   .bottom-btns {
     flex-direction: column;
     margin-top: 40px;
-    gap: 5px;
+    gap: 10px;
   }
 
   #login-btn {
@@ -458,7 +458,7 @@ footer a:hover {
     }
 
   .inputs {
-    gap: 5%;
+    gap: 10px;
     height: 72%;
   }
 }
