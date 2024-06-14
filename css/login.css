@@ -70,20 +70,7 @@ h2 {
   margin-bottom: 42px;
 }
 
-#sign-up-btn {
-  border: none;
-  background-color: #2a3647;
-  color: white;
-  border-radius: 10px;
-  padding: 15px 16px 15px 16px;
-  display: flex;
-  align-items: center;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19.2px;
-}
-
-#sign-up-btn-mobil {
+#sign-up-btn, #sign-up-btn-mobil {
   border: none;
   background-color: #2a3647;
   color: white;
@@ -472,9 +459,12 @@ footer a:hover {
 }
 
 @media (max-width: 520px) {
-  .login-form-card h1 {
-    font-size: 47px;
+  .login-form-card {
     margin-top: 5%;
+  }
+
+  h1 {
+    font-size: 47px;
   }
 
   .login-underline {
