@@ -414,7 +414,7 @@ footer a:hover {
   .confirm-password-container {
     width: 85%;
     max-height: 40px;
-    padding-right: 20px;
+    padding-right: 5px;
   }
 
   .check-box {
@@ -463,7 +463,7 @@ footer a:hover {
 
 @media (max-width: 380px) {
   input {
-    width: 220px;
+    width: 100%;
   }
 
   .sign-up-form-card h1 {
