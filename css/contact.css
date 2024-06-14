@@ -65,7 +65,7 @@ h4 {
 .all-contacts {
   background-color: white;
   max-width: 456px;
-  height: 85vh;
+  height: calc(100vh - 160px);
   box-shadow: 4px 0px 6px 0px #00000014;
   padding: 32px 24px 32px 48px;
   overflow-y: scroll;
@@ -1087,7 +1087,7 @@ input[type="number"] {
   }
 
   .all-contacts{
-    height: 77vh;
+    height: calc(100vh - 235px);
   }
 }
 
