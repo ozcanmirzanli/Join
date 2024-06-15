@@ -1086,7 +1086,7 @@ input[type="number"] {
     width: 100vw;
   }
 
-  .all-contacts{
+  .all-contacts {
     height: calc(100vh - 235px);
   }
 }
@@ -1143,7 +1143,10 @@ input[type="number"] {
     justify-content: center;
     padding-top: 20px;
     padding-left: 0;
-    max-height: 69vh;
+  }
+
+  #all-contacts:last-child {
+    padding-bottom: 50px;
   }
 
   .contactSmall:active {

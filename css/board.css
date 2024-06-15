@@ -1,6 +1,13 @@
- body {
+body {
   margin: 0;
   box-sizing: border-box;
+}
+
+p {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  color: #42526e;
 }
 
 .dialog-bg {
@@ -26,7 +33,7 @@
   align-items: center;
 }
 
-.flexBetweenCenter img:hover{
+.flexBetweenCenter img:hover {
   background-color: #f2f2f2; /* Leichtes Grau */
   cursor: pointer;
   border-radius: 10px;
@@ -55,11 +62,12 @@
 .FindTask {
   display: flex;
   margin-right: 32px;
-  border: 1px solid;
+  border: 1px solid #a8a8a8;
   border-radius: 10px;
-  height: 48px;
   width: 312px;
+  padding: 8px 16px 8px 16px;
   justify-content: space-around;
+  align-items: center;
   background-color: white;
 }
 
@@ -72,7 +80,12 @@
 
 #search {
   border: none;
-  padding: 0;
+  width: 80%;
+  height: 100%;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  padding-left: 0 !important;
 }
 
 .searchButton {
@@ -81,6 +94,8 @@
   cursor: pointer;
   background-color: white;
   border-radius: 50px;
+  width: 35px;
+  height: 35px;
 }
 
 .line {
@@ -164,7 +179,8 @@
 
 .plus:hover {
   cursor: pointer;
-  filter: invert(64%) sepia(70%) saturate(2202%) hue-rotate(165deg) brightness(91%) contrast(94%);
+  filter: invert(64%) sepia(70%) saturate(2202%) hue-rotate(165deg)
+    brightness(91%) contrast(94%);
 }
 
 input:focus {
@@ -208,7 +224,7 @@ input:focus {
   padding-top: 16px;
   gap: 10px;
   border-radius: 24px;
-  background-color: #fff; 
+  background-color: #fff;
   box-shadow: 0px 0px 10px 3px #00000014;
   transition: transform 0.3s ease-out;
 }
@@ -217,14 +233,14 @@ input:focus {
   transform: rotate(+5deg); /* Beispiel für Skalierung während des Ziehens */
 }
 
-.mobileHead{
+.mobileHead {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.mobilDrag{
-  background-color: #2A3647;
+.mobilDrag {
+  background-color: #2a3647;
   border-radius: 50px;
   margin-right: 8px;
   display: none;
@@ -234,20 +250,19 @@ input:focus {
   position: absolute;
   display: flex;
   flex-direction: column;
-  background-color: #2A3647;
+  background-color: #2a3647;
   border-radius: 12px;
   z-index: 12;
   width: 150px;
   height: 210px;
   padding-left: 7px;
   padding-right: 7px;
-  top: 100%; 
-  left: 0; 
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+  top: 100%;
+  left: 0;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-
-.dragPara{
+.dragPara {
   color: #fff;
 }
 
@@ -304,15 +319,15 @@ input:focus {
 .progressbar {
   width: 128px;
   height: 100%;
-  background-color: #F4F4F4; 
+  background-color: #f4f4f4;
   border-radius: 8px;
   position: relative;
 }
 
 .progressbar .progress-bar {
   height: 100%;
-  background-color: #4589FF; 
-  border-radius: 8px; 
+  background-color: #4589ff;
+  border-radius: 8px;
   position: absolute;
   top: 0;
   left: 0;
@@ -355,15 +370,13 @@ input:focus {
 }
 
 .bigTask {
-  margin-top: 5%;
-  margin-left: 470px;
   position: absolute;
   background-color: #fff;
   width: 525px;
-  height: auto;
   border-radius: 30px;
   z-index: 999;
-  max-height: 80vh;
+  max-height: 931px;
+
   overflow-y: auto;
   scroll-behavior: smooth;
 }
@@ -389,6 +402,9 @@ input:focus {
 
 .overlay {
   position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   top: 0;
   left: 0;
   width: 100%;
@@ -447,7 +463,7 @@ input:focus {
 }
 
 .bigTaskColor {
-  color:  rgba(66, 82, 110, 1);
+  color: rgba(66, 82, 110, 1);
 }
 
 .bigTaskPrio {
@@ -456,7 +472,7 @@ input:focus {
   gap: 10px;
 }
 
-.bigTaskPrio img{
+.bigTaskPrio img {
   width: 17px;
   height: 12px;
 }
@@ -531,7 +547,7 @@ input:focus {
   align-items: center;
 }
 
-.subTaskCheckBox{
+.subTaskCheckBox {
   padding-right: 16px;
   height: 24px;
   width: 24px;
@@ -549,16 +565,17 @@ input:focus {
   gap: 8px;
 }
 
-.iconTask img{
+.iconTask img {
   width: 16px;
   height: 18px;
 }
 
-.iconTask:hover{
+.iconTask:hover {
   cursor: pointer;
   color: rgb(0, 124, 238);
   font-weight: 700;
-  filter: invert(64%) sepia(70%) saturate(2202%) hue-rotate(165deg) brightness(91%) contrast(94%);
+  filter: invert(64%) sepia(70%) saturate(2202%) hue-rotate(165deg)
+    brightness(91%) contrast(94%);
 }
 
 /* assigned to section */
@@ -587,7 +604,8 @@ input:focus {
   padding: 12px 16px;
 }
 
-.assignToDDArrow, #arrowup {
+.assignToDDArrow,
+#arrowup {
   border-radius: 50px;
   right: 13px;
   top: 10px;
@@ -636,7 +654,7 @@ input:focus {
 
 .assignField {
   border-radius: 10px;
-  border: solid 1px #D1D1D1;
+  border: solid 1px #d1d1d1;
   background-color: white;
   color: black !important;
   display: flex;
@@ -650,7 +668,7 @@ input:focus {
   width: 100%;
 }
 
-.drop-down-image-assign { 
+.drop-down-image-assign {
   border-radius: 10px;
   height: 20px;
   width: 20px;
@@ -660,7 +678,7 @@ input:focus {
 }
 
 .contactSelected {
-  background-color: #2A3647 !important;
+  background-color: #2a3647 !important;
   color: white;
 }
 
@@ -680,11 +698,7 @@ input:focus {
   .headlineBoard {
     margin-left: auto;
     justify-content: space-around;
-}
-  .bigTask{
-    margin-top: 8%;
-    margin-left: 308px;
-}
+  }
 
   .Task {
     height: auto;
@@ -760,51 +774,15 @@ input:focus {
 
   .bigTask {
     max-width: 90vw;
-    margin-left: 25%;
-    margin-top: 15%;
-    top: 0;}
+  }
 
   .mobilDrag {
-   display: block;
-    }
+    display: block;
+  }
 }
 
 @media (max-width: 970px) {
   .table {
     flex-direction: column;
-  }
-
-  .bigTask {
-    max-width: 90vw;
-    margin-left: 25%;
-  }
-}
-
-@media (max-width: 900px ) {
-  .bigTask {
-    margin-top: 5%;
-    margin-left: 19%;
-  }
-}
-
-@media (max-width: 750px) {
-  .bigTask {
-    margin-top: 12%;
-    max-width: 90vw;
-    margin-left: 12%;
-  }
-}
-
-@media (max-width: 550px) {
-  .bigTask {
-    max-width: 90vw;
-    margin-left: 5%;
-    margin-top: 30%;
-  }
-}
-
-@media (max-height: 667px) {
-  .bigTask{
-    margin-top: 5%;
   }
 }
