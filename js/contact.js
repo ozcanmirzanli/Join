@@ -1,3 +1,11 @@
+import {
+  generateEditContactHTML,
+  generateContactDetailsHTML,
+  generateLettersCategoriesHTML,
+  generateSmallContactHTML,
+  generateAddContactHTML,
+} from "./contactHTML.js";
+
 let contacts = [];
 let firstLetters = [];
 
@@ -28,15 +36,16 @@ async function init() {
  */
 async function getContact() {
   try {
-    contacts = JSON.parse(await getItem("contact"));
-  } catch (error) {
-    console.info("Could not load contacts");
+    contacts = await getItem("contacts");
+  } catch (e) {
+    console.error("Loading error:", e);
   }
 }
 
 /**
  * Display the form to add a new contact.
  */
+
 function addNewContact() {
   let addContact = document.getElementById("add-contact-bg");
   addContact.style.display = "flex";
@@ -238,7 +247,7 @@ function changeContactColor(contactId) {
   let allContacts = document.querySelectorAll(".contactSmall");
   if (window.innerWidth > 630) {
     allContacts.forEach((contact) => {
-      if (contact.getAttribute("data-id") == contactId) {
+      if (+contact.getAttribute("data-id") == contactId) {
         contact.classList.add("contact-list-active");
       } else {
         contact.classList.remove("contact-list-active");
@@ -335,7 +344,7 @@ function updateContactDetails(index) {
   let name = document.getElementById("name").value;
   let mail = document.getElementById("mail").value;
   let number = document.getElementById("number").value;
-  let color = contacts[index]['color'];
+  let color = contacts[index]["color"];
   let initials = getInitials(name);
 
   contacts[index]["name"] = name;
@@ -356,6 +365,7 @@ async function saveContactsToStorage() {
  * Update the first letters array after editing a contact.
  * @param {number} index - The index of the contact being edited.
  */
+
 function updateFirstLettersAfterEdit(index) {
   let name = document.getElementById("name").value;
   let nameParts = name.split(" ");
@@ -398,6 +408,9 @@ document.addEventListener("click", function (event) {
  * Show the contact options for editing.
  */
 function showContactOptions() {
+  /**
+   * @type {HTMLElement}
+   */
   let editBtn = document.querySelector(".edit-contact-btns");
   if (editBtn) {
     editBtn.style.display = "flex";
@@ -436,6 +449,9 @@ if (editContactBtns) {
  * The message is shown for a short duration and then hidden.
  */
 function contactAddedSuccess() {
+  /**
+   * @type {HTMLElement}
+   */
   let addContactSuccessContainer = document.querySelector(
     ".add-contact-success-container"
   );

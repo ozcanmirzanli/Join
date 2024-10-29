@@ -5,8 +5,8 @@
  * @param {number} i - The index of the subtask.
  * @returns {string} The HTML code for the subtask item.
  */
-function renderSubtaskItem(subtask, i) {
-    return /*HTML*/ `
+export function renderSubtaskItem(subtask, i) {
+  return /*HTML*/ `
         <div class="subtask-item" id="subtask${i}">
             <div class="subtask-content"  id="subtaskContent${i}">
                 <span>\u2022 ${subtask}</span>
@@ -26,13 +26,13 @@ function renderSubtaskItem(subtask, i) {
             </div>
         </div>
     `;
-  }
+}
 
 /**
  * Generates HTML for a contact in the assign to dropdown menu.
  */
 function getassignListHTML(contact, badgeColor, i) {
-    return /*HTML*/ `
+  return /*HTML*/ `
               <div class="assignListContact" id="contact${i}" onclick="assignContact(${i}, '${contact.name}', '${contact.initials}')">
                   <div class="assignDetails">
                       <div class="assignToBadge" style="background-color: ${badgeColor}">${contact.initials}</div>
@@ -41,17 +41,17 @@ function getassignListHTML(contact, badgeColor, i) {
                   <img id="checkbox${i}" src="./assets/img/addTask_AssignTo_Checkbox.svg" class="checkbox">
               </div>
               `;
-  }
+}
 
 /**
  * Renders assigned users.
  */
-function renderassignedUser(assignedUser) {
-    assignedUser.innerHTML = "";
-    assignedContacts.forEach((assignedContact) => {
-      let badgeColor = assignedContact.color;
-      assignedUser.innerHTML += `
+export function renderAssignedUser(assignedUser) {
+  assignedUser.innerHTML = "";
+  assignedContacts.forEach((assignedContact) => {
+    let badgeColor = assignedContact.color;
+    assignedUser.innerHTML += `
               <div class="assignToBadge" style="background-color: ${badgeColor}">${assignedContact.initials}</div>
           `;
-    });
-  }
+  });
+}

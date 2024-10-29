@@ -1,15 +1,17 @@
+import { changePriorityColor, closeAssignTo } from "./add_task";
+
 /**
  * Sets up event listeners for focus and blur events on the input element.
  */
 document.addEventListener("DOMContentLoaded", function () {
-    let addSubtaskInput = document.getElementById("addsubtask");
-  
-    if (addSubtaskInput) {
-      addSubtaskInput.addEventListener("focus", handleFocus);
-      addSubtaskInput.addEventListener("blur", handleBlur);
-       changePriorityColor("medium");
-    }
-  });
+  let addSubtaskInput = document.getElementById("addsubtask");
+
+  if (addSubtaskInput) {
+    addSubtaskInput.addEventListener("focus", handleFocus);
+    addSubtaskInput.addEventListener("blur", handleBlur);
+    changePriorityColor("medium");
+  }
+});
 
 /**
  * Handles category change.
@@ -17,34 +19,37 @@ document.addEventListener("DOMContentLoaded", function () {
  * @param {HTMLSelectElement} selectElement - The select element.
  */
 function handleCategoryChange(selectElement) {
-    let selectedCategory = selectElement.value;
-  }
+  let selectedCategory = selectElement.value;
+}
 
 /**
  * Handles focus event on subtask input.
  */
 function handleFocus() {
-    let addSubtaskMain = document.getElementById("addSubtaskMain");
-    addSubtaskMain.style.border = "1px solid #29abe2";
-  }
-  
+  let addSubtaskMain = document.getElementById("addSubtaskMain");
+  addSubtaskMain.style.border = "1px solid #29abe2";
+}
+
 /**
  * Handles blur event on subtask input.
  */
 function handleBlur() {
-    let addSubtaskMain = document.getElementById("addSubtaskMain");
-    addSubtaskMain.style.border = "1px solid #29abe2"
-  }
+  let addSubtaskMain = document.getElementById("addSubtaskMain");
+  addSubtaskMain.style.border = "1px solid #29abe2";
+}
 
 /**
  * Handles clicks outside the assignAddTask div.
  */
 function handleClickOutside(event) {
-    let assignAddTask = document.getElementById("assignAddTask");
-    let assignToDropdown = document.getElementById("assignToDropdown");
-      if (!assignAddTask.contains(event.target) && !assignToDropdown.contains(event.target)) {
-          closeAssignTo();
-      }
+  let assignAddTask = document.getElementById("assignAddTask");
+  let assignToDropdown = document.getElementById("assignToDropdown");
+  if (
+    !assignAddTask.contains(event.target) &&
+    !assignToDropdown.contains(event.target)
+  ) {
+    closeAssignTo();
+  }
 }
 
 /**
@@ -75,16 +80,16 @@ async function createTask() {
     priority: selectedPrio,
     todo: "toDo",
   });
-    await setItem('taskData', JSON.stringify(taskData));
+  await setItem("taskData", JSON.stringify(taskData));
 
   checkDueDate();
   clearEntries();
   displaySuccessMessage();
-  changeBackground('sideBtn3');
+  changeBackground("sideBtn3");
 
-    setTimeout(() => {
-      window.location.href = "board.html";
-    }, 1000);
+  setTimeout(() => {
+    window.location.href = "board.html";
+  }, 1000);
 }
 
 /**
@@ -103,7 +108,7 @@ function displaySuccessMessage() {
 /**
  * Checks if the selected due date is valid.
  * Only current day or future day are allowed.
- * Set Function of, because there are issue when putting date manual 
+ * Set Function of, because there are issue when putting date manual
  */
 function checkDueDate() {
   let selectedDate = new Date(document.getElementById("dueDate").value);

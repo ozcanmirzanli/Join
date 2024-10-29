@@ -2,7 +2,7 @@
  * Generates the HTML for the "Add Contact" form.
  * @returns {string} The HTML string for the "Add Contact" form.
  */
-function generateAddContactHTML() {
+export function generateAddContactHTML() {
   return /*html*/ `
     <div class="add-contact-container">
     <div class="add-contact-left">
@@ -28,7 +28,7 @@ function generateAddContactHTML() {
  * Generates the HTML for the input fields in the "Add Contact" form.
  * @returns {string} The HTML string for the input fields in the "Add Contact" form.
  */
-function generateAddContactInputsHTML() {
+export function generateAddContactInputsHTML() {
   return /*html*/ `
     <form onsubmit="saveContact(event)" class="input-fields">
     <div class="input-container"><input type="text" placeholder="Name" id="name" required><img src="./assets/img/input_name.png" alt="" class="inputImg"></div>
@@ -42,7 +42,7 @@ function generateAddContactInputsHTML() {
  * Generates the HTML for the buttons in the "Add Contact" form.
  * @returns {string} The HTML string for the buttons in the "Add Contact" form.
  */
-function generateAddContactButtonsHTML() {
+export function generateAddContactButtonsHTML() {
   return /*html*/ `
     <div class="add-contact-btns" >
        <button class="add-contact-cancel" onclick="closePopUp()">
@@ -60,7 +60,7 @@ function generateAddContactButtonsHTML() {
 /**
  * Generates the HTML for a small contact preview.
  */
-function generateSmallContactHTML(contact) {
+export function generateSmallContactHTML(contact) {
   return /*html*/ `
     <div class="contactSmall" data-id="${contact.id}" onclick="getOverview(${contact.id})">
       <div class="initials" style="background-color: ${contact.color};">${contact.initials}</div>
@@ -75,7 +75,7 @@ function generateSmallContactHTML(contact) {
 /**
  * Generates the HTML for a letter category section.
  */
-function generateLettersCategoriesHTML(firstLetter) {
+export function generateLettersCategoriesHTML(firstLetter) {
   return /*html*/ `
      <div id="container${firstLetter}">
         <div class="container-letter">${firstLetter}</div>
@@ -89,7 +89,7 @@ function generateLettersCategoriesHTML(firstLetter) {
  * Generates the HTML for the contact details view.
  */
 // prettier-ignore
-function generateContactDetailsHTML(contact) {
+export function generateContactDetailsHTML(contact) {
     return /*html*/ `
       <div class="upperArea">
         <div class="initialsBig" style="background-color: ${contact.color};">${contact.initials}</div>
@@ -107,7 +107,7 @@ function generateContactDetailsHTML(contact) {
 /**
  * Generates the HTML for the contact name area.
  */
-function generateContactNameAreaHTML(contact) {
+export function generateContactNameAreaHTML(contact) {
   return /*html*/ `
     <div class="nameArea">
     <div class="nameBig">${contact.name}</div>
@@ -126,7 +126,7 @@ function generateContactNameAreaHTML(contact) {
 /**
  * Generates the HTML for the contact details information.
  */
-function generateContactDetailsInfo(contact) {
+export function generateContactDetailsInfo(contact) {
   return /*html*/ `
       <div class="contactDetailsInfo">
         <div class="mailHead">Email</div>
@@ -142,7 +142,7 @@ function generateContactDetailsInfo(contact) {
 /**
  * Generates the HTML for the "Edit Contact" form.
  */
-function generateEditContactHTML(contact) {
+export function generateEditContactHTML(contact) {
   return /*html*/ `
     <div class="edit-contact-container">
       <div class="edit-contact-left">
@@ -197,7 +197,7 @@ function generateEditContactInputsHTML(contact) {
 /**
  * Generates the HTML for the Buttons in the "Edit Contact" form.
  */
-function generateEditContactButtonsHTML(contactId) {
+export function generateEditContactButtonsHTML(contactId) {
   return /*html*/ `
     <div class="delete-save-btns">
         <button class="edit-contact-delete" onclick="deleteContact(${contactId})">

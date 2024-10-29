@@ -15,6 +15,7 @@ let alertUsedEmail = document.querySelector(".used-email");
 let uncheckedPrivacy = document.querySelector(".unchecked-privacy");
 let checkBox = document.querySelector(".check-box");
 
+let users = [];
 loadUsers();
 
 /**
@@ -32,7 +33,7 @@ async function init() {
  */
 async function loadUsers() {
   try {
-    users = JSON.parse(await getItem("users"));
+    users = await getItem("/users");
   } catch (e) {
     console.error("Loading error:", e);
   }

@@ -1,7 +1,6 @@
 /* JavaScript for header.html & sidemenu.html */
 
 let submenuOpen = false;
-let users = [];
 
 /**
  * Initializes the header by loading the users.
@@ -15,7 +14,7 @@ async function initHeader() {
  */
 async function loadUsersHead() {
   try {
-    users = JSON.parse(await getItem("users"));
+    users = await getItem("/users");
   } catch (e) {
     console.error("Loading error:", e);
   }

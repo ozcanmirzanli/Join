@@ -1,39 +1,41 @@
-const STORAGE_TOKEN = "CDWXOVPDT01MKZ60CIJW2K95MBKWUP1IFUHRH575";
-const STORAGE_URL = "https://remote-storage.developerakademie.org/item";
+const BASE_URL =
+  "https://join-1bae0-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
- * Stores an item in remote storage.
- *
- * This function sends a POST request to the remote storage service to save a key-value pair.
- * It uses a predefined storage token for authentication.
- *
- * @async
- * @param {string} key - The key under which the value will be stored.
+ * Stores data in the Firebase Realtime Database.
+ * @param {string} [path=""] - The path where the data should be stored.
+ * @param {Object} [data={}] - The data that should be stored.
+ * @returns {Promise<Object>} - The stored data.
  */
-async function setItem(key, value) {
-  const payload = { key, value, token: STORAGE_TOKEN };
-  return fetch(STORAGE_URL, {
-    method: "POST",
-    body: JSON.stringify(payload),
-  }).then((res) => res.json());
+async function setItem(path = "", data = {}) {
+  let response = await fetch(BASE_URL + path + ".json", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return await response.json();
 }
 
 /**
- * Retrieves an item from remote storage.
- *
- * This function sends a GET request to the remote storage service to fetch the value associated
- * with a specified key. It uses a predefined storage token for authentication.
- *
- * @async
- * @param {string} key - The key for which the value needs to be retrieved.
+ * Retrieves data from the Firebase Realtime Database.
+ * @param {string} [path=""] - The path from which the data should be retrieved.
+ * @returns {Promise<Object[]>} - The retrieved data or an empty array if no data exists.
  */
-async function getItem(key) {
-  const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
-  return fetch(url)
-    .then((res) => res.json())
-    .then((res) => res.data.value);
-}
+async function getItem(path = "") {
+  try {
+    const url = BASE_URL + path + ".json";
+    let response = await fetch(url);
+    let data = await response.json();
 
-// Attaching functions to window object for global accessibility
-window.setItem = setItem;
-window.getItem = getItem;
+    // Log data structure for troubleshooting
+    console.log("Retrieved data:", data);
+
+    // Parse users data if it is a string
+    return typeof data === "string" ? JSON.parse(data) : data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+}

@@ -6,10 +6,10 @@
  *
  * @param {Event} event - The DOMContentLoaded event object.
  */
-document.addEventListener('DOMContentLoaded', (event) => {
-  if (document.getElementById('login-logo')) {
+document.addEventListener("DOMContentLoaded", (event) => {
+  if (document.getElementById("login-logo")) {
     changeLogoToMobile();
-  } 
+  }
 });
 
 /**
@@ -37,7 +37,14 @@ async function login(event) {
   let email = document.getElementById("email").value.trim();
   let password = document.getElementById("password").value;
 
-  let user = validateUser(email, password);
+  let users = await getItem("/users");
+
+  // Ensure users is an array; if not, convert to empty array to avoid errors
+  if (!Array.isArray(users)) {
+    users = [];
+  }
+
+  let user = validateUser(users, email, password);
 
   if (user) {
     loginUser(user);
@@ -51,8 +58,23 @@ async function login(event) {
  * @param {string} email - User's email.
  * @param {string} password - User's password.
  */
-function validateUser(email, password) {
-  return users.find((u) => u.email.trim() === email && u.password === password);
+function validateUser(users, email, password) {
+  for (const user of users) {
+    console.log(`Checking email: ${user.email} against input: ${email}`);
+    console.log(
+      `Checking password: ${user.password} against input: ${password}`
+    );
+
+    if (
+      user.email.trim().toLowerCase() === email.toLowerCase() &&
+      user.password === password
+    ) {
+      console.log("User found:", user);
+      return user;
+    }
+  }
+  console.log("No matching user found.");
+  return null;
 }
 
 /**
@@ -318,12 +340,12 @@ function hideWrongPassword() {
 function changeLogoToMobile() {
   let loginLogo = document.getElementById("login-logo");
   if (!loginLogo) {
-      return;
+    return;
   }
   if (window.innerWidth < 601) {
-      loginLogo.src = "assets/img/mobile-logo.png";
-      setTimeout(function () {
-          loginLogo.src = "assets/img/Capa_1.png";
-      }, 1000);
+    loginLogo.src = "assets/img/mobile-logo.png";
+    setTimeout(function () {
+      loginLogo.src = "assets/img/Capa_1.png";
+    }, 1000);
   }
 }

@@ -1,3 +1,13 @@
+const dropDownMenu = document.getElementById("assignToDropdown");
+const assignedUser = document.getElementById("assignedUser");
+const cancelSubtask = document.getElementById("cancelSubtask");
+const subtasksDiv = document.getElementById("subtasks");
+const plusIcon = document.getElementById("plusIcon");
+const addSubtaskInput = document.getElementById("addsubtask");
+
+import { includeHTML } from "../script";
+import { renderSubtaskItem, renderAssignedUser } from "./addTaskHTML";
+
 /**
  * Global array to store data.
  * @type {Array<Object>}
@@ -47,7 +57,7 @@ async function getContact() {
  *
  * @param {string} priority - The priority level.
  */
-function changePriorityColor(priority) {
+export function changePriorityColor(priority) {
   resetPriorityButtons();
   setPriorityButtonStyles(priority);
 }
@@ -62,7 +72,7 @@ function resetPriorityButtons() {
     { id: "btnPrioLow", img: "assets/img/low_green_AddTask.svg" },
   ];
 
-  buttons.forEach(button => {
+  buttons.forEach((button) => {
     const btn = document.getElementById(button.id);
     btn.style.backgroundColor = "#ffffff";
     btn.style.color = "#000000";
@@ -83,25 +93,27 @@ function setPriorityButtonStyles(priority) {
       color: "#FFFFFF",
       borderColor: "#FF3D00",
       img: "assets/img/urgent_white_AddTask.svg",
-      prio: "Urgent"
+      prio: "Urgent",
     },
     medium: {
       backgroundColor: "#FFA800",
       color: "#FFFFFF",
       borderColor: "#FFA800",
       img: "assets/img/medium_white_AddTask.svg",
-      prio: "Medium"
+      prio: "Medium",
     },
     low: {
       backgroundColor: "#7AE229",
       color: "#FFFFFF",
       borderColor: "#7AE229",
       img: "assets/img/low_white_AddTask.svg",
-      prio: "Low"
-    }
+      prio: "Low",
+    },
   };
 
-  const btn = document.getElementById(`btnPrio${capitalizeFirstLetter(priority)}`);
+  const btn = document.getElementById(
+    `btnPrio${capitalizeFirstLetter(priority)}`
+  );
   if (btn) {
     btn.style.backgroundColor = styles[priority].backgroundColor;
     btn.style.color = styles[priority].color;
@@ -125,10 +137,6 @@ function capitalizeFirstLetter(string) {
  * Toggles the visibility of subtasks section.
  */
 function toggleSubtasks() {
-  const subtasksDiv = document.getElementById("subtasks");
-  const plusIcon = document.getElementById("plusIcon");
-  const cancelSubtask = document.getElementById("cancelSubtask");
-
   if (subtasksDiv.classList.contains("d-none")) {
     subtasksDiv.classList.remove("d-none");
     plusIcon.classList.add("d-none");
@@ -142,10 +150,6 @@ function toggleSubtasks() {
  * Handles click event on cancel subtask button.
  */
 function cancelSubtaskClick() {
-  const subtasksDiv = document.getElementById("subtasks");
-  const plusIcon = document.getElementById("plusIcon");
-  const addSubtaskInput = document.getElementById("addsubtask");
-
   subtasksDiv.classList.add("d-none");
   plusIcon.classList.remove("d-none");
   addSubtaskInput.value = "";
@@ -156,8 +160,7 @@ function cancelSubtaskClick() {
  * Improve better handover to remote storage array taskData.
  */
 function saveSubtask() {
-  let subtaskInput = document.getElementById("addsubtask");
-  let subtaskText = subtaskInput.value;
+  let subtaskText = addSubtaskInput.value;
 
   if (subtaskText !== "") {
     let subtaskId = subtask.length;
@@ -166,8 +169,8 @@ function saveSubtask() {
     const subtaskHTML = renderSubtaskItem(subtaskText, subtaskId);
     const showSubtasksContainer = document.getElementById("showsubtasks");
     showSubtasksContainer.insertAdjacentHTML("beforeend", subtaskHTML);
-    
-    subtaskInput.value = "";
+
+    addSubtaskInput.value = "";
     showSubtasksContainer.classList.remove("d-none");
   }
 }
@@ -180,10 +183,10 @@ function saveSubtask() {
 function subtaskEdit(i) {
   let subtaskContent = document.getElementById(`subtaskContent${i}`);
   let subtaskEditInput = document.getElementById(`subtaskEditInput${i}`);
-  document.getElementById(`mainBoundingBox${i}`).classList.add('d-none');
+  document.getElementById(`mainBoundingBox${i}`).classList.add("d-none");
 
-  subtaskContent.classList.add('d-none');
-  subtaskEditInput.classList.remove('d-none');
+  subtaskContent.classList.add("d-none");
+  subtaskEditInput.classList.remove("d-none");
 }
 
 /**
@@ -195,13 +198,15 @@ function subtaskSaveEdit(i) {
   let subtaskContent = document.getElementById(`subtaskContent${i}`);
   let subtaskEditInput = document.getElementById(`subtaskEditInput${i}`);
   let subtaskInput = document.getElementById(`subtaskInput${i}`);
-  document.getElementById(`mainBoundingBox${i}`).classList.remove('d-none');
+  document.getElementById(`mainBoundingBox${i}`).classList.remove("d-none");
 
   subtask[i].content = subtaskInput.value;
 
-  subtaskContent.querySelector('span').textContent = `\u2022 ${subtaskInput.value}`;
-  subtaskContent.classList.toggle('d-none');
-  subtaskEditInput.classList.toggle('d-none');
+  subtaskContent.querySelector(
+    "span"
+  ).textContent = `\u2022 ${subtaskInput.value}`;
+  subtaskContent.classList.toggle("d-none");
+  subtaskEditInput.classList.toggle("d-none");
 }
 
 /**
@@ -210,15 +215,14 @@ function subtaskSaveEdit(i) {
  * @param {number} id - The ID of the subtask to delete.
  */
 function subtaskDelete(id) {
-  let index = subtask.findIndex(sub => sub.id === id);
+  let index = subtask.findIndex((sub) => sub.id === id);
 
   if (index !== -1) {
     subtask.splice(index, 1);
 
     let subtaskElement = document.getElementById(`subtask${id}`);
     subtaskElement.remove();
-
-     }
+  }
 }
 
 /**
@@ -226,7 +230,7 @@ function subtaskDelete(id) {
  */
 function clearShowSubtasks() {
   const showSubtasks = document.getElementById("showsubtasks");
- 
+
   while (showSubtasks.firstChild) {
     showSubtasks.removeChild(showSubtasks.firstChild);
   }
@@ -247,19 +251,17 @@ function resetCategorySection() {
  */
 function toggleAssignTo(event) {
   event.stopPropagation();
-  let dropDownMenu = document.getElementById("assignToDropdown");
-    if (dropDownMenu.classList.contains("d-none")) {
-      openAssignTo();
-    } else {
-      closeAssignTo();
-    }
+  if (dropDownMenu.classList.contains("d-none")) {
+    openAssignTo();
+  } else {
+    closeAssignTo();
+  }
 }
 
 /**
  * Opens the assign to dropdown menu.
  */
 function openAssignTo() {
-  let dropDownMenu = document.getElementById("assignToDropdown");
   let inputAssignedTo = document.querySelector(".input-assignedTo");
   let selectContactsText = document.getElementById("select-contacts");
   dropDownMenu.classList.remove("d-none");
@@ -278,8 +280,7 @@ function openAssignTo() {
 /**
  * Closes the assign to dropdown menu.
  */
-function closeAssignTo() {
-  let dropDownMenu = document.getElementById("assignToDropdown");
+export function closeAssignTo() {
   let inputAssignedTo = document.querySelector(".input-assignedTo");
   let selectContactsText = document.getElementById("select-contacts");
 
@@ -297,8 +298,7 @@ function closeAssignTo() {
  * Renders assigned contacts.
  */
 function renderAssignedContacts() {
-  let assignedUser = document.getElementById("assignedUser");
-  renderassignedUser(assignedUser);
+  renderAssignedUser(assignedUser);
 }
 
 /**
@@ -358,7 +358,6 @@ function assignContact(i, contactName) {
  * Adds assigned contact to assigned user section.
  */
 function addToAssignedUser(contact) {
-  let assignedUser = document.getElementById("assignedUser");
   assignedContacts.push(contact);
   renderassignedUser(assignedUser);
 }
@@ -386,7 +385,6 @@ function findSelectedIndex(contactName) {
  * Removes a contact from the assigned list.
  */
 function removeFromAssignedList(selectedContactIndex) {
-  let assignedUser = document.getElementById("assignedUser");
   assignedContacts.splice(selectedContactIndex, 1);
   renderassignedUser(assignedUser);
   saveSelectedContacts();
