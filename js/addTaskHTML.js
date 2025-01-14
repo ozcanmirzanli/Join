@@ -5,7 +5,7 @@
  * @param {number} i - The index of the subtask.
  * @returns {string} The HTML code for the subtask item.
  */
-export function renderSubtaskItem(subtask, i) {
+function renderSubtaskItem(subtask, i) {
   return /*HTML*/ `
         <div class="subtask-item" id="subtask${i}">
             <div class="subtask-content"  id="subtaskContent${i}">
@@ -46,7 +46,7 @@ function getassignListHTML(contact, badgeColor, i) {
 /**
  * Renders assigned users.
  */
-export function renderAssignedUser(assignedUser) {
+function renderAssignedUser(assignedUser) {
   assignedUser.innerHTML = "";
   assignedContacts.forEach((assignedContact) => {
     let badgeColor = assignedContact.color;

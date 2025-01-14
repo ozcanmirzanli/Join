@@ -2,7 +2,7 @@
  * Includes HTML content from external files into elements with the 'w3-include-html' attribute.
  * @returns {Promise<void>}
  */
-export function includeHTML() {
+function includeHTML() {
   var z, i, elmnt, file, xhttp;
   /* Loop through a collection of all HTML elements: */
   z = document.getElementsByTagName("*");

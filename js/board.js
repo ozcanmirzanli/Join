@@ -23,12 +23,11 @@ function allowDrop(ev) {
  * @param {string} category - The category to move the task to.
  */
 function moveTo(category, event) {
-  let draggedTask = taskData.find(task => task.id === currentDraggedElement);
+  let draggedTask = taskData.find((task) => task.id === currentDraggedElement);
 
   if (draggedTask) {
-      draggedTask.todo = category;
-      saveDraggedTask(draggedTask)
-          .then(() => updateHTMLBoard());
+    draggedTask.todo = category;
+    saveDraggedTask(draggedTask).then(() => updateHTMLBoard());
   }
 }
 
@@ -41,12 +40,11 @@ function moveTo(category, event) {
  */
 function moveToMenu(category, event) {
   event.stopPropagation();
-  let draggedTask = taskData.find(task => task.id === currentDraggedElement);
+  let draggedTask = taskData.find((task) => task.id === currentDraggedElement);
 
   if (draggedTask) {
-      draggedTask.todo = category;
-      saveDraggedTask(draggedTask)
-          .then(() => updateHTMLBoard());
+    draggedTask.todo = category;
+    saveDraggedTask(draggedTask).then(() => updateHTMLBoard());
   }
 }
 
@@ -54,17 +52,17 @@ function moveToMenu(category, event) {
  * Saves the updated task after it has been dragged and dropped.
  * This function finds the task in the `taskData` array by its ID and updates it.
  * The updated task data is then saved back to storage.
- * 
+ *
  * @param {Object} updatedTask - The task object that has been updated after dragging.
  * @param {number} updatedTask.id - The ID of the updated task.
  * @returns {Promise<void>} A promise that resolves when the task data has been saved.
  */
 async function saveDraggedTask(updatedTask) {
-  const index = taskData.findIndex(task => task.id === updatedTask.id);
+  const index = taskData.findIndex((task) => task.id === updatedTask.id);
 
   if (index !== -1) {
-      taskData[index] = updatedTask;
-      await setItem('taskData', JSON.stringify(taskData));
+    taskData[index] = updatedTask;
+    await setItem("taskData", JSON.stringify(taskData));
   }
 }
 
@@ -76,7 +74,7 @@ function openTask(id) {
   let task = taskData.find((todo) => todo.id === id);
   document.getElementById("taskBig").classList.remove("d-none");
   document.getElementById("taskBig").classList.add("overlay");
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow = "hidden";
   renderBigTask(task);
 }
 
@@ -86,7 +84,7 @@ function openTask(id) {
 function closeTaskBig() {
   document.getElementById("taskBig").classList.remove("overlay");
   document.getElementById("taskBig").classList.add("d-none");
-  document.body.style.overflow = 'auto';
+  document.body.style.overflow = "auto";
   localStorage.removeItem("selectedContacts");
 }
 
@@ -99,11 +97,11 @@ function filterTasks() {
   let filteredTodos = taskData.filter(
     (todo) =>
       (todo.title.toLowerCase().includes(search) ||
-      todo.description.toLowerCase().includes(search)) &&
+        todo.description.toLowerCase().includes(search)) &&
       (todo.todo === "toDo" ||
-      todo.todo === "inProgress" ||
-      todo.todo === "awaitFeedback" ||
-      todo.todo === "done")
+        todo.todo === "inProgress" ||
+        todo.todo === "awaitFeedback" ||
+        todo.todo === "done")
   );
 
   displayFilteredTodos(filteredTodos);
@@ -113,9 +111,9 @@ function filterTasks() {
  * Shows the add task board.
  */
 function showaddTaskBoard() {
-  let addTask = document.getElementById("addTask"); //get element with id 'addTask'
+  let addTask = document.getElementById("addTask");
   addTask.style.display = "block";
-  addTask.style.right = "620px"; //add class 'addTask'
+  addTask.style.right = "620px";
 }
 
 /**
@@ -126,7 +124,7 @@ function openAddTaskDialog() {
   dialogContent.innerHTML = renderAddTaskForm();
   document.body.appendChild(dialogContent);
   document.getElementById("addTaskDialog").classList.add("overlay");
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow = "hidden";
   changePriorityColor("medium");
 }
 
@@ -138,10 +136,10 @@ function openAddTaskDialog() {
 function closeAddTaskDialog() {
   const dialogContent = document.querySelector(".dialog-content");
   if (dialogContent) {
-      dialogContent.remove();
+    dialogContent.remove();
   }
   document.getElementById("addTaskDialog").classList.remove("overlay");
-  document.body.style.overflow = 'auto';
+  document.body.style.overflow = "auto";
 }
 
 /**
@@ -150,20 +148,20 @@ function closeAddTaskDialog() {
  */
 async function deleteTaskBoard(id) {
   const index = taskData.findIndex((todo) => todo.id === id);
-     taskData.splice(index, 1);
-     await setItem("taskData", JSON.stringify(taskData));
-     await getContact();
-    updateHTMLBoard();
-    closeTaskBig();
+  taskData.splice(index, 1);
+  await setItem("taskData", JSON.stringify(taskData));
+  await getContact();
+  updateHTMLBoard();
+  closeTaskBig();
 }
 
-async function saveTaskContent(id){
+async function saveTaskContent(id) {
   const subTasksArray = getSubTasksArray();
-  const currentTodo = taskData.find(task => task.id === id);
+  const currentTodo = taskData.find((task) => task.id === id);
   const updatedFields = getUpdatedFields(currentTodo, subTasksArray);
 
   updateTaskData(id, updatedFields);
-  await setItem('taskData', JSON.stringify(taskData));
+  await setItem("taskData", JSON.stringify(taskData));
 }
 
 /**
@@ -185,10 +183,10 @@ async function saveTaskBoard(id) {
  */
 function getSubTasksArray() {
   let subTasks = document.querySelectorAll('[id^="subtaskInput"]');
-  return Array.from(subTasks).map(subTask => ({
+  return Array.from(subTasks).map((subTask) => ({
     id: subTask.id,
     content: subTask.value.trim(),
-    completed: false
+    completed: false,
   }));
 }
 
@@ -200,32 +198,33 @@ function getSubTasksArray() {
  * @returns {Object} - An object containing the updated fields for the task.
  */
 function getUpdatedFields(currentTodo, subTasksArray) {
-  const currentPriority = currentTodo ? currentTodo.priority : '';
-  const updatedAssignedTo = selectedContacts.length > 0 ? selectedContacts : currentTodo.assignTo;;
+  const currentPriority = currentTodo ? currentTodo.priority : "";
+  const updatedAssignedTo =
+    selectedContacts.length > 0 ? selectedContacts : currentTodo.assignTo;
   return {
-    title: document.getElementById('titleAddTask').value,
-    description: document.getElementById('descriptionAddTask').value,
+    title: document.getElementById("titleAddTask").value,
+    description: document.getElementById("descriptionAddTask").value,
     assignTo: updatedAssignedTo,
-    dueDate: document.getElementById('dueDate').value,
-    category: document.getElementById('categoryAddTask').value,
+    dueDate: document.getElementById("dueDate").value,
+    category: document.getElementById("categoryAddTask").value,
     subTasks: subTasksArray,
     priority: selectedPrio || currentPriority,
   };
 }
 
 /**
-* Saves updated subtasks of a task.
-* This function finds the task by ID, updates its subtasks, and stores the updated task list in local storage.
-* 
-* @async
-* @param {number} id - The ID of the task to update.
-* @param {Array} subTasks - The array of updated subtasks.
-*/
+ * Saves updated subtasks of a task.
+ * This function finds the task by ID, updates its subtasks, and stores the updated task list in local storage.
+ *
+ * @async
+ * @param {number} id - The ID of the task to update.
+ * @param {Array} subTasks - The array of updated subtasks.
+ */
 async function saveSubtaskBoard(id, subTasks) {
-  const updatedTask = taskData.find(task => task.id === id);
+  const updatedTask = taskData.find((task) => task.id === id);
   if (updatedTask) {
-      updatedTask.subTasks = subTasks;
-      await setItem('taskData', JSON.stringify(taskData));
+    updatedTask.subTasks = subTasks;
+    await setItem("taskData", JSON.stringify(taskData));
   }
 }
 
@@ -235,12 +234,12 @@ async function saveSubtaskBoard(id, subTasks) {
 function toggleAssignToBoard(event, taskId) {
   event.stopPropagation();
   let dropDownMenu = document.getElementById("assignToDropdown");
-    if (dropDownMenu.classList.contains("d-none")) {
-      assignedContactOnTaskBoard(taskId)
-      openAssignToBoard();
-    } else {
-      closeAssignToBoard(taskId);
-    }
+  if (dropDownMenu.classList.contains("d-none")) {
+    assignedContactOnTaskBoard(taskId);
+    openAssignToBoard();
+  } else {
+    closeAssignToBoard(taskId);
+  }
 }
 
 /**
@@ -285,7 +284,7 @@ function closeAssignToBoard(taskId) {
  * Restores the selected contacts from local storage and updates the UI.
  */
 function restoreSelectedContactsBoard() {
-  let selectedContactsFromStorage = JSON.parse(localStorage.getItem("selectedContacts"));
+  let selectedContactsFromStorage = localStorage.getItem("selectedContacts");
   if (selectedContactsFromStorage) {
     selectedContacts = selectedContactsFromStorage;
     selectedContacts.forEach((contact) => {
@@ -315,7 +314,7 @@ function renderContactsBoard() {
 
 /**
  * Toggles the selection of a contact and updates the UI and local storage.
- * 
+ *
  * @param {number} i - The index of the contact.
  * @param {string} contactName - The name of the contact.
  */
@@ -336,7 +335,7 @@ function assignContactBoard(i, contactName) {
 
 /**
  * Adds a contact to the list of assigned users and updates the UI.
- * 
+ *
  * @param {number} i - The index of the contact.
  */
 function addToAssignedUserBoard(i) {
@@ -349,7 +348,7 @@ function addToAssignedUserBoard(i) {
 
 /**
  * Unassigns a contact and updates the UI and local storage.
- * 
+ *
  * @param {string} contactName - The name of the contact to unassign.
  * @param {HTMLElement} checkbox - The checkbox element of the contact.
  */
@@ -362,17 +361,19 @@ function unassignContactsBoard(contactName, checkbox) {
 
 /**
  * Finds the index of a selected contact by name.
- * 
+ *
  * @param {string} contactName - The name of the contact.
  * @returns {number} - The index of the selected contact.
  */
 function findSelectedIndexBoard(contactName) {
-  return selectedContacts.findIndex((contact) => contact["name"] === contactName);
+  return selectedContacts.findIndex(
+    (contact) => contact["name"] === contactName
+  );
 }
 
 /**
  * Removes a contact from the list of assigned users and updates the UI and local storage.
- * 
+ *
  * @param {number} selectedContactIndex - The index of the selected contact.
  */
 function removeFromAssignedListBoard(selectedContactIndex) {
@@ -406,17 +407,17 @@ function adjustOnClickBehavior() {
   const plusMobile = document.getElementById("plusMobile");
   const addTaskBtns = document.querySelectorAll(".plus, #addTaskBtn");
   if (window.innerWidth < 580) {
-    plusMobile.onclick = function() {
-      window.location.href = './add_task.html';
+    plusMobile.onclick = function () {
+      window.location.href = "./add_task.html";
     };
-    addTaskBtns.forEach(button => {
-      button.onclick = function() {
-        window.location.href = './add_task.html';
+    addTaskBtns.forEach((button) => {
+      button.onclick = function () {
+        window.location.href = "./add_task.html";
       };
     });
   } else {
     plusMobile.onclick = openAddTaskDialog;
-    addTaskBtns.forEach(button => {
+    addTaskBtns.forEach((button) => {
       button.onclick = openAddTaskDialog;
     });
   }

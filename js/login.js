@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
   setTimeout(function () {
     let backgroundFade = document.getElementById("background-fade");
     if (backgroundFade) {
-      // Check if the element exists
       backgroundFade.style.display = "none";
     }
   }, 1000);
@@ -39,7 +38,6 @@ async function login(event) {
 
   let users = await getItem("/users");
 
-  // Ensure users is an array; if not, convert to empty array to avoid errors
   if (!Array.isArray(users)) {
     users = [];
   }
@@ -82,15 +80,13 @@ function validateUser(users, email, password) {
  * @param {Object} user - The user object to login.
  */
 async function loginUser(user) {
-  sessionStorage.setItem("currentUser", JSON.stringify(user));
+  sessionStorage.setItem('currentUser', JSON.stringify(user));
 
   let checked = document.getElementById("checked");
   if (!checked.classList.contains("d-none")) {
-    // Store the user email in remote storage for "Remember Me" functionality
     await setItem("rememberMeEmail", user.email);
     await setItem("rememberMePassword", user.password);
   } else {
-    // No datas are saved if 'Remember Me' is not checked
     await setItem("rememberMeEmail", "");
     await setItem("rememberMePassword", "");
   }
@@ -156,11 +152,11 @@ function checkBoxToggle() {
 
   if (checked.classList.contains("d-none")) {
     checkedFunc();
-    checkRememberMeState(true); // Save the checked state
+    checkRememberMeState(true);
     inputChecked = true;
   } else {
     uncheckedFunc();
-    checkRememberMeState(false); // Save the unchecked state
+    checkRememberMeState(false);
     inputChecked = false;
   }
 }
@@ -208,10 +204,6 @@ function fillLoginForm(rememberedEmail, rememberedPassword) {
   document.getElementById("password").value = rememberedPassword;
   checkedFunc();
 }
-
-/**
- * Clears the login form fields and adjusts the UI to reflect the "Remember Me" option being unchecked.
- */
 
 /**
  * Clears the remembered credentials.
@@ -269,7 +261,6 @@ function clearInputFields() {
   uncheckedFunc();
 }
 
-/* prettier-ignore */
 /**
  * Handles changes to the password field by updating the password logo based on input presence.
  */
@@ -277,7 +268,10 @@ function handlePasswordChange() {
   let passwordInput = document.getElementById("password");
   let passwordLogo = document.getElementById("password-logo");
 
-  passwordLogo.src = passwordInput.value.length > 0 ? "assets/img/password-hide.png" : "assets/img/lock.png";
+  passwordLogo.src =
+    passwordInput.value.length > 0
+      ? "assets/img/password-hide.png"
+      : "assets/img/lock.png";
 }
 
 /**
@@ -300,7 +294,6 @@ function togglePasswordVisibility(passwordInput) {
   }
 }
 
-/* prettier-ignore */
 /**
  * Updates the visual icon for the password field based on its current state (visible or hidden).
  */
@@ -309,7 +302,10 @@ function updatePasswordLogo(passwordInput) {
 
   if (passwordInput.type === "text") {
     passwordLogo.src = "assets/img/password-visible.png";
-  } else if (passwordInput.type === "password" && passwordInput.value.length > 0) {
+  } else if (
+    passwordInput.type === "password" &&
+    passwordInput.value.length > 0
+  ) {
     passwordLogo.src = "assets/img/password-hide.png";
   } else {
     passwordLogo.src = "assets/img/lock.png";
