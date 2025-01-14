@@ -43,7 +43,7 @@ async function loadTasksData() {
  */
 async function getContact() {
   try {
-    contacts = await getItem("contact");
+    contacts = await getItem("contacts");
   } catch (error) {
     console.info("Could not load contacts");
   }
