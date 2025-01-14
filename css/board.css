@@ -716,10 +716,10 @@ input:focus {
   }
 
   .table {
-    margin-top: 112px;
+    margin-top: 80px;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    gap: 30px;
     flex-wrap: wrap;
   }
 
@@ -756,6 +756,7 @@ input:focus {
     align-items: center;
     justify-content: center;
     gap: 16vw;
+    margin-bottom: 20px;
   }
 }
 
