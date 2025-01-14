@@ -40,7 +40,7 @@ let taskData = [];
 
 async function loadtaskData() {
   try {
-    const loadedtaskData = JSON.parse(await getItem("taskData")) || [];
+    const loadedtaskData = await getItem("taskData");
     taskData = loadedtaskData;
   } catch (e) {
     console.error("Could not load tasks", e);
@@ -52,11 +52,9 @@ async function loadtaskData() {
  * @returns {Object|null} The current user object or null if no user is stored.
  */
 function getCurrentUser() {
-  const userName = JSON.parse(sessionStorage.getItem("currentUser"));
-  if (userName) {
-    return userName;
-  }
-  return null;
+  const userName = sessionStorage.getItem("currentUser");
+  if (!userName) return null;
+  return JSON.parse(userName);
 }
 
 /**

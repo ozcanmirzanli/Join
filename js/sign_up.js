@@ -2,13 +2,14 @@ let userName = document.getElementById("user-name");
 let email = document.getElementById("email");
 let password = document.getElementById("password");
 let passwordLogo = document.getElementById("password-logo");
-/* prettier-ignore */
-let confirmPasswordContainer = document.querySelector(".confirm-password-container");
+let confirmPasswordInput = document.getElementById("confirm-password");
+let confirmPasswordContainer = document.querySelector(
+  ".confirm-password-container"
+);
 let confirmPasswordLogo = document.getElementById("confirm-password-logo");
 let signUpBtn = document.getElementById("sign-up-btn");
 let checked = document.getElementById("checked");
 let mismatchPassword = document.querySelector(".mismatched-password");
-let confirmPasswordInput = document.getElementById("confirm-password");
 let emailInput = document.getElementById("email");
 let emailContainer = document.querySelector(".email-input");
 let alertUsedEmail = document.querySelector(".used-email");
@@ -16,15 +17,15 @@ let uncheckedPrivacy = document.querySelector(".unchecked-privacy");
 let checkBox = document.querySelector(".check-box");
 
 let users = [];
-loadUsers();
 
 /**
  * Initializes the application by loading user data from storage.
  * @async
  */
 async function init() {
-  loadUsers();
+  await loadUsers();
 }
+init();
 
 /**
  * Loads user data from local storage and parses it into the 'users' array.
@@ -33,49 +34,59 @@ async function init() {
  */
 async function loadUsers() {
   try {
-    users = await getItem("/users");
+    let loadedUsers = await getItem("users");
+    // If it's falsy or not an array, default to an empty array
+    if (!Array.isArray(loadedUsers)) {
+      loadedUsers = [];
+    }
+    users = loadedUsers;
   } catch (e) {
     console.error("Loading error:", e);
+    users = [];
   }
 }
 
 let inputChecked = false;
 
-/* prettier-ignore */
 /**
  * Initiates the sign-up process for a new user. It first checks if the privacy policy has been agreed to,
  * then it validates if the passwords entered match and finally checks if the email is already in use.
  * If all conditions are met, it proceeds to register the user.
  */
 async function signUp() {
- if (!inputChecked) {
+  if (!inputChecked) {
     uncheckedPrivacy.style.display = "block";
     mismatchPassword.style.display = "none";
     alertUsedEmail.style.display = "none";
-      return;  
+    return;
   }
 
   let passwordsMatch = password.value === confirmPasswordInput.value;
-  wrongPasswordInput(passwordsMatch); 
+  wrongPasswordInput(passwordsMatch);
 
   if (!passwordsMatch) {
-    return; // Stop the sign-up process if the passwords do not match
+    return;
   }
 
   if (updateEmailUI()) {
-    return; // Stop the sign-up process if the email is already used
-}
-  signUpProccess() 
+    return;
   }
+  signUpProccess();
+}
 
-/* prettier-ignore */
 /**
  * Processes the registration of the user by adding their information to the storage
  * and handling registration tasks slike showing a success message and resetting the form.
  */
 async function signUpProccess() {
-users.push({ userName: userName.value, email: email.value, password: password.value });
-  await setItem("users", JSON.stringify(users));
+  let newUser = {
+    userName: userName.value,
+    email: email.value,
+    password: password.value,
+  };
+
+  users.push(newUser);
+  await setItem("users", users);
   showSignedUpSuccess();
   resetForm();
 }
@@ -117,11 +128,8 @@ function confirmPasswordFunction() {
   wrongPasswordInput(passwordsMatch);
   disableSignUpButton(passwordsMatch);
 
-  // Adds an event listener to the confirm password input field to handle changes in the confirmation password
   confirmPasswordInput.addEventListener("input", handleConfirmPasswordChange);
 }
-
-/* prettier-ignore */
 
 /**
  * Checks if the passwords in the 'password' and 'confirm password' fields match.
@@ -136,10 +144,10 @@ function wrongPasswordInput(passwordsMatch) {
   }
 
   // Adds an event listener to the password input field to hide the password mismatch warning when the user modifies the password
-password.addEventListener("input", hideMismatchWarning);
+  password.addEventListener("input", hideMismatchWarning);
 
-// Adds an event listener to the confirm password input field to hide the password mismatch warning when the user modifies the confirmation password
-confirmPasswordInput.addEventListener("input", hideMismatchWarning);
+  // Adds an event listener to the confirm password input field to hide the password mismatch warning when the user modifies the confirmation password
+  confirmPasswordInput.addEventListener("input", hideMismatchWarning);
 }
 
 /**
@@ -151,9 +159,10 @@ function showMismatchWarning() {
   mismatchPassword.style.display = "block";
   confirmPasswordContainer.style.border = "1px solid red";
 
-  /* prettier-ignore */
-  // Event listener to hide alert message for used email when the user starts typing in the email input field
-  emailInput.addEventListener("input", () => (alertUsedEmail.style.display = "none"));
+  emailInput.addEventListener(
+    "input",
+    () => (alertUsedEmail.style.display = "none")
+  );
 }
 
 /**
@@ -177,22 +186,26 @@ function disableSignUpButton(passwordsMatch) {
   signUpBtn.disabled = !isFormValid;
 }
 
-/* prettier-ignore */
 /**
  * Updates the visibility icon of the confirm password input based on its content.
  * Changes the icon to indicate whether the field is empty or contains text.
  */
 function handleConfirmPasswordChange() {
-  confirmPasswordLogo.src = confirmPasswordInput.value.length > 0 ? "assets/img/password-hide.png" : "assets/img/lock.png";
+  confirmPasswordLogo.src =
+    confirmPasswordInput.value.length > 0
+      ? "assets/img/password-hide.png"
+      : "assets/img/lock.png";
 }
 
-/* prettier-ignore */
 /**
  * This function changes the password logo depending on the input type
  */
 function toggleConfirmPassword() {
   let type = confirmPasswordInput.type === "password" ? "text" : "password";
-  let src = type === "text" ? "assets/img/password-visible.png" : "assets/img/password-hide.png";
+  let src =
+    type === "text"
+      ? "assets/img/password-visible.png"
+      : "assets/img/password-hide.png";
 
   confirmPasswordInput.type = type;
   confirmPasswordLogo.src = src;

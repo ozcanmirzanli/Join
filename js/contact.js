@@ -1,11 +1,3 @@
-import {
-  generateEditContactHTML,
-  generateContactDetailsHTML,
-  generateLettersCategoriesHTML,
-  generateSmallContactHTML,
-  generateAddContactHTML,
-} from "./contactHTML.js";
-
 let contacts = [];
 let firstLetters = [];
 
@@ -91,7 +83,7 @@ function createContact() {
  * Save contacts to storage.
  */
 async function saveContacts() {
-  await setItem("contact", JSON.stringify(contacts));
+  await setItem("contacts", contacts);
 }
 
 /**
@@ -231,7 +223,6 @@ function displayContactDetails(contact) {
   let contactOverview = document.querySelector(".contact-overview-container");
 
   contactBig.classList.remove("d-none");
-  // Check if the contact object is valid and contains the color property
   if (contact && contact.color) {
     contactBig.innerHTML = generateContactDetailsHTML(contact);
   }
@@ -271,7 +262,7 @@ async function deleteContact(contactId) {
   const index = contacts.findIndex((contact) => contact.id === contactId);
   if (index !== -1) {
     contacts.splice(index, 1);
-    await setItem("contact", JSON.stringify(contacts));
+    await setItem("contact", contacts);
     await getContact();
     closePopUp();
     closeOverview();
@@ -358,7 +349,7 @@ function updateContactDetails(index) {
  * Save the contacts array to storage.
  */
 async function saveContactsToStorage() {
-  await setItem("contact", JSON.stringify(contacts));
+  await setItem("contacts", contacts);
 }
 
 /**
@@ -399,7 +390,6 @@ function removeScrollingOnNumberInput() {
 function closeContactOverview() {
   document.querySelector(".contact-overview-container").style.display = "none";
 }
-// Close contact options when clicking outside of them
 document.addEventListener("click", function (event) {
   closeContactOptions(event);
 });
@@ -435,8 +425,6 @@ function closeContactOptions(event) {
   }
 }
 
-// Prevent clicks inside the edit button options from closing it
-// prettier-ignore
 var editContactBtns = document.querySelector(".edit-contact-btns");
 if (editContactBtns) {
   editContactBtns.addEventListener("click", function (event) {

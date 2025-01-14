@@ -1,5 +1,3 @@
-import { changePriorityColor, closeAssignTo } from "./add_task";
-
 /**
  * Sets up event listeners for focus and blur events on the input element.
  */

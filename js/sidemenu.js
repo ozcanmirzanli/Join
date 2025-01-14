@@ -122,11 +122,18 @@ function renderUserHeader() {
  * @returns {Object|null} - The user object or null if no user is found.
  */
 function getCurrentUserHeader() {
-  const userName = JSON.parse(sessionStorage.getItem("currentUser"));
-  if (userName) {
-    return userName;
+  const userString = sessionStorage.getItem("currentUser");
+  if (!userString) {
+    return null;
   }
-  return null;
+  try {
+    // Parse the stored JSON string into a JS object
+    return JSON.parse(userString);
+  } catch (error) {
+    // If parsing fails for any reason, return null (or handle the error)
+    console.error("Failed to parse currentUser from sessionStorage:", error);
+    return null;
+  }
 }
 
 /**

@@ -5,9 +5,6 @@ const subtasksDiv = document.getElementById("subtasks");
 const plusIcon = document.getElementById("plusIcon");
 const addSubtaskInput = document.getElementById("addsubtask");
 
-import { includeHTML } from "../script";
-import { renderSubtaskItem, renderAssignedUser } from "./addTaskHTML";
-
 /**
  * Global array to store data.
  * @type {Array<Object>}
@@ -35,7 +32,7 @@ async function init() {
  */
 async function loadTasksData() {
   try {
-    taskData = JSON.parse(await getItem("taskData"));
+    taskData = await getItem("taskData");
   } catch (e) {
     console.info("Could not load tasks");
   }
@@ -46,7 +43,7 @@ async function loadTasksData() {
  */
 async function getContact() {
   try {
-    contacts = JSON.parse(await getItem("contact"));
+    contacts = await getItem("contact");
   } catch (error) {
     console.info("Could not load contacts");
   }
@@ -57,7 +54,7 @@ async function getContact() {
  *
  * @param {string} priority - The priority level.
  */
-export function changePriorityColor(priority) {
+function changePriorityColor(priority) {
   resetPriorityButtons();
   setPriorityButtonStyles(priority);
 }
@@ -280,7 +277,8 @@ function openAssignTo() {
 /**
  * Closes the assign to dropdown menu.
  */
-export function closeAssignTo() {
+
+function closeAssignTo() {
   let inputAssignedTo = document.querySelector(".input-assignedTo");
   let selectContactsText = document.getElementById("select-contacts");
 
@@ -305,9 +303,7 @@ function renderAssignedContacts() {
  * Restores selected contacts from local storage.
  */
 function restoreSelectedContacts() {
-  let selectedContactsFromStorage = JSON.parse(
-    localStorage.getItem("selectedContacts")
-  );
+  let selectedContactsFromStorage = localStorage.getItem("selectedContacts");
   if (selectedContactsFromStorage) {
     selectedContacts = selectedContactsFromStorage;
     selectedContacts.forEach((contact) => {

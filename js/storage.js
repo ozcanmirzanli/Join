@@ -8,14 +8,13 @@ const BASE_URL =
  * @returns {Promise<Object>} - The stored data.
  */
 async function setItem(path = "", data = {}) {
-  let response = await fetch(BASE_URL + path + ".json", {
+  await fetch(BASE_URL + path + ".json", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   });
-  return await response.json();
 }
 
 /**
@@ -29,11 +28,7 @@ async function getItem(path = "") {
     let response = await fetch(url);
     let data = await response.json();
 
-    // Log data structure for troubleshooting
-    console.log("Retrieved data:", data);
-
-    // Parse users data if it is a string
-    return typeof data === "string" ? JSON.parse(data) : data;
+    return data !== "" && data !== null ? data : [];
   } catch (error) {
     console.error("Error fetching data:", error);
     return [];
