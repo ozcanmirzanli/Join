@@ -355,7 +355,7 @@ function assignContact(i, contactName) {
  */
 function addToAssignedUser(contact) {
   assignedContacts.push(contact);
-  renderassignedUser(assignedUser);
+  renderAssignedUser(assignedUser);
 }
 
 /**
@@ -382,7 +382,7 @@ function findSelectedIndex(contactName) {
  */
 function removeFromAssignedList(selectedContactIndex) {
   assignedContacts.splice(selectedContactIndex, 1);
-  renderassignedUser(assignedUser);
+  renderAssignedUser(assignedUser);
   saveSelectedContacts();
 }
 
@@ -392,7 +392,7 @@ function removeFromAssignedList(selectedContactIndex) {
 function clearAssignedUser() {
   assignedContacts = [];
   selectedContacts = [];
-  renderassignedUser(assignedUser);
+  renderAssignedUser(assignedUser);
   document.querySelectorAll(".checkbox").forEach(function (checkbox) {
     checkbox.src = "./assets/img/addTask_AssignTo_Checkbox.svg";
   });

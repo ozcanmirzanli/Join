@@ -78,7 +78,7 @@ async function createTask() {
     priority: selectedPrio,
     todo: "toDo",
   });
-  await setItem("taskData", JSON.stringify(taskData));
+  await setItem("taskData", taskData);
 
   checkDueDate();
   clearEntries();
