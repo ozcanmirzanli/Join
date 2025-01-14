@@ -62,7 +62,7 @@ async function saveDraggedTask(updatedTask) {
 
   if (index !== -1) {
     taskData[index] = updatedTask;
-    await setItem("taskData", JSON.stringify(taskData));
+    await setItem("taskData", taskData);
   }
 }
 
@@ -149,7 +149,7 @@ function closeAddTaskDialog() {
 async function deleteTaskBoard(id) {
   const index = taskData.findIndex((todo) => todo.id === id);
   taskData.splice(index, 1);
-  await setItem("taskData", JSON.stringify(taskData));
+  await setItem("taskData", taskData);
   await getContact();
   updateHTMLBoard();
   closeTaskBig();
@@ -161,7 +161,7 @@ async function saveTaskContent(id) {
   const updatedFields = getUpdatedFields(currentTodo, subTasksArray);
 
   updateTaskData(id, updatedFields);
-  await setItem("taskData", JSON.stringify(taskData));
+  await setItem("taskData", taskData);
 }
 
 /**
@@ -224,7 +224,7 @@ async function saveSubtaskBoard(id, subTasks) {
   const updatedTask = taskData.find((task) => task.id === id);
   if (updatedTask) {
     updatedTask.subTasks = subTasks;
-    await setItem("taskData", JSON.stringify(taskData));
+    await setItem("taskData", taskData);
   }
 }
 

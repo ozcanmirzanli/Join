@@ -74,7 +74,7 @@ async function createTask() {
     assignTo: assignedContacts,
     dueDate: dueDate,
     category: document.getElementById("categoryAddTask").value,
-    subTasks: subTasks,
+    subTasks: subTasks || [],
     priority: selectedPrio,
     todo: "toDo",
   });
@@ -143,5 +143,5 @@ function clearEntries() {
  * Saves selected contacts to local storage.
  */
 function saveSelectedContacts() {
-  localStorage.setItem("selectedContacts", JSON.stringify(selectedContacts));
+  localStorage.setItem("selectedContacts", selectedContacts);
 }

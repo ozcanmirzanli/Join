@@ -1,8 +1,8 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-    initBoard();
-    updateTodo();
-    updateHTMLBoard(); 
-  });
+document.addEventListener("DOMContentLoaded", (event) => {
+  initBoard();
+  updateTodo();
+  updateHTMLBoard();
+});
 
 /**
  * Generates HTML for a todo element.
@@ -10,31 +10,45 @@ document.addEventListener('DOMContentLoaded', (event) => {
  * @returns {string} - The HTML string representing the todo element.
  */
 function generateTodoHTMLBoard(element) {
-    let categoryStyle = getCategoryStyle(element.category); 
-    let assignTo = '';
-    let zIndex = 1; 
+  let categoryStyle = getCategoryStyle(element.category);
+  let assignTo = "";
+  let zIndex = 1;
 
-    if (element["assignTo"] && element["assignTo"].length > 0) {
-        const maxContactsToShow = 3;
-        for (let j = 0; j < Math.min(maxContactsToShow, element["assignTo"].length); j++) {
-            let member = element["assignTo"][j];
-            const marginLeft = j !== 0 ? 'margin-left: -10%;' : ''; 
-            if (member) {
-                assignTo += `<div class="initialsMini" style="z-index: ${zIndex++}; ${marginLeft}; background-color: ${member.color}">${member.initials}</div>`;
-            }
-        }
-        if (element["assignTo"].length > maxContactsToShow) {
-            assignTo += `<div class="initialsMini" style="z-index: ${zIndex++}; margin-left: -10%; background-color: grey">+${element["assignTo"].length - maxContactsToShow}</div>`;
-        }
+  if (!Array.isArray(element.subTasks)) {
+    element.subTasks = [];
+  }
+
+  if (element["assignTo"] && element["assignTo"].length > 0) {
+    const maxContactsToShow = 3;
+    for (
+      let j = 0;
+      j < Math.min(maxContactsToShow, element["assignTo"].length);
+      j++
+    ) {
+      let member = element["assignTo"][j];
+      const marginLeft = j !== 0 ? "margin-left: -10%;" : "";
+      if (member) {
+        assignTo += `<div class="initialsMini" style="z-index: ${zIndex++}; ${marginLeft}; background-color: ${
+          member.color
+        }">${member.initials}</div>`;
+      }
     }
+    if (element["assignTo"].length > maxContactsToShow) {
+      assignTo += `<div class="initialsMini" style="z-index: ${zIndex++}; margin-left: -10%; background-color: grey">+${
+        element["assignTo"].length - maxContactsToShow
+      }</div>`;
+    }
+  }
 
-    let progressBarHTML = '';
-    if (element['subTasks'].length > 0) {
-        let progressBarId = `progress-bar-${element.id}`;
-        let completedSubtasksCount = element.subTasks.filter(subtask => subtask.completed).length;
-        let totalSubtasksCount = element.subTasks.length;
-        let taskCounterText = `${completedSubtasksCount}/${totalSubtasksCount} Subtasks`;
-        progressBarHTML = /*html*/ `
+  let progressBarHTML = "";
+  if (element["subTasks"].length > 0) {
+    let progressBarId = `progress-bar-${element.id}`;
+    let completedSubtasksCount = element.subTasks.filter(
+      (subtask) => subtask.completed
+    ).length;
+    let totalSubtasksCount = element.subTasks.length;
+    let taskCounterText = `${completedSubtasksCount}/${totalSubtasksCount} Subtasks`;
+    progressBarHTML = /*html*/ `
             <div class="TaskProgressbar" role="progressbar">
                 <div id="${progressBarId}" class="progressbar">
                     <div class="progress-bar"></div>
@@ -42,10 +56,10 @@ function generateTodoHTMLBoard(element) {
                 <div class="Taskcounter">${taskCounterText}</div>
             </div>
         `;
-        setTimeout(() => updateProgressBar(element), 0);
-    }
+    setTimeout(() => updateProgressBar(element), 0);
+  }
 
-    return /*html*/ `
+  return /*html*/ `
         <div draggable="true" ondrag="startDragging(${element.id})" class="userStoryMini" onclick="openTask(${element.id})">
   <div class="mobileHead" style="position: relative;">
     <div class="taskCategory" style="background-color: ${categoryStyle.color}; width: ${categoryStyle.width};">${element.category}</div>
@@ -64,7 +78,7 @@ function generateTodoHTMLBoard(element) {
   ${progressBarHTML}
   <div class="taskFooter">
     <div class="badgesMini">${assignTo}</div>
-    <img src="./assets/img/${element['priority']}_priority.svg" alt="" class="taskPriority">
+    <img src="./assets/img/${element["priority"]}_priority.svg" alt="" class="taskPriority">
   </div>
 </div>
     `;
@@ -76,45 +90,47 @@ function generateTodoHTMLBoard(element) {
  * @returns {Object} - An object containing the background color and width.
  */
 function getCategoryStyle(category) {
-    if (category === 'Technical Story') {
-        return { color: 'rgba(31, 215, 193, 1)', width: '120px' }; // Set the desired color and width for Technical Story
-    } else if (category === 'User Story') {
-        return { color: 'rgba(0, 56, 255, 1)', width: '90px' }; // Set the desired color and width for User Story
-    }
-    return { color: 'white', width: 'auto' }; // Default color and width if the category doesn't match
+  if (category === "Technical Story") {
+    return { color: "rgba(31, 215, 193, 1)", width: "120px" }; // Set the desired color and width for Technical Story
+  } else if (category === "User Story") {
+    return { color: "rgba(0, 56, 255, 1)", width: "90px" }; // Set the desired color and width for User Story
+  }
+  return { color: "white", width: "auto" }; // Default color and width if the category doesn't match
 }
-  
- /**
+
+/**
  * Renders a big task with detailed information.
  * @param {Object} task - The task object to render.
  */
 function renderBigTask(task) {
-    let subtasks = '';
-    let taskIndex = task["id"];
-    if (task['subTasks'] && task['subTasks'].length > 0) {
-        for (let i = 0; i < task["subTasks"].length; i++) {
-            let subTaskIndex = task["subTasks"][i];
-            let imgSrc = subTaskIndex["completed"] ? "./assets/img/check-box-checked.png" : "./assets/img/check-box-disabled.png";
-            subtasks += /*html*/ `
+  let subtasks = "";
+  let taskIndex = task["id"];
+  if (task["subTasks"] && task["subTasks"].length > 0) {
+    for (let i = 0; i < task["subTasks"].length; i++) {
+      let subTaskIndex = task["subTasks"][i];
+      let imgSrc = subTaskIndex["completed"]
+        ? "./assets/img/check-box-checked.png"
+        : "./assets/img/check-box-disabled.png";
+      subtasks += /*html*/ `
                 <div class="subtaskContent">
                     <div><img src="${imgSrc}" alt="" id="subTaskCheckBox" onclick="changeCompletedBoard(${taskIndex}, ${i})"></div>
                     <div>${subTaskIndex["content"]}</div>
                 </div>
             `;
-        }
     }
-    let assignTo = '';
-    if (task["assignTo"] && task["assignTo"].length > 0) {
-        for (let j = 0; j < task["assignTo"].length; j++) {
-            let memberId = task["assignTo"][j];
-            if (memberId) {
-                assignTo += `<div class="userTask"><div class="initialsBig" style="background-color: ${memberId["color"]}">${memberId["initials"]}</div>${memberId["name"]}</div>`;
-            }
-        }
+  }
+  let assignTo = "";
+  if (task["assignTo"] && task["assignTo"].length > 0) {
+    for (let j = 0; j < task["assignTo"].length; j++) {
+      let memberId = task["assignTo"][j];
+      if (memberId) {
+        assignTo += `<div class="userTask"><div class="initialsBig" style="background-color: ${memberId["color"]}">${memberId["initials"]}</div>${memberId["name"]}</div>`;
+      }
     }
-    document.getElementById("taskBig").classList.remove("d-none");
-    let categoryStyle = getCategoryStyle(task["category"]);
-    const BigTaskHTML = /*html*/ `
+  }
+  document.getElementById("taskBig").classList.remove("d-none");
+  let categoryStyle = getCategoryStyle(task["category"]);
+  const BigTaskHTML = /*html*/ `
         <div class="bigTask">
             <div class="bigTaskContent">  
                 <div class="flexBetweenCenter">
@@ -130,8 +146,8 @@ function renderBigTask(task) {
                 <div class="bigTaskSections">
                     <div class="bigTaskColor">Priority:</div>
                     <div class="bigTaskPrio">
-                        <div>${task['priority']}</div>
-                        <div><img src="./assets/img/${task['priority']}_priority.svg" alt=""></div>
+                        <div>${task["priority"]}</div>
+                        <div><img src="./assets/img/${task["priority"]}_priority.svg" alt=""></div>
                     </div>
                 </div>
                 <div class="members">
@@ -153,26 +169,30 @@ function renderBigTask(task) {
             </div>
         </div>
     `;
-    document.getElementById("taskBig").innerHTML = BigTaskHTML;
+  document.getElementById("taskBig").innerHTML = BigTaskHTML;
 }
-  
+
 /**
- * Toggles the completion status of a subtask, updates the task display, 
+ * Toggles the completion status of a subtask, updates the task display,
  * and saves the updated subtask data.
- * 
+ *
  * @param {number} taskIndex - The index of the task in the taskData array.
  * @param {number} subTaskIndex - The index of the subtask within the task's subTasks array.
  */
 function changeCompletedBoard(taskIndex, subTaskIndex) {
-    if (taskData[taskIndex] && taskData[taskIndex].subTasks) {
-        const subTask = taskData[taskIndex].subTasks[subTaskIndex];
-        subTask.completed = !subTask.completed;
-        renderBigTask(taskData[taskIndex]);
-        saveSubtaskBoard(taskData[taskIndex].id, taskData[taskIndex].subTasks);
-        updateProgressBar(taskData[taskIndex]);
-    } else {
-        console.error('Task or subTasks are undefined', taskIndex, taskData[taskIndex]);
-    }
+  if (taskData[taskIndex] && taskData[taskIndex].subTasks) {
+    const subTask = taskData[taskIndex].subTasks[subTaskIndex];
+    subTask.completed = !subTask.completed;
+    renderBigTask(taskData[taskIndex]);
+    saveSubtaskBoard(taskData[taskIndex].id, taskData[taskIndex].subTasks);
+    updateProgressBar(taskData[taskIndex]);
+  } else {
+    console.error(
+      "Task or subTasks are undefined",
+      taskIndex,
+      taskData[taskIndex]
+    );
+  }
 }
 
 /**
@@ -295,17 +315,17 @@ function renderAddTaskForm() {
  * @param {Object} todo - The task object to edit.
  */
 function renderEditTaskForm(todo) {
-    document.getElementById("taskBig").classList.remove("d-none");
-    let assignTo = '';
-    if (todo["assignTo"] && todo["assignTo"].length > 0) {
-        for (let j = 0; j < todo["assignTo"].length; j++) {
-            let memberId = todo["assignTo"][j];
-            if (memberId) {
-                assignTo += `<div class="initialsBig" style="background-color: ${memberId["color"]}">${memberId["initials"]}</div>`;
-            }
-        }
+  document.getElementById("taskBig").classList.remove("d-none");
+  let assignTo = "";
+  if (todo["assignTo"] && todo["assignTo"].length > 0) {
+    for (let j = 0; j < todo["assignTo"].length; j++) {
+      let memberId = todo["assignTo"][j];
+      if (memberId) {
+        assignTo += `<div class="initialsBig" style="background-color: ${memberId["color"]}">${memberId["initials"]}</div>`;
+      }
     }
-    document.getElementById("taskBig").innerHTML = /*html*/ `
+  }
+  document.getElementById("taskBig").innerHTML = /*html*/ `
       <div class="bigTask">
           <div class="bigEditTaskContent">
               <section class="btnCloseEditTaks">
@@ -313,18 +333,24 @@ function renderEditTaskForm(todo) {
               </section>
               <section class="input-parts-addTask">
                   <div class="pd-bottom"><span>Title<span class="required-addTask">*</span></span></div>
-                  <input id="titleAddTask" type="text" placeholder="Enter a Title" required class="border-input-addtask" value="${todo.title}"/>
+                  <input id="titleAddTask" type="text" placeholder="Enter a Title" required class="border-input-addtask" value="${
+                    todo.title
+                  }"/>
               </section>
               <!-- Description -->
               <section class="padding-description">
                   <div class="pd-bottom"><span>Description</span></div>
-                  <textarea name="description" id="descriptionAddTask" cols="30" rows="10" placeholder="Enter a Description" class="border-input-addtask">${todo.description}</textarea>
+                  <textarea name="description" id="descriptionAddTask" cols="30" rows="10" placeholder="Enter a Description" class="border-input-addtask">${
+                    todo.description
+                  }</textarea>
               </section>
               <!-- Assigned To -->
               <section class="padding-description">
                   <div class="pd-bottom"><label>Assigned to</label></div>
                   <div class="">
-                      <div id="assignAddTask" name="assignTo" class="input-assignedTo" onclick="toggleAssignToBoard(event, ${todo.id})">
+                      <div id="assignAddTask" name="assignTo" class="input-assignedTo" onclick="toggleAssignToBoard(event, ${
+                        todo.id
+                      })">
                           <span id="select-contacts">Select contacts to assign</span>
                           <img class="assignToDDArrow" src="assets/img/arrow_drop_down_AddTask.svg" id="arrowdown" alt="arrowdown"/>
                           <img src="assets/img/arrow_drop_down_AddTask.svg" id="arrowup" alt="arrowup"  class="assignToDDArrow rotate d-none"/>
@@ -342,20 +368,46 @@ function renderEditTaskForm(todo) {
                   <div class="pd-bottom">
                   <span>Due Date<span class="required-addTask">*</span></span>
                   </div>
-                  <input id="dueDate" type="date" placeholder="yyyy/mm/dd" class="input-dueDate border-input-addtask" value="${todo.dueDate}" required/>
+                  <input id="dueDate" type="date" placeholder="yyyy/mm/dd" class="input-dueDate border-input-addtask" value="${
+                    todo.dueDate
+                  }" required/>
               </section>
               <!-- Priority -->
               <section class="padding-prio">
                   <div class="pd-bottom"><span>Prio</span></div>
                   <div class="priority">
-                      <button type="button" class="button-prio" id="btnPrioUrgent" onclick="changePriorityColor('urgent')" style="${todo.priority === 'Urgent' ? 'background-color: #FF3D00; color: #FFFFFF;' : ''}">Urgent
-                          <img id="imgPrioUrgent" src="${todo.priority === 'Urgent' ? 'assets/img/urgent_white_AddTask.svg' : 'assets/img/urgent_red_AddTask.svg'}" alt="urgent_red_AddTask"/>
+                      <button type="button" class="button-prio" id="btnPrioUrgent" onclick="changePriorityColor('urgent')" style="${
+                        todo.priority === "Urgent"
+                          ? "background-color: #FF3D00; color: #FFFFFF;"
+                          : ""
+                      }">Urgent
+                          <img id="imgPrioUrgent" src="${
+                            todo.priority === "Urgent"
+                              ? "assets/img/urgent_white_AddTask.svg"
+                              : "assets/img/urgent_red_AddTask.svg"
+                          }" alt="urgent_red_AddTask"/>
                       </button>                    
-                      <button type="button" class="button-prio" id="btnPrioMedium" onclick="changePriorityColor('medium')" style="${todo.priority === 'Medium' ? 'background-color: #FFA800; color: #FFFFFF;' : ''}">Medium
-                          <img id="imgPrioMedium" src="${todo.priority === 'Medium' ? 'assets/img/medium_white_AddTask.svg' : 'assets/img/medium_orange_AddTask.svg'}" alt="medium_orange_AddTask"/>
+                      <button type="button" class="button-prio" id="btnPrioMedium" onclick="changePriorityColor('medium')" style="${
+                        todo.priority === "Medium"
+                          ? "background-color: #FFA800; color: #FFFFFF;"
+                          : ""
+                      }">Medium
+                          <img id="imgPrioMedium" src="${
+                            todo.priority === "Medium"
+                              ? "assets/img/medium_white_AddTask.svg"
+                              : "assets/img/medium_orange_AddTask.svg"
+                          }" alt="medium_orange_AddTask"/>
                       </button>                    
-                      <button type="button" class="button-prio" id="btnPrioLow" onclick="changePriorityColor('low')" style="${todo.priority === 'Low' ? 'background-color: #7AE229; color: #FFFFFF;' : ''}">Low
-                          <img id="imgPrioLow" src="${todo.priority === 'Low' ? 'assets/img/low_white_AddTask.svg' : 'assets/img/low_green_AddTask.svg'}" alt="low_green_AddTask"/>
+                      <button type="button" class="button-prio" id="btnPrioLow" onclick="changePriorityColor('low')" style="${
+                        todo.priority === "Low"
+                          ? "background-color: #7AE229; color: #FFFFFF;"
+                          : ""
+                      }">Low
+                          <img id="imgPrioLow" src="${
+                            todo.priority === "Low"
+                              ? "assets/img/low_white_AddTask.svg"
+                              : "assets/img/low_green_AddTask.svg"
+                          }" alt="low_green_AddTask"/>
                       </button>                    
                   </div>
               </section>
@@ -366,8 +418,14 @@ function renderEditTaskForm(todo) {
                   </div>
                   <select title="category" id="categoryAddTask" class="input-category input-assignedTo border-input-addtask" onchange="handleCategoryChange(this)" required>
                           <option value="" selected disabled>Select Task Category</option>
-                          <option class="input-option" value="User Story" ${todo.category === 'User Story' ? 'selected' : ''}>User Story</option>
-                          <option class="input-option" value="Technical Story" ${todo.category === 'Technical Story' ? 'selected' : ''}>Technical Story</option>
+                          <option class="input-option" value="User Story" ${
+                            todo.category === "User Story" ? "selected" : ""
+                          }>User Story</option>
+                          <option class="input-option" value="Technical Story" ${
+                            todo.category === "Technical Story"
+                              ? "selected"
+                              : ""
+                          }>Technical Story</option>
                   </select>
                 </section>
                <!-- Subtasks -->
@@ -385,7 +443,9 @@ function renderEditTaskForm(todo) {
                     </div>
                 </div>
                 <div id></div>
-                ${todo.subTasks.map((subtask, index) => `
+                ${todo.subTasks
+                  .map(
+                    (subtask, index) => `
                 <div id="subtaskContainer${index}" class="subtask-item">
                   <div id="subtask${index}" class="subtask-content">
                       <span>\u2022 ${subtask.content}</span>
@@ -404,10 +464,14 @@ function renderEditTaskForm(todo) {
                       <img onclick="subtaskDeleteBoard(${index})" src="assets/img/subtask_trash_AddTask.svg" alt="Delete Subtask" class="subtask-icon">
                   </div>
                 </div>
-                `).join('')}
+                `
+                  )
+                  .join("")}
             </section>
             <footer class="editTaskFooter">
-                <button onclick="saveTaskBoard(${todo.id})" class="addTaskBtn" type="button">
+                <button onclick="saveTaskBoard(${
+                  todo.id
+                })" class="addTaskBtn" type="button">
                     Ok
                     <img src="./assets/img/board_addTask_button_check.svg" alt="addTask_Button_Board_Plus">
                 </button>
@@ -417,17 +481,16 @@ function renderEditTaskForm(todo) {
   `;
 }
 
-
 /**
  * Generates HTML for a contact list item in the "Assign To" dropdown menu.
- * 
+ *
  * @param {Object} contact - The contact object.
  * @param {string} badgeColor - The color of the contact's badge.
  * @param {number} i - The index of the contact.
  * @returns {string} - The HTML string for the contact list item.
  */
 function getassignListHTMLBoard(contact, badgeColor, i) {
-    return /*HTML*/ `
+  return /*HTML*/ `
               <div class="assignListContact" id="contact${i}" onclick="assignContactBoard(${i}, '${contact.name}', '${contact.initials}')">
                   <div class="assignDetails">
                       <div class="assignToBadge" style="background-color: ${badgeColor}">${contact.initials}</div>
@@ -436,20 +499,20 @@ function getassignListHTMLBoard(contact, badgeColor, i) {
                   <img id="checkbox${i}" src="./assets/img/addTask_AssignTo_Checkbox.svg" class="checkbox">
               </div>
               `;
-  }
+}
 
-  /**
+/**
  * Renders the assigned users in the "Assigned To" section.
- * 
+ *
  * @param {HTMLElement} assignedUser - The HTML element to render the assigned users in.
  */
 function renderAssignedUserBoard(assignedUser, taskId) {
-    let assignedContacts = taskData[taskId]['assignTo'];
-    assignedUser.innerHTML = "";
-    assignedContacts.forEach((assignedContact) => {
-      let badgeColor = assignedContact.color;
-      assignedUser.innerHTML += `
+  let assignedContacts = taskData[taskId]["assignTo"];
+  assignedUser.innerHTML = "";
+  assignedContacts.forEach((assignedContact) => {
+    let badgeColor = assignedContact.color;
+    assignedUser.innerHTML += `
               <div class="assignToBadge" style="background-color: ${badgeColor}">${assignedContact.initials}</div>
           `;
-    });
-  }
+  });
+}
