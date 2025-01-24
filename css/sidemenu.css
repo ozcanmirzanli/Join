@@ -246,7 +246,7 @@ a:hover {
   height: 14px;
   color: #29abe2;
   font-weight: 700;
-  font-size: 40px;
+  font-size: 35px;
 }
 
 #privacy {
@@ -413,6 +413,10 @@ a:hover {
   .subMenu {
     right: 7%;
   }
+
+  .initialsHeader {
+    font-size: 30px;
+  }
 }
 
 @media (max-width: 680px) {
@@ -424,6 +428,10 @@ a:hover {
 @media (max-width: 580px) {
   .header {
     width: 70%;
+  }
+
+  .initialsHeader {
+    font-size: 25px;
   }
 }
 

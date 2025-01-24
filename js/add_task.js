@@ -1,3 +1,6 @@
+/******************************
+ * Element / Global References
+ ******************************/
 const dropDownMenu = document.getElementById("assignToDropdown");
 const assignedUser = document.getElementById("assignedUser");
 const cancelSubtask = document.getElementById("cancelSubtask");
@@ -6,7 +9,7 @@ const plusIcon = document.getElementById("plusIcon");
 const addSubtaskInput = document.getElementById("addsubtask");
 
 /**
- * Global array to store data.
+ * Global arrays and variables to store data.
  * @type {Array<Object>}
  */
 let subtask = [];
@@ -50,8 +53,7 @@ async function getContact() {
 }
 
 /**
- * Sets all buttons back to default colors and font colors.
- *
+ * Sets all priority buttons back to their default colors.
  * @param {string} priority - The priority level.
  */
 function changePriorityColor(priority) {
@@ -71,6 +73,7 @@ function resetPriorityButtons() {
 
   buttons.forEach((button) => {
     const btn = document.getElementById(button.id);
+    if (!btn) return;
     btn.style.backgroundColor = "#ffffff";
     btn.style.color = "#000000";
     btn.style.borderColor = "#D1D1D1";
@@ -80,7 +83,6 @@ function resetPriorityButtons() {
 
 /**
  * Sets the styles for the priority button based on the given priority.
- *
  * @param {string} priority - The priority level.
  */
 function setPriorityButtonStyles(priority) {
@@ -111,7 +113,7 @@ function setPriorityButtonStyles(priority) {
   const btn = document.getElementById(
     `btnPrio${capitalizeFirstLetter(priority)}`
   );
-  if (btn) {
+  if (btn && styles[priority]) {
     btn.style.backgroundColor = styles[priority].backgroundColor;
     btn.style.color = styles[priority].color;
     btn.style.borderColor = styles[priority].borderColor;
@@ -122,24 +124,24 @@ function setPriorityButtonStyles(priority) {
 
 /**
  * Capitalizes the first letter of the given string.
- *
- * @param {string} string - The string to capitalize.
- * @returns {string} - The string with the first letter capitalized.
+ * @param {string} string
+ * @returns {string}
  */
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 /**
- * Toggles the visibility of subtasks section.
+ * Toggles the visibility of the subtasks section.
  */
 function toggleSubtasks() {
+  if (!subtasksDiv) return;
   if (subtasksDiv.classList.contains("d-none")) {
     subtasksDiv.classList.remove("d-none");
-    plusIcon.classList.add("d-none");
+    plusIcon?.classList.add("d-none");
   } else {
     subtasksDiv.classList.add("d-none");
-    plusIcon.classList.remove("d-none");
+    plusIcon?.classList.remove("d-none");
   }
 }
 
@@ -147,79 +149,73 @@ function toggleSubtasks() {
  * Handles click event on cancel subtask button.
  */
 function cancelSubtaskClick() {
+  if (!subtasksDiv) return;
   subtasksDiv.classList.add("d-none");
-  plusIcon.classList.remove("d-none");
+  plusIcon?.classList.remove("d-none");
   addSubtaskInput.value = "";
 }
 
 /**
- * Saves a new subtask and push subtask into subtask global arra.
- * Improve better handover to remote storage array taskData.
+ * Saves a new subtask into the global array `subtask`.
  */
 function saveSubtask() {
-  let subtaskText = addSubtaskInput.value;
+  const subtaskText = addSubtaskInput.value.trim();
+  if (!subtaskText) return;
 
-  if (subtaskText !== "") {
-    let subtaskId = subtask.length;
+  const subtaskId = subtask.length;
+  subtask.push({ id: subtaskId, content: subtaskText, completed: false });
 
-    subtask.push({ id: subtaskId, content: subtaskText, completed: false });
-    const subtaskHTML = renderSubtaskItem(subtaskText, subtaskId);
-    const showSubtasksContainer = document.getElementById("showsubtasks");
-    showSubtasksContainer.insertAdjacentHTML("beforeend", subtaskHTML);
-
-    addSubtaskInput.value = "";
+  const showSubtasksContainer = document.getElementById("showsubtasks");
+  if (showSubtasksContainer) {
+    showSubtasksContainer.insertAdjacentHTML(
+      "beforeend",
+      renderSubtaskItem(subtaskText, subtaskId)
+    );
     showSubtasksContainer.classList.remove("d-none");
   }
+
+  addSubtaskInput.value = "";
 }
 
 /**
  * Handles subtask edit action.
- *
  * @param {number} i - The index of the subtask to edit.
  */
 function subtaskEdit(i) {
-  let subtaskContent = document.getElementById(`subtaskContent${i}`);
-  let subtaskEditInput = document.getElementById(`subtaskEditInput${i}`);
-  document.getElementById(`mainBoundingBox${i}`).classList.add("d-none");
-
-  subtaskContent.classList.add("d-none");
-  subtaskEditInput.classList.remove("d-none");
+  document.getElementById(`mainBoundingBox${i}`)?.classList.add("d-none");
+  document.getElementById(`subtaskContent${i}`)?.classList.add("d-none");
+  document.getElementById(`subtaskEditInput${i}`)?.classList.remove("d-none");
 }
 
 /**
  * Handles subtask save edit action.
- *
- * @param {number} i - The index of the subtask to save edit.
+ * @param {number} i - The index of the subtask to save.
  */
 function subtaskSaveEdit(i) {
-  let subtaskContent = document.getElementById(`subtaskContent${i}`);
-  let subtaskEditInput = document.getElementById(`subtaskEditInput${i}`);
-  let subtaskInput = document.getElementById(`subtaskInput${i}`);
-  document.getElementById(`mainBoundingBox${i}`).classList.remove("d-none");
+  const subtaskContent = document.getElementById(`subtaskContent${i}`);
+  const subtaskEditInput = document.getElementById(`subtaskEditInput${i}`);
+  const subtaskInput = document.getElementById(`subtaskInput${i}`);
+  document.getElementById(`mainBoundingBox${i}`)?.classList.remove("d-none");
 
   subtask[i].content = subtaskInput.value;
-
   subtaskContent.querySelector(
     "span"
   ).textContent = `\u2022 ${subtaskInput.value}`;
+
   subtaskContent.classList.toggle("d-none");
   subtaskEditInput.classList.toggle("d-none");
 }
 
 /**
- * Deletes a subtask.
- *
+ * Deletes a subtask from the global array `subtask`.
  * @param {number} id - The ID of the subtask to delete.
  */
 function subtaskDelete(id) {
-  let index = subtask.findIndex((sub) => sub.id === id);
+  const index = subtask.findIndex((sub) => sub.id === id);
+  if (index === -1) return;
 
-  if (index !== -1) {
-    subtask.splice(index, 1);
-
-    let subtaskElement = document.getElementById(`subtask${id}`);
-    subtaskElement.remove();
-  }
+  subtask.splice(index, 1);
+  document.getElementById(`subtask${id}`)?.remove();
 }
 
 /**
@@ -227,8 +223,7 @@ function subtaskDelete(id) {
  */
 function clearShowSubtasks() {
   const showSubtasks = document.getElementById("showsubtasks");
-
-  while (showSubtasks.firstChild) {
+  while (showSubtasks?.firstChild) {
     showSubtasks.removeChild(showSubtasks.firstChild);
   }
 }
@@ -238,35 +233,50 @@ function clearShowSubtasks() {
  */
 function resetCategorySection() {
   const categoryDropdown = document.getElementById("categoryAddTask");
+  if (!categoryDropdown) return;
+
   categoryDropdown.selectedIndex = 0;
   categoryDropdown.style.borderColor = "#D1D1D1";
   categoryDropdown.onchange = handleCategoryChange;
 }
 
 /**
- * Toggles the assign to dropdown menu.
+ * Toggles the assign-to dropdown menu.
  */
 function toggleAssignTo(event) {
   event.stopPropagation();
-  if (dropDownMenu.classList.contains("d-none")) {
-    openAssignTo();
+  const localMenu = document.getElementById("assignToDropdown");
+  if (!localMenu) return;
+
+  if (localMenu.classList.contains("d-none")) {
+    openAssignTo(localMenu);
   } else {
-    closeAssignTo();
+    closeAssignTo(localMenu);
   }
 }
 
 /**
- * Opens the assign to dropdown menu.
+ * Opens the assign-to dropdown menu.
+ * @param {HTMLElement} menu - The dropdown menu element.
  */
-function openAssignTo() {
-  let inputAssignedTo = document.querySelector(".input-assignedTo");
-  let selectContactsText = document.getElementById("select-contacts");
+function openAssignTo(menu) {
+  const dropDownMenu = document.getElementById("assignToDropdown");
+  if (!dropDownMenu) return;
   dropDownMenu.classList.remove("d-none");
-  document.getElementById("assignedUser").classList.add("d-none");
-  document.getElementById("arrowdown").classList.add("d-none");
-  document.getElementById("arrowup").classList.remove("d-none");
-  inputAssignedTo.style.border = "1px solid #29ABE2";
-  selectContactsText.innerHTML = "";
+
+  const assignedUserEl = document.getElementById("assignedUser");
+  const arrowDown = document.getElementById("arrowdown");
+  const arrowUp = document.getElementById("arrowup");
+  const inputAssignedTo = document.querySelector(".input-assignedTo");
+  const selectContactsText = document.getElementById("select-contacts");
+
+  assignedUserEl?.classList.add("d-none");
+  arrowDown?.classList.add("d-none");
+  arrowUp?.classList.remove("d-none");
+
+  if (inputAssignedTo) inputAssignedTo.style.border = "1px solid #29ABE2";
+  if (selectContactsText) selectContactsText.innerHTML = "";
+
   renderContacts();
   renderAssignedContacts();
   restoreSelectedContacts();
@@ -275,70 +285,83 @@ function openAssignTo() {
 }
 
 /**
- * Closes the assign to dropdown menu.
+ * Closes the assign-to dropdown menu.
+ * @param {HTMLElement} menu - The dropdown menu element.
  */
-
-function closeAssignTo() {
-  let inputAssignedTo = document.querySelector(".input-assignedTo");
-  let selectContactsText = document.getElementById("select-contacts");
-
+function closeAssignTo(menu) {
+  const dropDownMenu = document.getElementById("assignToDropdown");
+  if (!dropDownMenu) return;
   dropDownMenu.classList.add("d-none");
-  document.getElementById("assignedUser").classList.remove("d-none");
-  document.getElementById("arrowup").classList.add("d-none");
-  document.getElementById("arrowdown").classList.remove("d-none");
-  inputAssignedTo.style.border = "";
-  selectContactsText.innerHTML = "Select contacts to assign";
+
+  const assignedUserEl = document.getElementById("assignedUser");
+  const arrowDown = document.getElementById("arrowdown");
+  const arrowUp = document.getElementById("arrowup");
+  const inputAssignedTo = document.querySelector(".input-assignedTo");
+  const selectContactsText = document.getElementById("select-contacts");
+
+  assignedUserEl?.classList.remove("d-none");
+  arrowUp?.classList.add("d-none");
+  arrowDown?.classList.remove("d-none");
+
+  if (inputAssignedTo) inputAssignedTo.style.border = "";
+  if (selectContactsText)
+    selectContactsText.innerHTML = "Select contacts to assign";
 
   document.removeEventListener("click", handleClickOutside);
 }
 
 /**
- * Renders assigned contacts.
+ * Renders assigned contacts to the assignedUser container.
  */
 function renderAssignedContacts() {
   renderAssignedUser(assignedUser);
 }
 
 /**
- * Restores selected contacts from local storage.
+ * Restores selected contacts from localStorage.
  */
 function restoreSelectedContacts() {
-  let selectedContactsFromStorage = localStorage.getItem("selectedContacts");
-  if (selectedContactsFromStorage) {
-    selectedContacts = selectedContactsFromStorage;
-    selectedContacts.forEach((contact) => {
-      let index = contacts.findIndex((c) => c.name === contact.name);
-      if (index !== -1) {
-        let contactElement = document.getElementById(`contact${index}`);
-        contactElement.classList.add("contactSelected");
-        let checkbox = document.getElementById(`checkbox${index}`);
+  const selectedContactsFromStorage = localStorage.getItem("selectedContacts");
+  if (!selectedContactsFromStorage) return;
+
+  selectedContacts.forEach((contact) => {
+    const index = contacts.findIndex((c) => c.name === contact.name);
+    if (index !== -1) {
+      const contactElement = document.getElementById(`contact${index}`);
+      const checkbox = document.getElementById(`checkbox${index}`);
+      contactElement?.classList.add("contactSelected");
+      if (checkbox)
         checkbox.src = "./assets/img/addTask_AssignTo_Checkbox_Checked.svg";
-      }
-    });
-  }
+    }
+  });
 }
 
 /**
- * Renders contacts in the assign to dropdown menu.
+ * Renders contacts into the assign-to dropdown menu.
  */
 function renderContacts() {
-  let assignList = document.getElementById("assignToList");
+  const assignList = document.getElementById("assignToList");
+  if (!assignList) return;
   assignList.innerHTML = "";
+
   for (let i = 0; i < contacts.length; i++) {
-    let contact = contacts[i];
-    let badgeColor = contact.color;
-    assignToList.innerHTML += getassignListHTML(contact, badgeColor, i);
+    const contact = contacts[i];
+    assignList.innerHTML += getassignListHTML(contact, contact.color, i);
   }
 }
 
 /**
  * Handles assigning a contact to a task.
+ * @param {number} i - The index of the contact.
+ * @param {string} contactName - The contact's name.
  */
 function assignContact(i, contactName) {
-  let contact = document.getElementById(`contact${i}`);
-  let checkbox = document.getElementById(`checkbox${i}`);
-  contact.classList.toggle("contactSelected");
-  let isSelected = contact.classList.contains("contactSelected");
+  const contactEl = document.getElementById(`contact${i}`);
+  const checkbox = document.getElementById(`checkbox${i}`);
+  if (!contactEl || !checkbox) return;
+
+  contactEl.classList.toggle("contactSelected");
+  const isSelected = contactEl.classList.contains("contactSelected");
 
   if (isSelected) {
     checkbox.src = "./assets/img/addTask_AssignTo_Checkbox_Checked.svg";
@@ -351,7 +374,8 @@ function assignContact(i, contactName) {
 }
 
 /**
- * Adds assigned contact to assigned user section.
+ * Adds an assigned contact to the assigned users array and re-renders them.
+ * @param {Object} contact
  */
 function addToAssignedUser(contact) {
   assignedContacts.push(contact);
@@ -359,26 +383,29 @@ function addToAssignedUser(contact) {
 }
 
 /**
- * Handles unassigning contacts from a task.
+ * Handles unassigning a contact from a task.
+ * @param {string} contactName
+ * @param {HTMLImageElement} checkbox
  */
 function unassignContacts(contactName, checkbox) {
   checkbox.src = "./assets/img/addTask_AssignTo_Checkbox.svg";
-  let selectedContactIndex = findSelectedIndex(contactName);
+  const selectedContactIndex = findSelectedIndex(contactName);
   selectedContacts.splice(selectedContactIndex, 1);
   removeFromAssignedList(selectedContactIndex);
 }
 
 /**
  * Finds the index of a selected contact.
+ * @param {string} contactName
+ * @returns {number} - The index in selectedContacts.
  */
 function findSelectedIndex(contactName) {
-  return selectedContacts.findIndex(
-    (contact) => contact["name"] === contactName
-  );
+  return selectedContacts.findIndex((contact) => contact.name === contactName);
 }
 
 /**
- * Removes a contact from the assigned list.
+ * Removes a contact from the assigned list array.
+ * @param {number} selectedContactIndex
  */
 function removeFromAssignedList(selectedContactIndex) {
   assignedContacts.splice(selectedContactIndex, 1);
@@ -393,11 +420,148 @@ function clearAssignedUser() {
   assignedContacts = [];
   selectedContacts = [];
   renderAssignedUser(assignedUser);
-  document.querySelectorAll(".checkbox").forEach(function (checkbox) {
+
+  document.querySelectorAll(".checkbox").forEach((checkbox) => {
     checkbox.src = "./assets/img/addTask_AssignTo_Checkbox.svg";
   });
-  let contactsElements = document.querySelectorAll(".assignListContact");
-  contactsElements.forEach(function (contact) {
+  document.querySelectorAll(".assignListContact").forEach((contact) => {
     contact.classList.remove("contactSelected");
   });
+}
+
+/**
+ * Renders HTML for a subtask item.
+ * @param {string} subtaskText - The subtask content.
+ * @param {number} i - The index of the subtask.
+ * @returns {string} The HTML code for the subtask item.
+ */
+function renderSubtaskItem(subtaskText, i) {
+  return /*html*/ `
+    <div class="subtask-item" id="subtask${i}">
+      <div class="subtask-content" id="subtaskContent${i}">
+        <span>\u2022 ${subtaskText}</span>
+      </div>
+      <div id="subtaskEditInput${i}" class="subtask-content d-none">
+        <input 
+          value="${subtaskText}" 
+          class="subtask-input subtaskEditText" 
+          id="subtaskInput${i}"
+        >
+        <div class="subtask-bounding-box">
+          <img 
+            onclick="subtaskDelete(${i})" 
+            src="assets/img/subtask_trash_AddTask.svg" 
+            alt="Delete Subtask" 
+            class="subtask-icon"
+          >
+          <img 
+            src="assets/img/subtask_seperator_AddTask.svg" 
+            alt="Separator" 
+            class="subtask-icon"
+          >
+          <img 
+            onclick="subtaskSaveEdit(${i})" 
+            src="assets/img/subtask_check_AddTask.svg" 
+            alt="Check Subtask" 
+            class="subtask-icon"
+          >
+        </div>
+      </div>
+      <div id="mainBoundingBox${i}" class="subtask-bounding-box">
+        <img 
+          onclick="subtaskEdit(${i})" 
+          src="assets/img/subtask_edit_AddTask.svg" 
+          alt="Edit Subtask" 
+          class="subtask-icon"
+        >
+        <img 
+          src="assets/img/subtask_seperator_AddTask.svg" 
+          alt="Separator" 
+          class="subtask-icon"
+        >
+        <img 
+          onclick="subtaskDelete(${i})" 
+          src="assets/img/subtask_trash_AddTask.svg" 
+          alt="Delete Subtask" 
+          class="subtask-icon"
+        >
+      </div>
+    </div>
+  `;
+}
+
+/**
+ * Generates HTML for a contact in the assign-to dropdown menu.
+ */
+function getassignListHTML(contact, badgeColor, i) {
+  return /*html*/ `
+    <div 
+      class="assignListContact" 
+      id="contact${i}" 
+      onclick="assignContact(${i}, '${contact.name}')"
+    >
+      <div class="assignDetails">
+        <div class="assignToBadge" style="background-color: ${badgeColor}">
+          ${contact.initials}
+        </div>
+        <div>${contact.name}</div>
+      </div>
+      <img 
+        id="checkbox${i}" 
+        src="./assets/img/addTask_AssignTo_Checkbox.svg" 
+        class="checkbox"
+      >
+    </div>
+  `;
+}
+
+/**
+ * Renders assigned contacts in the assignedUser container.
+ */
+function renderAssignedUser(assignedUserContainer) {
+  if (!assignedUserContainer) return;
+  assignedUserContainer.innerHTML = "";
+  assignedContacts.forEach((assignedContact) => {
+    assignedUserContainer.innerHTML += `
+      <div 
+        class="assignToBadge" 
+        style="background-color: ${assignedContact.color}"
+      >
+        ${assignedContact.initials}
+      </div>
+    `;
+  });
+}
+
+/**
+ * Saves selected contacts to local storage.
+ */
+function saveSelectedContacts() {
+  // If you're storing objects, typically:
+  // localStorage.setItem("selectedContacts", JSON.stringify(selectedContacts));
+  localStorage.setItem("selectedContacts", selectedContacts);
+}
+
+/**
+ * Handles category dropdown change.
+ * @param {HTMLSelectElement} selectElement
+ */
+function handleCategoryChange(selectElement) {
+  // Add your logic here if needed
+}
+
+/**
+ * Handles clicks outside the assign dropdown to close it.
+ */
+function handleClickOutside(event) {
+  const assignAddTask = document.getElementById("assignAddTask");
+  const assignToDropdown = document.getElementById("assignToDropdown");
+  if (!assignAddTask || !assignToDropdown) return;
+
+  if (
+    !assignAddTask.contains(event.target) &&
+    !assignToDropdown.contains(event.target)
+  ) {
+    closeAssignTo(assignToDropdown);
+  }
 }

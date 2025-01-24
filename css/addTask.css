@@ -165,6 +165,7 @@ textarea {
   border: 1px solid #d1d1d1;
   background: #fff;
   padding: 11px 15px;
+  width: 100%;
   max-width: 408px;
 }
 
@@ -316,7 +317,7 @@ textarea {
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-  background: url(/Join/assets/img/due_date_calender_AddTasksvg.svg);
+  background: url("/assets/img/due_date_calender_AddTask.svg");
   background-repeat: no-repeat;
   background-position: right center;
   background-size: 24px 24px;
@@ -382,14 +383,14 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 }
 
 .input-option {
-	padding: 0.5rem;
-	cursor: pointer;
+  padding: 0.5rem;
+  cursor: pointer;
   border-radius: 10px;
 }
 
 .input-option:hover {
-   background-color: #eaeaea;
-   border-radius: 0.625rem;
+  background-color: #eaeaea;
+  border-radius: 0.625rem;
 }
 
 .input-category:focus-visible {
@@ -617,7 +618,7 @@ select.input-category option[value=""][disabled] {
   .paddingForm {
     padding-left: 300px;
   }
-  
+
   h1 {
     padding-top: 140px;
   }
@@ -674,7 +675,8 @@ select.input-category option[value=""][disabled] {
 }
 
 @media screen and (max-width: 550px) {
-  #create-btn, #clear-btn {
+  #create-btn,
+  #clear-btn {
     padding: 15px 12px 15px 24px;
   }
 
@@ -744,7 +746,8 @@ select.input-category option[value=""][disabled] {
     font-size: 16px;
   }
 
-  #create-btn, #clear-btn {
+  #create-btn,
+  #clear-btn {
     font-size: 14px;
     padding: 15px 15px 15px 24px;
   }
@@ -764,7 +767,8 @@ select.input-category option[value=""][disabled] {
 }
 
 @media screen and (max-width: 343px) {
-  #create-btn, #clear-btn {
+  #create-btn,
+  #clear-btn {
     font-size: 11px;
   }
 }

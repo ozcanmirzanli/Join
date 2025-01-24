@@ -47,6 +47,9 @@ function getassignListHTML(contact, badgeColor, i) {
  * Renders assigned users.
  */
 function renderAssignedUser(assignedUser) {
+  if (!assignedUser) {
+    return;
+  }
   assignedUser.innerHTML = "";
   assignedContacts.forEach((assignedContact) => {
     let badgeColor = assignedContact.color;

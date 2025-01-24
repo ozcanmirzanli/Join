@@ -313,7 +313,7 @@ window.onresize = adjustOnClickBehavior;
  * Saves the selected contacts to local storage.
  */
 function saveSelectedContactsBoard() {
-  localStorage.setItem("selectedContacts", selectedContacts);
+  localStorage.setItem("selectedContacts", JSON.stringify(selectedContacts));
 }
 
 /**
@@ -368,7 +368,7 @@ function subtaskDeleteBoard(index) {
 function assignedContactOnTaskBoard(taskId) {
   if (taskId >= 0 && taskId < taskData.length) {
     let assignedContacts = taskData[taskId]["assignTo"];
-    localStorage.setItem("selectedContacts", assignedContacts);
+    localStorage.setItem("selectedContacts", JSON.stringify(assignedContacts));
   } else {
     console.error("Ungültige Task-ID.");
   }

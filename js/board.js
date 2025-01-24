@@ -286,7 +286,7 @@ function closeAssignToBoard(taskId) {
 function restoreSelectedContactsBoard() {
   let selectedContactsFromStorage = localStorage.getItem("selectedContacts");
   if (selectedContactsFromStorage) {
-    selectedContacts = selectedContactsFromStorage;
+    selectedContacts = JSON.parse(selectedContactsFromStorage);
     selectedContacts.forEach((contact) => {
       let index = contacts.findIndex((c) => c.name === contact.name);
       if (index !== -1) {

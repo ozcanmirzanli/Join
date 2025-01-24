@@ -507,6 +507,10 @@ function getassignListHTMLBoard(contact, badgeColor, i) {
  * @param {HTMLElement} assignedUser - The HTML element to render the assigned users in.
  */
 function renderAssignedUserBoard(assignedUser, taskId) {
+  if (!taskData[taskId]) {
+    return;
+  }
+
   let assignedContacts = taskData[taskId]["assignTo"];
   assignedUser.innerHTML = "";
   assignedContacts.forEach((assignedContact) => {
